@@ -1,0 +1,146 @@
+.section__contacto {
+  padding: 2rem;
+  width: 100%;
+  margin: auto;
+}
+
+.container {
+  margin: 2rem auto;
+
+}
+
+.contact-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.contact-form {
+  flex: 1;
+  width:45%;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form h2 {
+  margin-top: 0;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 0.5rem;
+}
+
+.form-group-inline {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.form-group-item {
+  flex: 1;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #555;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+button {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #f82727;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+
+.contact-image {
+    width: 45%;
+  text-align: center;
+}
+
+.contact-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.checkbox__input {
+  display: flex;
+  align-items: center;
+}
+.checkbox__input .check {
+  width: 2rem;
+}
+.checkbox__input label {
+  margin-bottom: 0;
+}
+
+
+.content__map{
+    margin: 2rem auto;
+}
+.content__map h2{
+    text-align: center;
+}
+.content__map iframe{
+    width: 90%;
+    border: none;
+    height: 30rem;
+    display: block;
+    margin: 2rem auto;
+}
+
+
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  width: 300px;
+  text-align: center;
+}
+
+.close {
+  cursor: pointer;
+  font-size: 20px;
+  float: right;
+}

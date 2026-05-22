@@ -1,0 +1,254 @@
+.section__payment {
+  width: 80%;
+  margin: 2rem auto;
+}
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Indicador de pasos */
+.stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  z-index: 2;
+}
+
+.step-icon {
+  background-color: #f82727;
+  color: white;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.step p {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+  z-index: 2;
+}
+
+.step.active .step-icon {
+  background-color: #fff;
+  color: #f82727;
+  border: 2px solid #f82727;
+}
+
+.progress-bar {
+  position: absolute;
+  top: 35%;
+  left: 0%;
+  width: 100%;
+  height: 4px;
+  background-color: #e0e0e0;
+  z-index: 1;
+}
+
+.progress {
+  height: 100%;
+  background-color: #f82727;
+  transition: width 0.3s ease;
+}
+
+.payment-layout {
+  display: flex;
+  justify-content: center;
+}
+
+/* Formulario */
+
+.cards__entrega {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+.cards__entrega article {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3rem;
+  cursor: pointer;
+  width: 10rem;
+  height: 6rem;
+  border-radius: 20px;
+  background-color: rgba(128, 128, 128, 0.182);
+}
+.cards__entrega article p {
+  color: #f82727;
+}
+.cards__entrega article i {
+  font-size: 1.7rem;
+  color: #f82727;
+}
+.cards__entrega article.active {
+  border: 1px solid #f82727;
+}
+
+.btn__form {
+  display: flex;
+  gap: 1rem;
+}
+.form-container {
+  height: fit-content;
+  width: 65%;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.half-width {
+  flex: 1;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.btn-comprar {
+  background-color: #f82727;
+  color: white;
+  padding: 8px 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  width: fit-content;
+  vertical-align: middle;
+  display: flex;
+  align-items: center;
+}
+.mercado__pago img {
+  width: 3rem;
+  height: 2rem;
+  object-fit: cover;
+}
+
+.mercado__pago p{
+    text-align: left;
+    font-weight: bold;
+}
+.mercado__pago {
+  padding: 8px 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .5rem;
+  background-color: #00b1ea;
+  color: #fff;
+}
+
+.btn-comprar:hover {
+  background-color: #d02020;
+}
+.mercado__pago:hover{
+    background-color: #00b1ea;
+}
+
+/* Resumen de productos */
+.summary-container {
+  background-color: #f9f9f9;
+  height: fit-content;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  width: 40%;
+}
+
+h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+.product-card img{
+  width: 5rem;
+  object-fit: cover;
+}
+.product-card {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: .5rem;
+  padding: 10px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.product-card:last-child {
+  border-bottom: none;
+}
+
+.product-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-name {
+  font-size: 16px;
+  margin: 0;
+}
+
+.product-price {
+  font-size: 16px;
+  color: #555;
+  margin: 0;
+}
+
+/* Total resumen */
+.total-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.total-label {
+  font-size: 18px;
+}
+
+.total-amount {
+  font-size: 20px;
+  color: #f82727;
+}

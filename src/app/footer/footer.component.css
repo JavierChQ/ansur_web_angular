@@ -1,0 +1,75 @@
+footer {
+  background-color: #383234;
+  padding: 1rem 6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+footer h2 {
+  color: #fff;
+}
+footer .contenedor__footer {
+  margin-top: 1rem;
+  width: 100%;
+}
+footer .contenedor__footer hr {
+  margin: 1rem 0;
+}
+footer .contenedor__footer article {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+footer .contenedor__footer article div {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+footer .contenedor__footer article .adress__footer{
+  width: 12.5rem;
+}
+
+footer .contenedor__footer article div i {
+  color: #fff;
+  font-size: 1.8rem;
+}
+footer .contenedor__footer article div .punto{
+    width: 2px;
+height: 2px;
+background-color: #fff;
+border-radius: 50%;
+}
+footer .contenedor__footer article div img{
+    filter: invert(1);
+    width: 1.5rem;
+}
+footer .contenedor__footer article div a {
+  text-decoration: none;
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  color: #fff;
+}
+footer .contenedor__footer article div .icon_media {
+  width: 1.8rem;
+  height: 1.8rem;
+  background-color: #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+footer .contenedor__footer article div .icon_media i {
+  color: #000;
+  font-size: 1.2rem;
+}
+footer .contenedor__footer p {
+  color: #fff;
+  font-size: .9rem;
+  text-align: center;
+}
+
+

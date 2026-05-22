@@ -1,0 +1,67 @@
+.section.compra__realizada {
+    padding: 2rem 0;
+    text-align: center;
+    background-color: #f9f9f9;
+    margin: 2rem auto;
+  }
+  
+  .compra__content {
+    padding: 2rem;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .compra__icon {
+    font-size: 4rem;
+    color: #28a745;
+    margin-bottom: 1rem;
+  }
+  
+  .compra__icon .bx-check-circle {
+    font-size: 4rem;
+    color: #28a745;
+  }
+  
+  h2 {
+    margin-bottom: 1rem;
+    color: #333;
+  }
+  
+  p {
+    margin-bottom: 1rem;
+    color: #555;
+  }
+  
+  strong {
+    color: #333;
+  }
+  
+  .compra__actions {
+    margin-top: 2rem;
+  }
+  
+  .btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    margin: 0.5rem;
+  }
+  
+  .btn-primary {
+    background-color: #f82727;
+    color: #fff;
+  }
+  
+  .btn-secondary {
+    background-color: #f82727;
+    color: #fff;
+  }
+  
+  .btn-primary:hover,
+  .btn-secondary:hover {
+    opacity: 0.9;
+  }
+  

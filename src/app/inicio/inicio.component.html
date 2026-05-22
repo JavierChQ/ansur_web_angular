@@ -1,0 +1,57 @@
+<app-header></app-header>
+<div class="banner_inicio">
+  <div class="slider">
+    <div class="slides">
+      <div
+        *ngFor="let image of images; let i = index"
+        [ngClass]="{ slide: true, active: i === currentIndex }"
+      >
+        <img [src]="image" alt="Slide image" />
+      </div>
+    </div>
+    <div class="indicators">
+      <div
+        *ngFor="let image of images; let i = index"
+        (click)="goToSlide(i)"
+        [ngClass]="{ indicator: true, active: i === currentIndex }"
+      ></div>
+    </div>
+    <div class="arrows">
+      <span (click)="prevSlide()" class="arrow left-arrow">&#10094;</span>
+      <span (click)="nextSlide()" class="arrow right-arrow">&#10095;</span>
+    </div>
+  </div>
+</div>
+<section class="section section__productos">
+  <div class="card-container">
+    <div class="card" *ngFor="let product of products">
+      <img class="card-image" [src]="product.image1" alt="Producto" />
+      <div class="card-content">
+        <h2 class="card-title">{{ product.name }}</h2>
+        <div class="text__content">
+          <p class="card-price">S/ {{ product.price }}</p>
+          <div class="quantity-selector">
+            <button class="quantity-btn" (click)="disminuir(product)">-</button>
+            <input type="text" [value]="product.quantity" min="1" readonly />
+            <button class="quantity-btn" (click)="aumentar(product)">+</button>
+          </div>
+        </div>
+        <div class="btns__content">
+          <a
+            class="card-button"
+            [routerLink]="['/detalle-del-producto', product.id]"
+          >Ver producto</a>
+          <a class="card-button" (click)="addToCart(product)">Agregar al carrito</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="myModal" class="modal" style="display: none;">
+  <div class="modal-content">
+    <span class="close" (click)="closeModal()">&times;</span>
+    <p id="modal-content">Debe iniciar sesión para agregar productos al carrito.</p>
+  </div>
+</div>
+<app-footer></app-footer>

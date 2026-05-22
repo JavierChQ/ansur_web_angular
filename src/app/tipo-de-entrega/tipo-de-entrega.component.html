@@ -1,0 +1,344 @@
+<!-- <app-header></app-header>
+<section class="section section__payment">
+  <div class="container">
+    <div class="stepper">
+      <div class="step active">
+        <div class="step-icon">
+          <i class="bx bx-user"></i>
+        </div>
+        <p>Datos del Usuario</p>
+      </div>
+      <div class="step active">
+        <div class="step-icon">
+          <i class="bx bx-package"></i>
+        </div>
+        <p>Tipo de Entrega</p>
+      </div>
+      <div class="step">
+        <div class="step-icon">
+          <i class="bx bx-credit-card"></i>
+        </div>
+        <p>Pago</p>
+      </div>
+      <div class="progress-bar">
+        <div class="progress" style="width: 50%"></div>
+      </div>
+    </div>
+
+    <div class="payment-layout">
+      <div class="form-container">
+        <div class="cards__entrega">
+          <article
+            class="art__domicilio"
+            [ngClass]="{ active: isActive('delivery') }"
+            (click)="setActiveSection('delivery')"
+          >
+            <i class="bx bx-home"></i>
+            <p>Entrega a domicilio</p>
+          </article>
+          <article
+            class="art__tienda"
+            [ngClass]="{ active: isActive('pickup') }"
+            (click)="setActiveSection('pickup')"
+          >
+            <i class="bx bx-store"></i>
+            <p>Retiro en tienda</p>
+          </article>
+        </div>
+
+        <form
+          class="form__entrega"
+          *ngIf="isActive('delivery')"
+          [formGroup]="entregaForm"
+          (ngSubmit)="onSubmit()"
+        >
+          <div class="form-row">
+            <div class="form-group half-width">
+              <label for="direccion">Dirección/distrito/provincia/región</label>
+              <input
+                type="text"
+                id="direccion"
+                placeholder="Dirección"
+                formControlName="direccion"
+              />
+              <div *ngIf="entregaForm.get('direccion')?.invalid && entregaForm.get('direccion')?.touched">
+                <small class="error-text">Este campo es obligatorio</small>
+              </div>
+            </div>
+
+            <div class="form-group half-width">
+              <label for="referencia">Referencia</label>
+              <input
+                type="text"
+                id="referencia"
+                placeholder="Referencia"
+                formControlName="referencia"
+              />
+              <div *ngIf="entregaForm.get('referencia')?.invalid && entregaForm.get('referencia')?.touched">
+                <small class="error-text">Este campo es obligatorio</small>
+              </div>
+            </div>
+          </div>
+          <br />
+          <div>
+            <h3>¿Quién lo recibirá?</h3>
+            <div class="form-row">
+              <div class="form-group half-width">
+                <label for="nombre-receptor">Nombres y apellidos</label>
+                <input
+                  type="text"
+                  id="nombre-receptor"
+                  placeholder="Nombres y apellidos"
+                  formControlName="nombreReceptor"
+                />
+                <div *ngIf="entregaForm.get('nombreReceptor')?.invalid && entregaForm.get('nombreReceptor')?.touched">
+                  <small class="error-text">Este campo es obligatorio</small>
+                </div>
+              </div>
+
+              <div class="form-group half-width">
+                <label for="telefono">Teléfono</label>
+                <input
+                  type="text"
+                  id="telefono"
+                  placeholder="Teléfono"
+                  formControlName="telefono"
+                />
+                <div *ngIf="entregaForm.get('telefono')?.invalid && entregaForm.get('telefono')?.touched">
+                  <small class="error-text">Este campo es obligatorio</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="btn__form">
+            <a routerLink="/datos-del-usuario" class="btn btn-comprar">Regresar</a>
+            <button type="submit" class="btn btn-comprar">Continuar</button>
+          </div>
+        </form>
+
+        <div class="recojo__tienda" *ngIf="isActive('pickup')">
+          <h2>Información de la tienda</h2>
+          <p><b>Dirección:</b> CAL.GARCI CARBAJAL NRO. 101 INT. A 12 CENTRO COMERCIAL LA ESQUINA DEL FUTURO</p>
+          <p><b>Referencia:</b> ESQUINA DE CALLE SAN JUAN DE DIOS) AREQUIPA - AREQUIPA - AREQUIPA</p>
+          <br />
+          <h2>Información importante</h2>
+          <p>
+            Cuando el pedido esté listo para recogerse, te avisaremos a través
+            de una llamada
+          </p>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3827.3803355712826!2d-71.53874012582217!3d-16.405499084323765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91424af819a9a93b%3A0xdb0d19b772b79adf!2sGarc%C3%AD%20de%20Carbajal%20101%2C%20Arequipa%2004001!5e0!3m2!1ses!2spe!4v1725838165510!5m2!1ses!2spe"
+            style="border: 0"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+          <div class="btn__form">
+            <a routerLink="/comprobante" class="btn btn-comprar">Regresar</a>
+            <a routerLink="/pagar" class="btn btn-comprar">Continuar</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="summary-container">
+        <h3>Resumen de tu Pedido</h3>
+        <div *ngFor="let product of products" class="product-card">
+          <img [src]="product.image1" alt="{{ product.title }}" class="product-image" />
+          <div class="product-details">
+            <p class="product-name"><strong>{{ product.title }}</strong></p>
+            <p class="product-price">S/ {{ product.unit_price.toFixed(2) }}</p>
+            <p>Cantidad: {{product.quantity}}</p>
+          </div>
+        </div>
+        <div class="total-summary">
+          <p class="total-label"><strong>Total:</strong></p>
+          <p class="total-amount"><strong>S/ {{ totalAmount.toFixed(2) }}</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div *ngIf="showErrorModal" class="modal">
+  <div class="modal-content">
+    <span class="close" (click)="closeErrorModal()">&times;</span>
+    <h2>Error</h2>
+    <p>Por favor, complete todos los campos obligatorios.</p>
+  </div>
+</div>
+
+<app-footer></app-footer> -->
+
+
+
+<app-header></app-header>
+<section class="section section__payment">
+  <div class="container">
+    <div class="stepper">
+      <div class="step active">
+        <div class="step-icon">
+          <i class="bx bx-user"></i>
+        </div>
+        <p>Datos del Usuario</p>
+      </div>
+      <div class="step active">
+        <div class="step-icon">
+          <i class="bx bx-package"></i>
+        </div>
+        <p>Tipo de Entrega</p>
+      </div>
+      <div class="step">
+        <div class="step-icon">
+          <i class="bx bx-credit-card"></i>
+        </div>
+        <p>Pago</p>
+      </div>
+      <div class="progress-bar">
+        <div class="progress" style="width: 50%"></div>
+      </div>
+    </div>
+
+    <div class="payment-layout">
+      <div class="form-container">
+        <div class="cards__entrega">
+          <article
+            class="art__domicilio"
+            [ngClass]="{ active: isActive('delivery') }"
+            (click)="setActiveSection('delivery')"
+          >
+            <i class="bx bx-home"></i>
+            <p>Entrega a domicilio</p>
+          </article>
+          <article
+            class="art__tienda"
+            [ngClass]="{ active: isActive('pickup') }"
+            (click)="setActiveSection('pickup')"
+          >
+            <i class="bx bx-store"></i>
+            <p>Retiro en tienda</p>
+          </article>
+        </div>
+
+        <form
+          class="form__entrega"
+          *ngIf="isActive('delivery')"
+          [formGroup]="entregaForm"
+          (ngSubmit)="onSubmit()"
+        >
+          <div class="form-row">
+            <div class="form-group half-width">
+              <label for="direccion">Dirección/distrito/provincia/región</label>
+              <input
+                type="text"
+                id="direccion"
+                placeholder="Dirección"
+                formControlName="direccion"
+              />
+              <div *ngIf="entregaForm.get('direccion')?.invalid && entregaForm.get('direccion')?.touched">
+                <small class="error-text">Este campo es obligatorio</small>
+              </div>
+            </div>
+
+            <div class="form-group half-width">
+              <label for="referencia">Referencia</label>
+              <input
+                type="text"
+                id="referencia"
+                placeholder="Referencia"
+                formControlName="referencia"
+              />
+              <div *ngIf="entregaForm.get('referencia')?.invalid && entregaForm.get('referencia')?.touched">
+                <small class="error-text">Este campo es obligatorio</small>
+              </div>
+            </div>
+          </div>
+          <br />
+          <div>
+            <h3>¿Quién lo recibirá?</h3>
+            <div class="form-row">
+              <div class="form-group half-width">
+                <label for="nombre-receptor">Nombres y apellidos</label>
+                <input
+                  type="text"
+                  id="nombre-receptor"
+                  placeholder="Nombres y apellidos"
+                  formControlName="nombreReceptor"
+                />
+                <div *ngIf="entregaForm.get('nombreReceptor')?.invalid && entregaForm.get('nombreReceptor')?.touched">
+                  <small class="error-text">Este campo es obligatorio</small>
+                </div>
+              </div>
+
+              <div class="form-group half-width">
+                <label for="telefono">Teléfono</label>
+                <input
+                  type="text"
+                  id="telefono"
+                  placeholder="Teléfono"
+                  formControlName="telefono"
+                />
+                <div *ngIf="entregaForm.get('telefono')?.invalid && entregaForm.get('telefono')?.touched">
+                  <small class="error-text">Este campo es obligatorio</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="btn__form">
+            <a routerLink="/datos-del-usuario" class="btn btn-comprar">Regresar</a>
+            <button type="submit" class="btn btn-comprar">Continuar</button>
+          </div>
+        </form>
+
+        <div class="recojo__tienda" *ngIf="isActive('pickup')">
+          <h2>Información de la tienda</h2>
+          <p><b>Dirección:</b> CAL.GARCI CARBAJAL NRO. 101 INT. A 12 CENTRO COMERCIAL LA ESQUINA DEL FUTURO</p>
+          <p><b>Referencia:</b> ESQUINA DE CALLE SAN JUAN DE DIOS) AREQUIPA - AREQUIPA - AREQUIPA</p>
+          <br />
+          <h2>Información importante</h2>
+          <p>
+            Cuando el pedido esté listo para recogerse, te avisaremos a través
+            de una llamada
+          </p>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3827.3803355712826!2d-71.53874012582217!3d-16.405499084323765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91424af819a9a93b%3A0xdb0d19b772b79adf!2sGarc%C3%AD%20de%20Carbajal%20101%2C%20Arequipa%2004001!5e0!3m2!1ses!2spe!4v1725838165510!5m2!1ses!2spe"
+            style="border: 0"
+            allowfullscreen="true"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+          <div class="btn__form">
+            <a routerLink="/datos-del-usuario" class="btn btn-comprar">Regresar</a>
+            <a routerLink="/pagar" class="btn btn-comprar">Continuar</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="summary-container">
+        <h3>Resumen de tu Pedido</h3>
+        <div *ngFor="let product of products" class="product-card">
+          <img [src]="product.image" alt="{{ product.title }}" class="product-image" />
+          <div class="product-details">
+            <p class="product-name"><strong>{{ product.name }}</strong></p>
+            <p class="product-price">S/ {{ product.price.toFixed(2) }}</p>
+            <p>Cantidad: {{ product.quantity }}</p>
+          </div>
+        </div>
+        <div class="total-summary">
+          <p class="total-label"><strong>Total:</strong></p>
+          <p class="total-amount"><strong>S/ {{ totalAmount.toFixed(2) }}</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal de error -->
+<div *ngIf="showErrorModal" class="modal">
+  <div class="modal-content">
+    <span class="close" (click)="closeErrorModal()">&times;</span>
+    <h2>Error</h2>
+    <p>Por favor, complete todos los campos obligatorios.</p>
+  </div>
+</div>
+
+<app-footer></app-footer>

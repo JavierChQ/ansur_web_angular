@@ -1,0 +1,64 @@
+<app-header></app-header>
+<section class="section section__contacto">
+  <div class="container">
+    <div class="contact-content">
+      <div class="contact-form">
+        <h2>Iniciar sesión</h2>
+        <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="Email"
+              name="email"
+              required
+              [(ngModel)]="email"
+              #emailInput="ngModel"
+            />
+          </div>
+          <div class="form-group password-group">
+            <label for="password">Contraseña</label>
+            <div class="password-wrapper">
+              <input
+                [type]="passwordType"
+                id="password"
+                name="password"
+                placeholder="Contraseña"
+                required
+                [(ngModel)]="password"
+                #passwordInput="ngModel"
+              />
+              <i
+                class="bx"
+                [ngClass]="{'bx-show': passwordType === 'text', 'bx-hide': passwordType === 'password'}"
+                (click)="togglePasswordVisibility()"
+              ></i>
+            </div>
+          </div>
+          <button type="submit">Iniciar sesión</button>
+          <div class="register__content">
+            <p>¿Aún no tienes una cuenta?</p>
+            <a routerLink="/registrate">Regístrate</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div *ngIf="showEmptyFormError" class="modal">
+  <div class="modal-content">
+    <span class="close" (click)="showEmptyFormError = false">&times;</span>
+    <p>Completa todos los campos.</p>
+  </div>
+</div>
+
+<div *ngIf="showApiError" class="modal">
+  <div class="modal-content">
+    <span class="close" (click)="showApiError = false">&times;</span>
+    <p>{{ apiErrorMessage }}</p>
+  </div>
+</div>
+
+<app-footer></app-footer>

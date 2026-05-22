@@ -1,0 +1,31 @@
+<app-header></app-header>
+<section class="section product-detail-section">
+  <div class="product-detail-container">
+    <div class="product-image">
+      <img [src]="product.image1" alt="Imagen del producto">
+    </div>
+    <div class="product-info">
+      <h2 class="product-title">{{ product.name }}</h2>
+      <div class="product-details-section">
+        <h2 class="details-header">Descripción:</h2>
+        <p class="description__p">{{ product.description }}</p>
+      </div>
+      <p class="product-price">S/ {{ product.price }}</p>
+      <div class="quantity-selector">
+        <button class="quantity-btn" (click)="disminuir()">-</button>
+        <input type="text" id="quantity" [value]="quantity" min="1" readonly>
+        <button class="quantity-btn" (click)="aumentar()">+</button>
+      </div>
+      <a class="add-to-cart-btn" (click)="onAddToCartClick()">Agregar al carrito</a>
+    </div>
+  </div>
+</section>
+
+<div id="myModal" class="modal" style="display: none;">
+  <div class="modal-content">
+    <span class="close" (click)="closeModal()">&times;</span>
+    <p id="modal-content">Debe iniciar sesión para agregar productos al carrito.</p>
+  </div>
+</div>
+
+<app-footer></app-footer>

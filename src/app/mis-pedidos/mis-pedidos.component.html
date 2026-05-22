@@ -1,0 +1,32 @@
+<app-header></app-header>
+<section class="section section__cart">
+  <div class="cart-container">
+    <h2 class="cart-title">Compras realizadas</h2>
+    <div class="cart-item-list" *ngIf="cartItems.length > 0; else noProducts">
+      <div *ngFor="let item of cartItems" class="cart-item">
+        <img [src]="item.image1" alt="Producto" class="cart-item-image" />
+        <div class="cart-item-details">
+          <h3 class="cart-item-title">{{ item.title }}</h3>
+          <p class="cart-item-description">
+            <b>Descripción:</b> detalle del producto. Incluye información sobre características, beneficios, y otros detalles relevantes.
+          </p>
+          <div class="cart-item-meta">
+            <p class="cart-item-price"><b>Precio:</b> ${{ item.unit_price.toFixed(2) }}</p>
+            <p class="cart-item-price"><b>Cantidad:</b> {{ item.quantity }}</p>
+            <p class="cart-item-price"><b>Total:</b> S/ {{ (item.unit_price * item.quantity).toFixed(2) }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-template #noProducts>
+      <p>No tienes compras realizadas aún.</p>
+    </ng-template>
+    <div class="cart-summary" *ngIf="cartItems.length > 0">
+      <!-- <p><b>Total de la compra:</b> S/ {{ totalAmount.toFixed(2) }}</p> -->
+      <br>
+      <a class="checkout-button" routerLink="/productos">Comprar más productos</a>
+    </div>
+  </div>
+</section>
+<app-footer></app-footer>
+
