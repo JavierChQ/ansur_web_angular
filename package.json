@@ -9,7 +9,7 @@
     "prewatch": "npm run env:generate",
     "pretest": "npm run env:generate",
     "start": "node server.js",
-    "build": "gn build --configuration production",
+    "build": "ng build --configuration production",
     "watch": "node -r dotenv/config node_modules/@angular/cli/bin/ng build --watch --configuration development",
     "test": "ng test"
   },
