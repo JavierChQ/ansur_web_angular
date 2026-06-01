@@ -8,10 +8,13 @@
     "prebuild": "npm run env:generate",
     "prewatch": "npm run env:generate",
     "pretest": "npm run env:generate",
-    "start": "node -r dotenv/config node_modules/@angular/cli/bin/ng serve",
-    "build": "node -r dotenv/config node_modules/@angular/cli/bin/ng build",
+    "start": "node server.js",
+    "build": "gn build --configuration production",
     "watch": "node -r dotenv/config node_modules/@angular/cli/bin/ng build --watch --configuration development",
     "test": "ng test"
+  },
+  "engines": {
+    "node": ">=22.0.0"
   },
   "private": true,
   "dependencies": {
@@ -23,6 +26,7 @@
     "@angular/platform-browser": "^17.2.0",
     "@angular/platform-browser-dynamic": "^17.2.0",
     "@angular/router": "^17.2.0",
+    "express": "^5.2.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
