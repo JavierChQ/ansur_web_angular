@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http'; 
 import { Router } from '@angular/router'; 
+import { AuthService } from '../auth.service';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-register',
@@ -18,8 +19,6 @@ export class RegisterComponent {
   
   passwordType: string = 'password';
 
-  private registerUrl = 'https://ansurbackendnestjs-production.up.railway.app/auth/register';
-
   showEmptyFormError: boolean = false;
   showEmailExistsError: boolean = false;
   showApiError: boolean = false;
@@ -33,7 +32,7 @@ export class RegisterComponent {
     password: ''
   };
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private router: Router, private authService: AuthService, private apiService: ApiService) {}
 
   validateForm() {
     this.clearErrors();
@@ -92,9 +91,20 @@ export class RegisterComponent {
       return;
     }
 
-    this.http.post(this.registerUrl, this.user).subscribe({
+    this.apiService.register(this.user).subscribe({
       next: (response: any) => {
         // console.log('Registro exitoso:', response);
+        // si el backend retorna token/usuario, guardarlos
+        if (response && response.token) {
+          this.authService.login(response.token);
+          localStorage.setItem('token', response.token);
+        }
+        if (response && response.user) {
+          this.authService.setUser(response.user);
+          localStorage.setItem('nombre', response.user.name || '');
+          localStorage.setItem('apellidos', response.user.lastname || '');
+          localStorage.setItem('id', response.user.id || '');
+        }
         this.showSuccessMessage = true; 
         setTimeout(() => {
           this.router.navigate(['/login']);

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-login',
@@ -10,15 +11,13 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   email: string = '';
   password: string = '';
-  passwordType: string = 'password'; 
-  private loginUrl =
-    'https://ansurbackendnestjs-production.up.railway.app/auth/login';
+  passwordType: string = 'password';
 
   showEmptyFormError: boolean = false;
   showApiError: boolean = false;
   apiErrorMessage: string = '';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private router: Router, private authService: AuthService, private apiService: ApiService) {}
 
   onSubmit() {
     if (!this.email || !this.password) {
@@ -31,14 +30,20 @@ export class LoginComponent {
       password: this.password,
     };
 
-    this.http.post(this.loginUrl, loginData).subscribe({
+    this.apiService.login(loginData).subscribe({
       next: (response: any) => {
         this.router.navigate(['/inicio']);
-        // console.log('Login éxito', response);
-        localStorage.setItem('nombre', response.user.name);
-        localStorage.setItem('apellidos', response.user.lastname);
-        localStorage.setItem('token', response.token);
-        localStorage.setItem('id', response.user.id);
+        // guardar token y datos de usuario
+        if (response && response.token) {
+          this.authService.login(response.token);
+          localStorage.setItem('token', response.token);
+        }
+        if (response && response.user) {
+          this.authService.setUser(response.user);
+          localStorage.setItem('nombre', response.user.name || '');
+          localStorage.setItem('apellidos', response.user.lastname || '');
+          localStorage.setItem('id', response.user.id || '');
+        }
       },
       error: (error) => {
         console.error('Error', error);

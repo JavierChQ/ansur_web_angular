@@ -18,6 +18,27 @@ export class AuthService {
     localStorage.setItem('token', token);
   }
 
+  // Guardar datos básicos del usuario
+  setUser(user: any): void {
+    if (!user) return;
+    try {
+      localStorage.setItem('user', JSON.stringify(user));
+    } catch (e) {
+      // no-op
+    }
+  }
+
+  // Obtener datos del usuario
+  getUser(): any {
+    const raw = localStorage.getItem('user');
+    if (!raw) return null;
+    try {
+      return JSON.parse(raw);
+    } catch (e) {
+      return null;
+    }
+  }
+
   // Método para cerrar sesión, eliminando el token
   logout(): void {
     localStorage.removeItem('token');

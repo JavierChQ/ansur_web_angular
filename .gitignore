@@ -3,12 +3,16 @@
 # Compiled output
 /tmp
 /out-tsc
+/dist
 /bazel-out
 
 # Node
 /node_modules
 npm-debug.log
 yarn-error.log
+
+# Environment variables
+.env
 
 # IDEs and editors
 .idea/

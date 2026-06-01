@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../auth.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-detalle-del-producto',
@@ -12,7 +13,7 @@ export class DetalleDelProductoComponent implements OnInit {
   product: any = {}; 
   quantity: number = 1; 
 
-  private apiUrl = 'https://ansurbackendnestjs-production.up.railway.app/products'; 
+  private apiUrl = `${environment.apiUrl}/products`;
   products: any[] = []; 
 
   constructor(

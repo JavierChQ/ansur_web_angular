@@ -237,6 +237,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-proyectos',
@@ -246,9 +247,9 @@ import { AuthService } from '../auth.service';
 export class ProyectosComponent implements OnInit {
   products: any[] = [];
   categorias: any[] = [];
-  private apiUrl = 'https://ansurbackendnestjs-production.up.railway.app/products';
-  private apiCategorias = 'https://ansurbackendnestjs-production.up.railway.app/categories';
-  private searchApiUrl = 'https://ansurbackendnestjs-production.up.railway.app/products/search/';
+  private apiUrl = `${environment.apiUrl}/products`;
+  private apiCategorias = `${environment.apiUrl}/categories`;
+  private searchApiUrl = `${environment.apiUrl}/products/search/`;
 
   iconosPorCategoria: { [key: string]: string } = {
     Hogar: 'bx bx-home',
@@ -316,7 +317,7 @@ export class ProyectosComponent implements OnInit {
   }
 
   getIdCategory(id: number) {
-    const apiPC = `https://ansurbackendnestjs-production.up.railway.app/products/category/${id}`;
+    const apiPC = `${environment.apiUrl}/products/category/${id}`;
     this.http.get<any[]>(apiPC).subscribe({
       next: (data) => {
         this.products = data;

@@ -263,6 +263,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../auth.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-inicio',
@@ -279,7 +280,7 @@ export class InicioComponent implements OnInit {
     'assets/banner5.png',
   ];
   currentIndex: number = 0;
-  private apiUrl = 'https://ansurbackendnestjs-production.up.railway.app/products';
+  private apiUrl = `${environment.apiUrl}/products`;
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
