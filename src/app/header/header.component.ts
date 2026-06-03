@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service'; // Asegúrate de tener el servicio AuthService
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,7 @@ import { AuthService } from '../auth.service'; // Asegúrate de tener el servici
 export class HeaderComponent implements OnInit {
   name: string | null = '';
   searchTerm: string = '';
-  private searchApiUrl = 'https://ansurbackendnestjs-production.up.railway.app/products/search/';
+  private searchApiUrl = `${environment.apiUrl}/products/search/`;
 
   constructor(
     private router: Router,

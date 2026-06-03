@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-compra-realizada',
@@ -7,8 +8,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   styleUrls: ['./compra-realizada.component.css'],
 })
 export class CompraRealizadaComponent implements OnInit {
-  private cartApiUrl = 'https://ansurbackendnestjs-production.up.railway.app/mercadopago/payments';
-  private cardTokenApiUrl = 'https://ansurbackendnestjs-production.up.railway.app/mercadopago/card_token';
+  private cartApiUrl = `${environment.apiUrl}/mercadopago/payments`;
+  private cardTokenApiUrl = `${environment.apiUrl}/mercadopago/card_token`;
   products: any[] = [];
   totalAmount: number = 0;
 

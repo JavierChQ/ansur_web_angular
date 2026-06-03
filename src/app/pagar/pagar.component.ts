@@ -2,6 +2,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 declare const MercadoPago: any;
 
@@ -14,8 +15,8 @@ export class PagarComponent implements OnInit {
   private mp: any;
   products: any[] = [];
   totalAmount: number = 0;
-  private cartApiUrl = 'https://ansurbackendnestjs-production.up.railway.app/mercadopago/payments';
-  private cardTokenApiUrl = 'https://ansurbackendnestjs-production.up.railway.app/mercadopago/card_token';
+  private cartApiUrl = `${environment.apiUrl}/mercadopago/payments`;
+  private cardTokenApiUrl = `${environment.apiUrl}/mercadopago/card_token`;
 
   constructor(private http: HttpClient) {}
 

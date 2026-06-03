@@ -3,6 +3,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-mis-pedidos',
@@ -25,7 +26,7 @@ export class MisPedidosComponent implements OnInit {
 
     if (orderId && token) {
       const headers = new HttpHeaders().set('Authorization', `${token}`);
-      this.http.get<any[]>(`https://ansurbackendnestjs-production.up.railway.app/orders/${orderId}`, { headers })
+      this.http.get<any[]>(`${environment.apiUrl}/orders/${orderId}`, { headers })
         .subscribe(response => {
           const products = response.flatMap(order => 
             order.orderHasProducts.map((orderProduct: any) => ({
