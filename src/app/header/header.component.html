@@ -30,9 +30,10 @@
       Salir
     </a>
     
-    <a (click)="handleCartClick()">
+    <a (click)="handleCartClick()" class="cart-link">
       <i class="bx bx-cart"></i>
-      Carrito
+      <span class="cart-label">Carrito</span>
+      <span *ngIf="cartCount > 0" class="cart-bubble">{{ cartCount }}</span>
     </a>
   </div>
 </header>

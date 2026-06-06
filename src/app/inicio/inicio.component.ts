@@ -263,6 +263,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../auth.service';
+import { CartService } from '../cart.service';
 import { environment } from '../../environments/environment';
 
 @Component({
@@ -282,7 +283,11 @@ export class InicioComponent implements OnInit {
   currentIndex: number = 0;
   private apiUrl = `${environment.apiUrl}/products`;
 
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
+    private cartService: CartService
+  ) {}
 
   ngOnInit() {
     this.http.get<any[]>(this.apiUrl).subscribe({
@@ -355,6 +360,7 @@ export class InicioComponent implements OnInit {
     }
 
     localStorage.setItem('cart', JSON.stringify(cart));
+    this.cartService.updateCartCount();
   }
 
   showModal(message: string): void {

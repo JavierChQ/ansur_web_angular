@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth.service'; // Asegúrate de tener el servicio AuthService
+import { Subscription } from 'rxjs';
+import { AuthService } from '../auth.service';
+import { CartService } from '../cart.service';
 import { environment } from '../../environments/environment';
 
 @Component({
@@ -9,19 +11,30 @@ import { environment } from '../../environments/environment';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   name: string | null = '';
   searchTerm: string = '';
+  cartCount: number = 0;
   private searchApiUrl = `${environment.apiUrl}/products/search/`;
+  private cartSubscription?: Subscription;
 
   constructor(
     private router: Router,
     private http: HttpClient,
-    private authService: AuthService // Inyectar AuthService
+    private authService: AuthService,
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {
     this.name = localStorage.getItem('nombre');
+    this.cartSubscription = this.cartService.cartCount$.subscribe((count) => {
+      this.cartCount = count;
+    });
+    this.cartService.updateCartCount();
+  }
+
+  ngOnDestroy(): void {
+    this.cartSubscription?.unsubscribe();
   }
 
   deleteToken(): void {

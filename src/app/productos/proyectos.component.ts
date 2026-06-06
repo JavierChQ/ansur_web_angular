@@ -237,6 +237,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { CartService } from '../cart.service';
 import { environment } from '../../environments/environment';
 
 @Component({
@@ -262,7 +263,8 @@ export class ProyectosComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,
+    private cartService: CartService
   ) {}
 
   ngOnInit() {
@@ -371,6 +373,7 @@ export class ProyectosComponent implements OnInit {
     }
 
     localStorage.setItem('cart', JSON.stringify(cart));
+    this.cartService.updateCartCount();
   }
 
   showModal(message: string): void {
