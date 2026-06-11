@@ -30,7 +30,7 @@ export class CheckoutStateService {
 
   isExpired(order: CheckoutOrder | null): boolean {
     if (!order?.expires_at) {
-      return true;
+      return false;
     }
     return new Date(order.expires_at).getTime() < Date.now();
   }
