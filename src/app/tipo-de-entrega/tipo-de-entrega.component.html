@@ -46,6 +46,8 @@
           </article>
         </div>
 
+        <div *ngIf="checkoutError" class="cart-alert">{{ checkoutError }}</div>
+
         <form
           class="form__entrega"
           *ngIf="isActive('delivery')"
@@ -112,7 +114,9 @@
           </div>
           <div class="btn__form">
             <a routerLink="/datos-del-usuario" class="btn btn-comprar">Regresar</a>
-            <button type="submit" class="btn btn-comprar">Continuar</button>
+            <button type="submit" class="btn btn-comprar" [disabled]="isSubmitting">
+              {{ isSubmitting ? 'Procesando...' : 'Continuar' }}
+            </button>
           </div>
         </form>
 
@@ -135,7 +139,9 @@
           ></iframe>
           <div class="btn__form">
             <a routerLink="/comprobante" class="btn btn-comprar">Regresar</a>
-            <a routerLink="/pagar" class="btn btn-comprar">Continuar</a>
+            <button type="button" class="btn btn-comprar" (click)="continuePickup()" [disabled]="isSubmitting">
+              {{ isSubmitting ? 'Procesando...' : 'Continuar' }}
+            </button>
           </div>
         </div>
       </div>
@@ -219,6 +225,8 @@
           </article>
         </div>
 
+        <div *ngIf="checkoutError" class="cart-alert">{{ checkoutError }}</div>
+
         <form
           class="form__entrega"
           *ngIf="isActive('delivery')"
@@ -285,7 +293,9 @@
           </div>
           <div class="btn__form">
             <a routerLink="/datos-del-usuario" class="btn btn-comprar">Regresar</a>
-            <button type="submit" class="btn btn-comprar">Continuar</button>
+            <button type="submit" class="btn btn-comprar" [disabled]="isSubmitting">
+              {{ isSubmitting ? 'Procesando...' : 'Continuar' }}
+            </button>
           </div>
         </form>
 
@@ -308,7 +318,9 @@
           ></iframe>
           <div class="btn__form">
             <a routerLink="/datos-del-usuario" class="btn btn-comprar">Regresar</a>
-            <a routerLink="/pagar" class="btn btn-comprar">Continuar</a>
+            <button type="button" class="btn btn-comprar" (click)="continuePickup()" [disabled]="isSubmitting">
+              {{ isSubmitting ? 'Procesando...' : 'Continuar' }}
+            </button>
           </div>
         </div>
       </div>

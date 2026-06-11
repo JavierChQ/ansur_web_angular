@@ -1,39 +1,59 @@
-
-
-
 <app-header></app-header>
 <section class="section section__cart">
   <div class="cart-container">
     <h2 class="cart-title">Carrito de compras</h2>
-    <div class="cart-item-list">
+
+    <div *ngIf="error" class="cart-alert">{{ error }}</div>
+    <div *ngIf="isLoading">Cargando carrito...</div>
+
+    <div *ngIf="!isLoading && cartItems.length > 0" class="cart-item-list">
       <div *ngFor="let item of cartItems" class="cart-item">
-        <img [src]="item.image" alt="{{ item.name }}" class="cart-item-image" />
+        <img
+          [src]="item.image || 'assets/banner1.png'"
+          alt="{{ item.name }}"
+          class="cart-item-image"
+        />
         <div class="cart-item-details">
           <h3 class="cart-item-title">{{ item.name }}</h3>
-          <p class="cart-item-description">
-            Descripción: {{ item.description || 'Sin descripción' }}
-          </p>
+          <span
+            class="stock-badge"
+            [class.available]="isItemInStock(item)"
+            [class.unavailable]="!isItemInStock(item)"
+          >
+            {{ getStockLabel(item) }}
+          </span>
           <div class="cart-item-meta">
             <div class="cart__delete">
-              <p class="cart-item-price">$ {{ getItemPrice(item).toFixed(2) }}</p>
-              <button class="cart-item-remove" (click)="removeItem(item.id)">
+              <p class="cart-item-price">S/ {{ item.sales_price.toFixed(2) }}</p>
+              <button class="cart-item-remove" (click)="removeItem(item.id_product)">
                 <i class="bx bxs-trash-alt"></i>
               </button>
             </div>
             <div class="quantity-selector">
-              <button class="quantity-btn" (click)="updateQuantity(item.id, -1)">-</button>
-              <input
-                type="text"
-                [value]="item.quantity"
-                readonly
-              />
-              <button class="quantity-btn" (click)="updateQuantity(item.id, 1)">+</button>
+              <button
+                class="quantity-btn"
+                (click)="updateQuantity(item.id_product, -1)"
+                [disabled]="!isItemInStock(item)"
+              >
+                -
+              </button>
+              <input type="text" [value]="item.quantity" readonly />
+              <button
+                class="quantity-btn"
+                (click)="updateQuantity(item.id_product, 1)"
+                [disabled]="!canIncreaseQuantity(item)"
+              >
+                +
+              </button>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="cart-summary">
+
+    <p *ngIf="!isLoading && !cartItems.length" class="empty-state">Tu carrito está vacío.</p>
+
+    <div *ngIf="!isLoading && cartItems.length > 0" class="cart-summary">
       <p class="summary-total">Total: S/ {{ totalAmount.toFixed(2) }}</p>
       <a class="checkout-button" routerLink="/datos-del-usuario">Continuar</a>
     </div>

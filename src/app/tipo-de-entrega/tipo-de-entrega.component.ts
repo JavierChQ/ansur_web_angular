@@ -1,141 +1,122 @@
-// import { HttpClient, HttpHeaders } from '@angular/common/http';
-// import { Component } from '@angular/core';
-// import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-// import { Router } from '@angular/router';
-
-// @Component({
-//   selector: 'app-tipo-de-entrega',
-//   templateUrl: './tipo-de-entrega.component.html',
-//   styleUrls: ['./tipo-de-entrega.component.css']
-// })
-// export class TipoDeEntregaComponent {
-//   activeSection: 'delivery' | 'pickup' = 'delivery';
-//   entregaForm: FormGroup;
-//   showErrorModal: boolean = false;
-//   products: any[] = [];
-//   totalAmount: number = 0;
-
-//   constructor(private fb: FormBuilder, private router: Router, private http: HttpClient) {
-//     this.entregaForm = this.fb.group({
-//       direccion: ['', Validators.required],
-//       referencia: ['', Validators.required],
-//       nombreReceptor: ['', Validators.required],
-//       telefono: ['', Validators.required]
-//     });
-//   }
-
-//   ngOnInit(): void {
-//     const orderId = localStorage.getItem('id');
-//     const token = localStorage.getItem('token');
-
-//     if (orderId && token) {
-//       const headers = new HttpHeaders().set('Authorization', `${token}`);
-      
-//       this.http.get<any[]>(`https://ansurbackendnestjs-production.up.railway.app/orders/${orderId}`, { headers }).subscribe(response => {
-//         this.products = response.flatMap(order => 
-//           order.orderHasProducts.map((orderProduct: any) => ({
-//             title: orderProduct.product.name,
-//             unit_price: orderProduct.product.price,
-//             quantity: orderProduct.quantity,
-//             image1: orderProduct.product.image1
-//           }))
-//         );
-
-//         this.totalAmount = this.products.reduce((total, product) => total + (product.unit_price * product.quantity), 0);
-//       }, error => {
-//         console.error('Error al obtener los productos:', error);
-//       });
-//     }
-//   }
-
-  
-
-//   setActiveSection(section: 'delivery' | 'pickup') {
-//     this.activeSection = section;
-//   }
-
-//   isActive(section: 'delivery' | 'pickup'): boolean {
-//     return this.activeSection === section;
-//   }
-
-//   onSubmit() {
-//     if (this.entregaForm.valid) {
-//       this.router.navigate(['/pagar']);
-//     } else {
-//       this.showErrorModal = true; 
-//       this.entregaForm.markAllAsTouched();
-//     }
-//   }
-
-//   closeErrorModal() {
-//     this.showErrorModal = false; 
-//   }
-
-//   redirectToPagar() {
-//     this.router.navigate(['/pagar']);
-//   }
-// }
-
-
-
 import { Component, OnInit } from '@angular/core';
-import { unitPrice } from '../utils/unit-price.util';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CartService } from '../cart.service';
+import { CheckoutFlowService } from '../services/checkout-flow.service';
+import { CheckoutStateService } from '../services/checkout-state.service';
 
 @Component({
   selector: 'app-tipo-de-entrega',
   templateUrl: './tipo-de-entrega.component.html',
-  styleUrls: ['./tipo-de-entrega.component.css']
+  styleUrls: ['./tipo-de-entrega.component.css'],
 })
 export class TipoDeEntregaComponent implements OnInit {
   activeSection: 'delivery' | 'pickup' = 'delivery';
   entregaForm: FormGroup;
-  showErrorModal: boolean = false;
+  showErrorModal = false;
   products: any[] = [];
-  totalAmount: number = 0;
+  totalAmount = 0;
+  isSubmitting = false;
+  checkoutError = '';
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private cartService: CartService,
+    private checkoutFlowService: CheckoutFlowService,
+    private checkoutState: CheckoutStateService,
+  ) {
     this.entregaForm = this.fb.group({
       direccion: ['', Validators.required],
       referencia: ['', Validators.required],
       nombreReceptor: ['', Validators.required],
-      telefono: ['', Validators.required]
+      telefono: ['', Validators.required],
     });
   }
 
   ngOnInit(): void {
-    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    this.products = cart.map((product: any) => ({
-      name: product.name,
-      sales_price: unitPrice(product),
-      quantity: product.quantity,
-      image: product.image
-    }));
-    this.totalAmount = this.products.reduce(
-      (total, product) => total + product.sales_price * product.quantity,
-      0,
-    );
+    this.cartService.refreshCart().subscribe((cart) => {
+      const items = cart?.items ?? [];
+      if (!items.length) {
+        this.router.navigate(['/cart']);
+        return;
+      }
+
+      this.products = items.map((item) => ({
+        name: item.name,
+        sales_price: item.sales_price,
+        quantity: item.quantity,
+        image: this.cartService.getDisplayItems().find(
+          (displayItem) => displayItem.id_product === item.id_product,
+        )?.image,
+      }));
+      this.totalAmount = cart?.total ?? 0;
+    });
   }
 
-  setActiveSection(section: 'delivery' | 'pickup') {
+  setActiveSection(section: 'delivery' | 'pickup'): void {
     this.activeSection = section;
+    this.checkoutError = '';
   }
 
   isActive(section: 'delivery' | 'pickup'): boolean {
     return this.activeSection === section;
   }
 
-  onSubmit() {
-    if (this.entregaForm.valid) {
-      this.router.navigate(['/pagar']);
-    } else {
-      this.showErrorModal = true; 
+  onSubmit(): void {
+    if (!this.entregaForm.valid) {
+      this.showErrorModal = true;
       this.entregaForm.markAllAsTouched();
+      return;
     }
+
+    this.startCheckout(
+      this.checkoutFlowService.startDeliveryCheckout(this.entregaForm.getRawValue()),
+    );
   }
 
-  closeErrorModal() {
-    this.showErrorModal = false; 
+  continuePickup(): void {
+    this.startCheckout(this.checkoutFlowService.startPickupCheckout());
+  }
+
+  private startCheckout(request$: ReturnType<CheckoutFlowService['startDeliveryCheckout']>): void {
+    this.isSubmitting = true;
+    this.checkoutError = '';
+
+    request$.subscribe({
+      next: (order) => {
+        this.checkoutState.save(order);
+        this.isSubmitting = false;
+        this.router.navigate(['/pagar']);
+      },
+      error: (error) => {
+        this.isSubmitting = false;
+        this.checkoutError = this.mapCheckoutError(error);
+      },
+    });
+  }
+
+  private mapCheckoutError(error: {
+    status?: number;
+    error?: { message?: string | string[] };
+  }): string {
+    const message = error?.error?.message;
+    if (Array.isArray(message)) {
+      return message.join(', ');
+    }
+    if (typeof message === 'string' && message.trim()) {
+      return message;
+    }
+    if (error?.status === 409) {
+      return 'No hay stock suficiente para completar la compra.';
+    }
+    if (error?.status === 400) {
+      return 'El carrito está vacío o los datos de envío no son válidos.';
+    }
+    return 'No se pudo iniciar el checkout. Intenta nuevamente.';
+  }
+
+  closeErrorModal(): void {
+    this.showErrorModal = false;
   }
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { CartService } from '../cart.service';
 import { ApiService } from '../services/api.service';
 
 @Component({
@@ -17,7 +18,12 @@ export class LoginComponent {
   showApiError: boolean = false;
   apiErrorMessage: string = '';
 
-  constructor(private router: Router, private authService: AuthService, private apiService: ApiService) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private apiService: ApiService,
+    private cartService: CartService,
+  ) {}
 
   onSubmit() {
     if (!this.email || !this.password) {
@@ -44,6 +50,8 @@ export class LoginComponent {
           localStorage.setItem('apellidos', response.user.lastname || '');
           localStorage.setItem('id', response.user.id || '');
         }
+
+        this.cartService.syncAfterLogin().subscribe();
       },
       error: (error) => {
         console.error('Error', error);

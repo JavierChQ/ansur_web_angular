@@ -48,4 +48,24 @@ export class AuthService {
   getToken(): string | null {
     return localStorage.getItem('token');
   }
+
+  getUserId(): number | null {
+    const storedId = localStorage.getItem('id');
+    if (storedId) {
+      const parsed = Number(storedId);
+      return Number.isInteger(parsed) ? parsed : null;
+    }
+
+    const user = this.getUser();
+    if (user?.id) {
+      const parsed = Number(user.id);
+      return Number.isInteger(parsed) ? parsed : null;
+    }
+
+    return null;
+  }
+
+  getUserEmail(): string {
+    return this.getUser()?.email ?? '';
+  }
 }

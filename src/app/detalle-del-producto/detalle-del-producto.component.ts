@@ -3,7 +3,14 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../auth.service';
 import { CartService } from '../cart.service';
-import { unitPrice } from '../utils/unit-price.util';
+import { Product } from '../models/product.model';
+import { normalizeProduct } from '../utils/product.util';
+import {
+  canIncreaseAddQuantity,
+  getMaxAddableQuantity,
+  getStockLabel,
+  getStockLimitMessage,
+} from '../utils/stock.util';
 import { environment } from '../../environments/environment';
 
 @Component({
@@ -12,53 +19,76 @@ import { environment } from '../../environments/environment';
   styleUrls: ['./detalle-del-producto.component.css']
 })
 export class DetalleDelProductoComponent implements OnInit {
-  product: any = {}; 
-  quantity: number = 1; 
+  product: Product | null = null;
+  quantity = 1;
 
-  private apiUrl = `${environment.apiUrl}/products`;
-  products: any[] = []; 
+  private readonly apiUrl = `${environment.apiUrl}/products`;
 
   constructor(
-    private route: ActivatedRoute, 
-    private http: HttpClient, 
+    private route: ActivatedRoute,
+    private http: HttpClient,
     private authService: AuthService,
-    private cartService: CartService
+    private cartService: CartService,
   ) {}
 
   ngOnInit(): void {
-    const productId = this.route.snapshot.paramMap.get('id'); 
+    const productId = this.route.snapshot.paramMap.get('id');
     if (productId) {
-      this.getAllProducts(productId);
+      this.loadProduct(productId);
     }
   }
 
-  getAllProducts(productId: string) {
-    this.http.get<any[]>(this.apiUrl).subscribe({
-      next: (data) => {
-        this.products = data; 
-        this.findProductById(parseInt(productId)); 
+  private loadProduct(productId: string): void {
+    this.http.get<Product>(`${this.apiUrl}/${productId}`).subscribe({
+      next: (product) => {
+        this.product = normalizeProduct(product);
+        this.quantity = 1;
       },
       error: (err) => {
-        console.error('Error al obtener productos:', err);
-        alert('Error al obtener los productos.');
-      }
+        console.error('Error al obtener el producto:', err);
+        alert('Error al obtener el producto.');
+      },
     });
   }
 
-  findProductById(id: number) {
-    this.product = this.products.find(p => p.id === id); 
-    if (!this.product) {
-      console.error('Producto no encontrado');
-      alert('Producto no encontrado.');
-    }
+  isProductInStock(): boolean {
+    return this.cartService.isProductInStock(this.product);
   }
 
-  aumentar() {
+  getStockLabel(): string {
+    return getStockLabel(this.product);
+  }
+
+  canIncreaseQuantity(): boolean {
+    if (!this.product) {
+      return false;
+    }
+    return canIncreaseAddQuantity(
+      this.product,
+      this.quantity,
+      this.cartService.getCartQuantityForProduct(this.product.id),
+    );
+  }
+
+  aumentar(): void {
+    if (!this.product) {
+      return;
+    }
+
+    if (!this.canIncreaseQuantity()) {
+      this.showModal(
+        getStockLimitMessage(
+          this.product,
+          this.cartService.getCartQuantityForProduct(this.product.id),
+        ),
+      );
+      return;
+    }
     this.quantity++;
     this.updateQuantityInput();
   }
 
-  disminuir() {
+  disminuir(): void {
     if (this.quantity > 1) {
       this.quantity--;
       this.updateQuantityInput();
@@ -72,35 +102,27 @@ export class DetalleDelProductoComponent implements OnInit {
     }
   }
 
-  onAddToCartClick() {
+  onAddToCartClick(): void {
+    if (!this.product) {
+      return;
+    }
+
     if (!this.authService.isLoggedIn()) {
       this.showModal('Debe iniciar sesión para agregar productos al carrito.');
       return;
     }
 
-    this.saveProductToLocalStorage(this.product);
-    this.showModal('Producto agregado al carrito.');
-  }
-
-  saveProductToLocalStorage(product: any) {
-    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
-
-    const existingProductIndex = cart.findIndex((item: any) => item.id === product.id);
-
-    if (existingProductIndex !== -1) {
-      cart[existingProductIndex].quantity += this.quantity;
-    } else {
-      cart.push({
-        id: product.id,
-        name: product.name,
-        quantity: this.quantity,
-        sales_price: unitPrice(product),
-        image: product.image1,
-      });
-    }
-
-    localStorage.setItem('cart', JSON.stringify(cart));
-    this.cartService.updateCartCount();
+    this.cartService.addProductToCart(this.product, this.quantity).subscribe((result) => {
+      if (result.success && this.product) {
+        const max = getMaxAddableQuantity(
+          this.product,
+          this.cartService.getCartQuantityForProduct(this.product.id),
+        );
+        this.quantity = Math.min(this.quantity, Math.max(1, max));
+        this.updateQuantityInput();
+      }
+      this.showModal(result.message);
+    });
   }
 
   showModal(message: string): void {

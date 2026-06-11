@@ -1,11 +1,19 @@
-
-
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../environments/environment';
-import { unitPrice } from '../utils/unit-price.util';
+import { Router } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
+import { AuthService } from '../auth.service';
+import { CartService } from '../cart.service';
+import { CheckoutOrder } from '../models/order.model';
+import { CheckoutStateService } from '../services/checkout-state.service';
+import { PaymentService } from '../services/payment.service';
 
-declare const MercadoPago: any;
+interface PaymentProductSummary {
+  id: number;
+  name: string;
+  sales_price: number;
+  quantity: number;
+  image?: string;
+}
 
 @Component({
   selector: 'app-pagar',
@@ -13,68 +21,144 @@ declare const MercadoPago: any;
   styleUrls: ['./pagar.component.css'],
 })
 export class PagarComponent implements OnInit {
-  private mp: any;
-  products: any[] = [];
-  totalAmount: number = 0;
-  private cartApiUrl = `${environment.apiUrl}/mercadopago/payments`;
-  private cardTokenApiUrl = `${environment.apiUrl}/mercadopago/card_token`;
+  products: PaymentProductSummary[] = [];
+  totalAmount = 0;
+  pendingOrder: CheckoutOrder | null = null;
+  isPaying = false;
+  paymentError = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private readonly router: Router,
+    private readonly authService: AuthService,
+    private readonly cartService: CartService,
+    private readonly checkoutState: CheckoutStateService,
+    private readonly paymentService: PaymentService,
+  ) {}
 
   ngOnInit(): void {
-    // aquí se pone el token real
-    this.mp = new MercadoPago('TEST-34422d86-4f9c-4426-8b6d-60ff374b6909', {
-      locale: 'es-PE',
-    });
+    const pendingOrder = this.checkoutState.get();
 
-    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    this.products = cart.map((product: any) => ({
-      id: product.id,
-      name: product.name,
-      sales_price: unitPrice(product),
-      quantity: product.quantity,
-      image: product.image,
+    if (!pendingOrder || this.checkoutState.isExpired(pendingOrder)) {
+      this.checkoutState.clear();
+      this.router.navigate(['/cart']);
+      return;
+    }
+
+    this.pendingOrder = pendingOrder;
+    this.totalAmount = Number(pendingOrder.amount);
+    this.products = (pendingOrder.orderHasProducts ?? []).map((line) => ({
+      id: line.id_product,
+      name: line.product?.name ?? `Producto #${line.id_product}`,
+      sales_price: Number(line.product?.sale_price ?? 0),
+      quantity: line.quantity,
+      image: line.product?.image1,
     }));
-    this.totalAmount = this.products.reduce(
-      (total, product) => total + product.sales_price * product.quantity,
-      0
-    );
+  }
+
+  get expiresAtLabel(): string {
+    if (!this.pendingOrder?.expires_at) {
+      return '';
+    }
+    return new Date(this.pendingOrder.expires_at).toLocaleString('es-PE');
   }
 
   payWithMercadoPago(): void {
-    // aquí se pone el token real
-    const accessToken = 'TEST-6239032100822731-090817-0c82c6f39ab7dd100c12208f23b3b014-1983574764';
+    if (!this.pendingOrder || this.isPaying) {
+      return;
+    }
 
-    this.http.post<any>(
-      `https://api.mercadopago.com/checkout/preferences?access_token=${accessToken}`,
-      {
-        items: this.products.map((product) => ({
-          title: product.name,
-          quantity: product.quantity,
-          unit_price: product.sales_price,
-        })),
-        back_urls: {
-          success: 'https://proyecto-del-instituto.netlify.app/compra-realizada?status=approved',
-          failure: 'https://proyecto-del-instituto.netlify.app/error-en-la-compra?status=failed',
-          pending: 'https://proyecto-del-instituto.netlify.app/?status=pending',
+    if (this.checkoutState.isExpired(this.pendingOrder)) {
+      this.paymentError = 'Tu reserva expiró. Volvé al carrito e intentá de nuevo.';
+      this.checkoutState.clear();
+      return;
+    }
+
+    this.isPaying = true;
+    this.paymentError = '';
+
+    const cardTokenPayload = {
+      card_number: '5031755734530604',
+      expiration_year: '2030',
+      expiration_month: 11,
+      security_code: '123',
+      cardholder: {
+        name: 'APRO',
+        identification: {
+          number: '12345678',
+          type: 'DNI',
         },
-        auto_return: 'approved',
-        payer_email: 'pabloyucragutierrez@gmail.com',
-      }
-    ).subscribe(
-      (response) => {
-        const preferenceId = response.id;
-
-        this.mp.checkout({
-          preference: {
-            id: preferenceId,
-          },
-          autoOpen: true,
-        });
       },
-      (error) => {
-        console.error('Error al realizar el pago:', error);
-      }
-    );
+    };
+
+    this.paymentService
+      .createCardToken(cardTokenPayload)
+      .pipe(
+        switchMap((tokenResponse) =>
+          this.paymentService.createPayment({
+            transaction_amount: this.totalAmount,
+            token: tokenResponse.id,
+            installments: 1,
+            issuer_id: '310',
+            payment_method_id: 'master',
+            payer: {
+              email: this.authService.getUserEmail() || 'test_user@test.com',
+              identification: {
+                type: 'DNI',
+                number: '12345678',
+              },
+            },
+            order_id: this.pendingOrder!.id,
+          }),
+        ),
+      )
+      .subscribe({
+        next: (payment) => this.handlePaymentResult(payment.status),
+        error: (error) => {
+          this.isPaying = false;
+          this.paymentError = this.mapPaymentError(error);
+        },
+      });
+  }
+
+  private handlePaymentResult(status: string): void {
+    this.isPaying = false;
+
+    if (status === 'approved') {
+      this.checkoutState.clear();
+      this.cartService.clearLocalState();
+      this.router.navigate(['/compra-realizada'], {
+        queryParams: { orderId: this.pendingOrder?.id },
+      });
+      return;
+    }
+
+    if (['rejected', 'cancelled'].includes(status)) {
+      this.checkoutState.clear();
+      this.router.navigate(['/error-en-la-compra']);
+      return;
+    }
+
+    this.paymentError = 'El pago quedó pendiente. Revisa tu cuenta de Mercado Pago.';
+  }
+
+  private mapPaymentError(error: {
+    status?: number;
+    error?: { message?: string | string[] };
+  }): string {
+    const message = error?.error?.message;
+    if (Array.isArray(message)) {
+      return message.join(', ');
+    }
+    if (typeof message === 'string' && message.trim()) {
+      return message;
+    }
+    if (error?.status === 409) {
+      return 'La orden ya no está pendiente de pago.';
+    }
+    if (error?.status === 410) {
+      this.checkoutState.clear();
+      return 'Tu reserva expiró. Volvé al carrito e intentá de nuevo.';
+    }
+    return 'No se pudo procesar el pago. Intenta nuevamente.';
   }
 }

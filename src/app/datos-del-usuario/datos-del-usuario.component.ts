@@ -68,7 +68,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { unitPrice } from '../utils/unit-price.util';
+import { CartService } from '../cart.service';
 
 @Component({
   selector: 'app-datos-del-usuario',
@@ -81,7 +81,12 @@ export class DatosDelUsuarioComponent implements OnInit {
   products: any[] = [];
   totalAmount: number = 0;
 
-  constructor(private fb: FormBuilder, private router: Router, private http: HttpClient) {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private http: HttpClient,
+    private cartService: CartService,
+  ) {
     const nombre = localStorage.getItem('nombre') || '';
     const apellidos = localStorage.getItem('apellidos') || '';
 
@@ -92,19 +97,18 @@ export class DatosDelUsuarioComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Leer productos desde localStorage
-    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-
-    // Procesar los productos del carrito
-    this.products = cart.map((product: any) => ({
-      title: product.name,
-      unit_price: unitPrice(product),
-      quantity: product.quantity,
-      image1: product.image
-    }));
-
-    // Calcular el total
-    this.totalAmount = this.products.reduce((total, product) => total + (product.unit_price * product.quantity), 0);
+    this.cartService.refreshCart().subscribe((cart) => {
+      const items = cart?.items ?? [];
+      this.products = items.map((item) => ({
+        title: item.name,
+        unit_price: item.sales_price,
+        quantity: item.quantity,
+        image1: this.cartService.getDisplayItems().find(
+          (displayItem) => displayItem.id_product === item.id_product,
+        )?.image,
+      }));
+      this.totalAmount = cart?.total ?? 0;
+    });
   }
 
   onSubmit() {

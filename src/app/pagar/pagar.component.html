@@ -29,7 +29,7 @@
       <div class="summary-container">
         <h3>Resumen de tu Pedido</h3>
         <div *ngFor="let product of products" class="product-card">
-          <img [src]="product.image" alt="{{ product.title }}" class="product-image" />
+          <img [src]="product.image || 'assets/banner1.png'" alt="{{ product.name }}" class="product-image" />
           <div class="product-details">
             <!-- <p>id: {{product.id}}</p> -->
             <p class="product-name"><strong>{{ product.name }}</strong></p>
@@ -41,6 +41,10 @@
           <p class="total-label"><strong>Total:</strong></p>
           <p class="total-amount"><strong>S/ {{ totalAmount.toFixed(2) }}</strong></p>
         </div>
+        <p *ngIf="expiresAtLabel" class="checkout-expiry">
+          Reserva de stock válida hasta: {{ expiresAtLabel }}
+        </p>
+        <div *ngIf="paymentError" class="cart-alert">{{ paymentError }}</div>
         <hr />
         <br />
         <div class="btn__form">
@@ -49,9 +53,10 @@
             type="button"
             class="btn btn-comprar mercado__pago"
             (click)="payWithMercadoPago()"
+            [disabled]="isPaying"
           >
             <img src="/assets/mercadopago.png" alt="Mercado Pago" />
-            <p>Pagar con Mercado Pago</p>
+            <p>{{ isPaying ? 'Procesando pago...' : 'Pagar con Mercado Pago' }}</p>
           </button>
         </div>
       </div>

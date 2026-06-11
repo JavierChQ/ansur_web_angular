@@ -13,24 +13,35 @@
       <img class="card-image" [src]="product.image1" alt="Product Image" />
       <div class="card-content">
         <h2 class="card-title">{{ product.name }}</h2>
+        <span
+          class="stock-badge"
+          [class.available]="isProductInStock(product)"
+          [class.unavailable]="!isProductInStock(product)"
+        >
+          {{ getStockLabel(product) }}
+        </span>
         <div class="text__content">
-          <p class="card-price">S/ {{ product.sales_price }}</p>
+          <p class="card-price">S/ {{ product | productPrice }}</p>
           <div class="quantity-selector">
-            <button class="quantity-btn" (click)="disminuir(product)">-</button>
+            <button class="quantity-btn" (click)="disminuir(product)" [disabled]="!isProductInStock(product)">-</button>
             <input type="text" [value]="product.quantity" min="1" readonly>
-            <button class="quantity-btn" (click)="aumentar(product)">+</button>
+            <button class="quantity-btn" (click)="aumentar(product)" [disabled]="!canIncreaseQuantity(product)">+</button>
           </div>
         </div>
         <div class="btns__content">
           <a class="card-button" [routerLink]="['/detalle-del-producto', product.id]">Ver producto</a>
-          <a class="card-button" (click)="addToCart(product)">Agregar al carrito</a>
+          <a
+            class="card-button"
+            [class.disabled]="!isProductInStock(product)"
+            (click)="addToCart(product)"
+          >Agregar al carrito</a>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<div id="loginModal" class="modal" style="display: none;">
+<div id="myModal" class="modal" style="display: none;">
   <div class="modal-content">
     <span class="close" (click)="closeModal()">&times;</span>
     <p>Debe iniciar sesión para agregar productos al carrito.</p>

@@ -30,7 +30,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.cartSubscription = this.cartService.cartCount$.subscribe((count) => {
       this.cartCount = count;
     });
-    this.cartService.updateCartCount();
+
+    if (this.authService.isLoggedIn()) {
+      this.cartService.refreshCart().subscribe();
+    } else {
+      this.cartService.clearLocalState();
+    }
   }
 
   ngOnDestroy(): void {
@@ -40,7 +45,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   deleteToken(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('nombre');
-    localStorage.removeItem('cart');
+    this.cartService.clearLocalState();
     localStorage.removeItem('purchasedProducts');
     localStorage.removeItem('totalAmount');
     window.location.reload();

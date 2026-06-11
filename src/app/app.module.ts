@@ -12,7 +12,8 @@ import { ContactoComponent } from './contacto/contacto.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { DetalleDelProductoComponent } from './detalle-del-producto/detalle-del-producto.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthInterceptor } from './auth.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CartComponent } from './cart/cart.component';
 import { DatosDelUsuarioComponent } from './datos-del-usuario/datos-del-usuario.component';
@@ -22,6 +23,7 @@ import { PagarComponent } from './pagar/pagar.component';
 import { CompraRealizadaComponent } from './compra-realizada/compra-realizada.component';
 import { ErrorEnLaCompraComponent } from './error-en-la-compra/error-en-la-compra.component';
 import { MisPedidosComponent } from './mis-pedidos/mis-pedidos.component';
+import { ProductPricePipe } from './pipes/product-price.pipe';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ import { MisPedidosComponent } from './mis-pedidos/mis-pedidos.component';
     PagarComponent,
     CompraRealizadaComponent,
     ErrorEnLaCompraComponent,
-    MisPedidosComponent
+    MisPedidosComponent,
+    ProductPricePipe,
   ],
   imports: [
     BrowserModule,
@@ -51,7 +54,13 @@ import { MisPedidosComponent } from './mis-pedidos/mis-pedidos.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

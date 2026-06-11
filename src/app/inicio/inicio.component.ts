@@ -264,7 +264,14 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../auth.service';
 import { CartService } from '../cart.service';
-import { unitPrice } from '../utils/unit-price.util';
+import { Product } from '../models/product.model';
+import { normalizeProduct } from '../utils/product.util';
+import {
+  canIncreaseAddQuantity,
+  getMaxAddableQuantity,
+  getStockLabel,
+  getStockLimitMessage,
+} from '../utils/stock.util';
 import { environment } from '../../environments/environment';
 
 @Component({
@@ -273,7 +280,7 @@ import { environment } from '../../environments/environment';
   styleUrls: ['./inicio.component.css'],
 })
 export class InicioComponent implements OnInit {
-  products: any[] = [];
+  products: Product[] = [];
   images: string[] = [
     'assets/banner1.png',
     'assets/banner2.png',
@@ -291,10 +298,9 @@ export class InicioComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.http.get<any[]>(this.apiUrl).subscribe({
+    this.http.get<Product[]>(this.apiUrl).subscribe({
       next: (data) => {
-        this.products = data;
-        this.products.forEach((product) => (product.quantity = 1));
+        this.products = (data || []).map((product) => normalizeProduct({ ...product, quantity: 1 }));
       },
       error: (err) => {
         console.error('Error al obtener los productos:', err);
@@ -323,45 +329,54 @@ export class InicioComponent implements OnInit {
     slides.style.transform = `translateX(-${this.currentIndex * 100}%)`;
   }
 
-  aumentar(product: any) {
-    product.quantity++;
+  isProductInStock(product: Product): boolean {
+    return this.cartService.isProductInStock(product);
   }
 
-  disminuir(product: any) {
-    if (product.quantity > 1) {
-      product.quantity--;
+  getStockLabel(product: Product): string {
+    return getStockLabel(product);
+  }
+
+  canIncreaseQuantity(product: Product): boolean {
+    return canIncreaseAddQuantity(
+      product,
+      product.quantity ?? 1,
+      this.cartService.getCartQuantityForProduct(product.id),
+    );
+  }
+
+  aumentar(product: Product): void {
+    if (!this.canIncreaseQuantity(product)) {
+      this.showModal(
+        getStockLimitMessage(product, this.cartService.getCartQuantityForProduct(product.id)),
+      );
+      return;
+    }
+    product.quantity = (product.quantity ?? 1) + 1;
+  }
+
+  disminuir(product: Product): void {
+    if ((product.quantity ?? 1) > 1) {
+      product.quantity = (product.quantity ?? 1) - 1;
     }
   }
 
-  addToCart(product: any) {
+  addToCart(product: Product): void {
     if (!this.authService.isLoggedIn()) {
       this.showModal('Debe iniciar sesión para agregar productos al carrito.');
       return;
     }
 
-    this.saveProductToLocalStorage(product);
-    this.showModal('Producto agregado al carrito.');
-  }
-
-  saveProductToLocalStorage(product: any) {
-    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
-
-    const existingProductIndex = cart.findIndex((item: any) => item.id === product.id);
-
-    if (existingProductIndex !== -1) {
-      cart[existingProductIndex].quantity += product.quantity;
-    } else {
-      cart.push({
-        id: product.id,
-        name: product.name,
-        quantity: product.quantity,
-        sales_price: unitPrice(product),
-        image: product.image1,
-      });
-    }
-
-    localStorage.setItem('cart', JSON.stringify(cart));
-    this.cartService.updateCartCount();
+    this.cartService.addProductToCart(product, product.quantity ?? 1).subscribe((result) => {
+      if (result.success) {
+        const max = getMaxAddableQuantity(
+          product,
+          this.cartService.getCartQuantityForProduct(product.id),
+        );
+        product.quantity = Math.min(product.quantity ?? 1, Math.max(1, max));
+      }
+      this.showModal(result.message);
+    });
   }
 
   showModal(message: string): void {
