@@ -68,6 +68,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { unitPrice } from '../utils/unit-price.util';
 
 @Component({
   selector: 'app-datos-del-usuario',
@@ -97,7 +98,7 @@ export class DatosDelUsuarioComponent implements OnInit {
     // Procesar los productos del carrito
     this.products = cart.map((product: any) => ({
       title: product.name,
-      unit_price: product.price,
+      unit_price: unitPrice(product),
       quantity: product.quantity,
       image1: product.image
     }));

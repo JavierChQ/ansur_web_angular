@@ -79,6 +79,7 @@
 
 
 import { Component, OnInit } from '@angular/core';
+import { unitPrice } from '../utils/unit-price.util';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -107,11 +108,14 @@ export class TipoDeEntregaComponent implements OnInit {
     const cart = JSON.parse(localStorage.getItem('cart') || '[]');
     this.products = cart.map((product: any) => ({
       name: product.name,
-      price: product.price,
+      sales_price: unitPrice(product),
       quantity: product.quantity,
       image: product.image
     }));
-    this.totalAmount = this.products.reduce((total, product) => total + (product.price * product.quantity), 0);
+    this.totalAmount = this.products.reduce(
+      (total, product) => total + product.sales_price * product.quantity,
+      0,
+    );
   }
 
   setActiveSection(section: 'delivery' | 'pickup') {

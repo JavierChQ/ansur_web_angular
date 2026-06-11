@@ -264,6 +264,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../auth.service';
 import { CartService } from '../cart.service';
+import { unitPrice } from '../utils/unit-price.util';
 import { environment } from '../../environments/environment';
 
 @Component({
@@ -354,7 +355,7 @@ export class InicioComponent implements OnInit {
         id: product.id,
         name: product.name,
         quantity: product.quantity,
-        price: product.price,
+        sales_price: unitPrice(product),
         image: product.image1,
       });
     }

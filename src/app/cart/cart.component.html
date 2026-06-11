@@ -15,7 +15,7 @@
           </p>
           <div class="cart-item-meta">
             <div class="cart__delete">
-              <p class="cart-item-price">$ {{ item.price.toFixed(2) }}</p>
+              <p class="cart-item-price">$ {{ getItemPrice(item).toFixed(2) }}</p>
               <button class="cart-item-remove" (click)="removeItem(item.id)">
                 <i class="bx bxs-trash-alt"></i>
               </button>

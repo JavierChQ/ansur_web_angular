@@ -2,6 +2,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../cart.service';
+import { unitPrice } from '../utils/unit-price.util';
 
 @Component({
   selector: 'app-cart',
@@ -44,8 +45,15 @@ export class CartComponent implements OnInit {
     this.calculateTotal();
   }
 
+  getItemPrice(item: { sales_price?: number; price?: number }): number {
+    return unitPrice(item);
+  }
+
   calculateTotal(): void {
-    this.totalAmount = this.cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+    this.totalAmount = this.cartItems.reduce(
+      (total, item) => total + this.getItemPrice(item) * item.quantity,
+      0,
+    );
   }
 
   saveCartToLocalStorage(): void {

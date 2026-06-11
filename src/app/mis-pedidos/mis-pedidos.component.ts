@@ -33,7 +33,7 @@ export class MisPedidosComponent implements OnInit {
               id: orderProduct.product.id,
               title: orderProduct.product.name,
               description: orderProduct.product.description,
-              unit_price: orderProduct.product.price,
+              unit_price: Number(orderProduct.product.sale_price ?? orderProduct.product.sales_price ?? 0),
               quantity: orderProduct.quantity,
               image1: orderProduct.product.image1
             }))

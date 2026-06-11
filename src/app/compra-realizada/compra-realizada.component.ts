@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { unitPrice } from '../utils/unit-price.util';
 
 @Component({
   selector: 'app-compra-realizada',
@@ -28,7 +29,7 @@ export class CompraRealizadaComponent implements OnInit {
     this.products = cart.map((product: any) => ({
       id: product.id,
       name: product.name,
-      price: product.price,
+      sales_price: unitPrice(product),
       quantity: product.quantity,
       image: product.image,
     }));
@@ -36,7 +37,10 @@ export class CompraRealizadaComponent implements OnInit {
   }
 
   calculateTotalAmount(products: any[]): number {
-    return products.reduce((total, product) => total + product.price * product.quantity, 0);
+    return products.reduce(
+      (total, product) => total + product.sales_price * product.quantity,
+      0,
+    );
   }
 
   async handleSuccessfulPurchase(): Promise<void> {

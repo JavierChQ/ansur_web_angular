@@ -3,6 +3,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { unitPrice } from '../utils/unit-price.util';
 
 declare const MercadoPago: any;
 
@@ -30,12 +31,12 @@ export class PagarComponent implements OnInit {
     this.products = cart.map((product: any) => ({
       id: product.id,
       name: product.name,
-      price: product.price,
+      sales_price: unitPrice(product),
       quantity: product.quantity,
       image: product.image,
     }));
     this.totalAmount = this.products.reduce(
-      (total, product) => total + product.price * product.quantity,
+      (total, product) => total + product.sales_price * product.quantity,
       0
     );
   }
@@ -50,7 +51,7 @@ export class PagarComponent implements OnInit {
         items: this.products.map((product) => ({
           title: product.name,
           quantity: product.quantity,
-          unit_price: product.price,
+          unit_price: product.sales_price,
         })),
         back_urls: {
           success: 'https://proyecto-del-instituto.netlify.app/compra-realizada?status=approved',
