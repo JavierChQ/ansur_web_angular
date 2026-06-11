@@ -243,8 +243,7 @@ export class CartService {
   }
 
   private publishCount(cart: Cart): void {
-    const count = cart.items.reduce((total, item) => total + item.quantity, 0);
-    this.cartCountSubject.next(count);
+    this.cartCountSubject.next(cart.items.length);
   }
 
   private readLegacyCart(): LegacyCartItem[] {
