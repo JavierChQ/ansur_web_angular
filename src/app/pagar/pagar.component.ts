@@ -31,6 +31,7 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
   paymentMethod: PaymentMethod = 'card';
   isPaying = false;
   isLoadingPayment = true;
+  isWaitingWebhook = false;
   paymentError = '';
   paymentNotice = '';
   checkoutExpired = false;
@@ -41,6 +42,7 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
   private viewReady = false;
   private cardFormMounted = false;
   private expiryCheckInterval: ReturnType<typeof setInterval> | null = null;
+  private pendingPollSub: { unsubscribe: () => void } | null = null;
 
   constructor(
     private readonly router: Router,
@@ -109,6 +111,7 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.expiryCheckInterval) {
       clearInterval(this.expiryCheckInterval);
     }
+    this.pendingPollSub?.unsubscribe();
   }
 
   get expiresAtLabel(): string {
@@ -319,24 +322,87 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private handlePaymentResult(status: string): void {
-    this.isPaying = false;
-
     if (status === 'approved') {
-      this.checkoutState.clear();
-      this.cartService.clearLocalState();
-      this.router.navigate(['/compra-realizada'], {
-        queryParams: { orderId: this.pendingOrder?.id },
-      });
+      this.finishSuccessfulPayment();
       return;
     }
 
     if (['rejected', 'cancelled'].includes(status)) {
+      this.isPaying = false;
       this.checkoutState.clear();
       this.router.navigate(['/error-en-la-compra']);
       return;
     }
 
+    if (this.paymentService.isPendingMercadoPagoStatus(status)) {
+      this.startPendingPaymentPolling();
+      return;
+    }
+
+    this.isPaying = false;
     this.paymentError = 'El pago quedó pendiente. Revisa tu cuenta de Mercado Pago.';
+  }
+
+  private startPendingPaymentPolling(): void {
+    if (!this.pendingOrder) {
+      this.isPaying = false;
+      return;
+    }
+
+    this.isPaying = false;
+    this.isWaitingWebhook = true;
+    this.paymentError = '';
+    this.paymentNotice =
+      'Estamos confirmando tu pago. No cierres esta ventana...';
+
+    this.pendingPollSub?.unsubscribe();
+    this.pendingPollSub = this.paymentService
+      .waitForOrderResolution(this.pendingOrder.id)
+      .subscribe({
+        next: (orderStatus) => {
+          this.isWaitingWebhook = false;
+          this.paymentNotice = '';
+
+          if (orderStatus.status === 'PAGADO') {
+            this.finishSuccessfulPayment();
+            return;
+          }
+
+          if (orderStatus.status === 'CANCELADO') {
+            this.checkoutState.clear();
+            this.router.navigate(['/error-en-la-compra']);
+            return;
+          }
+
+          this.paymentError =
+            'El pago sigue pendiente. Revisa Mercado Pago o intenta de nuevo.';
+        },
+        error: () => {
+          this.isWaitingWebhook = false;
+          this.paymentNotice = '';
+          this.paymentError =
+            'No pudimos confirmar el pago. Revisa Mercado Pago o intenta de nuevo.';
+        },
+        complete: () => {
+          if (!this.isWaitingWebhook) {
+            return;
+          }
+          this.isWaitingWebhook = false;
+          this.paymentNotice = '';
+          this.paymentError =
+            'Tiempo de espera agotado. Si debitaron el pago, revisá Mis pedidos en unos minutos.';
+        },
+      });
+  }
+
+  private finishSuccessfulPayment(): void {
+    this.isPaying = false;
+    this.isWaitingWebhook = false;
+    this.checkoutState.clear();
+    this.cartService.clearLocalState();
+    this.router.navigate(['/compra-realizada'], {
+      queryParams: { orderId: this.pendingOrder?.id },
+    });
   }
 
   private mapPaymentError(error: {

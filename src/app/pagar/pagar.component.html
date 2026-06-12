@@ -54,6 +54,10 @@
           Cargando formulario de pago...
         </div>
 
+        <div *ngIf="isWaitingWebhook" class="payment-loading">
+          Confirmando pago con Mercado Pago...
+        </div>
+
         <div *ngIf="paymentNotice" class="payment-notice">{{ paymentNotice }}</div>
         <div *ngIf="paymentError" class="cart-alert">
           <p>{{ paymentError }}</p>
@@ -119,7 +123,7 @@
             type="submit"
             id="form-checkout__submit"
             class="btn btn-comprar mercado__pago"
-            [disabled]="isPaying"
+            [disabled]="isPaying || isWaitingWebhook"
           >
             <img src="/assets/mercadopago.png" alt="Mercado Pago" />
             <p>{{ isPaying ? 'Procesando pago...' : 'Pagar con tarjeta' }}</p>
@@ -160,7 +164,7 @@
             type="button"
             class="btn btn-comprar mercado__pago yape-btn"
             (click)="payWithYape()"
-            [disabled]="isPaying"
+            [disabled]="isPaying || isWaitingWebhook"
           >
             <img src="/assets/mercadopago.png" alt="Mercado Pago" />
             <p>{{ isPaying ? 'Procesando pago...' : 'Pagar con Yape' }}</p>
