@@ -4,6 +4,9 @@ import { MercadoPagoCardForm, MercadoPagoCardFormData, MercadoPagoInstance } fro
 export interface MountCardFormOptions {
   amount: string;
   payerEmail?: string;
+  payerName?: string;
+  identificationType?: string;
+  identificationNumber?: string;
   onSubmit: (data: MercadoPagoCardFormData) => void | Promise<void>;
   onError?: (error: unknown) => void;
   onInstallmentsError?: (error: unknown) => void;
@@ -23,7 +26,23 @@ export class MercadoPagoSdkService {
       throw new Error('El SDK de Mercado Pago no está disponible.');
     }
 
+    this.unmountCardForm();
     this.mp = new window.MercadoPago(publicKey, { locale });
+  }
+
+  unmountCardForm(): void {
+    this.cardForm = null;
+
+    [
+      'form-checkout__cardNumber',
+      'form-checkout__expirationDate',
+      'form-checkout__securityCode',
+    ].forEach((id) => {
+      const element = document.getElementById(id);
+      if (element) {
+        element.innerHTML = '';
+      }
+    });
   }
 
   mountCardForm(options: MountCardFormOptions): void {
@@ -31,9 +50,7 @@ export class MercadoPagoSdkService {
       throw new Error('Mercado Pago no está inicializado.');
     }
 
-    if (this.cardForm) {
-      return;
-    }
+    this.unmountCardForm();
 
     this.cardForm = this.mp.cardForm({
       amount: options.amount,
@@ -81,7 +98,9 @@ export class MercadoPagoSdkService {
         onFormMounted: (error: unknown) => {
           if (error) {
             this.ngZone.run(() => options.onError?.(error));
+            return;
           }
+          setTimeout(() => this.applyPayerFields(options), 150);
         },
         onSubmit: (event: Event) => {
           event.preventDefault();
@@ -104,13 +123,43 @@ export class MercadoPagoSdkService {
         },
       },
     });
+  }
 
+  private applyPayerFields(options: MountCardFormOptions): void {
     if (options.payerEmail) {
       const emailInput = document.getElementById(
         'form-checkout__cardholderEmail',
       ) as HTMLInputElement | null;
       if (emailInput) {
         emailInput.value = options.payerEmail;
+      }
+    }
+
+    if (options.payerName) {
+      const nameInput = document.getElementById(
+        'form-checkout__cardholderName',
+      ) as HTMLInputElement | null;
+      if (nameInput) {
+        nameInput.value = options.payerName;
+      }
+    }
+
+    if (options.identificationType) {
+      const typeSelect = document.getElementById(
+        'form-checkout__identificationType',
+      ) as HTMLSelectElement | null;
+      if (typeSelect) {
+        typeSelect.value = options.identificationType;
+        typeSelect.dispatchEvent(new Event('change'));
+      }
+    }
+
+    if (options.identificationNumber) {
+      const numberInput = document.getElementById(
+        'form-checkout__identificationNumber',
+      ) as HTMLInputElement | null;
+      if (numberInput) {
+        numberInput.value = options.identificationNumber;
       }
     }
   }

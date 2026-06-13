@@ -1,32 +1,57 @@
 <app-header></app-header>
-<section class="section section__cart">
-  <div class="cart-container">
-    <h2 class="cart-title">Compras realizadas</h2>
-    <div class="cart-item-list" *ngIf="cartItems.length > 0; else noProducts">
-      <div *ngFor="let item of cartItems" class="cart-item">
-        <img [src]="item.image1" alt="Producto" class="cart-item-image" />
-        <div class="cart-item-details">
-          <h3 class="cart-item-title">{{ item.title }}</h3>
-          <p class="cart-item-description">
-            <b>Descripción:</b> detalle del producto. Incluye información sobre características, beneficios, y otros detalles relevantes.
-          </p>
-          <div class="cart-item-meta">
-            <p class="cart-item-price"><b>Precio:</b> ${{ item.unit_price.toFixed(2) }}</p>
-            <p class="cart-item-price"><b>Cantidad:</b> {{ item.quantity }}</p>
-            <p class="cart-item-price"><b>Total:</b> S/ {{ (item.unit_price * item.quantity).toFixed(2) }}</p>
+<section class="section section__orders">
+  <div class="orders-container">
+    <h2 class="orders-title">Mis pedidos</h2>
+
+    <div *ngIf="error" class="orders-alert">{{ error }}</div>
+    <div *ngIf="isLoading">Cargando pedidos...</div>
+
+    <div *ngIf="!isLoading && orders.length === 0" class="empty-state">
+      <p>No tienes pedidos registrados.</p>
+      <a routerLink="/productos" class="btn-link">Ir a la tienda</a>
+    </div>
+
+    <div *ngFor="let order of orders" class="order-card">
+      <div class="order-card-header">
+        <div>
+          <h3>Pedido #{{ order.id }}</h3>
+          <p class="order-date">{{ order.created_at | date:'medium' }}</p>
+        </div>
+        <span class="status-badge" [ngClass]="getStatusClass(order.status)">
+          {{ getStatusLabel(order.status) }}
+        </span>
+      </div>
+
+      <div class="order-products">
+        <div *ngFor="let line of order.orderHasProducts" class="order-product">
+          <img
+            [src]="line.product?.image1 || 'assets/banner1.png'"
+            alt="{{ line.product?.name }}"
+          />
+          <div>
+            <p class="product-name">{{ line.product?.name || ('Producto #' + line.id_product) }}</p>
+            <p>S/ {{ getLinePrice(line).toFixed(2) }} × {{ line.quantity }}</p>
           </div>
         </div>
       </div>
-    </div>
-    <ng-template #noProducts>
-      <p>No tienes compras realizadas aún.</p>
-    </ng-template>
-    <div class="cart-summary" *ngIf="cartItems.length > 0">
-      <!-- <p><b>Total de la compra:</b> S/ {{ totalAmount.toFixed(2) }}</p> -->
-      <br>
-      <a class="checkout-button" routerLink="/productos">Comprar más productos</a>
+
+      <div class="order-meta">
+        <p><strong>Total:</strong> S/ {{ order.amount | number:'1.2-2' }}</p>
+        <p><strong>Entrega:</strong> {{ getDeliveryLabel(order) }}</p>
+        <p *ngIf="order.delivery_type === 'delivery'">
+          {{ order.direccion }}, {{ order.distrito }}, {{ order.provincia }}, {{ order.departamento }}
+        </p>
+        <p *ngIf="order.delivery_type === 'delivery' && order.referencia">
+          Ref: {{ order.referencia }}
+        </p>
+        <p *ngIf="order.delivery_type === 'pickup'">{{ storeAddress }}</p>
+        <p *ngIf="order.delivery_type === 'pickup'">{{ storeHours }}</p>
+        <p><strong>Recibe/recoge:</strong> {{ getReceptorName(order) }}</p>
+        <p *ngIf="order.delivery_fee">
+          <strong>Envío:</strong> S/ {{ order.delivery_fee | number:'1.2-2' }}
+        </p>
+      </div>
     </div>
   </div>
 </section>
 <app-footer></app-footer>
-

@@ -107,11 +107,6 @@ export class DetalleDelProductoComponent implements OnInit {
       return;
     }
 
-    if (!this.authService.isLoggedIn()) {
-      this.showModal('Debe iniciar sesión para agregar productos al carrito.');
-      return;
-    }
-
     this.cartService.addProductToCart(this.product, this.quantity).subscribe((result) => {
       if (result.success && this.product) {
         const max = getMaxAddableQuantity(

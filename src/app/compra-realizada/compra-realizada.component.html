@@ -5,13 +5,51 @@
       <div class="compra__icon">
         <i class="bx bx-check-circle"></i>
       </div>
-      <h2>¡Compra Realizada Exitosamente!</h2>
+      <h2>¡Compra realizada exitosamente!</h2>
       <p>Gracias por tu compra. Tu pedido ha sido procesado con éxito.</p>
       <p>Te enviamos el comprobante de compra a tu correo registrado.</p>
-      <p *ngIf="orderId">Número de orden: <strong>#{{ orderId }}</strong></p>
+      <p *ngIf="summary">Número de orden: <strong>#{{ summary.orderId }}</strong></p>
+
+      <div class="compra__summary" *ngIf="summary && summary.products.length">
+        <h3>Resumen de tu compra</h3>
+        <div *ngFor="let product of summary.products" class="summary-product">
+          <img [src]="product.image || 'assets/banner1.png'" alt="{{ product.name }}" />
+          <div>
+            <p><strong>{{ product.name }}</strong></p>
+            <p>S/ {{ product.price.toFixed(2) }} × {{ product.quantity }}</p>
+          </div>
+        </div>
+        <div class="summary-line">
+          <span>Subtotal</span>
+          <span>S/ {{ summary.subtotal.toFixed(2) }}</span>
+        </div>
+        <div class="summary-line" *ngIf="summary.deliveryFee > 0">
+          <span>Envío a domicilio</span>
+          <span>S/ {{ summary.deliveryFee.toFixed(2) }}</span>
+        </div>
+        <div class="summary-total">
+          <span>Total pagado</span>
+          <span>S/ {{ summary.total.toFixed(2) }}</span>
+        </div>
+      </div>
+
+      <div class="compra__delivery" *ngIf="summary?.delivery as delivery">
+        <h3>Entrega</h3>
+        <p *ngIf="delivery.tipo === 'delivery'">Entrega a domicilio</p>
+        <p *ngIf="delivery.tipo === 'pickup'">Retiro en tienda</p>
+        <p *ngIf="delivery.tipo === 'delivery'">
+          {{ delivery.direccion }}, {{ delivery.distrito }},
+          {{ delivery.provincia }}, {{ delivery.departamento }}
+        </p>
+        <p *ngIf="delivery.tipo === 'delivery'">Ref: {{ delivery.referencia }}</p>
+        <p *ngIf="delivery.tipo === 'pickup'">{{ storeAddress }}</p>
+        <p *ngIf="delivery.tipo === 'pickup'">{{ storeHours }}</p>
+        <p>Recibe/recoge: {{ receptorLabel }}</p>
+      </div>
+
       <div class="compra__actions">
-        <a routerLink="/inicio" class="btn btn-primary">Volver al Inicio</a>
-        <a routerLink="/mis-pedidos" class="btn btn-secondary">Ver Mis Pedidos</a>
+        <a routerLink="/inicio" class="btn btn-primary">Volver al inicio</a>
+        <a routerLink="/mis-pedidos" class="btn btn-secondary">Ver mis pedidos</a>
       </div>
     </div>
   </div>

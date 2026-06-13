@@ -1,33 +1,83 @@
-<!-- <app-header></app-header>
+<app-header></app-header>
 <section class="section section__payment">
   <div class="container">
     <div class="stepper">
       <div class="step active">
         <div class="step-icon">
-          <i class='bx bx-user'></i>
+          <i class="bx bx-user"></i>
         </div>
         <p>Datos del Usuario</p>
       </div>
       <div class="step">
         <div class="step-icon">
-          <i class='bx bx-package'></i>
+          <i class="bx bx-package"></i>
         </div>
         <p>Tipo de Entrega</p>
       </div>
       <div class="step">
         <div class="step-icon">
-          <i class='bx bx-credit-card'></i>
+          <i class="bx bx-credit-card"></i>
         </div>
         <p>Pago</p>
       </div>
       <div class="progress-bar">
-        <div class="progress" style="width: 0%;"></div>
+        <div class="progress" style="width: 0%"></div>
       </div>
     </div>
 
     <div class="payment-layout">
       <div class="form-container">
-        <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <div class="checkout-mode-tabs">
+          <button
+            type="button"
+            class="mode-tab"
+            [class.active]="mode === 'guest'"
+            (click)="setMode('guest')"
+          >
+            Continuar como invitado
+          </button>
+          <button
+            type="button"
+            class="mode-tab"
+            [class.active]="mode === 'login'"
+            (click)="setMode('login')"
+          >
+            Iniciar sesión
+          </button>
+          <button type="button" class="mode-tab link-tab" (click)="goToRegister()">
+            Registrarse
+          </button>
+        </div>
+
+        <form
+          *ngIf="mode === 'login'"
+          [formGroup]="loginForm"
+          (ngSubmit)="onLogin()"
+          class="login-inline-form"
+        >
+          <div class="form-group">
+            <label for="login-email">Correo</label>
+            <input type="email" id="login-email" formControlName="email" placeholder="tu@email.com" />
+          </div>
+          <div class="form-group">
+            <label for="login-password">Contraseña</label>
+            <input type="password" id="login-password" formControlName="password" />
+          </div>
+          <div *ngIf="loginError" class="cart-alert">{{ loginError }}</div>
+          <button type="submit" class="btn btn-comprar" [disabled]="isLoggingIn">
+            {{ isLoggingIn ? 'Ingresando...' : 'Iniciar sesión' }}
+          </button>
+        </form>
+
+        <form *ngIf="mode === 'guest'" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="email">Correo</label>
+            <input type="email" id="email" formControlName="email" placeholder="tu@email.com" />
+            <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">
+              <small class="error-text">Ingresa un correo válido</small>
+            </div>
+          </div>
+
           <div class="form-row">
             <div class="form-group half-width">
               <label for="nombres">Nombres</label>
@@ -45,122 +95,47 @@
             </div>
           </div>
 
-        
-
-          <button type="submit" class="btn btn-comprar">Continuar</button>
-        </form>
-      </div>
-
-      <div class="summary-container">
-        <h3>Resumen de tu Pedido</h3>
-
-        <div *ngFor="let product of products" class="product-card">
-          <img [src]="product.image1" alt="{{ product.title }}" class="product-image" />
-          <div class="product-details">
-            <p class="product-name"><strong>{{ product.title }}</strong></p>
-            <p class="product-price">S/ {{ product.unit_price.toFixed(2) }}</p>
-            <p>Cantidad: {{product.quantity}}</p>
-          </div>
-        </div>
-        <div class="total-summary">
-          <p class="total-label"><strong>Total:</strong></p>
-          <p class="total-amount"><strong>S/ {{ totalAmount.toFixed(2) }}</strong></p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<div *ngIf="showErrorModal" class="modal">
-  <div class="modal-content">
-    <span class="close" (click)="closeModal()">
-      <i class='bx bx-x'></i> 
-    </span>
-    <h2>Error</h2>
-    <p>Por favor, completa todos los campos requeridos antes de continuar.</p>
-  </div>
-</div>
-
-<app-footer></app-footer> -->
-
-
-
-<app-header></app-header>
-<section class="section section__payment">
-  <div class="container">
-    <div class="stepper">
-      <div class="step active">
-        <div class="step-icon">
-          <i class='bx bx-user'></i>
-        </div>
-        <p>Datos del Usuario</p>
-      </div>
-      <div class="step">
-        <div class="step-icon">
-          <i class='bx bx-package'></i>
-        </div>
-        <p>Tipo de Entrega</p>
-      </div>
-      <div class="step">
-        <div class="step-icon">
-          <i class='bx bx-credit-card'></i>
-        </div>
-        <p>Pago</p>
-      </div>
-      <div class="progress-bar">
-        <div class="progress" style="width: 0%;"></div>
-      </div>
-    </div>
-
-    <div class="payment-layout">
-      <div class="form-container">
-        <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
           <div class="form-row">
             <div class="form-group half-width">
-              <label for="nombres">Nombres</label>
-              <input
-                type="text"
-                id="nombres"
-                formControlName="nombres"
-                placeholder="Ingresa tus nombres"
-              />
-              <div *ngIf="userForm.get('nombres')?.invalid && userForm.get('nombres')?.touched">
-                <small class="error-text">Este campo es obligatorio</small>
-              </div>
+              <label for="tipoDocumento">Tipo de documento</label>
+              <select id="tipoDocumento" formControlName="tipoDocumento">
+                <option *ngFor="let doc of docTypes" [value]="doc.value">{{ doc.label }}</option>
+              </select>
             </div>
             <div class="form-group half-width">
-              <label for="apellidos">Apellidos</label>
-              <input
-                type="text"
-                id="apellidos"
-                formControlName="apellidos"
-                placeholder="Ingresa tus apellidos"
-              />
-              <div *ngIf="userForm.get('apellidos')?.invalid && userForm.get('apellidos')?.touched">
+              <label for="numeroDocumento">Número de documento</label>
+              <input type="text" id="numeroDocumento" formControlName="numeroDocumento" />
+              <div *ngIf="userForm.get('numeroDocumento')?.invalid && userForm.get('numeroDocumento')?.touched">
                 <small class="error-text">Este campo es obligatorio</small>
               </div>
             </div>
           </div>
+
+          <div class="form-group">
+            <label for="celular">Número de celular</label>
+            <input type="tel" id="celular" formControlName="celular" maxlength="9" placeholder="999888777" />
+            <div *ngIf="userForm.get('celular')?.invalid && userForm.get('celular')?.touched">
+              <small class="error-text">Ingresa un celular válido de 9 dígitos</small>
+            </div>
+          </div>
+
           <button type="submit" class="btn btn-comprar">Continuar</button>
         </form>
       </div>
 
       <div class="summary-container">
         <h3>Resumen de tu Pedido</h3>
-
         <div *ngFor="let product of products" class="product-card">
-          <img [src]="product.image1" alt="{{ product.title }}" class="product-image" />
+          <img [src]="product.image1 || 'assets/banner1.png'" alt="{{ product.title }}" class="product-image" />
           <div class="product-details">
             <p class="product-name"><strong>{{ product.title }}</strong></p>
             <p class="product-price">S/ {{ product.unit_price.toFixed(2) }}</p>
             <p>Cantidad: {{ product.quantity }}</p>
           </div>
         </div>
-
         <div class="total-summary">
-          <p class="total-label"><strong>Total:</strong></p>
-          <p class="total-amount"><strong>S/ {{ totalAmount.toFixed(2) }}</strong></p>
+          <p class="total-label"><strong>Subtotal:</strong></p>
+          <p class="total-amount"><strong>S/ {{ subtotal.toFixed(2) }}</strong></p>
         </div>
       </div>
     </div>
@@ -170,7 +145,7 @@
 <div *ngIf="showErrorModal" class="modal">
   <div class="modal-content">
     <span class="close" (click)="closeModal()">
-      <i class='bx bx-x'></i> 
+      <i class="bx bx-x"></i>
     </span>
     <h2>Error</h2>
     <p>Por favor, completa todos los campos requeridos antes de continuar.</p>

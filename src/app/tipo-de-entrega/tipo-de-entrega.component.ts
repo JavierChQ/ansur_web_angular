@@ -1,7 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { finalize } from 'rxjs/operators';
 import { CartService } from '../cart.service';
+import {
+  CheckoutDeliveryData,
+  DELIVERY_FEE,
+  DocType,
+  ReceptorType,
+  STORE_BUSINESS_HOURS,
+  STORE_PICKUP_ADDRESS,
+  getDeliveryFee,
+} from '../models/checkout.model';
+import { UbigeoDistrict, UbigeoProvince, UbigeoService } from '../services/ubigeo.service';
 import { CheckoutFlowService } from '../services/checkout-flow.service';
 import { CheckoutStateService } from '../services/checkout-state.service';
 
@@ -13,28 +24,86 @@ import { CheckoutStateService } from '../services/checkout-state.service';
 export class TipoDeEntregaComponent implements OnInit {
   activeSection: 'delivery' | 'pickup' = 'delivery';
   entregaForm: FormGroup;
+  pickupForm: FormGroup;
   showErrorModal = false;
   products: any[] = [];
+  subtotal = 0;
+  deliveryFee = 0;
   totalAmount = 0;
   isSubmitting = false;
   checkoutError = '';
 
+  departments: string[] = [];
+  provinces: UbigeoProvince[] = [];
+  districts: UbigeoDistrict[] = [];
+
+  readonly deliveryFeeAmount = DELIVERY_FEE;
+  readonly storeAddress = STORE_PICKUP_ADDRESS;
+  readonly storeHours = STORE_BUSINESS_HOURS;
+
+  readonly docTypes: { value: DocType; label: string }[] = [
+    { value: 'DNI', label: 'DNI' },
+    { value: 'PASAPORTE', label: 'Pasaporte' },
+    { value: 'CE', label: 'Carnet de extranjería' },
+  ];
+
   constructor(
-    private fb: FormBuilder,
-    private router: Router,
-    private cartService: CartService,
-    private checkoutFlowService: CheckoutFlowService,
-    private checkoutState: CheckoutStateService,
+    private readonly fb: FormBuilder,
+    private readonly router: Router,
+    private readonly cartService: CartService,
+    private readonly checkoutFlowService: CheckoutFlowService,
+    private readonly checkoutState: CheckoutStateService,
+    private readonly ubigeoService: UbigeoService,
   ) {
+    const savedDelivery = this.checkoutState.getDelivery();
+
     this.entregaForm = this.fb.group({
-      direccion: ['', Validators.required],
-      referencia: ['', Validators.required],
-      nombreReceptor: ['', Validators.required],
-      telefono: ['', Validators.required],
+      departamento: [savedDelivery?.departamento ?? '', Validators.required],
+      provincia: [savedDelivery?.provincia ?? '', Validators.required],
+      distrito: [savedDelivery?.distrito ?? '', Validators.required],
+      direccion: [savedDelivery?.direccion ?? '', Validators.required],
+      referencia: [savedDelivery?.referencia ?? '', Validators.required],
+      receptorTipo: [savedDelivery?.receptorTipo ?? 'yo'],
+      receptorNombres: [savedDelivery?.receptor?.nombres ?? ''],
+      receptorApellidos: [savedDelivery?.receptor?.apellidos ?? ''],
+      receptorTipoDocumento: [savedDelivery?.receptor?.tipoDocumento ?? 'DNI'],
+      receptorNumeroDocumento: [savedDelivery?.receptor?.numeroDocumento ?? ''],
     });
+
+    this.pickupForm = this.fb.group({
+      receptorTipo: [savedDelivery?.receptorTipo ?? 'yo'],
+      receptorNombres: [savedDelivery?.receptor?.nombres ?? ''],
+      receptorApellidos: [savedDelivery?.receptor?.apellidos ?? ''],
+      receptorTipoDocumento: [savedDelivery?.receptor?.tipoDocumento ?? 'DNI'],
+      receptorNumeroDocumento: [savedDelivery?.receptor?.numeroDocumento ?? ''],
+    });
+
+    this.updateReceptorValidators(this.entregaForm, this.entregaForm.get('receptorTipo')?.value);
+    this.updateReceptorValidators(this.pickupForm, this.pickupForm.get('receptorTipo')?.value);
   }
 
   ngOnInit(): void {
+    if (!this.checkoutState.getCustomer()) {
+      this.router.navigate(['/datos-del-usuario']);
+      return;
+    }
+
+    this.ubigeoService.getDepartments().subscribe((data) => {
+      this.departments = data.map((item) => item.departamento);
+      const departamento = this.entregaForm.get('departamento')?.value;
+      if (departamento) {
+        this.onDepartmentChange(departamento, false);
+        const provincia = this.entregaForm.get('provincia')?.value;
+        if (provincia) {
+          this.onProvinceChange(provincia, false);
+        }
+      }
+    });
+
+    if (this.checkoutState.getDelivery()?.tipo === 'pickup') {
+      this.activeSection = 'pickup';
+    }
+
     this.cartService.refreshCart().subscribe((cart) => {
       const items = cart?.items ?? [];
       if (!items.length) {
@@ -50,49 +119,166 @@ export class TipoDeEntregaComponent implements OnInit {
           (displayItem) => displayItem.id_product === item.id_product,
         )?.image,
       }));
-      this.totalAmount = cart?.total ?? 0;
+      this.subtotal = cart?.total ?? 0;
+      this.updateTotals();
     });
   }
 
   setActiveSection(section: 'delivery' | 'pickup'): void {
     this.activeSection = section;
     this.checkoutError = '';
+    this.updateTotals();
   }
 
   isActive(section: 'delivery' | 'pickup'): boolean {
     return this.activeSection === section;
   }
 
-  onSubmit(): void {
+  onDepartmentChange(departamento: string, resetChildren = true): void {
+    if (resetChildren) {
+      this.entregaForm.patchValue({ provincia: '', distrito: '' });
+      this.districts = [];
+    }
+
+    this.ubigeoService.getProvinces(departamento).subscribe((provinces) => {
+      this.provinces = provinces;
+    });
+  }
+
+  onProvinceChange(provincia: string, resetDistrict = true): void {
+    const departamento = this.entregaForm.get('departamento')?.value;
+    if (resetDistrict) {
+      this.entregaForm.patchValue({ distrito: '' });
+    }
+
+    this.ubigeoService.getDistricts(departamento, provincia).subscribe((districts) => {
+      this.districts = districts;
+    });
+  }
+
+  onDeliveryReceptorChange(value: ReceptorType): void {
+    this.updateReceptorValidators(this.entregaForm, value);
+  }
+
+  onPickupReceptorChange(value: ReceptorType): void {
+    this.updateReceptorValidators(this.pickupForm, value);
+  }
+
+  isOtraPersona(form: FormGroup): boolean {
+    return form.get('receptorTipo')?.value === 'otra_persona';
+  }
+
+  onSubmitDelivery(): void {
     if (!this.entregaForm.valid) {
       this.showErrorModal = true;
       this.entregaForm.markAllAsTouched();
       return;
     }
 
-    this.startCheckout(
-      this.checkoutFlowService.startDeliveryCheckout(this.entregaForm.getRawValue()),
-    );
+    const delivery = this.buildDeliveryData('delivery', this.entregaForm);
+    this.checkoutState.saveDelivery(delivery);
+    this.startCheckout();
   }
 
-  continuePickup(): void {
-    this.startCheckout(this.checkoutFlowService.startPickupCheckout());
+  onSubmitPickup(): void {
+    if (!this.pickupForm.valid) {
+      this.showErrorModal = true;
+      this.pickupForm.markAllAsTouched();
+      return;
+    }
+
+    const delivery = this.buildDeliveryData('pickup', this.pickupForm);
+    this.checkoutState.saveDelivery(delivery);
+    this.startCheckout();
   }
 
-  private startCheckout(request$: ReturnType<CheckoutFlowService['startDeliveryCheckout']>): void {
+  private buildDeliveryData(
+    tipo: 'delivery' | 'pickup',
+    form: FormGroup,
+  ): CheckoutDeliveryData {
+    const raw = form.getRawValue();
+    const receptorTipo = raw.receptorTipo as ReceptorType;
+    const delivery: CheckoutDeliveryData = {
+      tipo,
+      receptorTipo,
+    };
+
+    if (tipo === 'delivery') {
+      delivery.departamento = raw.departamento;
+      delivery.provincia = raw.provincia;
+      delivery.distrito = raw.distrito;
+      delivery.direccion = raw.direccion;
+      delivery.referencia = raw.referencia;
+    }
+
+    if (receptorTipo === 'otra_persona') {
+      delivery.receptor = {
+        nombres: raw.receptorNombres,
+        apellidos: raw.receptorApellidos,
+        tipoDocumento: raw.receptorTipoDocumento,
+        numeroDocumento: raw.receptorNumeroDocumento,
+      };
+    }
+
+    return delivery;
+  }
+
+  private startCheckout(): void {
+    const existingOrder = this.checkoutState.getOrder();
+    if (existingOrder && !this.checkoutState.isExpired(existingOrder)) {
+      this.router.navigate(['/pagar']);
+      return;
+    }
+
     this.isSubmitting = true;
     this.checkoutError = '';
 
-    request$.subscribe({
-      next: (order) => {
-        this.checkoutState.save(order);
+    this.checkoutFlowService
+      .startCheckoutFromState()
+      .pipe(finalize(() => {
         this.isSubmitting = false;
-        this.router.navigate(['/pagar']);
-      },
-      error: (error) => {
-        this.isSubmitting = false;
-        this.checkoutError = this.mapCheckoutError(error);
-      },
+      }))
+      .subscribe({
+        next: (order) => {
+          if (!order?.id) {
+            this.checkoutError = 'No se recibió la orden. Intenta nuevamente.';
+            return;
+          }
+
+          this.checkoutState.saveOrder(order);
+          this.router.navigate(['/pagar']);
+        },
+        error: (error) => {
+          this.checkoutError = this.mapCheckoutError(error);
+        },
+      });
+  }
+
+  private updateTotals(): void {
+    this.deliveryFee = getDeliveryFee(this.activeSection);
+    this.totalAmount = this.subtotal + this.deliveryFee;
+  }
+
+  private updateReceptorValidators(form: FormGroup, receptorTipo: ReceptorType): void {
+    const isOtra = receptorTipo === 'otra_persona';
+    const controls = [
+      'receptorNombres',
+      'receptorApellidos',
+      'receptorTipoDocumento',
+      'receptorNumeroDocumento',
+    ];
+
+    controls.forEach((name) => {
+      const control = form.get(name);
+      if (!control) {
+        return;
+      }
+      if (isOtra) {
+        control.setValidators(Validators.required);
+      } else {
+        control.clearValidators();
+      }
+      control.updateValueAndValidity();
     });
   }
 
@@ -111,7 +297,14 @@ export class TipoDeEntregaComponent implements OnInit {
       return 'No hay stock suficiente para completar la compra.';
     }
     if (error?.status === 400) {
+      const message = typeof error?.error?.message === 'string' ? error.error.message : '';
+      if (message.includes('vacío') || message.includes('incompletos')) {
+        return message;
+      }
       return 'El carrito está vacío o los datos de envío no son válidos.';
+    }
+    if (error?.status === 401) {
+      return 'Tu sesión no es válida. Cierra sesión e intenta de nuevo, o continúa como invitado.';
     }
     return 'No se pudo iniciar el checkout. Intenta nuevamente.';
   }

@@ -1,9 +1,23 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { CartService } from '../cart.service';
-import { CheckoutOrder } from '../models/order.model';
+import { CheckoutOrder, OrderProductLine } from '../models/order.model';
 import { CheckoutStateService } from '../services/checkout-state.service';
+import {
+  CheckoutCustomerData,
+  CheckoutDeliveryData,
+  DELIVERY_FEE,
+  mapDocTypeToMercadoPago,
+  STORE_BUSINESS_HOURS,
+  STORE_PICKUP_ADDRESS,
+} from '../models/checkout.model';
 import { MercadoPagoConfigService } from '../services/mercadopago-config.service';
 import { MercadoPagoSdkService } from '../services/mercadopago-sdk.service';
 import { CreatePaymentPayload, PaymentService } from '../services/payment.service';
@@ -37,10 +51,18 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
   checkoutExpired = false;
   yapePhone = '';
   yapeOtp = '';
+  customerData: CheckoutCustomerData | null = null;
+  deliveryData: CheckoutDeliveryData | null = null;
+  subtotal = 0;
+  deliveryFee = 0;
+  readonly storeAddress = STORE_PICKUP_ADDRESS;
+  readonly storeHours = STORE_BUSINESS_HOURS;
 
   private sdkReady = false;
   private viewReady = false;
   private cardFormMounted = false;
+  private cardFormMountAttempts = 0;
+  private readonly maxCardFormMountAttempts = 10;
   private expiryCheckInterval: ReturnType<typeof setInterval> | null = null;
   private pendingPollSub: { unsubscribe: () => void } | null = null;
 
@@ -52,10 +74,13 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
     private readonly paymentService: PaymentService,
     private readonly mercadoPagoConfig: MercadoPagoConfigService,
     private readonly mercadoPagoSdk: MercadoPagoSdkService,
+    private readonly cdr: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): void {
-    const pendingOrder = this.checkoutState.get();
+    const pendingOrder = this.checkoutState.getOrder();
+    this.customerData = this.checkoutState.getCustomer();
+    this.deliveryData = this.checkoutState.getDelivery();
 
     if (!pendingOrder || this.checkoutState.isExpired(pendingOrder)) {
       this.checkoutState.clear();
@@ -65,6 +90,12 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.pendingOrder = pendingOrder;
     this.totalAmount = Number(pendingOrder.amount);
+    this.subtotal = (pendingOrder.orderHasProducts ?? []).reduce(
+      (sum, line) => sum + Number(line.product?.sale_price ?? 0) * line.quantity,
+      0,
+    );
+    this.deliveryFee = this.deliveryData?.tipo === 'delivery' ? DELIVERY_FEE : 0;
+    this.yapePhone = this.customerData?.celular ?? '';
     this.products = (pendingOrder.orderHasProducts ?? []).map((line) => ({
       id: line.id_product,
       name: line.product?.name ?? `Producto #${line.id_product}`,
@@ -86,7 +117,7 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
           .then(() => {
             this.sdkReady = true;
             this.isLoadingPayment = false;
-            this.tryMountCardForm();
+            this.scheduleMountCardForm();
           })
           .catch(() => {
             this.isLoadingPayment = false;
@@ -104,7 +135,7 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     this.viewReady = true;
-    this.tryMountCardForm();
+    this.scheduleMountCardForm();
   }
 
   ngOnDestroy(): void {
@@ -112,6 +143,8 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
       clearInterval(this.expiryCheckInterval);
     }
     this.pendingPollSub?.unsubscribe();
+    this.mercadoPagoSdk.unmountCardForm();
+    this.cardFormMounted = false;
   }
 
   get expiresAtLabel(): string {
@@ -122,7 +155,41 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   get payerEmail(): string {
-    return this.authService.getUserEmail() || '';
+    return this.customerData?.email || this.authService.getUserEmail() || '';
+  }
+
+  getCardholderName(): string {
+    if (!this.customerData) {
+      return '';
+    }
+    return `${this.customerData.nombres} ${this.customerData.apellidos}`.trim();
+  }
+
+  private getPrefillIdentificationType(): string | undefined {
+    if (!this.customerData?.tipoDocumento) {
+      return undefined;
+    }
+    return mapDocTypeToMercadoPago(this.customerData.tipoDocumento);
+  }
+
+  get receptorLabel(): string {
+    if (!this.deliveryData) {
+      return '';
+    }
+    if (this.deliveryData.receptorTipo === 'otra_persona' && this.deliveryData.receptor) {
+      return `${this.deliveryData.receptor.nombres} ${this.deliveryData.receptor.apellidos}`;
+    }
+    if (this.customerData) {
+      return `${this.customerData.nombres} ${this.customerData.apellidos}`;
+    }
+    return '';
+  }
+
+  submitCardPaymentClick(): void {
+    const submit = document.getElementById('form-checkout__submit');
+    if (submit) {
+      submit.click();
+    }
   }
 
   setPaymentMethod(method: PaymentMethod): void {
@@ -131,7 +198,9 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
     this.paymentNotice = '';
 
     if (method === 'card') {
-      this.tryMountCardForm();
+      this.cardFormMounted = false;
+      this.cardFormMountAttempts = 0;
+      this.scheduleMountCardForm();
     }
   }
 
@@ -191,28 +260,42 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  private scheduleMountCardForm(): void {
+    this.cdr.detectChanges();
+    setTimeout(() => this.tryMountCardForm(), 0);
+  }
+
   private tryMountCardForm(): void {
     if (
       !this.sdkReady ||
       !this.viewReady ||
       this.paymentMethod !== 'card' ||
       this.cardFormMounted ||
-      !this.pendingOrder
+      !this.pendingOrder ||
+      this.isLoadingPayment
     ) {
       return;
     }
 
     const formElement = document.getElementById('form-checkout');
-    if (!formElement) {
+    if (!formElement || formElement.classList.contains('hidden')) {
+      if (this.cardFormMountAttempts < this.maxCardFormMountAttempts) {
+        this.cardFormMountAttempts += 1;
+        this.scheduleMountCardForm();
+      }
       return;
     }
 
+    this.cardFormMountAttempts = 0;
     this.cardFormMounted = true;
 
     try {
       this.mercadoPagoSdk.mountCardForm({
         amount: this.totalAmount.toFixed(2),
         payerEmail: this.payerEmail,
+        payerName: this.getCardholderName(),
+        identificationType: this.getPrefillIdentificationType(),
+        identificationNumber: this.customerData?.numeroDocumento,
         onSubmit: (data) => this.submitCardPayment(data),
         onError: () => {
           this.paymentError =
@@ -398,6 +481,16 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
   private finishSuccessfulPayment(): void {
     this.isPaying = false;
     this.isWaitingWebhook = false;
+
+    if (this.pendingOrder) {
+      const summary = this.checkoutState.buildCompletedSummary(
+        this.pendingOrder,
+        this.customerData,
+        this.deliveryData,
+      );
+      this.checkoutState.saveCompletedSummary(summary);
+    }
+
     this.checkoutState.clear();
     this.cartService.clearLocalState();
     this.router.navigate(['/compra-realizada'], {

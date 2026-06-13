@@ -334,3 +334,33 @@ h3 {
   font-weight: 700;
   text-decoration: underline;
 }
+
+.summary-line {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.35rem 0;
+}
+
+.purchase-details {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e5e5;
+}
+
+.details-block {
+  margin-bottom: 1rem;
+}
+
+.details-block h4 {
+  margin: 0 0 0.5rem;
+}
+
+.summary-pay-btn {
+  width: 100%;
+  margin-top: 1rem;
+  justify-content: center;
+}
+
+.hidden-submit {
+  display: none;
+}

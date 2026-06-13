@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { CartService } from '../cart.service';
 import { ApiService } from '../services/api.service';
@@ -20,6 +20,7 @@ export class LoginComponent {
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private authService: AuthService,
     private apiService: ApiService,
     private cartService: CartService,
@@ -38,7 +39,6 @@ export class LoginComponent {
 
     this.apiService.login(loginData).subscribe({
       next: (response: any) => {
-        this.router.navigate(['/inicio']);
         // guardar token y datos de usuario
         if (response && response.token) {
           this.authService.login(response.token);
@@ -51,7 +51,9 @@ export class LoginComponent {
           localStorage.setItem('id', response.user.id || '');
         }
 
-        this.cartService.syncAfterLogin().subscribe();
+        this.cartService.syncAfterLogin().subscribe({
+          next: () => this.navigateAfterLogin(),
+        });
       },
       error: (error) => {
         console.error('Error', error);
@@ -59,6 +61,11 @@ export class LoginComponent {
         this.apiErrorMessage = this.getErrorMessage(error.status);
       },
     });
+  }
+
+  private navigateAfterLogin(): void {
+    const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
+    this.router.navigate(returnUrl ? [returnUrl] : ['/inicio']);
   }
 
   getErrorMessage(statusCode: number): string {

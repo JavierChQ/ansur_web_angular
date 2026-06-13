@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router'; 
+import { ActivatedRoute, Router } from '@angular/router'; 
 import { AuthService } from '../auth.service';
 import { ApiService } from '../services/api.service';
 
@@ -32,7 +32,12 @@ export class RegisterComponent {
     password: ''
   };
 
-  constructor(private router: Router, private authService: AuthService, private apiService: ApiService) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private authService: AuthService,
+    private apiService: ApiService,
+  ) {}
 
   validateForm() {
     this.clearErrors();
@@ -107,7 +112,8 @@ export class RegisterComponent {
         }
         this.showSuccessMessage = true; 
         setTimeout(() => {
-          this.router.navigate(['/login']);
+          const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
+          this.router.navigate(returnUrl ? [returnUrl] : ['/login']);
         }, 3000);
       },
       error: (error) => {

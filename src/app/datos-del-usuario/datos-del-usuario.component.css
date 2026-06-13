@@ -247,4 +247,33 @@
   .close i {
     color: #000;
   }
-  
+
+.checkout-mode-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.mode-tab {
+  border: 1px solid #f82727;
+  background: #fff;
+  color: #f82727;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.mode-tab.active,
+.mode-tab:hover {
+  background: #f82727;
+  color: #fff;
+}
+
+.mode-tab.link-tab {
+  background: transparent;
+}
+
+.login-inline-form {
+  margin-top: 1rem;
+}

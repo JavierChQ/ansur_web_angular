@@ -34,7 +34,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     if (this.authService.isLoggedIn()) {
       this.cartService.refreshCart().subscribe();
     } else {
-      this.cartService.clearLocalState();
+      this.cartService.refreshCart().subscribe();
     }
   }
 
@@ -77,11 +77,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   // Método cart
   handleCartClick() {
-    if (this.authService.isLoggedIn()) {
-      this.router.navigate(['/cart']);
-    } else {
-      this.showCartModal('Debes iniciar sesión para acceder al carrito');
-    }
+    this.router.navigate(['/cart']);
   }
 
   showModal(message: string): void {

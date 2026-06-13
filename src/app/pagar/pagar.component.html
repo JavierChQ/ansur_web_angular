@@ -103,7 +103,7 @@
             </div>
           </div>
 
-          <div class="form-row">
+          <div class="form-row mp-identification-fields">
             <div class="form-group half-width">
               <label>Tipo de documento</label>
               <select id="form-checkout__identificationType"></select>
@@ -122,11 +122,10 @@
           <button
             type="submit"
             id="form-checkout__submit"
-            class="btn btn-comprar mercado__pago"
+            class="btn btn-comprar mercado__pago hidden-submit"
             [disabled]="isPaying || isWaitingWebhook"
           >
-            <img src="/assets/mercadopago.png" alt="Mercado Pago" />
-            <p>{{ isPaying ? 'Procesando pago...' : 'Pagar con tarjeta' }}</p>
+            Pagar
           </button>
         </form>
 
@@ -159,16 +158,30 @@
               [(ngModel)]="yapeOtp"
             />
           </div>
+        </div>
 
-          <button
-            type="button"
-            class="btn btn-comprar mercado__pago yape-btn"
-            (click)="payWithYape()"
-            [disabled]="isPaying || isWaitingWebhook"
-          >
-            <img src="/assets/mercadopago.png" alt="Mercado Pago" />
-            <p>{{ isPaying ? 'Procesando pago...' : 'Pagar con Yape' }}</p>
-          </button>
+        <div class="purchase-details" *ngIf="customerData && deliveryData">
+          <h3>Detalles de la compra</h3>
+          <div class="details-block">
+            <h4>Datos del cliente</h4>
+            <p>{{ customerData.nombres }} {{ customerData.apellidos }}</p>
+            <p>{{ customerData.email }}</p>
+            <p>{{ customerData.celular }}</p>
+            <p>{{ customerData.tipoDocumento }}: {{ customerData.numeroDocumento }}</p>
+          </div>
+          <div class="details-block">
+            <h4>Entrega</h4>
+            <p *ngIf="deliveryData.tipo === 'delivery'">Entrega a domicilio</p>
+            <p *ngIf="deliveryData.tipo === 'pickup'">Retiro en tienda</p>
+            <p *ngIf="deliveryData.tipo === 'delivery'">
+              {{ deliveryData.direccion }}, {{ deliveryData.distrito }}, {{ deliveryData.provincia }},
+              {{ deliveryData.departamento }}
+            </p>
+            <p *ngIf="deliveryData.tipo === 'delivery'">Ref: {{ deliveryData.referencia }}</p>
+            <p *ngIf="deliveryData.tipo === 'pickup'">{{ storeAddress }}</p>
+            <p *ngIf="deliveryData.tipo === 'pickup'">{{ storeHours }}</p>
+            <p>Recibe/recoge: {{ receptorLabel }}</p>
+          </div>
         </div>
 
         <div class="btn__form back-row">
@@ -190,6 +203,14 @@
             <p>Cantidad: {{ product.quantity }}</p>
           </div>
         </div>
+        <div class="summary-line">
+          <span>Subtotal</span>
+          <span>S/ {{ subtotal.toFixed(2) }}</span>
+        </div>
+        <div class="summary-line" *ngIf="deliveryFee > 0">
+          <span>Envío a domicilio</span>
+          <span>S/ {{ deliveryFee.toFixed(2) }}</span>
+        </div>
         <div class="total-summary">
           <p class="total-label"><strong>Total:</strong></p>
           <p class="total-amount"><strong>S/ {{ totalAmount.toFixed(2) }}</strong></p>
@@ -197,6 +218,28 @@
         <p *ngIf="expiresAtLabel" class="checkout-expiry">
           Reserva de stock válida hasta: {{ expiresAtLabel }}
         </p>
+
+        <button
+          *ngIf="paymentMethod === 'card' && !isLoadingPayment"
+          type="button"
+          class="btn btn-comprar mercado__pago summary-pay-btn"
+          (click)="submitCardPaymentClick()"
+          [disabled]="isPaying || isWaitingWebhook"
+        >
+          <img src="/assets/mercadopago.png" alt="Mercado Pago" />
+          <p>{{ isPaying ? 'Procesando pago...' : 'Pagar con tarjeta' }}</p>
+        </button>
+
+        <button
+          *ngIf="paymentMethod === 'yape' && !isLoadingPayment"
+          type="button"
+          class="btn btn-comprar mercado__pago yape-btn summary-pay-btn"
+          (click)="payWithYape()"
+          [disabled]="isPaying || isWaitingWebhook"
+        >
+          <img src="/assets/mercadopago.png" alt="Mercado Pago" />
+          <p>{{ isPaying ? 'Procesando pago...' : 'Pagar con Yape' }}</p>
+        </button>
       </div>
     </div>
   </div>

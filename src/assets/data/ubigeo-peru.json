@@ -1,0 +1,8482 @@
+[
+  {
+    "departamento": "Amazonas",
+    "provincias": [
+      {
+        "provincia": "Bagua",
+        "distritos": [
+          {
+            "distrito": "Aramango",
+            "ubigeo": "010202"
+          },
+          {
+            "distrito": "Bagua",
+            "ubigeo": "010201"
+          },
+          {
+            "distrito": "Copallin",
+            "ubigeo": "010203"
+          },
+          {
+            "distrito": "El Parco",
+            "ubigeo": "010204"
+          },
+          {
+            "distrito": "Imaza",
+            "ubigeo": "010205"
+          },
+          {
+            "distrito": "La Peca",
+            "ubigeo": "010206"
+          }
+        ]
+      },
+      {
+        "provincia": "Bongará",
+        "distritos": [
+          {
+            "distrito": "Chisquilla",
+            "ubigeo": "010302"
+          },
+          {
+            "distrito": "Churuja",
+            "ubigeo": "010303"
+          },
+          {
+            "distrito": "Corosha",
+            "ubigeo": "010304"
+          },
+          {
+            "distrito": "Cuispes",
+            "ubigeo": "010305"
+          },
+          {
+            "distrito": "Florida",
+            "ubigeo": "010306"
+          },
+          {
+            "distrito": "Jazan",
+            "ubigeo": "010307"
+          },
+          {
+            "distrito": "Jumbilla",
+            "ubigeo": "010301"
+          },
+          {
+            "distrito": "Recta",
+            "ubigeo": "010308"
+          },
+          {
+            "distrito": "San Carlos",
+            "ubigeo": "010309"
+          },
+          {
+            "distrito": "Shipasbamba",
+            "ubigeo": "010310"
+          },
+          {
+            "distrito": "Valera",
+            "ubigeo": "010311"
+          },
+          {
+            "distrito": "Yambrasbamba",
+            "ubigeo": "010312"
+          }
+        ]
+      },
+      {
+        "provincia": "Chachapoyas",
+        "distritos": [
+          {
+            "distrito": "Asuncion",
+            "ubigeo": "010102"
+          },
+          {
+            "distrito": "Balsas",
+            "ubigeo": "010103"
+          },
+          {
+            "distrito": "Chachapoyas",
+            "ubigeo": "010101"
+          },
+          {
+            "distrito": "Cheto",
+            "ubigeo": "010104"
+          },
+          {
+            "distrito": "Chiliquin",
+            "ubigeo": "010105"
+          },
+          {
+            "distrito": "Chuquibamba",
+            "ubigeo": "010106"
+          },
+          {
+            "distrito": "Granada",
+            "ubigeo": "010107"
+          },
+          {
+            "distrito": "Huancas",
+            "ubigeo": "010108"
+          },
+          {
+            "distrito": "La Jalca",
+            "ubigeo": "010109"
+          },
+          {
+            "distrito": "Leimebamba",
+            "ubigeo": "010110"
+          },
+          {
+            "distrito": "Levanto",
+            "ubigeo": "010111"
+          },
+          {
+            "distrito": "Magdalena",
+            "ubigeo": "010112"
+          },
+          {
+            "distrito": "Mariscal Castilla",
+            "ubigeo": "010113"
+          },
+          {
+            "distrito": "Molinopampa",
+            "ubigeo": "010114"
+          },
+          {
+            "distrito": "Montevideo",
+            "ubigeo": "010115"
+          },
+          {
+            "distrito": "Olleros",
+            "ubigeo": "010116"
+          },
+          {
+            "distrito": "Quinjalca",
+            "ubigeo": "010117"
+          },
+          {
+            "distrito": "San Francisco De Daguas",
+            "ubigeo": "010118"
+          },
+          {
+            "distrito": "San Isidro De Maino",
+            "ubigeo": "010119"
+          },
+          {
+            "distrito": "Soloco",
+            "ubigeo": "010120"
+          },
+          {
+            "distrito": "Sonche",
+            "ubigeo": "010121"
+          }
+        ]
+      },
+      {
+        "provincia": "Condorcanqui",
+        "distritos": [
+          {
+            "distrito": "El Cenepa",
+            "ubigeo": "010402"
+          },
+          {
+            "distrito": "Nieva",
+            "ubigeo": "010401"
+          },
+          {
+            "distrito": "Rio Santiago",
+            "ubigeo": "010403"
+          }
+        ]
+      },
+      {
+        "provincia": "Luya",
+        "distritos": [
+          {
+            "distrito": "Camporredondo",
+            "ubigeo": "010502"
+          },
+          {
+            "distrito": "Cocabamba",
+            "ubigeo": "010503"
+          },
+          {
+            "distrito": "Colcamar",
+            "ubigeo": "010504"
+          },
+          {
+            "distrito": "Conila",
+            "ubigeo": "010505"
+          },
+          {
+            "distrito": "Inguilpata",
+            "ubigeo": "010506"
+          },
+          {
+            "distrito": "Lamud",
+            "ubigeo": "010501"
+          },
+          {
+            "distrito": "Longuita",
+            "ubigeo": "010507"
+          },
+          {
+            "distrito": "Lonya Chico",
+            "ubigeo": "010508"
+          },
+          {
+            "distrito": "Luya",
+            "ubigeo": "010509"
+          },
+          {
+            "distrito": "Luya Viejo",
+            "ubigeo": "010510"
+          },
+          {
+            "distrito": "Maria",
+            "ubigeo": "010511"
+          },
+          {
+            "distrito": "Ocalli",
+            "ubigeo": "010512"
+          },
+          {
+            "distrito": "Ocumal",
+            "ubigeo": "010513"
+          },
+          {
+            "distrito": "Pisuquia",
+            "ubigeo": "010514"
+          },
+          {
+            "distrito": "Providencia",
+            "ubigeo": "010515"
+          },
+          {
+            "distrito": "San Cristobal",
+            "ubigeo": "010516"
+          },
+          {
+            "distrito": "San Francisco Del Yeso",
+            "ubigeo": "010517"
+          },
+          {
+            "distrito": "San Jeronimo",
+            "ubigeo": "010518"
+          },
+          {
+            "distrito": "San Juan De Lopecancha",
+            "ubigeo": "010519"
+          },
+          {
+            "distrito": "Santa Catalina",
+            "ubigeo": "010520"
+          },
+          {
+            "distrito": "Santo Tomas",
+            "ubigeo": "010521"
+          },
+          {
+            "distrito": "Tingo",
+            "ubigeo": "010522"
+          },
+          {
+            "distrito": "Trita",
+            "ubigeo": "010523"
+          }
+        ]
+      },
+      {
+        "provincia": "Rodríguez De Mendoza",
+        "distritos": [
+          {
+            "distrito": "Chirimoto",
+            "ubigeo": "010602"
+          },
+          {
+            "distrito": "Cochamal",
+            "ubigeo": "010603"
+          },
+          {
+            "distrito": "Huambo",
+            "ubigeo": "010604"
+          },
+          {
+            "distrito": "Limabamba",
+            "ubigeo": "010605"
+          },
+          {
+            "distrito": "Longar",
+            "ubigeo": "010606"
+          },
+          {
+            "distrito": "Mariscal Benavides",
+            "ubigeo": "010607"
+          },
+          {
+            "distrito": "Milpuc",
+            "ubigeo": "010608"
+          },
+          {
+            "distrito": "Omia",
+            "ubigeo": "010609"
+          },
+          {
+            "distrito": "San Nicolas",
+            "ubigeo": "010601"
+          },
+          {
+            "distrito": "Santa Rosa",
+            "ubigeo": "010610"
+          },
+          {
+            "distrito": "Totora",
+            "ubigeo": "010611"
+          },
+          {
+            "distrito": "Vista Alegre",
+            "ubigeo": "010612"
+          }
+        ]
+      },
+      {
+        "provincia": "Utcubamba",
+        "distritos": [
+          {
+            "distrito": "Bagua Grande",
+            "ubigeo": "010701"
+          },
+          {
+            "distrito": "Cajaruro",
+            "ubigeo": "010702"
+          },
+          {
+            "distrito": "Cumba",
+            "ubigeo": "010703"
+          },
+          {
+            "distrito": "El Milagro",
+            "ubigeo": "010704"
+          },
+          {
+            "distrito": "Jamalca",
+            "ubigeo": "010705"
+          },
+          {
+            "distrito": "Lonya Grande",
+            "ubigeo": "010706"
+          },
+          {
+            "distrito": "Yamon",
+            "ubigeo": "010707"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "departamento": "Áncash",
+    "provincias": [
+      {
+        "provincia": "Aija",
+        "distritos": [
+          {
+            "distrito": "Aija",
+            "ubigeo": "020201"
+          },
+          {
+            "distrito": "Coris",
+            "ubigeo": "020202"
+          },
+          {
+            "distrito": "Huacllan",
+            "ubigeo": "020203"
+          },
+          {
+            "distrito": "La Merced",
+            "ubigeo": "020204"
+          },
+          {
+            "distrito": "Succha",
+            "ubigeo": "020205"
+          }
+        ]
+      },
+      {
+        "provincia": "Antonio Raymondi",
+        "distritos": [
+          {
+            "distrito": "Aczo",
+            "ubigeo": "020302"
+          },
+          {
+            "distrito": "Chaccho",
+            "ubigeo": "020303"
+          },
+          {
+            "distrito": "Chingas",
+            "ubigeo": "020304"
+          },
+          {
+            "distrito": "Llamellin",
+            "ubigeo": "020301"
+          },
+          {
+            "distrito": "Mirgas",
+            "ubigeo": "020305"
+          },
+          {
+            "distrito": "San Juan De Rontoy",
+            "ubigeo": "020306"
+          }
+        ]
+      },
+      {
+        "provincia": "Asunción",
+        "distritos": [
+          {
+            "distrito": "Acochaca",
+            "ubigeo": "020402"
+          },
+          {
+            "distrito": "Chacas",
+            "ubigeo": "020401"
+          }
+        ]
+      },
+      {
+        "provincia": "Bolognesi",
+        "distritos": [
+          {
+            "distrito": "Abelardo Pardo Lezameta",
+            "ubigeo": "020502"
+          },
+          {
+            "distrito": "Antonio Raymondi",
+            "ubigeo": "020503"
+          },
+          {
+            "distrito": "Aquia",
+            "ubigeo": "020504"
+          },
+          {
+            "distrito": "Cajacay",
+            "ubigeo": "020505"
+          },
+          {
+            "distrito": "Canis",
+            "ubigeo": "020506"
+          },
+          {
+            "distrito": "Chiquian",
+            "ubigeo": "020501"
+          },
+          {
+            "distrito": "Colquioc",
+            "ubigeo": "020507"
+          },
+          {
+            "distrito": "Huallanca",
+            "ubigeo": "020508"
+          },
+          {
+            "distrito": "Huasta",
+            "ubigeo": "020509"
+          },
+          {
+            "distrito": "Huayllacayan",
+            "ubigeo": "020510"
+          },
+          {
+            "distrito": "La Primavera",
+            "ubigeo": "020511"
+          },
+          {
+            "distrito": "Mangas",
+            "ubigeo": "020512"
+          },
+          {
+            "distrito": "Pacllon",
+            "ubigeo": "020513"
+          },
+          {
+            "distrito": "San Miguel De Corpanqui",
+            "ubigeo": "020514"
+          },
+          {
+            "distrito": "Ticllos",
+            "ubigeo": "020515"
+          }
+        ]
+      },
+      {
+        "provincia": "Carhuaz",
+        "distritos": [
+          {
+            "distrito": "Acopampa",
+            "ubigeo": "020602"
+          },
+          {
+            "distrito": "Amashca",
+            "ubigeo": "020603"
+          },
+          {
+            "distrito": "Anta",
+            "ubigeo": "020604"
+          },
+          {
+            "distrito": "Ataquero",
+            "ubigeo": "020605"
+          },
+          {
+            "distrito": "Carhuaz",
+            "ubigeo": "020601"
+          },
+          {
+            "distrito": "Marcara",
+            "ubigeo": "020606"
+          },
+          {
+            "distrito": "Pariahuanca",
+            "ubigeo": "020607"
+          },
+          {
+            "distrito": "San Miguel De Aco",
+            "ubigeo": "020608"
+          },
+          {
+            "distrito": "Shilla",
+            "ubigeo": "020609"
+          },
+          {
+            "distrito": "Tinco",
+            "ubigeo": "020610"
+          },
+          {
+            "distrito": "Yungar",
+            "ubigeo": "020611"
+          }
+        ]
+      },
+      {
+        "provincia": "Carlos Fermín Fitzcarrald",
+        "distritos": [
+          {
+            "distrito": "San Luis",
+            "ubigeo": "020701"
+          },
+          {
+            "distrito": "San Nicolas",
+            "ubigeo": "020702"
+          },
+          {
+            "distrito": "Yauya",
+            "ubigeo": "020703"
+          }
+        ]
+      },
+      {
+        "provincia": "Casma",
+        "distritos": [
+          {
+            "distrito": "Buena Vista Alta",
+            "ubigeo": "020802"
+          },
+          {
+            "distrito": "Casma",
+            "ubigeo": "020801"
+          },
+          {
+            "distrito": "Comandante Noel",
+            "ubigeo": "020803"
+          },
+          {
+            "distrito": "Yautan",
+            "ubigeo": "020804"
+          }
+        ]
+      },
+      {
+        "provincia": "Corongo",
+        "distritos": [
+          {
+            "distrito": "Aco",
+            "ubigeo": "020902"
+          },
+          {
+            "distrito": "Bambas",
+            "ubigeo": "020903"
+          },
+          {
+            "distrito": "Corongo",
+            "ubigeo": "020901"
+          },
+          {
+            "distrito": "Cusca",
+            "ubigeo": "020904"
+          },
+          {
+            "distrito": "La Pampa",
+            "ubigeo": "020905"
+          },
+          {
+            "distrito": "Yanac",
+            "ubigeo": "020906"
+          },
+          {
+            "distrito": "Yupan",
+            "ubigeo": "020907"
+          }
+        ]
+      },
+      {
+        "provincia": "Huaraz",
+        "distritos": [
+          {
+            "distrito": "Cochabamba",
+            "ubigeo": "020102"
+          },
+          {
+            "distrito": "Colcabamba",
+            "ubigeo": "020103"
+          },
+          {
+            "distrito": "Huanchay",
+            "ubigeo": "020104"
+          },
+          {
+            "distrito": "Huaraz",
+            "ubigeo": "020101"
+          },
+          {
+            "distrito": "Independencia",
+            "ubigeo": "020105"
+          },
+          {
+            "distrito": "Jangas",
+            "ubigeo": "020106"
+          },
+          {
+            "distrito": "La Libertad",
+            "ubigeo": "020107"
+          },
+          {
+            "distrito": "Olleros",
+            "ubigeo": "020108"
+          },
+          {
+            "distrito": "Pampas Grande",
+            "ubigeo": "020109"
+          },
+          {
+            "distrito": "Pariacoto",
+            "ubigeo": "020110"
+          },
+          {
+            "distrito": "Pira",
+            "ubigeo": "020111"
+          },
+          {
+            "distrito": "Tarica",
+            "ubigeo": "020112"
+          }
+        ]
+      },
+      {
+        "provincia": "Huari",
+        "distritos": [
+          {
+            "distrito": "Anra",
+            "ubigeo": "021002"
+          },
+          {
+            "distrito": "Cajay",
+            "ubigeo": "021003"
+          },
+          {
+            "distrito": "Chavin De Huantar",
+            "ubigeo": "021004"
+          },
+          {
+            "distrito": "Huacachi",
+            "ubigeo": "021005"
+          },
+          {
+            "distrito": "Huacchis",
+            "ubigeo": "021006"
+          },
+          {
+            "distrito": "Huachis",
+            "ubigeo": "021007"
+          },
+          {
+            "distrito": "Huantar",
+            "ubigeo": "021008"
+          },
+          {
+            "distrito": "Huari",
+            "ubigeo": "021001"
+          },
+          {
+            "distrito": "Masin",
+            "ubigeo": "021009"
+          },
+          {
+            "distrito": "Paucas",
+            "ubigeo": "021010"
+          },
+          {
+            "distrito": "Ponto",
+            "ubigeo": "021011"
+          },
+          {
+            "distrito": "Rahuapampa",
+            "ubigeo": "021012"
+          },
+          {
+            "distrito": "Rapayan",
+            "ubigeo": "021013"
+          },
+          {
+            "distrito": "San Marcos",
+            "ubigeo": "021014"
+          },
+          {
+            "distrito": "San Pedro De Chana",
+            "ubigeo": "021015"
+          },
+          {
+            "distrito": "Uco",
+            "ubigeo": "021016"
+          }
+        ]
+      },
+      {
+        "provincia": "Huarmey",
+        "distritos": [
+          {
+            "distrito": "Cochapeti",
+            "ubigeo": "021102"
+          },
+          {
+            "distrito": "Culebras",
+            "ubigeo": "021103"
+          },
+          {
+            "distrito": "Huarmey",
+            "ubigeo": "021101"
+          },
+          {
+            "distrito": "Huayan",
+            "ubigeo": "021104"
+          },
+          {
+            "distrito": "Malvas",
+            "ubigeo": "021105"
+          }
+        ]
+      },
+      {
+        "provincia": "Huaylas",
+        "distritos": [
+          {
+            "distrito": "Caraz",
+            "ubigeo": "021201"
+          },
+          {
+            "distrito": "Huallanca",
+            "ubigeo": "021202"
+          },
+          {
+            "distrito": "Huata",
+            "ubigeo": "021203"
+          },
+          {
+            "distrito": "Huaylas",
+            "ubigeo": "021204"
+          },
+          {
+            "distrito": "Mato",
+            "ubigeo": "021205"
+          },
+          {
+            "distrito": "Pamparomas",
+            "ubigeo": "021206"
+          },
+          {
+            "distrito": "Pueblo Libre",
+            "ubigeo": "021207"
+          },
+          {
+            "distrito": "Santa Cruz",
+            "ubigeo": "021208"
+          },
+          {
+            "distrito": "Santo Toribio",
+            "ubigeo": "021209"
+          },
+          {
+            "distrito": "Yuracmarca",
+            "ubigeo": "021210"
+          }
+        ]
+      },
+      {
+        "provincia": "Mariscal Luzuriaga",
+        "distritos": [
+          {
+            "distrito": "Casca",
+            "ubigeo": "021302"
+          },
+          {
+            "distrito": "Eleazar Guzman Barron",
+            "ubigeo": "021303"
+          },
+          {
+            "distrito": "Fidel Olivas Escudero",
+            "ubigeo": "021304"
+          },
+          {
+            "distrito": "Llama",
+            "ubigeo": "021305"
+          },
+          {
+            "distrito": "Llumpa",
+            "ubigeo": "021306"
+          },
+          {
+            "distrito": "Lucma",
+            "ubigeo": "021307"
+          },
+          {
+            "distrito": "Musga",
+            "ubigeo": "021308"
+          },
+          {
+            "distrito": "Piscobamba",
+            "ubigeo": "021301"
+          }
+        ]
+      },
+      {
+        "provincia": "Ocros",
+        "distritos": [
+          {
+            "distrito": "Acas",
+            "ubigeo": "021402"
+          },
+          {
+            "distrito": "Cajamarquilla",
+            "ubigeo": "021403"
+          },
+          {
+            "distrito": "Carhuapampa",
+            "ubigeo": "021404"
+          },
+          {
+            "distrito": "Cochas",
+            "ubigeo": "021405"
+          },
+          {
+            "distrito": "Congas",
+            "ubigeo": "021406"
+          },
+          {
+            "distrito": "Llipa",
+            "ubigeo": "021407"
+          },
+          {
+            "distrito": "Ocros",
+            "ubigeo": "021401"
+          },
+          {
+            "distrito": "San Cristobal De Rajan",
+            "ubigeo": "021408"
+          },
+          {
+            "distrito": "San Pedro",
+            "ubigeo": "021409"
+          },
+          {
+            "distrito": "Santiago De Chilcas",
+            "ubigeo": "021410"
+          }
+        ]
+      },
+      {
+        "provincia": "Pallasca",
+        "distritos": [
+          {
+            "distrito": "Bolognesi",
+            "ubigeo": "021502"
+          },
+          {
+            "distrito": "Cabana",
+            "ubigeo": "021501"
+          },
+          {
+            "distrito": "Conchucos",
+            "ubigeo": "021503"
+          },
+          {
+            "distrito": "Huacaschuque",
+            "ubigeo": "021504"
+          },
+          {
+            "distrito": "Huandoval",
+            "ubigeo": "021505"
+          },
+          {
+            "distrito": "Lacabamba",
+            "ubigeo": "021506"
+          },
+          {
+            "distrito": "Llapo",
+            "ubigeo": "021507"
+          },
+          {
+            "distrito": "Pallasca",
+            "ubigeo": "021508"
+          },
+          {
+            "distrito": "Pampas",
+            "ubigeo": "021509"
+          },
+          {
+            "distrito": "Santa Rosa",
+            "ubigeo": "021510"
+          },
+          {
+            "distrito": "Tauca",
+            "ubigeo": "021511"
+          }
+        ]
+      },
+      {
+        "provincia": "Pomabamba",
+        "distritos": [
+          {
+            "distrito": "Huayllan",
+            "ubigeo": "021602"
+          },
+          {
+            "distrito": "Parobamba",
+            "ubigeo": "021603"
+          },
+          {
+            "distrito": "Pomabamba",
+            "ubigeo": "021601"
+          },
+          {
+            "distrito": "Quinuabamba",
+            "ubigeo": "021604"
+          }
+        ]
+      },
+      {
+        "provincia": "Recuay",
+        "distritos": [
+          {
+            "distrito": "Catac",
+            "ubigeo": "021702"
+          },
+          {
+            "distrito": "Cotaparaco",
+            "ubigeo": "021703"
+          },
+          {
+            "distrito": "Huayllapampa",
+            "ubigeo": "021704"
+          },
+          {
+            "distrito": "Llacllin",
+            "ubigeo": "021705"
+          },
+          {
+            "distrito": "Marca",
+            "ubigeo": "021706"
+          },
+          {
+            "distrito": "Pampas Chico",
+            "ubigeo": "021707"
+          },
+          {
+            "distrito": "Pararin",
+            "ubigeo": "021708"
+          },
+          {
+            "distrito": "Recuay",
+            "ubigeo": "021701"
+          },
+          {
+            "distrito": "Tapacocha",
+            "ubigeo": "021709"
+          },
+          {
+            "distrito": "Ticapampa",
+            "ubigeo": "021710"
+          }
+        ]
+      },
+      {
+        "provincia": "Santa",
+        "distritos": [
+          {
+            "distrito": "Caceres Del Peru",
+            "ubigeo": "021802"
+          },
+          {
+            "distrito": "Chimbote",
+            "ubigeo": "021801"
+          },
+          {
+            "distrito": "Coishco",
+            "ubigeo": "021803"
+          },
+          {
+            "distrito": "Macate",
+            "ubigeo": "021804"
+          },
+          {
+            "distrito": "Moro",
+            "ubigeo": "021805"
+          },
+          {
+            "distrito": "Nepeña",
+            "ubigeo": "021806"
+          },
+          {
+            "distrito": "Nuevo Chimbote",
+            "ubigeo": "021809"
+          },
+          {
+            "distrito": "Samanco",
+            "ubigeo": "021807"
+          },
+          {
+            "distrito": "Santa",
+            "ubigeo": "021808"
+          }
+        ]
+      },
+      {
+        "provincia": "Sihuas",
+        "distritos": [
+          {
+            "distrito": "Acobamba",
+            "ubigeo": "021902"
+          },
+          {
+            "distrito": "Alfonso Ugarte",
+            "ubigeo": "021903"
+          },
+          {
+            "distrito": "Cashapampa",
+            "ubigeo": "021904"
+          },
+          {
+            "distrito": "Chingalpo",
+            "ubigeo": "021905"
+          },
+          {
+            "distrito": "Huayllabamba",
+            "ubigeo": "021906"
+          },
+          {
+            "distrito": "Quiches",
+            "ubigeo": "021907"
+          },
+          {
+            "distrito": "Ragash",
+            "ubigeo": "021908"
+          },
+          {
+            "distrito": "San Juan",
+            "ubigeo": "021909"
+          },
+          {
+            "distrito": "Sicsibamba",
+            "ubigeo": "021910"
+          },
+          {
+            "distrito": "Sihuas",
+            "ubigeo": "021901"
+          }
+        ]
+      },
+      {
+        "provincia": "Yungay",
+        "distritos": [
+          {
+            "distrito": "Cascapara",
+            "ubigeo": "022002"
+          },
+          {
+            "distrito": "Mancos",
+            "ubigeo": "022003"
+          },
+          {
+            "distrito": "Matacoto",
+            "ubigeo": "022004"
+          },
+          {
+            "distrito": "Quillo",
+            "ubigeo": "022005"
+          },
+          {
+            "distrito": "Ranrahirca",
+            "ubigeo": "022006"
+          },
+          {
+            "distrito": "Shupluy",
+            "ubigeo": "022007"
+          },
+          {
+            "distrito": "Yanama",
+            "ubigeo": "022008"
+          },
+          {
+            "distrito": "Yungay",
+            "ubigeo": "022001"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "departamento": "Apurímac",
+    "provincias": [
+      {
+        "provincia": "Abancay",
+        "distritos": [
+          {
+            "distrito": "Abancay",
+            "ubigeo": "030101"
+          },
+          {
+            "distrito": "Chacoche",
+            "ubigeo": "030102"
+          },
+          {
+            "distrito": "Circa",
+            "ubigeo": "030103"
+          },
+          {
+            "distrito": "Curahuasi",
+            "ubigeo": "030104"
+          },
+          {
+            "distrito": "Huanipaca",
+            "ubigeo": "030105"
+          },
+          {
+            "distrito": "Lambrama",
+            "ubigeo": "030106"
+          },
+          {
+            "distrito": "Pichirhua",
+            "ubigeo": "030107"
+          },
+          {
+            "distrito": "San Pedro De Cachora",
+            "ubigeo": "030108"
+          },
+          {
+            "distrito": "Tamburco",
+            "ubigeo": "030109"
+          }
+        ]
+      },
+      {
+        "provincia": "Andahuaylas",
+        "distritos": [
+          {
+            "distrito": "Andahuaylas",
+            "ubigeo": "030201"
+          },
+          {
+            "distrito": "Andarapa",
+            "ubigeo": "030202"
+          },
+          {
+            "distrito": "Chiara",
+            "ubigeo": "030203"
+          },
+          {
+            "distrito": "Huancarama",
+            "ubigeo": "030204"
+          },
+          {
+            "distrito": "Huancaray",
+            "ubigeo": "030205"
+          },
+          {
+            "distrito": "Huayana",
+            "ubigeo": "030206"
+          },
+          {
+            "distrito": "Kaquiabamba",
+            "ubigeo": "030219"
+          },
+          {
+            "distrito": "Kishuara",
+            "ubigeo": "030207"
+          },
+          {
+            "distrito": "Pacobamba",
+            "ubigeo": "030208"
+          },
+          {
+            "distrito": "Pacucha",
+            "ubigeo": "030209"
+          },
+          {
+            "distrito": "Pampachiri",
+            "ubigeo": "030210"
+          },
+          {
+            "distrito": "Pomacocha",
+            "ubigeo": "030211"
+          },
+          {
+            "distrito": "San Antonio De Cachi",
+            "ubigeo": "030212"
+          },
+          {
+            "distrito": "San Jeronimo",
+            "ubigeo": "030213"
+          },
+          {
+            "distrito": "San Miguel De Chaccrampa",
+            "ubigeo": "030214"
+          },
+          {
+            "distrito": "Santa Maria De Chicmo",
+            "ubigeo": "030215"
+          },
+          {
+            "distrito": "Talavera",
+            "ubigeo": "030216"
+          },
+          {
+            "distrito": "Tumay Huaraca",
+            "ubigeo": "030217"
+          },
+          {
+            "distrito": "Turpo",
+            "ubigeo": "030218"
+          }
+        ]
+      },
+      {
+        "provincia": "Antabamba",
+        "distritos": [
+          {
+            "distrito": "Antabamba",
+            "ubigeo": "030301"
+          },
+          {
+            "distrito": "El Oro",
+            "ubigeo": "030302"
+          },
+          {
+            "distrito": "Huaquirca",
+            "ubigeo": "030303"
+          },
+          {
+            "distrito": "Juan Espinoza Medrano",
+            "ubigeo": "030304"
+          },
+          {
+            "distrito": "Oropesa",
+            "ubigeo": "030305"
+          },
+          {
+            "distrito": "Pachaconas",
+            "ubigeo": "030306"
+          },
+          {
+            "distrito": "Sabaino",
+            "ubigeo": "030307"
+          }
+        ]
+      },
+      {
+        "provincia": "Aymaraes",
+        "distritos": [
+          {
+            "distrito": "Capaya",
+            "ubigeo": "030402"
+          },
+          {
+            "distrito": "Caraybamba",
+            "ubigeo": "030403"
+          },
+          {
+            "distrito": "Chalhuanca",
+            "ubigeo": "030401"
+          },
+          {
+            "distrito": "Chapimarca",
+            "ubigeo": "030404"
+          },
+          {
+            "distrito": "Colcabamba",
+            "ubigeo": "030405"
+          },
+          {
+            "distrito": "Cotaruse",
+            "ubigeo": "030406"
+          },
+          {
+            "distrito": "Huayllo",
+            "ubigeo": "030407"
+          },
+          {
+            "distrito": "Justo Apu Sahuaraura",
+            "ubigeo": "030408"
+          },
+          {
+            "distrito": "Lucre",
+            "ubigeo": "030409"
+          },
+          {
+            "distrito": "Pocohuanca",
+            "ubigeo": "030410"
+          },
+          {
+            "distrito": "San Juan De Chacña",
+            "ubigeo": "030411"
+          },
+          {
+            "distrito": "Sañayca",
+            "ubigeo": "030412"
+          },
+          {
+            "distrito": "Soraya",
+            "ubigeo": "030413"
+          },
+          {
+            "distrito": "Tapairihua",
+            "ubigeo": "030414"
+          },
+          {
+            "distrito": "Tintay",
+            "ubigeo": "030415"
+          },
+          {
+            "distrito": "Toraya",
+            "ubigeo": "030416"
+          },
+          {
+            "distrito": "Yanaca",
+            "ubigeo": "030417"
+          }
+        ]
+      },
+      {
+        "provincia": "Chincheros",
+        "distritos": [
+          {
+            "distrito": "Anco_huallo",
+            "ubigeo": "030602"
+          },
+          {
+            "distrito": "Chincheros",
+            "ubigeo": "030601"
+          },
+          {
+            "distrito": "Cocharcas",
+            "ubigeo": "030603"
+          },
+          {
+            "distrito": "Huaccana",
+            "ubigeo": "030604"
+          },
+          {
+            "distrito": "Ocobamba",
+            "ubigeo": "030605"
+          },
+          {
+            "distrito": "Ongoy",
+            "ubigeo": "030606"
+          },
+          {
+            "distrito": "Ranracancha",
+            "ubigeo": "030608"
+          },
+          {
+            "distrito": "Uranmarca",
+            "ubigeo": "030607"
+          }
+        ]
+      },
+      {
+        "provincia": "Cotabambas",
+        "distritos": [
+          {
+            "distrito": "Challhuahuacho",
+            "ubigeo": "030506"
+          },
+          {
+            "distrito": "Cotabambas",
+            "ubigeo": "030502"
+          },
+          {
+            "distrito": "Coyllurqui",
+            "ubigeo": "030503"
+          },
+          {
+            "distrito": "Haquira",
+            "ubigeo": "030504"
+          },
+          {
+            "distrito": "Mara",
+            "ubigeo": "030505"
+          },
+          {
+            "distrito": "Tambobamba",
+            "ubigeo": "030501"
+          }
+        ]
+      },
+      {
+        "provincia": "Grau",
+        "distritos": [
+          {
+            "distrito": "Chuquibambilla",
+            "ubigeo": "030701"
+          },
+          {
+            "distrito": "Curasco",
+            "ubigeo": "030714"
+          },
+          {
+            "distrito": "Curpahuasi",
+            "ubigeo": "030702"
+          },
+          {
+            "distrito": "Gamarra",
+            "ubigeo": "030703"
+          },
+          {
+            "distrito": "Huayllati",
+            "ubigeo": "030704"
+          },
+          {
+            "distrito": "Mamara",
+            "ubigeo": "030705"
+          },
+          {
+            "distrito": "Micaela Bastidas",
+            "ubigeo": "030706"
+          },
+          {
+            "distrito": "Pataypampa",
+            "ubigeo": "030707"
+          },
+          {
+            "distrito": "Progreso",
+            "ubigeo": "030708"
+          },
+          {
+            "distrito": "San Antonio",
+            "ubigeo": "030709"
+          },
+          {
+            "distrito": "Santa Rosa",
+            "ubigeo": "030710"
+          },
+          {
+            "distrito": "Turpay",
+            "ubigeo": "030711"
+          },
+          {
+            "distrito": "Vilcabamba",
+            "ubigeo": "030712"
+          },
+          {
+            "distrito": "Virundo",
+            "ubigeo": "030713"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "departamento": "Arequipa",
+    "provincias": [
+      {
+        "provincia": "Arequipa",
+        "distritos": [
+          {
+            "distrito": "Alto Selva Alegre",
+            "ubigeo": "040102"
+          },
+          {
+            "distrito": "Arequipa",
+            "ubigeo": "040101"
+          },
+          {
+            "distrito": "Cayma",
+            "ubigeo": "040103"
+          },
+          {
+            "distrito": "Cerro Colorado",
+            "ubigeo": "040104"
+          },
+          {
+            "distrito": "Characato",
+            "ubigeo": "040105"
+          },
+          {
+            "distrito": "Chiguata",
+            "ubigeo": "040106"
+          },
+          {
+            "distrito": "Jacobo Hunter",
+            "ubigeo": "040107"
+          },
+          {
+            "distrito": "Jose Luis Bustamante Y Rivero",
+            "ubigeo": "040129"
+          },
+          {
+            "distrito": "La Joya",
+            "ubigeo": "040108"
+          },
+          {
+            "distrito": "Mariano Melgar",
+            "ubigeo": "040109"
+          },
+          {
+            "distrito": "Miraflores",
+            "ubigeo": "040110"
+          },
+          {
+            "distrito": "Mollebaya",
+            "ubigeo": "040111"
+          },
+          {
+            "distrito": "Paucarpata",
+            "ubigeo": "040112"
+          },
+          {
+            "distrito": "Pocsi",
+            "ubigeo": "040113"
+          },
+          {
+            "distrito": "Polobaya",
+            "ubigeo": "040114"
+          },
+          {
+            "distrito": "Quequeña",
+            "ubigeo": "040115"
+          },
+          {
+            "distrito": "Sabandia",
+            "ubigeo": "040116"
+          },
+          {
+            "distrito": "Sachaca",
+            "ubigeo": "040117"
+          },
+          {
+            "distrito": "San Juan De Siguas",
+            "ubigeo": "040118"
+          },
+          {
+            "distrito": "San Juan De Tarucani",
+            "ubigeo": "040119"
+          },
+          {
+            "distrito": "Santa Isabel De Siguas",
+            "ubigeo": "040120"
+          },
+          {
+            "distrito": "Santa Rita De Siguas",
+            "ubigeo": "040121"
+          },
+          {
+            "distrito": "Socabaya",
+            "ubigeo": "040122"
+          },
+          {
+            "distrito": "Tiabaya",
+            "ubigeo": "040123"
+          },
+          {
+            "distrito": "Uchumayo",
+            "ubigeo": "040124"
+          },
+          {
+            "distrito": "Vitor",
+            "ubigeo": "040125"
+          },
+          {
+            "distrito": "Yanahuara",
+            "ubigeo": "040126"
+          },
+          {
+            "distrito": "Yarabamba",
+            "ubigeo": "040127"
+          },
+          {
+            "distrito": "Yura",
+            "ubigeo": "040128"
+          }
+        ]
+      },
+      {
+        "provincia": "Camaná",
+        "distritos": [
+          {
+            "distrito": "Camana",
+            "ubigeo": "040201"
+          },
+          {
+            "distrito": "Jose Maria Quimper",
+            "ubigeo": "040202"
+          },
+          {
+            "distrito": "Mariano Nicolas Valcarcel",
+            "ubigeo": "040203"
+          },
+          {
+            "distrito": "Mariscal Caceres",
+            "ubigeo": "040204"
+          },
+          {
+            "distrito": "Nicolas De Pierola",
+            "ubigeo": "040205"
+          },
+          {
+            "distrito": "Ocoña",
+            "ubigeo": "040206"
+          },
+          {
+            "distrito": "Quilca",
+            "ubigeo": "040207"
+          },
+          {
+            "distrito": "Samuel Pastor",
+            "ubigeo": "040208"
+          }
+        ]
+      },
+      {
+        "provincia": "Caravelí",
+        "distritos": [
+          {
+            "distrito": "Acari",
+            "ubigeo": "040302"
+          },
+          {
+            "distrito": "Atico",
+            "ubigeo": "040303"
+          },
+          {
+            "distrito": "Atiquipa",
+            "ubigeo": "040304"
+          },
+          {
+            "distrito": "Bella Union",
+            "ubigeo": "040305"
+          },
+          {
+            "distrito": "Cahuacho",
+            "ubigeo": "040306"
+          },
+          {
+            "distrito": "Caraveli",
+            "ubigeo": "040301"
+          },
+          {
+            "distrito": "Chala",
+            "ubigeo": "040307"
+          },
+          {
+            "distrito": "Chaparra",
+            "ubigeo": "040308"
+          },
+          {
+            "distrito": "Huanuhuanu",
+            "ubigeo": "040309"
+          },
+          {
+            "distrito": "Jaqui",
+            "ubigeo": "040310"
+          },
+          {
+            "distrito": "Lomas",
+            "ubigeo": "040311"
+          },
+          {
+            "distrito": "Quicacha",
+            "ubigeo": "040312"
+          },
+          {
+            "distrito": "Yauca",
+            "ubigeo": "040313"
+          }
+        ]
+      },
+      {
+        "provincia": "Castilla",
+        "distritos": [
+          {
+            "distrito": "Andagua",
+            "ubigeo": "040402"
+          },
+          {
+            "distrito": "Aplao",
+            "ubigeo": "040401"
+          },
+          {
+            "distrito": "Ayo",
+            "ubigeo": "040403"
+          },
+          {
+            "distrito": "Chachas",
+            "ubigeo": "040404"
+          },
+          {
+            "distrito": "Chilcaymarca",
+            "ubigeo": "040405"
+          },
+          {
+            "distrito": "Choco",
+            "ubigeo": "040406"
+          },
+          {
+            "distrito": "Huancarqui",
+            "ubigeo": "040407"
+          },
+          {
+            "distrito": "Machaguay",
+            "ubigeo": "040408"
+          },
+          {
+            "distrito": "Orcopampa",
+            "ubigeo": "040409"
+          },
+          {
+            "distrito": "Pampacolca",
+            "ubigeo": "040410"
+          },
+          {
+            "distrito": "Tipan",
+            "ubigeo": "040411"
+          },
+          {
+            "distrito": "Uñon",
+            "ubigeo": "040412"
+          },
+          {
+            "distrito": "Uraca",
+            "ubigeo": "040413"
+          },
+          {
+            "distrito": "Viraco",
+            "ubigeo": "040414"
+          }
+        ]
+      },
+      {
+        "provincia": "Caylloma",
+        "distritos": [
+          {
+            "distrito": "Achoma",
+            "ubigeo": "040502"
+          },
+          {
+            "distrito": "Cabanaconde",
+            "ubigeo": "040503"
+          },
+          {
+            "distrito": "Callalli",
+            "ubigeo": "040504"
+          },
+          {
+            "distrito": "Caylloma",
+            "ubigeo": "040505"
+          },
+          {
+            "distrito": "Chivay",
+            "ubigeo": "040501"
+          },
+          {
+            "distrito": "Coporaque",
+            "ubigeo": "040506"
+          },
+          {
+            "distrito": "Huambo",
+            "ubigeo": "040507"
+          },
+          {
+            "distrito": "Huanca",
+            "ubigeo": "040508"
+          },
+          {
+            "distrito": "Ichupampa",
+            "ubigeo": "040509"
+          },
+          {
+            "distrito": "Lari",
+            "ubigeo": "040510"
+          },
+          {
+            "distrito": "Lluta",
+            "ubigeo": "040511"
+          },
+          {
+            "distrito": "Maca",
+            "ubigeo": "040512"
+          },
+          {
+            "distrito": "Madrigal",
+            "ubigeo": "040513"
+          },
+          {
+            "distrito": "Majes",
+            "ubigeo": "040520"
+          },
+          {
+            "distrito": "San Antonio De Chuca",
+            "ubigeo": "040514"
+          },
+          {
+            "distrito": "Sibayo",
+            "ubigeo": "040515"
+          },
+          {
+            "distrito": "Tapay",
+            "ubigeo": "040516"
+          },
+          {
+            "distrito": "Tisco",
+            "ubigeo": "040517"
+          },
+          {
+            "distrito": "Tuti",
+            "ubigeo": "040518"
+          },
+          {
+            "distrito": "Yanque",
+            "ubigeo": "040519"
+          }
+        ]
+      },
+      {
+        "provincia": "Condesuyos",
+        "distritos": [
+          {
+            "distrito": "Andaray",
+            "ubigeo": "040602"
+          },
+          {
+            "distrito": "Cayarani",
+            "ubigeo": "040603"
+          },
+          {
+            "distrito": "Chichas",
+            "ubigeo": "040604"
+          },
+          {
+            "distrito": "Chuquibamba",
+            "ubigeo": "040601"
+          },
+          {
+            "distrito": "Iray",
+            "ubigeo": "040605"
+          },
+          {
+            "distrito": "Rio Grande",
+            "ubigeo": "040606"
+          },
+          {
+            "distrito": "Salamanca",
+            "ubigeo": "040607"
+          },
+          {
+            "distrito": "Yanaquihua",
+            "ubigeo": "040608"
+          }
+        ]
+      },
+      {
+        "provincia": "Islay",
+        "distritos": [
+          {
+            "distrito": "Cocachacra",
+            "ubigeo": "040702"
+          },
+          {
+            "distrito": "Dean Valdivia",
+            "ubigeo": "040703"
+          },
+          {
+            "distrito": "Islay",
+            "ubigeo": "040704"
+          },
+          {
+            "distrito": "Mejia",
+            "ubigeo": "040705"
+          },
+          {
+            "distrito": "Mollendo",
+            "ubigeo": "040701"
+          },
+          {
+            "distrito": "Punta De Bombon",
+            "ubigeo": "040706"
+          }
+        ]
+      },
+      {
+        "provincia": "La Uniòn",
+        "distritos": [
+          {
+            "distrito": "Alca",
+            "ubigeo": "040802"
+          },
+          {
+            "distrito": "Charcana",
+            "ubigeo": "040803"
+          },
+          {
+            "distrito": "Cotahuasi",
+            "ubigeo": "040801"
+          },
+          {
+            "distrito": "Huaynacotas",
+            "ubigeo": "040804"
+          },
+          {
+            "distrito": "Pampamarca",
+            "ubigeo": "040805"
+          },
+          {
+            "distrito": "Puyca",
+            "ubigeo": "040806"
+          },
+          {
+            "distrito": "Quechualla",
+            "ubigeo": "040807"
+          },
+          {
+            "distrito": "Sayla",
+            "ubigeo": "040808"
+          },
+          {
+            "distrito": "Tauria",
+            "ubigeo": "040809"
+          },
+          {
+            "distrito": "Tomepampa",
+            "ubigeo": "040810"
+          },
+          {
+            "distrito": "Toro",
+            "ubigeo": "040811"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "departamento": "Ayacucho",
+    "provincias": [
+      {
+        "provincia": "Cangallo",
+        "distritos": [
+          {
+            "distrito": "Cangallo",
+            "ubigeo": "050201"
+          },
+          {
+            "distrito": "Chuschi",
+            "ubigeo": "050202"
+          },
+          {
+            "distrito": "Los Morochucos",
+            "ubigeo": "050203"
+          },
+          {
+            "distrito": "Maria Parado De Bellido",
+            "ubigeo": "050204"
+          },
+          {
+            "distrito": "Paras",
+            "ubigeo": "050205"
+          },
+          {
+            "distrito": "Totos",
+            "ubigeo": "050206"
+          }
+        ]
+      },
+      {
+        "provincia": "Huamanga",
+        "distritos": [
+          {
+            "distrito": "Acocro",
+            "ubigeo": "050102"
+          },
+          {
+            "distrito": "Acos Vinchos",
+            "ubigeo": "050103"
+          },
+          {
+            "distrito": "Andrés Avelino Cáceres Dorregaray",
+            "ubigeo": "050116"
+          },
+          {
+            "distrito": "Ayacucho",
+            "ubigeo": "050101"
+          },
+          {
+            "distrito": "Carmen Alto",
+            "ubigeo": "050104"
+          },
+          {
+            "distrito": "Chiara",
+            "ubigeo": "050105"
+          },
+          {
+            "distrito": "Jesus Nazareno",
+            "ubigeo": "050115"
+          },
+          {
+            "distrito": "Ocros",
+            "ubigeo": "050106"
+          },
+          {
+            "distrito": "Pacaycasa",
+            "ubigeo": "050107"
+          },
+          {
+            "distrito": "Quinua",
+            "ubigeo": "050108"
+          },
+          {
+            "distrito": "San Jose De Ticllas",
+            "ubigeo": "050109"
+          },
+          {
+            "distrito": "San Juan Bautista",
+            "ubigeo": "050110"
+          },
+          {
+            "distrito": "Santiago De Pischa",
+            "ubigeo": "050111"
+          },
+          {
+            "distrito": "Socos",
+            "ubigeo": "050112"
+          },
+          {
+            "distrito": "Tambillo",
+            "ubigeo": "050113"
+          },
+          {
+            "distrito": "Vinchos",
+            "ubigeo": "050114"
+          }
+        ]
+      },
+      {
+        "provincia": "Huanca Sancos",
+        "distritos": [
+          {
+            "distrito": "Carapo",
+            "ubigeo": "050302"
+          },
+          {
+            "distrito": "Sacsamarca",
+            "ubigeo": "050303"
+          },
+          {
+            "distrito": "Sancos",
+            "ubigeo": "050301"
+          },
+          {
+            "distrito": "Santiago De Lucanamarca",
+            "ubigeo": "050304"
+          }
+        ]
+      },
+      {
+        "provincia": "Huanta",
+        "distritos": [
+          {
+            "distrito": "Ayahuanco",
+            "ubigeo": "050402"
+          },
+          {
+            "distrito": "Canayre",
+            "ubigeo": "050409"
+          },
+          {
+            "distrito": "Huamanguilla",
+            "ubigeo": "050403"
+          },
+          {
+            "distrito": "Huanta",
+            "ubigeo": "050401"
+          },
+          {
+            "distrito": "Iguain",
+            "ubigeo": "050404"
+          },
+          {
+            "distrito": "Llochegua",
+            "ubigeo": "050408"
+          },
+          {
+            "distrito": "Luricocha",
+            "ubigeo": "050405"
+          },
+          {
+            "distrito": "Santillana",
+            "ubigeo": "050406"
+          },
+          {
+            "distrito": "Sivia",
+            "ubigeo": "050407"
+          },
+          {
+            "distrito": "Uchuraccay",
+            "ubigeo": "050410"
+          }
+        ]
+      },
+      {
+        "provincia": "La Mar",
+        "distritos": [
+          {
+            "distrito": "Anchihuay",
+            "ubigeo": "050510"
+          },
+          {
+            "distrito": "Anco",
+            "ubigeo": "050502"
+          },
+          {
+            "distrito": "Ayna",
+            "ubigeo": "050503"
+          },
+          {
+            "distrito": "Chilcas",
+            "ubigeo": "050504"
+          },
+          {
+            "distrito": "Chungui",
+            "ubigeo": "050505"
+          },
+          {
+            "distrito": "Luis Carranza",
+            "ubigeo": "050506"
+          },
+          {
+            "distrito": "Samugari",
+            "ubigeo": "050509"
+          },
+          {
+            "distrito": "San Miguel",
+            "ubigeo": "050501"
+          },
+          {
+            "distrito": "Santa Rosa",
+            "ubigeo": "050507"
+          },
+          {
+            "distrito": "Tambo",
+            "ubigeo": "050508"
+          }
+        ]
+      },
+      {
+        "provincia": "Lucanas",
+        "distritos": [
+          {
+            "distrito": "Aucara",
+            "ubigeo": "050602"
+          },
+          {
+            "distrito": "Cabana",
+            "ubigeo": "050603"
+          },
+          {
+            "distrito": "Carmen Salcedo",
+            "ubigeo": "050604"
+          },
+          {
+            "distrito": "Chaviña",
+            "ubigeo": "050605"
+          },
+          {
+            "distrito": "Chipao",
+            "ubigeo": "050606"
+          },
+          {
+            "distrito": "Huac-huas",
+            "ubigeo": "050607"
+          },
+          {
+            "distrito": "Laramate",
+            "ubigeo": "050608"
+          },
+          {
+            "distrito": "Leoncio Prado",
+            "ubigeo": "050609"
+          },
+          {
+            "distrito": "Llauta",
+            "ubigeo": "050610"
+          },
+          {
+            "distrito": "Lucanas",
+            "ubigeo": "050611"
+          },
+          {
+            "distrito": "Ocaña",
+            "ubigeo": "050612"
+          },
+          {
+            "distrito": "Otoca",
+            "ubigeo": "050613"
+          },
+          {
+            "distrito": "Puquio",
+            "ubigeo": "050601"
+          },
+          {
+            "distrito": "Saisa",
+            "ubigeo": "050614"
+          },
+          {
+            "distrito": "San Cristobal",
+            "ubigeo": "050615"
+          },
+          {
+            "distrito": "San Juan",
+            "ubigeo": "050616"
+          },
+          {
+            "distrito": "San Pedro",
+            "ubigeo": "050617"
+          },
+          {
+            "distrito": "San Pedro De Palco",
+            "ubigeo": "050618"
+          },
+          {
+            "distrito": "Sancos",
+            "ubigeo": "050619"
+          },
+          {
+            "distrito": "Santa Ana De Huaycahuacho",
+            "ubigeo": "050620"
+          },
+          {
+            "distrito": "Santa Lucia",
+            "ubigeo": "050621"
+          }
+        ]
+      },
+      {
+        "provincia": "Parinacochas",
+        "distritos": [
+          {
+            "distrito": "Chumpi",
+            "ubigeo": "050702"
+          },
+          {
+            "distrito": "Coracora",
+            "ubigeo": "050701"
+          },
+          {
+            "distrito": "Coronel Castañeda",
+            "ubigeo": "050703"
+          },
+          {
+            "distrito": "Pacapausa",
+            "ubigeo": "050704"
+          },
+          {
+            "distrito": "Pullo",
+            "ubigeo": "050705"
+          },
+          {
+            "distrito": "Puyusca",
+            "ubigeo": "050706"
+          },
+          {
+            "distrito": "San Francisco De Ravacayco",
+            "ubigeo": "050707"
+          },
+          {
+            "distrito": "Upahuacho",
+            "ubigeo": "050708"
+          }
+        ]
+      },
+      {
+        "provincia": "Pàucar Del Sara Sara",
+        "distritos": [
+          {
+            "distrito": "Colta",
+            "ubigeo": "050802"
+          },
+          {
+            "distrito": "Corculla",
+            "ubigeo": "050803"
+          },
+          {
+            "distrito": "Lampa",
+            "ubigeo": "050804"
+          },
+          {
+            "distrito": "Marcabamba",
+            "ubigeo": "050805"
+          },
+          {
+            "distrito": "Oyolo",
+            "ubigeo": "050806"
+          },
+          {
+            "distrito": "Pararca",
+            "ubigeo": "050807"
+          },
+          {
+            "distrito": "Pausa",
+            "ubigeo": "050801"
+          },
+          {
+            "distrito": "San Javier De Alpabamba",
+            "ubigeo": "050808"
+          },
+          {
+            "distrito": "San Jose De Ushua",
+            "ubigeo": "050809"
+          },
+          {
+            "distrito": "Sara Sara",
+            "ubigeo": "050810"
+          }
+        ]
+      },
+      {
+        "provincia": "Sucre",
+        "distritos": [
+          {
+            "distrito": "Belén",
+            "ubigeo": "050902"
+          },
+          {
+            "distrito": "Chalcos",
+            "ubigeo": "050903"
+          },
+          {
+            "distrito": "Chilcayoc",
+            "ubigeo": "050904"
+          },
+          {
+            "distrito": "Huacaña",
+            "ubigeo": "050905"
+          },
+          {
+            "distrito": "Morcolla",
+            "ubigeo": "050906"
+          },
+          {
+            "distrito": "Paico",
+            "ubigeo": "050907"
+          },
+          {
+            "distrito": "Querobamba",
+            "ubigeo": "050901"
+          },
+          {
+            "distrito": "San Pedro De Larcay",
+            "ubigeo": "050908"
+          },
+          {
+            "distrito": "San Salvador De Quije",
+            "ubigeo": "050909"
+          },
+          {
+            "distrito": "Santiago De Paucaray",
+            "ubigeo": "050910"
+          },
+          {
+            "distrito": "Soras",
+            "ubigeo": "050911"
+          }
+        ]
+      },
+      {
+        "provincia": "Víctor Fajardo",
+        "distritos": [
+          {
+            "distrito": "Alcamenca",
+            "ubigeo": "051002"
+          },
+          {
+            "distrito": "Apongo",
+            "ubigeo": "051003"
+          },
+          {
+            "distrito": "Asquipata",
+            "ubigeo": "051004"
+          },
+          {
+            "distrito": "Canaria",
+            "ubigeo": "051005"
+          },
+          {
+            "distrito": "Cayara",
+            "ubigeo": "051006"
+          },
+          {
+            "distrito": "Colca",
+            "ubigeo": "051007"
+          },
+          {
+            "distrito": "Huamanquiquia",
+            "ubigeo": "051008"
+          },
+          {
+            "distrito": "Huancapi",
+            "ubigeo": "051001"
+          },
+          {
+            "distrito": "Huancaraylla",
+            "ubigeo": "051009"
+          },
+          {
+            "distrito": "Huaya",
+            "ubigeo": "051010"
+          },
+          {
+            "distrito": "Sarhua",
+            "ubigeo": "051011"
+          },
+          {
+            "distrito": "Vilcanchos",
+            "ubigeo": "051012"
+          }
+        ]
+      },
+      {
+        "provincia": "Vilcas Huamán",
+        "distritos": [
+          {
+            "distrito": "Accomarca",
+            "ubigeo": "051102"
+          },
+          {
+            "distrito": "Carhuanca",
+            "ubigeo": "051103"
+          },
+          {
+            "distrito": "Concepcion",
+            "ubigeo": "051104"
+          },
+          {
+            "distrito": "Huambalpa",
+            "ubigeo": "051105"
+          },
+          {
+            "distrito": "Independencia",
+            "ubigeo": "051106"
+          },
+          {
+            "distrito": "Saurama",
+            "ubigeo": "051107"
+          },
+          {
+            "distrito": "Vilcas Huaman",
+            "ubigeo": "051101"
+          },
+          {
+            "distrito": "Vischongo",
+            "ubigeo": "051108"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "departamento": "Cajamarca",
+    "provincias": [
+      {
+        "provincia": "Cajabamba",
+        "distritos": [
+          {
+            "distrito": "Cachachi",
+            "ubigeo": "060202"
+          },
+          {
+            "distrito": "Cajabamba",
+            "ubigeo": "060201"
+          },
+          {
+            "distrito": "Condebamba",
+            "ubigeo": "060203"
+          },
+          {
+            "distrito": "Sitacocha",
+            "ubigeo": "060204"
+          }
+        ]
+      },
+      {
+        "provincia": "Cajamarca",
+        "distritos": [
+          {
+            "distrito": "Asuncion",
+            "ubigeo": "060102"
+          },
+          {
+            "distrito": "Cajamarca",
+            "ubigeo": "060101"
+          },
+          {
+            "distrito": "Chetilla",
+            "ubigeo": "060103"
+          },
+          {
+            "distrito": "Cospan",
+            "ubigeo": "060104"
+          },
+          {
+            "distrito": "Encañada",
+            "ubigeo": "060105"
+          },
+          {
+            "distrito": "Jesus",
+            "ubigeo": "060106"
+          },
+          {
+            "distrito": "Llacanora",
+            "ubigeo": "060107"
+          },
+          {
+            "distrito": "Los Baños Del Inca",
+            "ubigeo": "060108"
+          },
+          {
+            "distrito": "Magdalena",
+            "ubigeo": "060109"
+          },
+          {
+            "distrito": "Matara",
+            "ubigeo": "060110"
+          },
+          {
+            "distrito": "Namora",
+            "ubigeo": "060111"
+          },
+          {
+            "distrito": "San Juan",
+            "ubigeo": "060112"
+          }
+        ]
+      },
+      {
+        "provincia": "Celendín",
+        "distritos": [
+          {
+            "distrito": "Celendin",
+            "ubigeo": "060301"
+          },
+          {
+            "distrito": "Chumuch",
+            "ubigeo": "060302"
+          },
+          {
+            "distrito": "Cortegana",
+            "ubigeo": "060303"
+          },
+          {
+            "distrito": "Huasmin",
+            "ubigeo": "060304"
+          },
+          {
+            "distrito": "Jorge Chavez",
+            "ubigeo": "060305"
+          },
+          {
+            "distrito": "Jose Galvez",
+            "ubigeo": "060306"
+          },
+          {
+            "distrito": "La Libertad De Pallan",
+            "ubigeo": "060312"
+          },
+          {
+            "distrito": "Miguel Iglesias",
+            "ubigeo": "060307"
+          },
+          {
+            "distrito": "Oxamarca",
+            "ubigeo": "060308"
+          },
+          {
+            "distrito": "Sorochuco",
+            "ubigeo": "060309"
+          },
+          {
+            "distrito": "Sucre",
+            "ubigeo": "060310"
+          },
+          {
+            "distrito": "Utco",
+            "ubigeo": "060311"
+          }
+        ]
+      },
+      {
+        "provincia": "Chota",
+        "distritos": [
+          {
+            "distrito": "Anguia",
+            "ubigeo": "060402"
+          },
+          {
+            "distrito": "Chadin",
+            "ubigeo": "060403"
+          },
+          {
+            "distrito": "Chalamarca",
+            "ubigeo": "060419"
+          },
+          {
+            "distrito": "Chiguirip",
+            "ubigeo": "060404"
+          },
+          {
+            "distrito": "Chimban",
+            "ubigeo": "060405"
+          },
+          {
+            "distrito": "Choropampa",
+            "ubigeo": "060406"
+          },
+          {
+            "distrito": "Chota",
+            "ubigeo": "060401"
+          },
+          {
+            "distrito": "Cochabamba",
+            "ubigeo": "060407"
+          },
+          {
+            "distrito": "Conchan",
+            "ubigeo": "060408"
+          },
+          {
+            "distrito": "Huambos",
+            "ubigeo": "060409"
+          },
+          {
+            "distrito": "Lajas",
+            "ubigeo": "060410"
+          },
+          {
+            "distrito": "Llama",
+            "ubigeo": "060411"
+          },
+          {
+            "distrito": "Miracosta",
+            "ubigeo": "060412"
+          },
+          {
+            "distrito": "Paccha",
+            "ubigeo": "060413"
+          },
+          {
+            "distrito": "Pion",
+            "ubigeo": "060414"
+          },
+          {
+            "distrito": "Querocoto",
+            "ubigeo": "060415"
+          },
+          {
+            "distrito": "San Juan De Licupis",
+            "ubigeo": "060416"
+          },
+          {
+            "distrito": "Tacabamba",
+            "ubigeo": "060417"
+          },
+          {
+            "distrito": "Tocmoche",
+            "ubigeo": "060418"
+          }
+        ]
+      },
+      {
+        "provincia": "Contumazá",
+        "distritos": [
+          {
+            "distrito": "Chilete",
+            "ubigeo": "060502"
+          },
+          {
+            "distrito": "Contumaza",
+            "ubigeo": "060501"
+          },
+          {
+            "distrito": "Cupisnique",
+            "ubigeo": "060503"
+          },
+          {
+            "distrito": "Guzmango",
+            "ubigeo": "060504"
+          },
+          {
+            "distrito": "San Benito",
+            "ubigeo": "060505"
+          },
+          {
+            "distrito": "Santa Cruz De Toled",
+            "ubigeo": "060506"
+          },
+          {
+            "distrito": "Tantarica",
+            "ubigeo": "060507"
+          },
+          {
+            "distrito": "Yonan",
+            "ubigeo": "060508"
+          }
+        ]
+      },
+      {
+        "provincia": "Cutervo",
+        "distritos": [
+          {
+            "distrito": "Callayuc",
+            "ubigeo": "060602"
+          },
+          {
+            "distrito": "Choros",
+            "ubigeo": "060603"
+          },
+          {
+            "distrito": "Cujillo",
+            "ubigeo": "060604"
+          },
+          {
+            "distrito": "Cutervo",
+            "ubigeo": "060601"
+          },
+          {
+            "distrito": "La Ramada",
+            "ubigeo": "060605"
+          },
+          {
+            "distrito": "Pimpingos",
+            "ubigeo": "060606"
+          },
+          {
+            "distrito": "Querocotillo",
+            "ubigeo": "060607"
+          },
+          {
+            "distrito": "San Andres De Cutervo",
+            "ubigeo": "060608"
+          },
+          {
+            "distrito": "San Juan De Cutervo",
+            "ubigeo": "060609"
+          },
+          {
+            "distrito": "San Luis De Lucma",
+            "ubigeo": "060610"
+          },
+          {
+            "distrito": "Santa Cruz",
+            "ubigeo": "060611"
+          },
+          {
+            "distrito": "Santo Domingo De La Capilla",
+            "ubigeo": "060612"
+          },
+          {
+            "distrito": "Santo Tomas",
+            "ubigeo": "060613"
+          },
+          {
+            "distrito": "Socota",
+            "ubigeo": "060614"
+          },
+          {
+            "distrito": "Toribio Casanova",
+            "ubigeo": "060615"
+          }
+        ]
+      },
+      {
+        "provincia": "Hualgayoc",
+        "distritos": [
+          {
+            "distrito": "Bambamarca",
+            "ubigeo": "060701"
+          },
+          {
+            "distrito": "Chugur",
+            "ubigeo": "060702"
+          },
+          {
+            "distrito": "Hualgayoc",
+            "ubigeo": "060703"
+          }
+        ]
+      },
+      {
+        "provincia": "Jaén",
+        "distritos": [
+          {
+            "distrito": "Bellavista",
+            "ubigeo": "060802"
+          },
+          {
+            "distrito": "Chontali",
+            "ubigeo": "060803"
+          },
+          {
+            "distrito": "Colasay",
+            "ubigeo": "060804"
+          },
+          {
+            "distrito": "Huabal",
+            "ubigeo": "060805"
+          },
+          {
+            "distrito": "Jaen",
+            "ubigeo": "060801"
+          },
+          {
+            "distrito": "Las Pirias",
+            "ubigeo": "060806"
+          },
+          {
+            "distrito": "Pomahuaca",
+            "ubigeo": "060807"
+          },
+          {
+            "distrito": "Pucara",
+            "ubigeo": "060808"
+          },
+          {
+            "distrito": "Sallique",
+            "ubigeo": "060809"
+          },
+          {
+            "distrito": "San Felipe",
+            "ubigeo": "060810"
+          },
+          {
+            "distrito": "San Jose Del Alto",
+            "ubigeo": "060811"
+          },
+          {
+            "distrito": "Santa Rosa",
+            "ubigeo": "060812"
+          }
+        ]
+      },
+      {
+        "provincia": "San Ignacio",
+        "distritos": [
+          {
+            "distrito": "Chirinos",
+            "ubigeo": "060902"
+          },
+          {
+            "distrito": "Huarango",
+            "ubigeo": "060903"
+          },
+          {
+            "distrito": "La Coipa",
+            "ubigeo": "060904"
+          },
+          {
+            "distrito": "Namballe",
+            "ubigeo": "060905"
+          },
+          {
+            "distrito": "San Ignacio",
+            "ubigeo": "060901"
+          },
+          {
+            "distrito": "San Jose De Lourdes",
+            "ubigeo": "060906"
+          },
+          {
+            "distrito": "Tabaconas",
+            "ubigeo": "060907"
+          }
+        ]
+      },
+      {
+        "provincia": "San Marcos",
+        "distritos": [
+          {
+            "distrito": "Chancay",
+            "ubigeo": "061002"
+          },
+          {
+            "distrito": "Eduardo Villanueva",
+            "ubigeo": "061003"
+          },
+          {
+            "distrito": "Gregorio Pita",
+            "ubigeo": "061004"
+          },
+          {
+            "distrito": "Ichocan",
+            "ubigeo": "061005"
+          },
+          {
+            "distrito": "Jose Manuel Quiroz",
+            "ubigeo": "061006"
+          },
+          {
+            "distrito": "Jose Sabogal",
+            "ubigeo": "061007"
+          },
+          {
+            "distrito": "Pedro Galvez",
+            "ubigeo": "061001"
+          }
+        ]
+      },
+      {
+        "provincia": "San Miguel",
+        "distritos": [
+          {
+            "distrito": "Bolivar",
+            "ubigeo": "061102"
+          },
+          {
+            "distrito": "Calquis",
+            "ubigeo": "061103"
+          },
+          {
+            "distrito": "Catilluc",
+            "ubigeo": "061104"
+          },
+          {
+            "distrito": "El Prado",
+            "ubigeo": "061105"
+          },
+          {
+            "distrito": "La Florida",
+            "ubigeo": "061106"
+          },
+          {
+            "distrito": "Llapa",
+            "ubigeo": "061107"
+          },
+          {
+            "distrito": "Nanchoc",
+            "ubigeo": "061108"
+          },
+          {
+            "distrito": "Niepos",
+            "ubigeo": "061109"
+          },
+          {
+            "distrito": "San Gregorio",
+            "ubigeo": "061110"
+          },
+          {
+            "distrito": "San Miguel",
+            "ubigeo": "061101"
+          },
+          {
+            "distrito": "San Silvestre De Cochan",
+            "ubigeo": "061111"
+          },
+          {
+            "distrito": "Tongod",
+            "ubigeo": "061112"
+          },
+          {
+            "distrito": "Union Agua Blanca",
+            "ubigeo": "061113"
+          }
+        ]
+      },
+      {
+        "provincia": "San Pablo",
+        "distritos": [
+          {
+            "distrito": "San Bernardino",
+            "ubigeo": "061202"
+          },
+          {
+            "distrito": "San Luis",
+            "ubigeo": "061203"
+          },
+          {
+            "distrito": "San Pablo",
+            "ubigeo": "061201"
+          },
+          {
+            "distrito": "Tumbaden",
+            "ubigeo": "061204"
+          }
+        ]
+      },
+      {
+        "provincia": "Santa Cruz",
+        "distritos": [
+          {
+            "distrito": "Andabamba",
+            "ubigeo": "061302"
+          },
+          {
+            "distrito": "Catache",
+            "ubigeo": "061303"
+          },
+          {
+            "distrito": "Chancaybaños",
+            "ubigeo": "061304"
+          },
+          {
+            "distrito": "La Esperanza",
+            "ubigeo": "061305"
+          },
+          {
+            "distrito": "Ninabamba",
+            "ubigeo": "061306"
+          },
+          {
+            "distrito": "Pulan",
+            "ubigeo": "061307"
+          },
+          {
+            "distrito": "Santa Cruz",
+            "ubigeo": "061301"
+          },
+          {
+            "distrito": "Saucepampa",
+            "ubigeo": "061308"
+          },
+          {
+            "distrito": "Sexi",
+            "ubigeo": "061309"
+          },
+          {
+            "distrito": "Uticyacu",
+            "ubigeo": "061310"
+          },
+          {
+            "distrito": "Yauyucan",
+            "ubigeo": "061311"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "departamento": "Cusco",
+    "provincias": [
+      {
+        "provincia": "Acomayo",
+        "distritos": [
+          {
+            "distrito": "Acomayo",
+            "ubigeo": "080201"
+          },
+          {
+            "distrito": "Acopia",
+            "ubigeo": "080202"
+          },
+          {
+            "distrito": "Acos",
+            "ubigeo": "080203"
+          },
+          {
+            "distrito": "Mosoc Llacta",
+            "ubigeo": "080204"
+          },
+          {
+            "distrito": "Pomacanchi",
+            "ubigeo": "080205"
+          },
+          {
+            "distrito": "Rondocan",
+            "ubigeo": "080206"
+          },
+          {
+            "distrito": "Sangarara",
+            "ubigeo": "080207"
+          }
+        ]
+      },
+      {
+        "provincia": "Anta",
+        "distritos": [
+          {
+            "distrito": "Ancahuasi",
+            "ubigeo": "080302"
+          },
+          {
+            "distrito": "Anta",
+            "ubigeo": "080301"
+          },
+          {
+            "distrito": "Cachimayo",
+            "ubigeo": "080303"
+          },
+          {
+            "distrito": "Chinchaypujio",
+            "ubigeo": "080304"
+          },
+          {
+            "distrito": "Huarocondo",
+            "ubigeo": "080305"
+          },
+          {
+            "distrito": "Limatambo",
+            "ubigeo": "080306"
+          },
+          {
+            "distrito": "Mollepata",
+            "ubigeo": "080307"
+          },
+          {
+            "distrito": "Pucyura",
+            "ubigeo": "080308"
+          },
+          {
+            "distrito": "Zurite",
+            "ubigeo": "080309"
+          }
+        ]
+      },
+      {
+        "provincia": "Calca",
+        "distritos": [
+          {
+            "distrito": "Calca",
+            "ubigeo": "080401"
+          },
+          {
+            "distrito": "Coya",
+            "ubigeo": "080402"
+          },
+          {
+            "distrito": "Lamay",
+            "ubigeo": "080403"
+          },
+          {
+            "distrito": "Lares",
+            "ubigeo": "080404"
+          },
+          {
+            "distrito": "Pisac",
+            "ubigeo": "080405"
+          },
+          {
+            "distrito": "San Salvador",
+            "ubigeo": "080406"
+          },
+          {
+            "distrito": "Taray",
+            "ubigeo": "080407"
+          },
+          {
+            "distrito": "Yanatile",
+            "ubigeo": "080408"
+          }
+        ]
+      },
+      {
+        "provincia": "Canas",
+        "distritos": [
+          {
+            "distrito": "Checca",
+            "ubigeo": "080502"
+          },
+          {
+            "distrito": "Kunturkanki",
+            "ubigeo": "080503"
+          },
+          {
+            "distrito": "Langui",
+            "ubigeo": "080504"
+          },
+          {
+            "distrito": "Layo",
+            "ubigeo": "080505"
+          },
+          {
+            "distrito": "Pampamarca",
+            "ubigeo": "080506"
+          },
+          {
+            "distrito": "Quehue",
+            "ubigeo": "080507"
+          },
+          {
+            "distrito": "Tupac Amaru",
+            "ubigeo": "080508"
+          },
+          {
+            "distrito": "Yanaoca",
+            "ubigeo": "080501"
+          }
+        ]
+      },
+      {
+        "provincia": "Canchis",
+        "distritos": [
+          {
+            "distrito": "Checacupe",
+            "ubigeo": "080602"
+          },
+          {
+            "distrito": "Combapata",
+            "ubigeo": "080603"
+          },
+          {
+            "distrito": "Marangani",
+            "ubigeo": "080604"
+          },
+          {
+            "distrito": "Pitumarca",
+            "ubigeo": "080605"
+          },
+          {
+            "distrito": "San Pablo",
+            "ubigeo": "080606"
+          },
+          {
+            "distrito": "San Pedro",
+            "ubigeo": "080607"
+          },
+          {
+            "distrito": "Sicuani",
+            "ubigeo": "080601"
+          },
+          {
+            "distrito": "Tinta",
+            "ubigeo": "080608"
+          }
+        ]
+      },
+      {
+        "provincia": "Chumbivilcas",
+        "distritos": [
+          {
+            "distrito": "Capacmarca",
+            "ubigeo": "080702"
+          },
+          {
+            "distrito": "Chamaca",
+            "ubigeo": "080703"
+          },
+          {
+            "distrito": "Colquemarca",
+            "ubigeo": "080704"
+          },
+          {
+            "distrito": "Livitaca",
+            "ubigeo": "080705"
+          },
+          {
+            "distrito": "Llusco",
+            "ubigeo": "080706"
+          },
+          {
+            "distrito": "Quiñota",
+            "ubigeo": "080707"
+          },
+          {
+            "distrito": "Santo Tomas",
+            "ubigeo": "080701"
+          },
+          {
+            "distrito": "Velille",
+            "ubigeo": "080708"
+          }
+        ]
+      },
+      {
+        "provincia": "Cusco",
+        "distritos": [
+          {
+            "distrito": "Ccorca",
+            "ubigeo": "080102"
+          },
+          {
+            "distrito": "Cusco",
+            "ubigeo": "080101"
+          },
+          {
+            "distrito": "Poroy",
+            "ubigeo": "080103"
+          },
+          {
+            "distrito": "San Jeronimo",
+            "ubigeo": "080104"
+          },
+          {
+            "distrito": "San Sebastian",
+            "ubigeo": "080105"
+          },
+          {
+            "distrito": "Santiago",
+            "ubigeo": "080106"
+          },
+          {
+            "distrito": "Saylla",
+            "ubigeo": "080107"
+          },
+          {
+            "distrito": "Wanchaq",
+            "ubigeo": "080108"
+          }
+        ]
+      },
+      {
+        "provincia": "Espinar",
+        "distritos": [
+          {
+            "distrito": "Alto Pichigua",
+            "ubigeo": "080808"
+          },
+          {
+            "distrito": "Condoroma",
+            "ubigeo": "080802"
+          },
+          {
+            "distrito": "Coporaque",
+            "ubigeo": "080803"
+          },
+          {
+            "distrito": "Espinar",
+            "ubigeo": "080801"
+          },
+          {
+            "distrito": "Ocoruro",
+            "ubigeo": "080804"
+          },
+          {
+            "distrito": "Pallpata",
+            "ubigeo": "080805"
+          },
+          {
+            "distrito": "Pichigua",
+            "ubigeo": "080806"
+          },
+          {
+            "distrito": "Suyckutambo",
+            "ubigeo": "080807"
+          }
+        ]
+      },
+      {
+        "provincia": "La Convención",
+        "distritos": [
+          {
+            "distrito": "Echarate",
+            "ubigeo": "080902"
+          },
+          {
+            "distrito": "Huayopata",
+            "ubigeo": "080903"
+          },
+          {
+            "distrito": "Kimbiri",
+            "ubigeo": "080907"
+          },
+          {
+            "distrito": "Maranura",
+            "ubigeo": "080904"
+          },
+          {
+            "distrito": "Ocobamba",
+            "ubigeo": "080905"
+          },
+          {
+            "distrito": "Pichari",
+            "ubigeo": "080910"
+          },
+          {
+            "distrito": "Quellouno",
+            "ubigeo": "080906"
+          },
+          {
+            "distrito": "Santa Ana",
+            "ubigeo": "080901"
+          },
+          {
+            "distrito": "Santa Teresa",
+            "ubigeo": "080908"
+          },
+          {
+            "distrito": "Vilcabamba",
+            "ubigeo": "080909"
+          }
+        ]
+      },
+      {
+        "provincia": "Paruro",
+        "distritos": [
+          {
+            "distrito": "Accha",
+            "ubigeo": "081002"
+          },
+          {
+            "distrito": "Ccapi",
+            "ubigeo": "081003"
+          },
+          {
+            "distrito": "Colcha",
+            "ubigeo": "081004"
+          },
+          {
+            "distrito": "Huanoquite",
+            "ubigeo": "081005"
+          },
+          {
+            "distrito": "Omacha",
+            "ubigeo": "081006"
+          },
+          {
+            "distrito": "Paccaritambo",
+            "ubigeo": "081007"
+          },
+          {
+            "distrito": "Paruro",
+            "ubigeo": "081001"
+          },
+          {
+            "distrito": "Pillpinto",
+            "ubigeo": "081008"
+          },
+          {
+            "distrito": "Yaurisque",
+            "ubigeo": "081009"
+          }
+        ]
+      },
+      {
+        "provincia": "Paucartambo",
+        "distritos": [
+          {
+            "distrito": "Caicay",
+            "ubigeo": "081102"
+          },
+          {
+            "distrito": "Challabamba",
+            "ubigeo": "081103"
+          },
+          {
+            "distrito": "Colquepata",
+            "ubigeo": "081104"
+          },
+          {
+            "distrito": "Huancarani",
+            "ubigeo": "081105"
+          },
+          {
+            "distrito": "Kosñipata",
+            "ubigeo": "081106"
+          },
+          {
+            "distrito": "Paucartambo",
+            "ubigeo": "081101"
+          }
+        ]
+      },
+      {
+        "provincia": "Quispicanchi",
+        "distritos": [
+          {
+            "distrito": "Andahuaylillas",
+            "ubigeo": "081202"
+          },
+          {
+            "distrito": "Camanti",
+            "ubigeo": "081203"
+          },
+          {
+            "distrito": "Ccarhuayo",
+            "ubigeo": "081204"
+          },
+          {
+            "distrito": "Ccatca",
+            "ubigeo": "081205"
+          },
+          {
+            "distrito": "Cusipata",
+            "ubigeo": "081206"
+          },
+          {
+            "distrito": "Huaro",
+            "ubigeo": "081207"
+          },
+          {
+            "distrito": "Lucre",
+            "ubigeo": "081208"
+          },
+          {
+            "distrito": "Marcapata",
+            "ubigeo": "081209"
+          },
+          {
+            "distrito": "Ocongate",
+            "ubigeo": "081210"
+          },
+          {
+            "distrito": "Oropesa",
+            "ubigeo": "081211"
+          },
+          {
+            "distrito": "Quiquijana",
+            "ubigeo": "081212"
+          },
+          {
+            "distrito": "Urcos",
+            "ubigeo": "081201"
+          }
+        ]
+      },
+      {
+        "provincia": "Urubamba",
+        "distritos": [
+          {
+            "distrito": "Chinchero",
+            "ubigeo": "081302"
+          },
+          {
+            "distrito": "Huayllabamba",
+            "ubigeo": "081303"
+          },
+          {
+            "distrito": "Machupicchu",
+            "ubigeo": "081304"
+          },
+          {
+            "distrito": "Maras",
+            "ubigeo": "081305"
+          },
+          {
+            "distrito": "Ollantaytambo",
+            "ubigeo": "081306"
+          },
+          {
+            "distrito": "Urubamba",
+            "ubigeo": "081301"
+          },
+          {
+            "distrito": "Yucay",
+            "ubigeo": "081307"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "departamento": "Huancavelica",
+    "provincias": [
+      {
+        "provincia": "Acobamba",
+        "distritos": [
+          {
+            "distrito": "Acobamba",
+            "ubigeo": "090201"
+          },
+          {
+            "distrito": "Andabamba",
+            "ubigeo": "090202"
+          },
+          {
+            "distrito": "Anta",
+            "ubigeo": "090203"
+          },
+          {
+            "distrito": "Caja",
+            "ubigeo": "090204"
+          },
+          {
+            "distrito": "Marcas",
+            "ubigeo": "090205"
+          },
+          {
+            "distrito": "Paucara",
+            "ubigeo": "090206"
+          },
+          {
+            "distrito": "Pomacocha",
+            "ubigeo": "090207"
+          },
+          {
+            "distrito": "Rosario",
+            "ubigeo": "090208"
+          }
+        ]
+      },
+      {
+        "provincia": "Angaraes",
+        "distritos": [
+          {
+            "distrito": "Anchonga",
+            "ubigeo": "090302"
+          },
+          {
+            "distrito": "Callanmarca",
+            "ubigeo": "090303"
+          },
+          {
+            "distrito": "Ccochaccasa",
+            "ubigeo": "090304"
+          },
+          {
+            "distrito": "Chincho",
+            "ubigeo": "090305"
+          },
+          {
+            "distrito": "Congalla",
+            "ubigeo": "090306"
+          },
+          {
+            "distrito": "Huanca-huanca",
+            "ubigeo": "090307"
+          },
+          {
+            "distrito": "Huayllay Grande",
+            "ubigeo": "090308"
+          },
+          {
+            "distrito": "Julcamarca",
+            "ubigeo": "090309"
+          },
+          {
+            "distrito": "Lircay",
+            "ubigeo": "090301"
+          },
+          {
+            "distrito": "San Antonio De Antaparco",
+            "ubigeo": "090310"
+          },
+          {
+            "distrito": "Santo Tomas De Pata",
+            "ubigeo": "090311"
+          },
+          {
+            "distrito": "Secclla",
+            "ubigeo": "090312"
+          }
+        ]
+      },
+      {
+        "provincia": "Castrovirreyna",
+        "distritos": [
+          {
+            "distrito": "Arma",
+            "ubigeo": "090402"
+          },
+          {
+            "distrito": "Aurahua",
+            "ubigeo": "090403"
+          },
+          {
+            "distrito": "Capillas",
+            "ubigeo": "090404"
+          },
+          {
+            "distrito": "Castrovirreyna",
+            "ubigeo": "090401"
+          },
+          {
+            "distrito": "Chupamarca",
+            "ubigeo": "090405"
+          },
+          {
+            "distrito": "Cocas",
+            "ubigeo": "090406"
+          },
+          {
+            "distrito": "Huachos",
+            "ubigeo": "090407"
+          },
+          {
+            "distrito": "Huamatambo",
+            "ubigeo": "090408"
+          },
+          {
+            "distrito": "Mollepampa",
+            "ubigeo": "090409"
+          },
+          {
+            "distrito": "San Juan",
+            "ubigeo": "090410"
+          },
+          {
+            "distrito": "Santa Ana",
+            "ubigeo": "090411"
+          },
+          {
+            "distrito": "Tantara",
+            "ubigeo": "090412"
+          },
+          {
+            "distrito": "Ticrapo",
+            "ubigeo": "090413"
+          }
+        ]
+      },
+      {
+        "provincia": "Churcampa",
+        "distritos": [
+          {
+            "distrito": "Anco",
+            "ubigeo": "090502"
+          },
+          {
+            "distrito": "Chinchihuasi",
+            "ubigeo": "090503"
+          },
+          {
+            "distrito": "Churcampa",
+            "ubigeo": "090501"
+          },
+          {
+            "distrito": "Cosme",
+            "ubigeo": "090511"
+          },
+          {
+            "distrito": "El Carmen",
+            "ubigeo": "090504"
+          },
+          {
+            "distrito": "La Merced",
+            "ubigeo": "090505"
+          },
+          {
+            "distrito": "Locroja",
+            "ubigeo": "090506"
+          },
+          {
+            "distrito": "Pachamarca",
+            "ubigeo": "090510"
+          },
+          {
+            "distrito": "Paucarbamba",
+            "ubigeo": "090507"
+          },
+          {
+            "distrito": "San Miguel De Mayocc",
+            "ubigeo": "090508"
+          },
+          {
+            "distrito": "San Pedro De Coris",
+            "ubigeo": "090509"
+          }
+        ]
+      },
+      {
+        "provincia": "Huancavelica",
+        "distritos": [
+          {
+            "distrito": "Acobambilla",
+            "ubigeo": "090102"
+          },
+          {
+            "distrito": "Acoria",
+            "ubigeo": "090103"
+          },
+          {
+            "distrito": "Ascension",
+            "ubigeo": "090118"
+          },
+          {
+            "distrito": "Conayca",
+            "ubigeo": "090104"
+          },
+          {
+            "distrito": "Cuenca",
+            "ubigeo": "090105"
+          },
+          {
+            "distrito": "Huachocolpa",
+            "ubigeo": "090106"
+          },
+          {
+            "distrito": "Huancavelica",
+            "ubigeo": "090101"
+          },
+          {
+            "distrito": "Huando",
+            "ubigeo": "090119"
+          },
+          {
+            "distrito": "Huayllahuara",
+            "ubigeo": "090107"
+          },
+          {
+            "distrito": "Izcuchaca",
+            "ubigeo": "090108"
+          },
+          {
+            "distrito": "Laria",
+            "ubigeo": "090109"
+          },
+          {
+            "distrito": "Manta",
+            "ubigeo": "090110"
+          },
+          {
+            "distrito": "Mariscal Caceres",
+            "ubigeo": "090111"
+          },
+          {
+            "distrito": "Moya",
+            "ubigeo": "090112"
+          },
+          {
+            "distrito": "Nuevo Occoro",
+            "ubigeo": "090113"
+          },
+          {
+            "distrito": "Palca",
+            "ubigeo": "090114"
+          },
+          {
+            "distrito": "Pilchaca",
+            "ubigeo": "090115"
+          },
+          {
+            "distrito": "Vilca",
+            "ubigeo": "090116"
+          },
+          {
+            "distrito": "Yauli",
+            "ubigeo": "090117"
+          }
+        ]
+      },
+      {
+        "provincia": "Huaytará",
+        "distritos": [
+          {
+            "distrito": "Ayavi",
+            "ubigeo": "090602"
+          },
+          {
+            "distrito": "Cordova",
+            "ubigeo": "090603"
+          },
+          {
+            "distrito": "Huayacundo Arma",
+            "ubigeo": "090604"
+          },
+          {
+            "distrito": "Huaytara",
+            "ubigeo": "090601"
+          },
+          {
+            "distrito": "Laramarca",
+            "ubigeo": "090605"
+          },
+          {
+            "distrito": "Ocoyo",
+            "ubigeo": "090606"
+          },
+          {
+            "distrito": "Pilpichaca",
+            "ubigeo": "090607"
+          },
+          {
+            "distrito": "Querco",
+            "ubigeo": "090608"
+          },
+          {
+            "distrito": "Quito-arma",
+            "ubigeo": "090609"
+          },
+          {
+            "distrito": "San Antonio De Cusicancha",
+            "ubigeo": "090610"
+          },
+          {
+            "distrito": "San Francisco De Sangayaico",
+            "ubigeo": "090611"
+          },
+          {
+            "distrito": "San Isidro",
+            "ubigeo": "090612"
+          },
+          {
+            "distrito": "Santiago De Chocorvos",
+            "ubigeo": "090613"
+          },
+          {
+            "distrito": "Santiago De Quirahuara",
+            "ubigeo": "090614"
+          },
+          {
+            "distrito": "Santo Domingo De Capillas",
+            "ubigeo": "090615"
+          },
+          {
+            "distrito": "Tambo",
+            "ubigeo": "090616"
+          }
+        ]
+      },
+      {
+        "provincia": "Tayacaja",
+        "distritos": [
+          {
+            "distrito": "Acostambo",
+            "ubigeo": "090702"
+          },
+          {
+            "distrito": "Acraquia",
+            "ubigeo": "090703"
+          },
+          {
+            "distrito": "Ahuaycha",
+            "ubigeo": "090704"
+          },
+          {
+            "distrito": "Colcabamba",
+            "ubigeo": "090705"
+          },
+          {
+            "distrito": "Daniel Hernandez",
+            "ubigeo": "090706"
+          },
+          {
+            "distrito": "Huachocolpa",
+            "ubigeo": "090707"
+          },
+          {
+            "distrito": "Huaribamba",
+            "ubigeo": "090709"
+          },
+          {
+            "distrito": "Ñahuimpuquio",
+            "ubigeo": "090710"
+          },
+          {
+            "distrito": "Pampas",
+            "ubigeo": "090701"
+          },
+          {
+            "distrito": "Pazos",
+            "ubigeo": "090711"
+          },
+          {
+            "distrito": "Quishuar",
+            "ubigeo": "090713"
+          },
+          {
+            "distrito": "Salcabamba",
+            "ubigeo": "090714"
+          },
+          {
+            "distrito": "Salcahuasi",
+            "ubigeo": "090715"
+          },
+          {
+            "distrito": "San Marcos De Rocchac",
+            "ubigeo": "090716"
+          },
+          {
+            "distrito": "Surcubamba",
+            "ubigeo": "090717"
+          },
+          {
+            "distrito": "Tintay Puncu",
+            "ubigeo": "090718"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "departamento": "Huánuco",
+    "provincias": [
+      {
+        "provincia": "Ambo",
+        "distritos": [
+          {
+            "distrito": "Ambo",
+            "ubigeo": "100201"
+          },
+          {
+            "distrito": "Cayna",
+            "ubigeo": "100202"
+          },
+          {
+            "distrito": "Colpas",
+            "ubigeo": "100203"
+          },
+          {
+            "distrito": "Conchamarca",
+            "ubigeo": "100204"
+          },
+          {
+            "distrito": "Huacar",
+            "ubigeo": "100205"
+          },
+          {
+            "distrito": "San Francisco",
+            "ubigeo": "100206"
+          },
+          {
+            "distrito": "San Rafael",
+            "ubigeo": "100207"
+          },
+          {
+            "distrito": "Tomay Kichwa",
+            "ubigeo": "100208"
+          }
+        ]
+      },
+      {
+        "provincia": "Dos De Mayo",
+        "distritos": [
+          {
+            "distrito": "Chuquis",
+            "ubigeo": "100307"
+          },
+          {
+            "distrito": "La Union",
+            "ubigeo": "100301"
+          },
+          {
+            "distrito": "Marias",
+            "ubigeo": "100311"
+          },
+          {
+            "distrito": "Pachas",
+            "ubigeo": "100313"
+          },
+          {
+            "distrito": "Quivilla",
+            "ubigeo": "100316"
+          },
+          {
+            "distrito": "Ripan",
+            "ubigeo": "100317"
+          },
+          {
+            "distrito": "Shunqui",
+            "ubigeo": "100321"
+          },
+          {
+            "distrito": "Sillapata",
+            "ubigeo": "100322"
+          },
+          {
+            "distrito": "Yanas",
+            "ubigeo": "100323"
+          }
+        ]
+      },
+      {
+        "provincia": "Huacaybamba",
+        "distritos": [
+          {
+            "distrito": "Canchabamba",
+            "ubigeo": "100402"
+          },
+          {
+            "distrito": "Cochabamba",
+            "ubigeo": "100403"
+          },
+          {
+            "distrito": "Huacaybamba",
+            "ubigeo": "100401"
+          },
+          {
+            "distrito": "Pinra",
+            "ubigeo": "100404"
+          }
+        ]
+      },
+      {
+        "provincia": "Huamalíes",
+        "distritos": [
+          {
+            "distrito": "Arancay",
+            "ubigeo": "100502"
+          },
+          {
+            "distrito": "Chavin De Pariarca",
+            "ubigeo": "100503"
+          },
+          {
+            "distrito": "Jacas Grande",
+            "ubigeo": "100504"
+          },
+          {
+            "distrito": "Jircan",
+            "ubigeo": "100505"
+          },
+          {
+            "distrito": "Llata",
+            "ubigeo": "100501"
+          },
+          {
+            "distrito": "Miraflores",
+            "ubigeo": "100506"
+          },
+          {
+            "distrito": "Monzon",
+            "ubigeo": "100507"
+          },
+          {
+            "distrito": "Punchao",
+            "ubigeo": "100508"
+          },
+          {
+            "distrito": "Puños",
+            "ubigeo": "100509"
+          },
+          {
+            "distrito": "Singa",
+            "ubigeo": "100510"
+          },
+          {
+            "distrito": "Tantamayo",
+            "ubigeo": "100511"
+          }
+        ]
+      },
+      {
+        "provincia": "Huánuco",
+        "distritos": [
+          {
+            "distrito": "Amarilis",
+            "ubigeo": "100102"
+          },
+          {
+            "distrito": "Chinchao",
+            "ubigeo": "100103"
+          },
+          {
+            "distrito": "Churubamba",
+            "ubigeo": "100104"
+          },
+          {
+            "distrito": "Huanuco",
+            "ubigeo": "100101"
+          },
+          {
+            "distrito": "Margos",
+            "ubigeo": "100105"
+          },
+          {
+            "distrito": "Pillco Marca",
+            "ubigeo": "100111"
+          },
+          {
+            "distrito": "Quisqui (kichki)",
+            "ubigeo": "100106"
+          },
+          {
+            "distrito": "San Francisco De Cayran",
+            "ubigeo": "100107"
+          },
+          {
+            "distrito": "San Pedro De Chaulan",
+            "ubigeo": "100108"
+          },
+          {
+            "distrito": "Santa Maria Del Valle",
+            "ubigeo": "100109"
+          },
+          {
+            "distrito": "Yacus",
+            "ubigeo": "100112"
+          },
+          {
+            "distrito": "Yarumayo",
+            "ubigeo": "100110"
+          }
+        ]
+      },
+      {
+        "provincia": "Lauricocha",
+        "distritos": [
+          {
+            "distrito": "Baños",
+            "ubigeo": "101002"
+          },
+          {
+            "distrito": "Jesus",
+            "ubigeo": "101001"
+          },
+          {
+            "distrito": "Jivia",
+            "ubigeo": "101003"
+          },
+          {
+            "distrito": "Queropalca",
+            "ubigeo": "101004"
+          },
+          {
+            "distrito": "Rondos",
+            "ubigeo": "101005"
+          },
+          {
+            "distrito": "San Francisco De Asis",
+            "ubigeo": "101006"
+          },
+          {
+            "distrito": "San Miguel De Cauri",
+            "ubigeo": "101007"
+          }
+        ]
+      },
+      {
+        "provincia": "Leoncio Prado",
+        "distritos": [
+          {
+            "distrito": "Daniel Alomia Robles",
+            "ubigeo": "100602"
+          },
+          {
+            "distrito": "Hermilio Valdizan",
+            "ubigeo": "100603"
+          },
+          {
+            "distrito": "Jose Crespo Y Castillo",
+            "ubigeo": "100604"
+          },
+          {
+            "distrito": "Luyando",
+            "ubigeo": "100605"
+          },
+          {
+            "distrito": "Mariano Damaso Beraun",
+            "ubigeo": "100606"
+          },
+          {
+            "distrito": "Rupa-rupa",
+            "ubigeo": "100601"
+          }
+        ]
+      },
+      {
+        "provincia": "Marañón",
+        "distritos": [
+          {
+            "distrito": "Cholon",
+            "ubigeo": "100702"
+          },
+          {
+            "distrito": "Huacrachuco",
+            "ubigeo": "100701"
+          },
+          {
+            "distrito": "San Buenaventura",
+            "ubigeo": "100703"
+          }
+        ]
+      },
+      {
+        "provincia": "Pachitea",
+        "distritos": [
+          {
+            "distrito": "Chaglla",
+            "ubigeo": "100802"
+          },
+          {
+            "distrito": "Molino",
+            "ubigeo": "100803"
+          },
+          {
+            "distrito": "Panao",
+            "ubigeo": "100801"
+          },
+          {
+            "distrito": "Umari",
+            "ubigeo": "100804"
+          }
+        ]
+      },
+      {
+        "provincia": "Puerto Inca",
+        "distritos": [
+          {
+            "distrito": "Codo Del Pozuzo",
+            "ubigeo": "100902"
+          },
+          {
+            "distrito": "Honoria",
+            "ubigeo": "100903"
+          },
+          {
+            "distrito": "Puerto Inca",
+            "ubigeo": "100901"
+          },
+          {
+            "distrito": "Tournavista",
+            "ubigeo": "100904"
+          },
+          {
+            "distrito": "Yuyapichis",
+            "ubigeo": "100905"
+          }
+        ]
+      },
+      {
+        "provincia": "Yarowilca",
+        "distritos": [
+          {
+            "distrito": "Aparicio Pomares",
+            "ubigeo": "101104"
+          },
+          {
+            "distrito": "Cahuac",
+            "ubigeo": "101102"
+          },
+          {
+            "distrito": "Chacabamba",
+            "ubigeo": "101103"
+          },
+          {
+            "distrito": "Chavinillo",
+            "ubigeo": "101101"
+          },
+          {
+            "distrito": "Choras",
+            "ubigeo": "101108"
+          },
+          {
+            "distrito": "Jacas Chico",
+            "ubigeo": "101105"
+          },
+          {
+            "distrito": "Obas",
+            "ubigeo": "101106"
+          },
+          {
+            "distrito": "Pampamarca",
+            "ubigeo": "101107"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "departamento": "Ica",
+    "provincias": [
+      {
+        "provincia": "Chincha",
+        "distritos": [
+          {
+            "distrito": "Alto Laran",
+            "ubigeo": "110202"
+          },
+          {
+            "distrito": "Chavin",
+            "ubigeo": "110203"
+          },
+          {
+            "distrito": "Chincha Alta",
+            "ubigeo": "110201"
+          },
+          {
+            "distrito": "Chincha Baja",
+            "ubigeo": "110204"
+          },
+          {
+            "distrito": "El Carmen",
+            "ubigeo": "110205"
+          },
+          {
+            "distrito": "Grocio Prado",
+            "ubigeo": "110206"
+          },
+          {
+            "distrito": "Pueblo Nuevo",
+            "ubigeo": "110207"
+          },
+          {
+            "distrito": "San Juan De Yanac",
+            "ubigeo": "110208"
+          },
+          {
+            "distrito": "San Pedro De Huacarpana",
+            "ubigeo": "110209"
+          },
+          {
+            "distrito": "Sunampe",
+            "ubigeo": "110210"
+          },
+          {
+            "distrito": "Tambo De Mora",
+            "ubigeo": "110211"
+          }
+        ]
+      },
+      {
+        "provincia": "Ica",
+        "distritos": [
+          {
+            "distrito": "Ica",
+            "ubigeo": "110101"
+          },
+          {
+            "distrito": "La Tinguiña",
+            "ubigeo": "110102"
+          },
+          {
+            "distrito": "Los Aquijes",
+            "ubigeo": "110103"
+          },
+          {
+            "distrito": "Ocucaje",
+            "ubigeo": "110104"
+          },
+          {
+            "distrito": "Pachacutec",
+            "ubigeo": "110105"
+          },
+          {
+            "distrito": "Parcona",
+            "ubigeo": "110106"
+          },
+          {
+            "distrito": "Pueblo Nuevo",
+            "ubigeo": "110107"
+          },
+          {
+            "distrito": "Salas",
+            "ubigeo": "110108"
+          },
+          {
+            "distrito": "San Jose De Los Molinos",
+            "ubigeo": "110109"
+          },
+          {
+            "distrito": "San Juan Bautista",
+            "ubigeo": "110110"
+          },
+          {
+            "distrito": "Santiago",
+            "ubigeo": "110111"
+          },
+          {
+            "distrito": "Subtanjalla",
+            "ubigeo": "110112"
+          },
+          {
+            "distrito": "Tate",
+            "ubigeo": "110113"
+          },
+          {
+            "distrito": "Yauca Del Rosario",
+            "ubigeo": "110114"
+          }
+        ]
+      },
+      {
+        "provincia": "Nazca",
+        "distritos": [
+          {
+            "distrito": "Changuillo",
+            "ubigeo": "110302"
+          },
+          {
+            "distrito": "El Ingenio",
+            "ubigeo": "110303"
+          },
+          {
+            "distrito": "Marcona",
+            "ubigeo": "110304"
+          },
+          {
+            "distrito": "Nasca",
+            "ubigeo": "110301"
+          },
+          {
+            "distrito": "Vista Alegre",
+            "ubigeo": "110305"
+          }
+        ]
+      },
+      {
+        "provincia": "Palpa",
+        "distritos": [
+          {
+            "distrito": "Llipata",
+            "ubigeo": "110402"
+          },
+          {
+            "distrito": "Palpa",
+            "ubigeo": "110401"
+          },
+          {
+            "distrito": "Rio Grande",
+            "ubigeo": "110403"
+          },
+          {
+            "distrito": "Santa Cruz",
+            "ubigeo": "110404"
+          },
+          {
+            "distrito": "Tibillo",
+            "ubigeo": "110405"
+          }
+        ]
+      },
+      {
+        "provincia": "Pisco",
+        "distritos": [
+          {
+            "distrito": "Huancano",
+            "ubigeo": "110502"
+          },
+          {
+            "distrito": "Humay",
+            "ubigeo": "110503"
+          },
+          {
+            "distrito": "Independencia",
+            "ubigeo": "110504"
+          },
+          {
+            "distrito": "Paracas",
+            "ubigeo": "110505"
+          },
+          {
+            "distrito": "Pisco",
+            "ubigeo": "110501"
+          },
+          {
+            "distrito": "San Andres",
+            "ubigeo": "110506"
+          },
+          {
+            "distrito": "San Clemente",
+            "ubigeo": "110507"
+          },
+          {
+            "distrito": "Tupac Amaru Inca",
+            "ubigeo": "110508"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "departamento": "Junín",
+    "provincias": [
+      {
+        "provincia": "Chanchamayo",
+        "distritos": [
+          {
+            "distrito": "Chanchamayo",
+            "ubigeo": "120301"
+          },
+          {
+            "distrito": "Perene",
+            "ubigeo": "120302"
+          },
+          {
+            "distrito": "Pichanaqui",
+            "ubigeo": "120303"
+          },
+          {
+            "distrito": "San Luis De Shuaro",
+            "ubigeo": "120304"
+          },
+          {
+            "distrito": "San Ramon",
+            "ubigeo": "120305"
+          },
+          {
+            "distrito": "Vitoc",
+            "ubigeo": "120306"
+          }
+        ]
+      },
+      {
+        "provincia": "Chupaca",
+        "distritos": [
+          {
+            "distrito": "Ahuac",
+            "ubigeo": "120902"
+          },
+          {
+            "distrito": "Chongos Bajo",
+            "ubigeo": "120903"
+          },
+          {
+            "distrito": "Chupaca",
+            "ubigeo": "120901"
+          },
+          {
+            "distrito": "Huachac",
+            "ubigeo": "120904"
+          },
+          {
+            "distrito": "Huamancaca Chico",
+            "ubigeo": "120905"
+          },
+          {
+            "distrito": "San Juan De Iscos",
+            "ubigeo": "120906"
+          },
+          {
+            "distrito": "San Juan De Jarpa",
+            "ubigeo": "120907"
+          },
+          {
+            "distrito": "Tres De Diciembre",
+            "ubigeo": "120908"
+          },
+          {
+            "distrito": "Yanacancha",
+            "ubigeo": "120909"
+          }
+        ]
+      },
+      {
+        "provincia": "Concepción",
+        "distritos": [
+          {
+            "distrito": "Aco",
+            "ubigeo": "120202"
+          },
+          {
+            "distrito": "Andamarca",
+            "ubigeo": "120203"
+          },
+          {
+            "distrito": "Chambara",
+            "ubigeo": "120204"
+          },
+          {
+            "distrito": "Cochas",
+            "ubigeo": "120205"
+          },
+          {
+            "distrito": "Comas",
+            "ubigeo": "120206"
+          },
+          {
+            "distrito": "Concepcion",
+            "ubigeo": "120201"
+          },
+          {
+            "distrito": "Heroinas Toledo",
+            "ubigeo": "120207"
+          },
+          {
+            "distrito": "Manzanares",
+            "ubigeo": "120208"
+          },
+          {
+            "distrito": "Mariscal Castilla",
+            "ubigeo": "120209"
+          },
+          {
+            "distrito": "Matahuasi",
+            "ubigeo": "120210"
+          },
+          {
+            "distrito": "Mito",
+            "ubigeo": "120211"
+          },
+          {
+            "distrito": "Nueve De Julio",
+            "ubigeo": "120212"
+          },
+          {
+            "distrito": "Orcotuna",
+            "ubigeo": "120213"
+          },
+          {
+            "distrito": "San Jose De Quero",
+            "ubigeo": "120214"
+          },
+          {
+            "distrito": "Santa Rosa De Ocopa",
+            "ubigeo": "120215"
+          }
+        ]
+      },
+      {
+        "provincia": "Huancayo",
+        "distritos": [
+          {
+            "distrito": "Carhuacallanga",
+            "ubigeo": "120104"
+          },
+          {
+            "distrito": "Chacapampa",
+            "ubigeo": "120105"
+          },
+          {
+            "distrito": "Chicche",
+            "ubigeo": "120106"
+          },
+          {
+            "distrito": "Chilca",
+            "ubigeo": "120107"
+          },
+          {
+            "distrito": "Chongos Alto",
+            "ubigeo": "120108"
+          },
+          {
+            "distrito": "Chupuro",
+            "ubigeo": "120111"
+          },
+          {
+            "distrito": "Colca",
+            "ubigeo": "120112"
+          },
+          {
+            "distrito": "Cullhuas",
+            "ubigeo": "120113"
+          },
+          {
+            "distrito": "El Tambo",
+            "ubigeo": "120114"
+          },
+          {
+            "distrito": "Huacrapuquio",
+            "ubigeo": "120116"
+          },
+          {
+            "distrito": "Hualhuas",
+            "ubigeo": "120117"
+          },
+          {
+            "distrito": "Huancan",
+            "ubigeo": "120119"
+          },
+          {
+            "distrito": "Huancayo",
+            "ubigeo": "120101"
+          },
+          {
+            "distrito": "Huasicancha",
+            "ubigeo": "120120"
+          },
+          {
+            "distrito": "Huayucachi",
+            "ubigeo": "120121"
+          },
+          {
+            "distrito": "Ingenio",
+            "ubigeo": "120122"
+          },
+          {
+            "distrito": "Pariahuanca",
+            "ubigeo": "120124"
+          },
+          {
+            "distrito": "Pilcomayo",
+            "ubigeo": "120125"
+          },
+          {
+            "distrito": "Pucara",
+            "ubigeo": "120126"
+          },
+          {
+            "distrito": "Quichuay",
+            "ubigeo": "120127"
+          },
+          {
+            "distrito": "Quilcas",
+            "ubigeo": "120128"
+          },
+          {
+            "distrito": "San Agustin",
+            "ubigeo": "120129"
+          },
+          {
+            "distrito": "San Jeronimo De Tunan",
+            "ubigeo": "120130"
+          },
+          {
+            "distrito": "Santo Domingo De Acobamba",
+            "ubigeo": "120135"
+          },
+          {
+            "distrito": "Saño",
+            "ubigeo": "120132"
+          },
+          {
+            "distrito": "Sapallanga",
+            "ubigeo": "120133"
+          },
+          {
+            "distrito": "Sicaya",
+            "ubigeo": "120134"
+          },
+          {
+            "distrito": "Viques",
+            "ubigeo": "120136"
+          }
+        ]
+      },
+      {
+        "provincia": "Jauja",
+        "distritos": [
+          {
+            "distrito": "Acolla",
+            "ubigeo": "120402"
+          },
+          {
+            "distrito": "Apata",
+            "ubigeo": "120403"
+          },
+          {
+            "distrito": "Ataura",
+            "ubigeo": "120404"
+          },
+          {
+            "distrito": "Canchayllo",
+            "ubigeo": "120405"
+          },
+          {
+            "distrito": "Curicaca",
+            "ubigeo": "120406"
+          },
+          {
+            "distrito": "El Mantaro",
+            "ubigeo": "120407"
+          },
+          {
+            "distrito": "Huamali",
+            "ubigeo": "120408"
+          },
+          {
+            "distrito": "Huaripampa",
+            "ubigeo": "120409"
+          },
+          {
+            "distrito": "Huertas",
+            "ubigeo": "120410"
+          },
+          {
+            "distrito": "Janjaillo",
+            "ubigeo": "120411"
+          },
+          {
+            "distrito": "Jauja",
+            "ubigeo": "120401"
+          },
+          {
+            "distrito": "Julcan",
+            "ubigeo": "120412"
+          },
+          {
+            "distrito": "Leonor Ordoñez",
+            "ubigeo": "120413"
+          },
+          {
+            "distrito": "Llocllapampa",
+            "ubigeo": "120414"
+          },
+          {
+            "distrito": "Marco",
+            "ubigeo": "120415"
+          },
+          {
+            "distrito": "Masma",
+            "ubigeo": "120416"
+          },
+          {
+            "distrito": "Masma Chicche",
+            "ubigeo": "120417"
+          },
+          {
+            "distrito": "Molinos",
+            "ubigeo": "120418"
+          },
+          {
+            "distrito": "Monobamba",
+            "ubigeo": "120419"
+          },
+          {
+            "distrito": "Muqui",
+            "ubigeo": "120420"
+          },
+          {
+            "distrito": "Muquiyauyo",
+            "ubigeo": "120421"
+          },
+          {
+            "distrito": "Paca",
+            "ubigeo": "120422"
+          },
+          {
+            "distrito": "Paccha",
+            "ubigeo": "120423"
+          },
+          {
+            "distrito": "Pancan",
+            "ubigeo": "120424"
+          },
+          {
+            "distrito": "Parco",
+            "ubigeo": "120425"
+          },
+          {
+            "distrito": "Pomacancha",
+            "ubigeo": "120426"
+          },
+          {
+            "distrito": "Ricran",
+            "ubigeo": "120427"
+          },
+          {
+            "distrito": "San Lorenzo",
+            "ubigeo": "120428"
+          },
+          {
+            "distrito": "San Pedro De Chunan",
+            "ubigeo": "120429"
+          },
+          {
+            "distrito": "Sausa",
+            "ubigeo": "120430"
+          },
+          {
+            "distrito": "Sincos",
+            "ubigeo": "120431"
+          },
+          {
+            "distrito": "Tunan Marca",
+            "ubigeo": "120432"
+          },
+          {
+            "distrito": "Yauli",
+            "ubigeo": "120433"
+          },
+          {
+            "distrito": "Yauyos",
+            "ubigeo": "120434"
+          }
+        ]
+      },
+      {
+        "provincia": "Junín",
+        "distritos": [
+          {
+            "distrito": "Carhuamayo",
+            "ubigeo": "120502"
+          },
+          {
+            "distrito": "Junin",
+            "ubigeo": "120501"
+          },
+          {
+            "distrito": "Ondores",
+            "ubigeo": "120503"
+          },
+          {
+            "distrito": "Ulcumayo",
+            "ubigeo": "120504"
+          }
+        ]
+      },
+      {
+        "provincia": "Satipo",
+        "distritos": [
+          {
+            "distrito": "Coviriali",
+            "ubigeo": "120602"
+          },
+          {
+            "distrito": "Llaylla",
+            "ubigeo": "120603"
+          },
+          {
+            "distrito": "Mazamari",
+            "ubigeo": "120604"
+          },
+          {
+            "distrito": "Pampa Hermosa",
+            "ubigeo": "120605"
+          },
+          {
+            "distrito": "Pangoa",
+            "ubigeo": "120606"
+          },
+          {
+            "distrito": "Rio Negro",
+            "ubigeo": "120607"
+          },
+          {
+            "distrito": "Rio Tambo",
+            "ubigeo": "120608"
+          },
+          {
+            "distrito": "Satipo",
+            "ubigeo": "120601"
+          }
+        ]
+      },
+      {
+        "provincia": "Tarma",
+        "distritos": [
+          {
+            "distrito": "Acobamba",
+            "ubigeo": "120702"
+          },
+          {
+            "distrito": "Huaricolca",
+            "ubigeo": "120703"
+          },
+          {
+            "distrito": "Huasahuasi",
+            "ubigeo": "120704"
+          },
+          {
+            "distrito": "La Union",
+            "ubigeo": "120705"
+          },
+          {
+            "distrito": "Palca",
+            "ubigeo": "120706"
+          },
+          {
+            "distrito": "Palcamayo",
+            "ubigeo": "120707"
+          },
+          {
+            "distrito": "San Pedro De Cajas",
+            "ubigeo": "120708"
+          },
+          {
+            "distrito": "Tapo",
+            "ubigeo": "120709"
+          },
+          {
+            "distrito": "Tarma",
+            "ubigeo": "120701"
+          }
+        ]
+      },
+      {
+        "provincia": "Yauli",
+        "distritos": [
+          {
+            "distrito": "Chacapalpa",
+            "ubigeo": "120802"
+          },
+          {
+            "distrito": "Huay-huay",
+            "ubigeo": "120803"
+          },
+          {
+            "distrito": "La Oroya",
+            "ubigeo": "120801"
+          },
+          {
+            "distrito": "Marcapomacocha",
+            "ubigeo": "120804"
+          },
+          {
+            "distrito": "Morococha",
+            "ubigeo": "120805"
+          },
+          {
+            "distrito": "Paccha",
+            "ubigeo": "120806"
+          },
+          {
+            "distrito": "Santa Barbara De Carhuacayan",
+            "ubigeo": "120807"
+          },
+          {
+            "distrito": "Santa Rosa De Sacco",
+            "ubigeo": "120808"
+          },
+          {
+            "distrito": "Suitucancha",
+            "ubigeo": "120809"
+          },
+          {
+            "distrito": "Yauli",
+            "ubigeo": "120810"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "departamento": "La Libertad",
+    "provincias": [
+      {
+        "provincia": "Ascope",
+        "distritos": [
+          {
+            "distrito": "Ascope",
+            "ubigeo": "130201"
+          },
+          {
+            "distrito": "Casa Grande",
+            "ubigeo": "130208"
+          },
+          {
+            "distrito": "Chicama",
+            "ubigeo": "130202"
+          },
+          {
+            "distrito": "Chocope",
+            "ubigeo": "130203"
+          },
+          {
+            "distrito": "Magdalena De Cao",
+            "ubigeo": "130204"
+          },
+          {
+            "distrito": "Paijan",
+            "ubigeo": "130205"
+          },
+          {
+            "distrito": "Razuri",
+            "ubigeo": "130206"
+          },
+          {
+            "distrito": "Santiago De Cao",
+            "ubigeo": "130207"
+          }
+        ]
+      },
+      {
+        "provincia": "Bolívar",
+        "distritos": [
+          {
+            "distrito": "Bambamarca",
+            "ubigeo": "130302"
+          },
+          {
+            "distrito": "Bolivar",
+            "ubigeo": "130301"
+          },
+          {
+            "distrito": "Condormarca",
+            "ubigeo": "130303"
+          },
+          {
+            "distrito": "Longotea",
+            "ubigeo": "130304"
+          },
+          {
+            "distrito": "Uchumarca",
+            "ubigeo": "130305"
+          },
+          {
+            "distrito": "Ucuncha",
+            "ubigeo": "130306"
+          }
+        ]
+      },
+      {
+        "provincia": "Chepén",
+        "distritos": [
+          {
+            "distrito": "Chepen",
+            "ubigeo": "130401"
+          },
+          {
+            "distrito": "Pacanga",
+            "ubigeo": "130402"
+          },
+          {
+            "distrito": "Pueblo Nuevo",
+            "ubigeo": "130403"
+          }
+        ]
+      },
+      {
+        "provincia": "Gran Chimú",
+        "distritos": [
+          {
+            "distrito": "Cascas",
+            "ubigeo": "131101"
+          },
+          {
+            "distrito": "Lucma",
+            "ubigeo": "131102"
+          },
+          {
+            "distrito": "Marmot",
+            "ubigeo": "131103"
+          },
+          {
+            "distrito": "Sayapullo",
+            "ubigeo": "131104"
+          }
+        ]
+      },
+      {
+        "provincia": "Julcán",
+        "distritos": [
+          {
+            "distrito": "Calamarca",
+            "ubigeo": "130502"
+          },
+          {
+            "distrito": "Carabamba",
+            "ubigeo": "130503"
+          },
+          {
+            "distrito": "Huaso",
+            "ubigeo": "130504"
+          },
+          {
+            "distrito": "Julcan",
+            "ubigeo": "130501"
+          }
+        ]
+      },
+      {
+        "provincia": "Otuzco",
+        "distritos": [
+          {
+            "distrito": "Agallpampa",
+            "ubigeo": "130602"
+          },
+          {
+            "distrito": "Charat",
+            "ubigeo": "130604"
+          },
+          {
+            "distrito": "Huaranchal",
+            "ubigeo": "130605"
+          },
+          {
+            "distrito": "La Cuesta",
+            "ubigeo": "130606"
+          },
+          {
+            "distrito": "Mache",
+            "ubigeo": "130608"
+          },
+          {
+            "distrito": "Otuzco",
+            "ubigeo": "130601"
+          },
+          {
+            "distrito": "Paranday",
+            "ubigeo": "130610"
+          },
+          {
+            "distrito": "Salpo",
+            "ubigeo": "130611"
+          },
+          {
+            "distrito": "Sinsicap",
+            "ubigeo": "130613"
+          },
+          {
+            "distrito": "Usquil",
+            "ubigeo": "130614"
+          }
+        ]
+      },
+      {
+        "provincia": "Pacasmayo",
+        "distritos": [
+          {
+            "distrito": "Guadalupe",
+            "ubigeo": "130702"
+          },
+          {
+            "distrito": "Jequetepeque",
+            "ubigeo": "130703"
+          },
+          {
+            "distrito": "Pacasmayo",
+            "ubigeo": "130704"
+          },
+          {
+            "distrito": "San Jose",
+            "ubigeo": "130705"
+          },
+          {
+            "distrito": "San Pedro De Lloc",
+            "ubigeo": "130701"
+          }
+        ]
+      },
+      {
+        "provincia": "Pataz",
+        "distritos": [
+          {
+            "distrito": "Buldibuyo",
+            "ubigeo": "130802"
+          },
+          {
+            "distrito": "Chillia",
+            "ubigeo": "130803"
+          },
+          {
+            "distrito": "Huancaspata",
+            "ubigeo": "130804"
+          },
+          {
+            "distrito": "Huaylillas",
+            "ubigeo": "130805"
+          },
+          {
+            "distrito": "Huayo",
+            "ubigeo": "130806"
+          },
+          {
+            "distrito": "Ongon",
+            "ubigeo": "130807"
+          },
+          {
+            "distrito": "Parcoy",
+            "ubigeo": "130808"
+          },
+          {
+            "distrito": "Pataz",
+            "ubigeo": "130809"
+          },
+          {
+            "distrito": "Pias",
+            "ubigeo": "130810"
+          },
+          {
+            "distrito": "Santiago De Challas",
+            "ubigeo": "130811"
+          },
+          {
+            "distrito": "Taurija",
+            "ubigeo": "130812"
+          },
+          {
+            "distrito": "Tayabamba",
+            "ubigeo": "130801"
+          },
+          {
+            "distrito": "Urpay",
+            "ubigeo": "130813"
+          }
+        ]
+      },
+      {
+        "provincia": "Sánchez Carrión",
+        "distritos": [
+          {
+            "distrito": "Chugay",
+            "ubigeo": "130902"
+          },
+          {
+            "distrito": "Cochorco",
+            "ubigeo": "130903"
+          },
+          {
+            "distrito": "Curgos",
+            "ubigeo": "130904"
+          },
+          {
+            "distrito": "Huamachuco",
+            "ubigeo": "130901"
+          },
+          {
+            "distrito": "Marcabal",
+            "ubigeo": "130905"
+          },
+          {
+            "distrito": "Sanagoran",
+            "ubigeo": "130906"
+          },
+          {
+            "distrito": "Sarin",
+            "ubigeo": "130907"
+          },
+          {
+            "distrito": "Sartimbamba",
+            "ubigeo": "130908"
+          }
+        ]
+      },
+      {
+        "provincia": "Santiago De Chuco",
+        "distritos": [
+          {
+            "distrito": "Angasmarca",
+            "ubigeo": "131002"
+          },
+          {
+            "distrito": "Cachicadan",
+            "ubigeo": "131003"
+          },
+          {
+            "distrito": "Mollebamba",
+            "ubigeo": "131004"
+          },
+          {
+            "distrito": "Mollepata",
+            "ubigeo": "131005"
+          },
+          {
+            "distrito": "Quiruvilca",
+            "ubigeo": "131006"
+          },
+          {
+            "distrito": "Santa Cruz De Chuca",
+            "ubigeo": "131007"
+          },
+          {
+            "distrito": "Santiago De Chuco",
+            "ubigeo": "131001"
+          },
+          {
+            "distrito": "Sitabamba",
+            "ubigeo": "131008"
+          }
+        ]
+      },
+      {
+        "provincia": "Trujillo",
+        "distritos": [
+          {
+            "distrito": "El Porvenir",
+            "ubigeo": "130102"
+          },
+          {
+            "distrito": "Florencia De Mora",
+            "ubigeo": "130103"
+          },
+          {
+            "distrito": "Huanchaco",
+            "ubigeo": "130104"
+          },
+          {
+            "distrito": "La Esperanza",
+            "ubigeo": "130105"
+          },
+          {
+            "distrito": "Laredo",
+            "ubigeo": "130106"
+          },
+          {
+            "distrito": "Moche",
+            "ubigeo": "130107"
+          },
+          {
+            "distrito": "Poroto",
+            "ubigeo": "130108"
+          },
+          {
+            "distrito": "Salaverry",
+            "ubigeo": "130109"
+          },
+          {
+            "distrito": "Simbal",
+            "ubigeo": "130110"
+          },
+          {
+            "distrito": "Trujillo",
+            "ubigeo": "130101"
+          },
+          {
+            "distrito": "Victor Larco Herrera",
+            "ubigeo": "130111"
+          }
+        ]
+      },
+      {
+        "provincia": "Virú",
+        "distritos": [
+          {
+            "distrito": "Chao",
+            "ubigeo": "131202"
+          },
+          {
+            "distrito": "Guadalupito",
+            "ubigeo": "131203"
+          },
+          {
+            "distrito": "Viru",
+            "ubigeo": "131201"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "departamento": "Lambayeque",
+    "provincias": [
+      {
+        "provincia": "Chiclayo",
+        "distritos": [
+          {
+            "distrito": "Cayalti",
+            "ubigeo": "140116"
+          },
+          {
+            "distrito": "Chiclayo",
+            "ubigeo": "140101"
+          },
+          {
+            "distrito": "Chongoyape",
+            "ubigeo": "140102"
+          },
+          {
+            "distrito": "Eten",
+            "ubigeo": "140103"
+          },
+          {
+            "distrito": "Eten Puerto",
+            "ubigeo": "140104"
+          },
+          {
+            "distrito": "Jose Leonardo Ortiz",
+            "ubigeo": "140105"
+          },
+          {
+            "distrito": "La Victoria",
+            "ubigeo": "140106"
+          },
+          {
+            "distrito": "Lagunas",
+            "ubigeo": "140107"
+          },
+          {
+            "distrito": "Monsefu",
+            "ubigeo": "140108"
+          },
+          {
+            "distrito": "Nueva Arica",
+            "ubigeo": "140109"
+          },
+          {
+            "distrito": "Oyotun",
+            "ubigeo": "140110"
+          },
+          {
+            "distrito": "Patapo",
+            "ubigeo": "140117"
+          },
+          {
+            "distrito": "Picsi",
+            "ubigeo": "140111"
+          },
+          {
+            "distrito": "Pimentel",
+            "ubigeo": "140112"
+          },
+          {
+            "distrito": "Pomalca",
+            "ubigeo": "140118"
+          },
+          {
+            "distrito": "Pucala",
+            "ubigeo": "140119"
+          },
+          {
+            "distrito": "Reque",
+            "ubigeo": "140113"
+          },
+          {
+            "distrito": "Santa Rosa",
+            "ubigeo": "140114"
+          },
+          {
+            "distrito": "Saña",
+            "ubigeo": "140115"
+          },
+          {
+            "distrito": "Tuman",
+            "ubigeo": "140120"
+          }
+        ]
+      },
+      {
+        "provincia": "Ferreñafe",
+        "distritos": [
+          {
+            "distrito": "Cañaris",
+            "ubigeo": "140202"
+          },
+          {
+            "distrito": "Ferreñafe",
+            "ubigeo": "140201"
+          },
+          {
+            "distrito": "Incahuasi",
+            "ubigeo": "140203"
+          },
+          {
+            "distrito": "Manuel Antonio Mesones Muro",
+            "ubigeo": "140204"
+          },
+          {
+            "distrito": "Pitipo",
+            "ubigeo": "140205"
+          },
+          {
+            "distrito": "Pueblo Nuevo",
+            "ubigeo": "140206"
+          }
+        ]
+      },
+      {
+        "provincia": "Lambayeque",
+        "distritos": [
+          {
+            "distrito": "Chochope",
+            "ubigeo": "140302"
+          },
+          {
+            "distrito": "Illimo",
+            "ubigeo": "140303"
+          },
+          {
+            "distrito": "Jayanca",
+            "ubigeo": "140304"
+          },
+          {
+            "distrito": "Lambayeque",
+            "ubigeo": "140301"
+          },
+          {
+            "distrito": "Mochumi",
+            "ubigeo": "140305"
+          },
+          {
+            "distrito": "Morrope",
+            "ubigeo": "140306"
+          },
+          {
+            "distrito": "Motupe",
+            "ubigeo": "140307"
+          },
+          {
+            "distrito": "Olmos",
+            "ubigeo": "140308"
+          },
+          {
+            "distrito": "Pacora",
+            "ubigeo": "140309"
+          },
+          {
+            "distrito": "Salas",
+            "ubigeo": "140310"
+          },
+          {
+            "distrito": "San Jose",
+            "ubigeo": "140311"
+          },
+          {
+            "distrito": "Tucume",
+            "ubigeo": "140312"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "departamento": "Lima",
+    "provincias": [
+      {
+        "provincia": "Barranca",
+        "distritos": [
+          {
+            "distrito": "Barranca",
+            "ubigeo": "150201"
+          },
+          {
+            "distrito": "Paramonga",
+            "ubigeo": "150202"
+          },
+          {
+            "distrito": "Pativilca",
+            "ubigeo": "150203"
+          },
+          {
+            "distrito": "Supe",
+            "ubigeo": "150204"
+          },
+          {
+            "distrito": "Supe Puerto",
+            "ubigeo": "150205"
+          }
+        ]
+      },
+      {
+        "provincia": "Cajatambo",
+        "distritos": [
+          {
+            "distrito": "Cajatambo",
+            "ubigeo": "150301"
+          },
+          {
+            "distrito": "Copa",
+            "ubigeo": "150302"
+          },
+          {
+            "distrito": "Gorgor",
+            "ubigeo": "150303"
+          },
+          {
+            "distrito": "Huancapon",
+            "ubigeo": "150304"
+          },
+          {
+            "distrito": "Manas",
+            "ubigeo": "150305"
+          }
+        ]
+      },
+      {
+        "provincia": "Callao",
+        "distritos": [
+          {
+            "distrito": "Bellavista",
+            "ubigeo": "070102"
+          },
+          {
+            "distrito": "Callao",
+            "ubigeo": "070101"
+          },
+          {
+            "distrito": "Carmen De La Legua Reynoso",
+            "ubigeo": "070103"
+          },
+          {
+            "distrito": "La Perla",
+            "ubigeo": "070104"
+          },
+          {
+            "distrito": "La Punta",
+            "ubigeo": "070105"
+          },
+          {
+            "distrito": "Ventanilla",
+            "ubigeo": "070106"
+          }
+        ]
+      },
+      {
+        "provincia": "Canta",
+        "distritos": [
+          {
+            "distrito": "Arahuay",
+            "ubigeo": "150402"
+          },
+          {
+            "distrito": "Canta",
+            "ubigeo": "150401"
+          },
+          {
+            "distrito": "Huamantanga",
+            "ubigeo": "150403"
+          },
+          {
+            "distrito": "Huaros",
+            "ubigeo": "150404"
+          },
+          {
+            "distrito": "Lachaqui",
+            "ubigeo": "150405"
+          },
+          {
+            "distrito": "San Buenaventura",
+            "ubigeo": "150406"
+          },
+          {
+            "distrito": "Santa Rosa De Quives",
+            "ubigeo": "150407"
+          }
+        ]
+      },
+      {
+        "provincia": "Cañete",
+        "distritos": [
+          {
+            "distrito": "Asia",
+            "ubigeo": "150502"
+          },
+          {
+            "distrito": "Calango",
+            "ubigeo": "150503"
+          },
+          {
+            "distrito": "Cerro Azul",
+            "ubigeo": "150504"
+          },
+          {
+            "distrito": "Chilca",
+            "ubigeo": "150505"
+          },
+          {
+            "distrito": "Coayllo",
+            "ubigeo": "150506"
+          },
+          {
+            "distrito": "Imperial",
+            "ubigeo": "150507"
+          },
+          {
+            "distrito": "Lunahuana",
+            "ubigeo": "150508"
+          },
+          {
+            "distrito": "Mala",
+            "ubigeo": "150509"
+          },
+          {
+            "distrito": "Nuevo Imperial",
+            "ubigeo": "150510"
+          },
+          {
+            "distrito": "Pacaran",
+            "ubigeo": "150511"
+          },
+          {
+            "distrito": "Quilmana",
+            "ubigeo": "150512"
+          },
+          {
+            "distrito": "San Antonio",
+            "ubigeo": "150513"
+          },
+          {
+            "distrito": "San Luis",
+            "ubigeo": "150514"
+          },
+          {
+            "distrito": "San Vicente De Cañete",
+            "ubigeo": "150501"
+          },
+          {
+            "distrito": "Santa Cruz De Flores",
+            "ubigeo": "150515"
+          },
+          {
+            "distrito": "Zuñiga",
+            "ubigeo": "150516"
+          }
+        ]
+      },
+      {
+        "provincia": "Huaral",
+        "distritos": [
+          {
+            "distrito": "Atavillos Alto",
+            "ubigeo": "150602"
+          },
+          {
+            "distrito": "Atavillos Bajo",
+            "ubigeo": "150603"
+          },
+          {
+            "distrito": "Aucallama",
+            "ubigeo": "150604"
+          },
+          {
+            "distrito": "Chancay",
+            "ubigeo": "150605"
+          },
+          {
+            "distrito": "Huaral",
+            "ubigeo": "150601"
+          },
+          {
+            "distrito": "Ihuari",
+            "ubigeo": "150606"
+          },
+          {
+            "distrito": "Lampian",
+            "ubigeo": "150607"
+          },
+          {
+            "distrito": "Pacaraos",
+            "ubigeo": "150608"
+          },
+          {
+            "distrito": "San Miguel De Acos",
+            "ubigeo": "150609"
+          },
+          {
+            "distrito": "Santa Cruz De Andamarca",
+            "ubigeo": "150610"
+          },
+          {
+            "distrito": "Sumbilca",
+            "ubigeo": "150611"
+          },
+          {
+            "distrito": "Veintisiete De Noviembre",
+            "ubigeo": "150612"
+          }
+        ]
+      },
+      {
+        "provincia": "Huarochirí",
+        "distritos": [
+          {
+            "distrito": "Antioquia",
+            "ubigeo": "150702"
+          },
+          {
+            "distrito": "Callahuanca",
+            "ubigeo": "150703"
+          },
+          {
+            "distrito": "Carampoma",
+            "ubigeo": "150704"
+          },
+          {
+            "distrito": "Chicla",
+            "ubigeo": "150705"
+          },
+          {
+            "distrito": "Cuenca",
+            "ubigeo": "150706"
+          },
+          {
+            "distrito": "Huachupampa",
+            "ubigeo": "150707"
+          },
+          {
+            "distrito": "Huanza",
+            "ubigeo": "150708"
+          },
+          {
+            "distrito": "Huarochiri",
+            "ubigeo": "150709"
+          },
+          {
+            "distrito": "Lahuaytambo",
+            "ubigeo": "150710"
+          },
+          {
+            "distrito": "Langa",
+            "ubigeo": "150711"
+          },
+          {
+            "distrito": "Laraos",
+            "ubigeo": "150712"
+          },
+          {
+            "distrito": "Mariatana",
+            "ubigeo": "150713"
+          },
+          {
+            "distrito": "Matucana",
+            "ubigeo": "150701"
+          },
+          {
+            "distrito": "Ricardo Palma",
+            "ubigeo": "150714"
+          },
+          {
+            "distrito": "San Andres De Tupicocha",
+            "ubigeo": "150715"
+          },
+          {
+            "distrito": "San Antonio",
+            "ubigeo": "150716"
+          },
+          {
+            "distrito": "San Bartolome",
+            "ubigeo": "150717"
+          },
+          {
+            "distrito": "San Damian",
+            "ubigeo": "150718"
+          },
+          {
+            "distrito": "San Juan De Iris",
+            "ubigeo": "150719"
+          },
+          {
+            "distrito": "San Juan De Tantaranche",
+            "ubigeo": "150720"
+          },
+          {
+            "distrito": "San Lorenzo De Quinti",
+            "ubigeo": "150721"
+          },
+          {
+            "distrito": "San Mateo",
+            "ubigeo": "150722"
+          },
+          {
+            "distrito": "San Mateo De Otao",
+            "ubigeo": "150723"
+          },
+          {
+            "distrito": "San Pedro De Casta",
+            "ubigeo": "150724"
+          },
+          {
+            "distrito": "San Pedro De Huancayre",
+            "ubigeo": "150725"
+          },
+          {
+            "distrito": "Sangallaya",
+            "ubigeo": "150726"
+          },
+          {
+            "distrito": "Santa Cruz De Cocachacra",
+            "ubigeo": "150727"
+          },
+          {
+            "distrito": "Santa Eulalia",
+            "ubigeo": "150728"
+          },
+          {
+            "distrito": "Santiago De Anchucaya",
+            "ubigeo": "150729"
+          },
+          {
+            "distrito": "Santiago De Tuna",
+            "ubigeo": "150730"
+          },
+          {
+            "distrito": "Santo Domingo De Los Olleros",
+            "ubigeo": "150731"
+          },
+          {
+            "distrito": "Surco",
+            "ubigeo": "150732"
+          }
+        ]
+      },
+      {
+        "provincia": "Huaura",
+        "distritos": [
+          {
+            "distrito": "Ambar",
+            "ubigeo": "150802"
+          },
+          {
+            "distrito": "Caleta De Carquin",
+            "ubigeo": "150803"
+          },
+          {
+            "distrito": "Checras",
+            "ubigeo": "150804"
+          },
+          {
+            "distrito": "Huacho",
+            "ubigeo": "150801"
+          },
+          {
+            "distrito": "Hualmay",
+            "ubigeo": "150805"
+          },
+          {
+            "distrito": "Huaura",
+            "ubigeo": "150806"
+          },
+          {
+            "distrito": "Leoncio Prado",
+            "ubigeo": "150807"
+          },
+          {
+            "distrito": "Paccho",
+            "ubigeo": "150808"
+          },
+          {
+            "distrito": "Santa Leonor",
+            "ubigeo": "150809"
+          },
+          {
+            "distrito": "Santa Maria",
+            "ubigeo": "150810"
+          },
+          {
+            "distrito": "Sayan",
+            "ubigeo": "150811"
+          },
+          {
+            "distrito": "Vegueta",
+            "ubigeo": "150812"
+          }
+        ]
+      },
+      {
+        "provincia": "Lima",
+        "distritos": [
+          {
+            "distrito": "Ancon",
+            "ubigeo": "150102"
+          },
+          {
+            "distrito": "Ate",
+            "ubigeo": "150103"
+          },
+          {
+            "distrito": "Barranco",
+            "ubigeo": "150104"
+          },
+          {
+            "distrito": "Breña",
+            "ubigeo": "150105"
+          },
+          {
+            "distrito": "Carabayllo",
+            "ubigeo": "150106"
+          },
+          {
+            "distrito": "Chaclacayo",
+            "ubigeo": "150107"
+          },
+          {
+            "distrito": "Chorrillos",
+            "ubigeo": "150108"
+          },
+          {
+            "distrito": "Cieneguilla",
+            "ubigeo": "150109"
+          },
+          {
+            "distrito": "Comas",
+            "ubigeo": "150110"
+          },
+          {
+            "distrito": "El Agustino",
+            "ubigeo": "150111"
+          },
+          {
+            "distrito": "Independencia",
+            "ubigeo": "150112"
+          },
+          {
+            "distrito": "Jesus Maria",
+            "ubigeo": "150113"
+          },
+          {
+            "distrito": "La Molina",
+            "ubigeo": "150114"
+          },
+          {
+            "distrito": "La Victoria",
+            "ubigeo": "150115"
+          },
+          {
+            "distrito": "Lima",
+            "ubigeo": "150101"
+          },
+          {
+            "distrito": "Lince",
+            "ubigeo": "150116"
+          },
+          {
+            "distrito": "Los Olivos",
+            "ubigeo": "150117"
+          },
+          {
+            "distrito": "Lurigancho",
+            "ubigeo": "150118"
+          },
+          {
+            "distrito": "Lurin",
+            "ubigeo": "150119"
+          },
+          {
+            "distrito": "Magdalena Del Mar",
+            "ubigeo": "150120"
+          },
+          {
+            "distrito": "Miraflores",
+            "ubigeo": "150122"
+          },
+          {
+            "distrito": "Pachacamac",
+            "ubigeo": "150123"
+          },
+          {
+            "distrito": "Pucusana",
+            "ubigeo": "150124"
+          },
+          {
+            "distrito": "Pueblo Libre",
+            "ubigeo": "150121"
+          },
+          {
+            "distrito": "Puente Piedra",
+            "ubigeo": "150125"
+          },
+          {
+            "distrito": "Punta Hermosa",
+            "ubigeo": "150126"
+          },
+          {
+            "distrito": "Punta Negra",
+            "ubigeo": "150127"
+          },
+          {
+            "distrito": "Rimac",
+            "ubigeo": "150128"
+          },
+          {
+            "distrito": "San Bartolo",
+            "ubigeo": "150129"
+          },
+          {
+            "distrito": "San Borja",
+            "ubigeo": "150130"
+          },
+          {
+            "distrito": "San Isidro",
+            "ubigeo": "150131"
+          },
+          {
+            "distrito": "San Juan De Lurigancho",
+            "ubigeo": "150132"
+          },
+          {
+            "distrito": "San Juan De Miraflores",
+            "ubigeo": "150133"
+          },
+          {
+            "distrito": "San Luis",
+            "ubigeo": "150134"
+          },
+          {
+            "distrito": "San Martin De Porres",
+            "ubigeo": "150135"
+          },
+          {
+            "distrito": "San Miguel",
+            "ubigeo": "150136"
+          },
+          {
+            "distrito": "Santa Anita",
+            "ubigeo": "150137"
+          },
+          {
+            "distrito": "Santa Maria Del Mar",
+            "ubigeo": "150138"
+          },
+          {
+            "distrito": "Santa Rosa",
+            "ubigeo": "150139"
+          },
+          {
+            "distrito": "Santiago De Surco",
+            "ubigeo": "150140"
+          },
+          {
+            "distrito": "Surquillo",
+            "ubigeo": "150141"
+          },
+          {
+            "distrito": "Villa El Salvador",
+            "ubigeo": "150142"
+          },
+          {
+            "distrito": "Villa Maria Del Triunfo",
+            "ubigeo": "150143"
+          }
+        ]
+      },
+      {
+        "provincia": "Oyón",
+        "distritos": [
+          {
+            "distrito": "Andajes",
+            "ubigeo": "150902"
+          },
+          {
+            "distrito": "Caujul",
+            "ubigeo": "150903"
+          },
+          {
+            "distrito": "Cochamarca",
+            "ubigeo": "150904"
+          },
+          {
+            "distrito": "Navan",
+            "ubigeo": "150905"
+          },
+          {
+            "distrito": "Oyon",
+            "ubigeo": "150901"
+          },
+          {
+            "distrito": "Pachangara",
+            "ubigeo": "150906"
+          }
+        ]
+      },
+      {
+        "provincia": "Yauyos",
+        "distritos": [
+          {
+            "distrito": "Alis",
+            "ubigeo": "151002"
+          },
+          {
+            "distrito": "Allauca",
+            "ubigeo": "151003"
+          },
+          {
+            "distrito": "Ayaviri",
+            "ubigeo": "151004"
+          },
+          {
+            "distrito": "Azangaro",
+            "ubigeo": "151005"
+          },
+          {
+            "distrito": "Cacra",
+            "ubigeo": "151006"
+          },
+          {
+            "distrito": "Carania",
+            "ubigeo": "151007"
+          },
+          {
+            "distrito": "Catahuasi",
+            "ubigeo": "151008"
+          },
+          {
+            "distrito": "Chocos",
+            "ubigeo": "151009"
+          },
+          {
+            "distrito": "Cochas",
+            "ubigeo": "151010"
+          },
+          {
+            "distrito": "Colonia",
+            "ubigeo": "151011"
+          },
+          {
+            "distrito": "Hongos",
+            "ubigeo": "151012"
+          },
+          {
+            "distrito": "Huampara",
+            "ubigeo": "151013"
+          },
+          {
+            "distrito": "Huancaya",
+            "ubigeo": "151014"
+          },
+          {
+            "distrito": "Huangascar",
+            "ubigeo": "151015"
+          },
+          {
+            "distrito": "Huantan",
+            "ubigeo": "151016"
+          },
+          {
+            "distrito": "Huañec",
+            "ubigeo": "151017"
+          },
+          {
+            "distrito": "Laraos",
+            "ubigeo": "151018"
+          },
+          {
+            "distrito": "Lincha",
+            "ubigeo": "151019"
+          },
+          {
+            "distrito": "Madean",
+            "ubigeo": "151020"
+          },
+          {
+            "distrito": "Miraflores",
+            "ubigeo": "151021"
+          },
+          {
+            "distrito": "Omas",
+            "ubigeo": "151022"
+          },
+          {
+            "distrito": "Putinza",
+            "ubigeo": "151023"
+          },
+          {
+            "distrito": "Quinches",
+            "ubigeo": "151024"
+          },
+          {
+            "distrito": "Quinocay",
+            "ubigeo": "151025"
+          },
+          {
+            "distrito": "San Joaquin",
+            "ubigeo": "151026"
+          },
+          {
+            "distrito": "San Pedro De Pilas",
+            "ubigeo": "151027"
+          },
+          {
+            "distrito": "Tanta",
+            "ubigeo": "151028"
+          },
+          {
+            "distrito": "Tauripampa",
+            "ubigeo": "151029"
+          },
+          {
+            "distrito": "Tomas",
+            "ubigeo": "151030"
+          },
+          {
+            "distrito": "Tupe",
+            "ubigeo": "151031"
+          },
+          {
+            "distrito": "Viñac",
+            "ubigeo": "151032"
+          },
+          {
+            "distrito": "Vitis",
+            "ubigeo": "151033"
+          },
+          {
+            "distrito": "Yauyos",
+            "ubigeo": "151001"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "departamento": "Loreto",
+    "provincias": [
+      {
+        "provincia": "Alto Amazonas",
+        "distritos": [
+          {
+            "distrito": "Balsapuerto",
+            "ubigeo": "160202"
+          },
+          {
+            "distrito": "Jeberos",
+            "ubigeo": "160205"
+          },
+          {
+            "distrito": "Lagunas",
+            "ubigeo": "160206"
+          },
+          {
+            "distrito": "Santa Cruz",
+            "ubigeo": "160210"
+          },
+          {
+            "distrito": "Teniente Cesar Lopez Rojas",
+            "ubigeo": "160211"
+          },
+          {
+            "distrito": "Yurimaguas",
+            "ubigeo": "160201"
+          }
+        ]
+      },
+      {
+        "provincia": "Datem Del Marañón",
+        "distritos": [
+          {
+            "distrito": "Andoas",
+            "ubigeo": "160706"
+          },
+          {
+            "distrito": "Barranca",
+            "ubigeo": "160701"
+          },
+          {
+            "distrito": "Cahuapanas",
+            "ubigeo": "160702"
+          },
+          {
+            "distrito": "Manseriche",
+            "ubigeo": "160703"
+          },
+          {
+            "distrito": "Morona",
+            "ubigeo": "160704"
+          },
+          {
+            "distrito": "Pastaza",
+            "ubigeo": "160705"
+          }
+        ]
+      },
+      {
+        "provincia": "Loreto",
+        "distritos": [
+          {
+            "distrito": "Nauta",
+            "ubigeo": "160301"
+          },
+          {
+            "distrito": "Parinari",
+            "ubigeo": "160302"
+          },
+          {
+            "distrito": "Tigre",
+            "ubigeo": "160303"
+          },
+          {
+            "distrito": "Trompeteros",
+            "ubigeo": "160304"
+          },
+          {
+            "distrito": "Urarinas",
+            "ubigeo": "160305"
+          }
+        ]
+      },
+      {
+        "provincia": "Mariscal Ramón Castilla",
+        "distritos": [
+          {
+            "distrito": "Pebas",
+            "ubigeo": "160402"
+          },
+          {
+            "distrito": "Ramon Castilla",
+            "ubigeo": "160401"
+          },
+          {
+            "distrito": "San Pablo",
+            "ubigeo": "160404"
+          },
+          {
+            "distrito": "Yavari",
+            "ubigeo": "160403"
+          }
+        ]
+      },
+      {
+        "provincia": "Maynas",
+        "distritos": [
+          {
+            "distrito": "Alto Nanay",
+            "ubigeo": "160102"
+          },
+          {
+            "distrito": "Belén",
+            "ubigeo": "160112"
+          },
+          {
+            "distrito": "Fernando Lores",
+            "ubigeo": "160103"
+          },
+          {
+            "distrito": "Indiana",
+            "ubigeo": "160104"
+          },
+          {
+            "distrito": "Iquitos",
+            "ubigeo": "160101"
+          },
+          {
+            "distrito": "Las Amazonas",
+            "ubigeo": "160105"
+          },
+          {
+            "distrito": "Mazan",
+            "ubigeo": "160106"
+          },
+          {
+            "distrito": "Napo",
+            "ubigeo": "160107"
+          },
+          {
+            "distrito": "Punchana",
+            "ubigeo": "160108"
+          },
+          {
+            "distrito": "San Juan Bautista",
+            "ubigeo": "160113"
+          },
+          {
+            "distrito": "Torres Causana",
+            "ubigeo": "160110"
+          }
+        ]
+      },
+      {
+        "provincia": "Putumayo",
+        "distritos": [
+          {
+            "distrito": "Putumayo",
+            "ubigeo": "160801"
+          },
+          {
+            "distrito": "Rosa Panduro",
+            "ubigeo": "160802"
+          },
+          {
+            "distrito": "Teniente Manuel Clavero",
+            "ubigeo": "160803"
+          },
+          {
+            "distrito": "Yaguas",
+            "ubigeo": "160804"
+          }
+        ]
+      },
+      {
+        "provincia": "Requena",
+        "distritos": [
+          {
+            "distrito": "Alto Tapiche",
+            "ubigeo": "160502"
+          },
+          {
+            "distrito": "Capelo",
+            "ubigeo": "160503"
+          },
+          {
+            "distrito": "Emilio San Martin",
+            "ubigeo": "160504"
+          },
+          {
+            "distrito": "Jenaro Herrera",
+            "ubigeo": "160510"
+          },
+          {
+            "distrito": "Maquia",
+            "ubigeo": "160505"
+          },
+          {
+            "distrito": "Puinahua",
+            "ubigeo": "160506"
+          },
+          {
+            "distrito": "Requena",
+            "ubigeo": "160501"
+          },
+          {
+            "distrito": "Saquena",
+            "ubigeo": "160507"
+          },
+          {
+            "distrito": "Soplin",
+            "ubigeo": "160508"
+          },
+          {
+            "distrito": "Tapiche",
+            "ubigeo": "160509"
+          },
+          {
+            "distrito": "Yaquerana",
+            "ubigeo": "160511"
+          }
+        ]
+      },
+      {
+        "provincia": "Ucayali",
+        "distritos": [
+          {
+            "distrito": "Contamana",
+            "ubigeo": "160601"
+          },
+          {
+            "distrito": "Inahuaya",
+            "ubigeo": "160602"
+          },
+          {
+            "distrito": "Padre Marquez",
+            "ubigeo": "160603"
+          },
+          {
+            "distrito": "Pampa Hermosa",
+            "ubigeo": "160604"
+          },
+          {
+            "distrito": "Sarayacu",
+            "ubigeo": "160605"
+          },
+          {
+            "distrito": "Vargas Guerra",
+            "ubigeo": "160606"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "departamento": "Madre De Dios",
+    "provincias": [
+      {
+        "provincia": "Manu",
+        "distritos": [
+          {
+            "distrito": "Fitzcarrald",
+            "ubigeo": "170202"
+          },
+          {
+            "distrito": "Huepetuhe",
+            "ubigeo": "170204"
+          },
+          {
+            "distrito": "Madre De Dios",
+            "ubigeo": "170203"
+          },
+          {
+            "distrito": "Manu",
+            "ubigeo": "170201"
+          }
+        ]
+      },
+      {
+        "provincia": "Tahuamanu",
+        "distritos": [
+          {
+            "distrito": "Iberia",
+            "ubigeo": "170302"
+          },
+          {
+            "distrito": "Iñapari",
+            "ubigeo": "170301"
+          },
+          {
+            "distrito": "Tahuamanu",
+            "ubigeo": "170303"
+          }
+        ]
+      },
+      {
+        "provincia": "Tambopata",
+        "distritos": [
+          {
+            "distrito": "Inambari",
+            "ubigeo": "170102"
+          },
+          {
+            "distrito": "Laberinto",
+            "ubigeo": "170104"
+          },
+          {
+            "distrito": "Las Piedras",
+            "ubigeo": "170103"
+          },
+          {
+            "distrito": "Tambopata",
+            "ubigeo": "170101"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "departamento": "Moquegua",
+    "provincias": [
+      {
+        "provincia": "General Sánchez Cerro",
+        "distritos": [
+          {
+            "distrito": "Chojata",
+            "ubigeo": "180202"
+          },
+          {
+            "distrito": "Coalaque",
+            "ubigeo": "180203"
+          },
+          {
+            "distrito": "Ichuña",
+            "ubigeo": "180204"
+          },
+          {
+            "distrito": "La Capilla",
+            "ubigeo": "180205"
+          },
+          {
+            "distrito": "Lloque",
+            "ubigeo": "180206"
+          },
+          {
+            "distrito": "Matalaque",
+            "ubigeo": "180207"
+          },
+          {
+            "distrito": "Omate",
+            "ubigeo": "180201"
+          },
+          {
+            "distrito": "Puquina",
+            "ubigeo": "180208"
+          },
+          {
+            "distrito": "Quinistaquillas",
+            "ubigeo": "180209"
+          },
+          {
+            "distrito": "Ubinas",
+            "ubigeo": "180210"
+          },
+          {
+            "distrito": "Yunga",
+            "ubigeo": "180211"
+          }
+        ]
+      },
+      {
+        "provincia": "Ilo",
+        "distritos": [
+          {
+            "distrito": "El Algarrobal",
+            "ubigeo": "180302"
+          },
+          {
+            "distrito": "Ilo",
+            "ubigeo": "180301"
+          },
+          {
+            "distrito": "Pacocha",
+            "ubigeo": "180303"
+          }
+        ]
+      },
+      {
+        "provincia": "Mariscal Nieto",
+        "distritos": [
+          {
+            "distrito": "Carumas",
+            "ubigeo": "180102"
+          },
+          {
+            "distrito": "Cuchumbaya",
+            "ubigeo": "180103"
+          },
+          {
+            "distrito": "Moquegua",
+            "ubigeo": "180101"
+          },
+          {
+            "distrito": "Samegua",
+            "ubigeo": "180104"
+          },
+          {
+            "distrito": "San Cristobal",
+            "ubigeo": "180105"
+          },
+          {
+            "distrito": "Torata",
+            "ubigeo": "180106"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "departamento": "Pasco",
+    "provincias": [
+      {
+        "provincia": "Daniel Alcides Carrión",
+        "distritos": [
+          {
+            "distrito": "Chacayan",
+            "ubigeo": "190202"
+          },
+          {
+            "distrito": "Goyllarisquizga",
+            "ubigeo": "190203"
+          },
+          {
+            "distrito": "Paucar",
+            "ubigeo": "190204"
+          },
+          {
+            "distrito": "San Pedro De Pillao",
+            "ubigeo": "190205"
+          },
+          {
+            "distrito": "Santa Ana De Tusi",
+            "ubigeo": "190206"
+          },
+          {
+            "distrito": "Tapuc",
+            "ubigeo": "190207"
+          },
+          {
+            "distrito": "Vilcabamba",
+            "ubigeo": "190208"
+          },
+          {
+            "distrito": "Yanahuanca",
+            "ubigeo": "190201"
+          }
+        ]
+      },
+      {
+        "provincia": "Oxapampa",
+        "distritos": [
+          {
+            "distrito": "Chontabamba",
+            "ubigeo": "190302"
+          },
+          {
+            "distrito": "Constitución",
+            "ubigeo": "190308"
+          },
+          {
+            "distrito": "Huancabamba",
+            "ubigeo": "190303"
+          },
+          {
+            "distrito": "Oxapampa",
+            "ubigeo": "190301"
+          },
+          {
+            "distrito": "Palcazu",
+            "ubigeo": "190304"
+          },
+          {
+            "distrito": "Pozuzo",
+            "ubigeo": "190305"
+          },
+          {
+            "distrito": "Puerto Bermudez",
+            "ubigeo": "190306"
+          },
+          {
+            "distrito": "Villa Rica",
+            "ubigeo": "190307"
+          }
+        ]
+      },
+      {
+        "provincia": "Pasco",
+        "distritos": [
+          {
+            "distrito": "Chaupimarca",
+            "ubigeo": "190101"
+          },
+          {
+            "distrito": "Huachon",
+            "ubigeo": "190102"
+          },
+          {
+            "distrito": "Huariaca",
+            "ubigeo": "190103"
+          },
+          {
+            "distrito": "Huayllay",
+            "ubigeo": "190104"
+          },
+          {
+            "distrito": "Ninacaca",
+            "ubigeo": "190105"
+          },
+          {
+            "distrito": "Pallanchacra",
+            "ubigeo": "190106"
+          },
+          {
+            "distrito": "Paucartambo",
+            "ubigeo": "190107"
+          },
+          {
+            "distrito": "San Francisco De Asis De Yarusyacan",
+            "ubigeo": "190108"
+          },
+          {
+            "distrito": "Simon Bolivar",
+            "ubigeo": "190109"
+          },
+          {
+            "distrito": "Ticlacayan",
+            "ubigeo": "190110"
+          },
+          {
+            "distrito": "Tinyahuarco",
+            "ubigeo": "190111"
+          },
+          {
+            "distrito": "Vicco",
+            "ubigeo": "190112"
+          },
+          {
+            "distrito": "Yanacancha",
+            "ubigeo": "190113"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "departamento": "Piura",
+    "provincias": [
+      {
+        "provincia": "Ayabaca",
+        "distritos": [
+          {
+            "distrito": "Ayabaca",
+            "ubigeo": "200201"
+          },
+          {
+            "distrito": "Frias",
+            "ubigeo": "200202"
+          },
+          {
+            "distrito": "Jilili",
+            "ubigeo": "200203"
+          },
+          {
+            "distrito": "Lagunas",
+            "ubigeo": "200204"
+          },
+          {
+            "distrito": "Montero",
+            "ubigeo": "200205"
+          },
+          {
+            "distrito": "Pacaipampa",
+            "ubigeo": "200206"
+          },
+          {
+            "distrito": "Paimas",
+            "ubigeo": "200207"
+          },
+          {
+            "distrito": "Sapillica",
+            "ubigeo": "200208"
+          },
+          {
+            "distrito": "Sicchez",
+            "ubigeo": "200209"
+          },
+          {
+            "distrito": "Suyo",
+            "ubigeo": "200210"
+          }
+        ]
+      },
+      {
+        "provincia": "Huancabamba",
+        "distritos": [
+          {
+            "distrito": "Canchaque",
+            "ubigeo": "200302"
+          },
+          {
+            "distrito": "El Carmen De La Frontera",
+            "ubigeo": "200303"
+          },
+          {
+            "distrito": "Huancabamba",
+            "ubigeo": "200301"
+          },
+          {
+            "distrito": "Huarmaca",
+            "ubigeo": "200304"
+          },
+          {
+            "distrito": "Lalaquiz",
+            "ubigeo": "200305"
+          },
+          {
+            "distrito": "San Miguel De El Faique",
+            "ubigeo": "200306"
+          },
+          {
+            "distrito": "Sondor",
+            "ubigeo": "200307"
+          },
+          {
+            "distrito": "Sondorillo",
+            "ubigeo": "200308"
+          }
+        ]
+      },
+      {
+        "provincia": "Morropón",
+        "distritos": [
+          {
+            "distrito": "Buenos Aires",
+            "ubigeo": "200402"
+          },
+          {
+            "distrito": "Chalaco",
+            "ubigeo": "200403"
+          },
+          {
+            "distrito": "Chulucanas",
+            "ubigeo": "200401"
+          },
+          {
+            "distrito": "La Matanza",
+            "ubigeo": "200404"
+          },
+          {
+            "distrito": "Morropon",
+            "ubigeo": "200405"
+          },
+          {
+            "distrito": "Salitral",
+            "ubigeo": "200406"
+          },
+          {
+            "distrito": "San Juan De Bigote",
+            "ubigeo": "200407"
+          },
+          {
+            "distrito": "Santa Catalina De Mossa",
+            "ubigeo": "200408"
+          },
+          {
+            "distrito": "Santo Domingo",
+            "ubigeo": "200409"
+          },
+          {
+            "distrito": "Yamango",
+            "ubigeo": "200410"
+          }
+        ]
+      },
+      {
+        "provincia": "Paita",
+        "distritos": [
+          {
+            "distrito": "Amotape",
+            "ubigeo": "200502"
+          },
+          {
+            "distrito": "Arenal",
+            "ubigeo": "200503"
+          },
+          {
+            "distrito": "Colan",
+            "ubigeo": "200504"
+          },
+          {
+            "distrito": "La Huaca",
+            "ubigeo": "200505"
+          },
+          {
+            "distrito": "Paita",
+            "ubigeo": "200501"
+          },
+          {
+            "distrito": "Tamarindo",
+            "ubigeo": "200506"
+          },
+          {
+            "distrito": "Vichayal",
+            "ubigeo": "200507"
+          }
+        ]
+      },
+      {
+        "provincia": "Piura",
+        "distritos": [
+          {
+            "distrito": "Castilla",
+            "ubigeo": "200104"
+          },
+          {
+            "distrito": "Catacaos",
+            "ubigeo": "200105"
+          },
+          {
+            "distrito": "Cura Mori",
+            "ubigeo": "200107"
+          },
+          {
+            "distrito": "El Tallan",
+            "ubigeo": "200108"
+          },
+          {
+            "distrito": "La Arena",
+            "ubigeo": "200109"
+          },
+          {
+            "distrito": "La Union",
+            "ubigeo": "200110"
+          },
+          {
+            "distrito": "Las Lomas",
+            "ubigeo": "200111"
+          },
+          {
+            "distrito": "Piura",
+            "ubigeo": "200101"
+          },
+          {
+            "distrito": "Tambo Grande",
+            "ubigeo": "200114"
+          },
+          {
+            "distrito": "Veintiseis De Octubre",
+            "ubigeo": "200115"
+          }
+        ]
+      },
+      {
+        "provincia": "Sechura",
+        "distritos": [
+          {
+            "distrito": "Bellavista De La Union",
+            "ubigeo": "200802"
+          },
+          {
+            "distrito": "Bernal",
+            "ubigeo": "200803"
+          },
+          {
+            "distrito": "Cristo Nos Valga",
+            "ubigeo": "200804"
+          },
+          {
+            "distrito": "Rinconada Llicuar",
+            "ubigeo": "200806"
+          },
+          {
+            "distrito": "Sechura",
+            "ubigeo": "200801"
+          },
+          {
+            "distrito": "Vice",
+            "ubigeo": "200805"
+          }
+        ]
+      },
+      {
+        "provincia": "Sullana",
+        "distritos": [
+          {
+            "distrito": "Bellavista",
+            "ubigeo": "200602"
+          },
+          {
+            "distrito": "Ignacio Escudero",
+            "ubigeo": "200603"
+          },
+          {
+            "distrito": "Lancones",
+            "ubigeo": "200604"
+          },
+          {
+            "distrito": "Marcavelica",
+            "ubigeo": "200605"
+          },
+          {
+            "distrito": "Miguel Checa",
+            "ubigeo": "200606"
+          },
+          {
+            "distrito": "Querecotillo",
+            "ubigeo": "200607"
+          },
+          {
+            "distrito": "Salitral",
+            "ubigeo": "200608"
+          },
+          {
+            "distrito": "Sullana",
+            "ubigeo": "200601"
+          }
+        ]
+      },
+      {
+        "provincia": "Talara",
+        "distritos": [
+          {
+            "distrito": "El Alto",
+            "ubigeo": "200702"
+          },
+          {
+            "distrito": "La Brea",
+            "ubigeo": "200703"
+          },
+          {
+            "distrito": "Lobitos",
+            "ubigeo": "200704"
+          },
+          {
+            "distrito": "Los Organos",
+            "ubigeo": "200705"
+          },
+          {
+            "distrito": "Mancora",
+            "ubigeo": "200706"
+          },
+          {
+            "distrito": "Pariñas",
+            "ubigeo": "200701"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "departamento": "Puno",
+    "provincias": [
+      {
+        "provincia": "Azángaro",
+        "distritos": [
+          {
+            "distrito": "Achaya",
+            "ubigeo": "210202"
+          },
+          {
+            "distrito": "Arapa",
+            "ubigeo": "210203"
+          },
+          {
+            "distrito": "Asillo",
+            "ubigeo": "210204"
+          },
+          {
+            "distrito": "Azangaro",
+            "ubigeo": "210201"
+          },
+          {
+            "distrito": "Caminaca",
+            "ubigeo": "210205"
+          },
+          {
+            "distrito": "Chupa",
+            "ubigeo": "210206"
+          },
+          {
+            "distrito": "Jose Domingo Choquehuanca",
+            "ubigeo": "210207"
+          },
+          {
+            "distrito": "Muñani",
+            "ubigeo": "210208"
+          },
+          {
+            "distrito": "Potoni",
+            "ubigeo": "210209"
+          },
+          {
+            "distrito": "Saman",
+            "ubigeo": "210210"
+          },
+          {
+            "distrito": "San Anton",
+            "ubigeo": "210211"
+          },
+          {
+            "distrito": "San Jose",
+            "ubigeo": "210212"
+          },
+          {
+            "distrito": "San Juan De Salinas",
+            "ubigeo": "210213"
+          },
+          {
+            "distrito": "Santiago De Pupuja",
+            "ubigeo": "210214"
+          },
+          {
+            "distrito": "Tirapata",
+            "ubigeo": "210215"
+          }
+        ]
+      },
+      {
+        "provincia": "Carabaya",
+        "distritos": [
+          {
+            "distrito": "Ajoyani",
+            "ubigeo": "210302"
+          },
+          {
+            "distrito": "Ayapata",
+            "ubigeo": "210303"
+          },
+          {
+            "distrito": "Coasa",
+            "ubigeo": "210304"
+          },
+          {
+            "distrito": "Corani",
+            "ubigeo": "210305"
+          },
+          {
+            "distrito": "Crucero",
+            "ubigeo": "210306"
+          },
+          {
+            "distrito": "Ituata",
+            "ubigeo": "210307"
+          },
+          {
+            "distrito": "Macusani",
+            "ubigeo": "210301"
+          },
+          {
+            "distrito": "Ollachea",
+            "ubigeo": "210308"
+          },
+          {
+            "distrito": "San Gaban",
+            "ubigeo": "210309"
+          },
+          {
+            "distrito": "Usicayos",
+            "ubigeo": "210310"
+          }
+        ]
+      },
+      {
+        "provincia": "Chucuito",
+        "distritos": [
+          {
+            "distrito": "Desaguadero",
+            "ubigeo": "210402"
+          },
+          {
+            "distrito": "Huacullani",
+            "ubigeo": "210403"
+          },
+          {
+            "distrito": "Juli",
+            "ubigeo": "210401"
+          },
+          {
+            "distrito": "Kelluyo",
+            "ubigeo": "210404"
+          },
+          {
+            "distrito": "Pisacoma",
+            "ubigeo": "210405"
+          },
+          {
+            "distrito": "Pomata",
+            "ubigeo": "210406"
+          },
+          {
+            "distrito": "Zepita",
+            "ubigeo": "210407"
+          }
+        ]
+      },
+      {
+        "provincia": "El Collao",
+        "distritos": [
+          {
+            "distrito": "Capazo",
+            "ubigeo": "210502"
+          },
+          {
+            "distrito": "Conduriri",
+            "ubigeo": "210505"
+          },
+          {
+            "distrito": "Ilave",
+            "ubigeo": "210501"
+          },
+          {
+            "distrito": "Pilcuyo",
+            "ubigeo": "210503"
+          },
+          {
+            "distrito": "Santa Rosa",
+            "ubigeo": "210504"
+          }
+        ]
+      },
+      {
+        "provincia": "Huancané",
+        "distritos": [
+          {
+            "distrito": "Cojata",
+            "ubigeo": "210602"
+          },
+          {
+            "distrito": "Huancane",
+            "ubigeo": "210601"
+          },
+          {
+            "distrito": "Huatasani",
+            "ubigeo": "210603"
+          },
+          {
+            "distrito": "Inchupalla",
+            "ubigeo": "210604"
+          },
+          {
+            "distrito": "Pusi",
+            "ubigeo": "210605"
+          },
+          {
+            "distrito": "Rosaspata",
+            "ubigeo": "210606"
+          },
+          {
+            "distrito": "Taraco",
+            "ubigeo": "210607"
+          },
+          {
+            "distrito": "Vilque Chico",
+            "ubigeo": "210608"
+          }
+        ]
+      },
+      {
+        "provincia": "Lampa",
+        "distritos": [
+          {
+            "distrito": "Cabanilla",
+            "ubigeo": "210702"
+          },
+          {
+            "distrito": "Calapuja",
+            "ubigeo": "210703"
+          },
+          {
+            "distrito": "Lampa",
+            "ubigeo": "210701"
+          },
+          {
+            "distrito": "Nicasio",
+            "ubigeo": "210704"
+          },
+          {
+            "distrito": "Ocuviri",
+            "ubigeo": "210705"
+          },
+          {
+            "distrito": "Palca",
+            "ubigeo": "210706"
+          },
+          {
+            "distrito": "Paratia",
+            "ubigeo": "210707"
+          },
+          {
+            "distrito": "Pucara",
+            "ubigeo": "210708"
+          },
+          {
+            "distrito": "Santa Lucia",
+            "ubigeo": "210709"
+          },
+          {
+            "distrito": "Vilavila",
+            "ubigeo": "210710"
+          }
+        ]
+      },
+      {
+        "provincia": "Melgar",
+        "distritos": [
+          {
+            "distrito": "Antauta",
+            "ubigeo": "210802"
+          },
+          {
+            "distrito": "Ayaviri",
+            "ubigeo": "210801"
+          },
+          {
+            "distrito": "Cupi",
+            "ubigeo": "210803"
+          },
+          {
+            "distrito": "Llalli",
+            "ubigeo": "210804"
+          },
+          {
+            "distrito": "Macari",
+            "ubigeo": "210805"
+          },
+          {
+            "distrito": "Nuñoa",
+            "ubigeo": "210806"
+          },
+          {
+            "distrito": "Orurillo",
+            "ubigeo": "210807"
+          },
+          {
+            "distrito": "Santa Rosa",
+            "ubigeo": "210808"
+          },
+          {
+            "distrito": "Umachiri",
+            "ubigeo": "210809"
+          }
+        ]
+      },
+      {
+        "provincia": "Moho",
+        "distritos": [
+          {
+            "distrito": "Conima",
+            "ubigeo": "210902"
+          },
+          {
+            "distrito": "Huayrapata",
+            "ubigeo": "210903"
+          },
+          {
+            "distrito": "Moho",
+            "ubigeo": "210901"
+          },
+          {
+            "distrito": "Tilali",
+            "ubigeo": "210904"
+          }
+        ]
+      },
+      {
+        "provincia": "Puno",
+        "distritos": [
+          {
+            "distrito": "Acora",
+            "ubigeo": "210102"
+          },
+          {
+            "distrito": "Amantani",
+            "ubigeo": "210103"
+          },
+          {
+            "distrito": "Atuncolla",
+            "ubigeo": "210104"
+          },
+          {
+            "distrito": "Capachica",
+            "ubigeo": "210105"
+          },
+          {
+            "distrito": "Chucuito",
+            "ubigeo": "210106"
+          },
+          {
+            "distrito": "Coata",
+            "ubigeo": "210107"
+          },
+          {
+            "distrito": "Huata",
+            "ubigeo": "210108"
+          },
+          {
+            "distrito": "Mañazo",
+            "ubigeo": "210109"
+          },
+          {
+            "distrito": "Paucarcolla",
+            "ubigeo": "210110"
+          },
+          {
+            "distrito": "Pichacani",
+            "ubigeo": "210111"
+          },
+          {
+            "distrito": "Plateria",
+            "ubigeo": "210112"
+          },
+          {
+            "distrito": "Puno",
+            "ubigeo": "210101"
+          },
+          {
+            "distrito": "San Antonio",
+            "ubigeo": "210113"
+          },
+          {
+            "distrito": "Tiquillaca",
+            "ubigeo": "210114"
+          },
+          {
+            "distrito": "Vilque",
+            "ubigeo": "210115"
+          }
+        ]
+      },
+      {
+        "provincia": "San Antonio De Putina",
+        "distritos": [
+          {
+            "distrito": "Ananea",
+            "ubigeo": "211002"
+          },
+          {
+            "distrito": "Pedro Vilca Apaza",
+            "ubigeo": "211003"
+          },
+          {
+            "distrito": "Putina",
+            "ubigeo": "211001"
+          },
+          {
+            "distrito": "Quilcapuncu",
+            "ubigeo": "211004"
+          },
+          {
+            "distrito": "Sina",
+            "ubigeo": "211005"
+          }
+        ]
+      },
+      {
+        "provincia": "San Román",
+        "distritos": [
+          {
+            "distrito": "Cabana",
+            "ubigeo": "211102"
+          },
+          {
+            "distrito": "Cabanillas",
+            "ubigeo": "211103"
+          },
+          {
+            "distrito": "Caracoto",
+            "ubigeo": "211104"
+          },
+          {
+            "distrito": "Juliaca",
+            "ubigeo": "211101"
+          }
+        ]
+      },
+      {
+        "provincia": "Sandia",
+        "distritos": [
+          {
+            "distrito": "Alto Inambari",
+            "ubigeo": "211209"
+          },
+          {
+            "distrito": "Cuyocuyo",
+            "ubigeo": "211202"
+          },
+          {
+            "distrito": "Limbani",
+            "ubigeo": "211203"
+          },
+          {
+            "distrito": "Patambuco",
+            "ubigeo": "211204"
+          },
+          {
+            "distrito": "Phara",
+            "ubigeo": "211205"
+          },
+          {
+            "distrito": "Quiaca",
+            "ubigeo": "211206"
+          },
+          {
+            "distrito": "San Juan Del Oro",
+            "ubigeo": "211207"
+          },
+          {
+            "distrito": "San Pedro De Putina Punco",
+            "ubigeo": "211210"
+          },
+          {
+            "distrito": "Sandia",
+            "ubigeo": "211201"
+          },
+          {
+            "distrito": "Yanahuaya",
+            "ubigeo": "211208"
+          }
+        ]
+      },
+      {
+        "provincia": "Yunguyo",
+        "distritos": [
+          {
+            "distrito": "Anapia",
+            "ubigeo": "211302"
+          },
+          {
+            "distrito": "Copani",
+            "ubigeo": "211303"
+          },
+          {
+            "distrito": "Cuturapi",
+            "ubigeo": "211304"
+          },
+          {
+            "distrito": "Ollaraya",
+            "ubigeo": "211305"
+          },
+          {
+            "distrito": "Tinicachi",
+            "ubigeo": "211306"
+          },
+          {
+            "distrito": "Unicachi",
+            "ubigeo": "211307"
+          },
+          {
+            "distrito": "Yunguyo",
+            "ubigeo": "211301"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "departamento": "San Martín",
+    "provincias": [
+      {
+        "provincia": "Bellavista",
+        "distritos": [
+          {
+            "distrito": "Alto Biavo",
+            "ubigeo": "220202"
+          },
+          {
+            "distrito": "Bajo Biavo",
+            "ubigeo": "220203"
+          },
+          {
+            "distrito": "Bellavista",
+            "ubigeo": "220201"
+          },
+          {
+            "distrito": "Huallaga",
+            "ubigeo": "220204"
+          },
+          {
+            "distrito": "San Pablo",
+            "ubigeo": "220205"
+          },
+          {
+            "distrito": "San Rafael",
+            "ubigeo": "220206"
+          }
+        ]
+      },
+      {
+        "provincia": "El Dorado",
+        "distritos": [
+          {
+            "distrito": "Agua Blanca",
+            "ubigeo": "220302"
+          },
+          {
+            "distrito": "San Jose De Sisa",
+            "ubigeo": "220301"
+          },
+          {
+            "distrito": "San Martin",
+            "ubigeo": "220303"
+          },
+          {
+            "distrito": "Santa Rosa",
+            "ubigeo": "220304"
+          },
+          {
+            "distrito": "Shatoja",
+            "ubigeo": "220305"
+          }
+        ]
+      },
+      {
+        "provincia": "Huallaga",
+        "distritos": [
+          {
+            "distrito": "Alto Saposoa",
+            "ubigeo": "220402"
+          },
+          {
+            "distrito": "El Eslabon",
+            "ubigeo": "220403"
+          },
+          {
+            "distrito": "Piscoyacu",
+            "ubigeo": "220404"
+          },
+          {
+            "distrito": "Sacanche",
+            "ubigeo": "220405"
+          },
+          {
+            "distrito": "Saposoa",
+            "ubigeo": "220401"
+          },
+          {
+            "distrito": "Tingo De Saposoa",
+            "ubigeo": "220406"
+          }
+        ]
+      },
+      {
+        "provincia": "Lamas",
+        "distritos": [
+          {
+            "distrito": "Alonso De Alvarado",
+            "ubigeo": "220502"
+          },
+          {
+            "distrito": "Barranquita",
+            "ubigeo": "220503"
+          },
+          {
+            "distrito": "Caynarachi",
+            "ubigeo": "220504"
+          },
+          {
+            "distrito": "Cuñumbuqui",
+            "ubigeo": "220505"
+          },
+          {
+            "distrito": "Lamas",
+            "ubigeo": "220501"
+          },
+          {
+            "distrito": "Pinto Recodo",
+            "ubigeo": "220506"
+          },
+          {
+            "distrito": "Rumisapa",
+            "ubigeo": "220507"
+          },
+          {
+            "distrito": "San Roque De Cumbaza",
+            "ubigeo": "220508"
+          },
+          {
+            "distrito": "Shanao",
+            "ubigeo": "220509"
+          },
+          {
+            "distrito": "Tabalosos",
+            "ubigeo": "220510"
+          },
+          {
+            "distrito": "Zapatero",
+            "ubigeo": "220511"
+          }
+        ]
+      },
+      {
+        "provincia": "Mariscal Cáceres",
+        "distritos": [
+          {
+            "distrito": "Campanilla",
+            "ubigeo": "220602"
+          },
+          {
+            "distrito": "Huicungo",
+            "ubigeo": "220603"
+          },
+          {
+            "distrito": "Juanjui",
+            "ubigeo": "220601"
+          },
+          {
+            "distrito": "Pachiza",
+            "ubigeo": "220604"
+          },
+          {
+            "distrito": "Pajarillo",
+            "ubigeo": "220605"
+          }
+        ]
+      },
+      {
+        "provincia": "Moyobamba",
+        "distritos": [
+          {
+            "distrito": "Calzada",
+            "ubigeo": "220102"
+          },
+          {
+            "distrito": "Habana",
+            "ubigeo": "220103"
+          },
+          {
+            "distrito": "Jepelacio",
+            "ubigeo": "220104"
+          },
+          {
+            "distrito": "Moyobamba",
+            "ubigeo": "220101"
+          },
+          {
+            "distrito": "Soritor",
+            "ubigeo": "220105"
+          },
+          {
+            "distrito": "Yantalo",
+            "ubigeo": "220106"
+          }
+        ]
+      },
+      {
+        "provincia": "Picota",
+        "distritos": [
+          {
+            "distrito": "Buenos Aires",
+            "ubigeo": "220702"
+          },
+          {
+            "distrito": "Caspisapa",
+            "ubigeo": "220703"
+          },
+          {
+            "distrito": "Picota",
+            "ubigeo": "220701"
+          },
+          {
+            "distrito": "Pilluana",
+            "ubigeo": "220704"
+          },
+          {
+            "distrito": "Pucacaca",
+            "ubigeo": "220705"
+          },
+          {
+            "distrito": "San Cristobal",
+            "ubigeo": "220706"
+          },
+          {
+            "distrito": "San Hilarion",
+            "ubigeo": "220707"
+          },
+          {
+            "distrito": "Shamboyacu",
+            "ubigeo": "220708"
+          },
+          {
+            "distrito": "Tingo De Ponasa",
+            "ubigeo": "220709"
+          },
+          {
+            "distrito": "Tres Unidos",
+            "ubigeo": "220710"
+          }
+        ]
+      },
+      {
+        "provincia": "Rioja",
+        "distritos": [
+          {
+            "distrito": "Awajun",
+            "ubigeo": "220802"
+          },
+          {
+            "distrito": "Elias Soplin Vargas",
+            "ubigeo": "220803"
+          },
+          {
+            "distrito": "Nueva Cajamarca",
+            "ubigeo": "220804"
+          },
+          {
+            "distrito": "Pardo Miguel",
+            "ubigeo": "220805"
+          },
+          {
+            "distrito": "Posic",
+            "ubigeo": "220806"
+          },
+          {
+            "distrito": "Rioja",
+            "ubigeo": "220801"
+          },
+          {
+            "distrito": "San Fernando",
+            "ubigeo": "220807"
+          },
+          {
+            "distrito": "Yorongos",
+            "ubigeo": "220808"
+          },
+          {
+            "distrito": "Yuracyacu",
+            "ubigeo": "220809"
+          }
+        ]
+      },
+      {
+        "provincia": "San Martín",
+        "distritos": [
+          {
+            "distrito": "Alberto Leveau",
+            "ubigeo": "220902"
+          },
+          {
+            "distrito": "Cacatachi",
+            "ubigeo": "220903"
+          },
+          {
+            "distrito": "Chazuta",
+            "ubigeo": "220904"
+          },
+          {
+            "distrito": "Chipurana",
+            "ubigeo": "220905"
+          },
+          {
+            "distrito": "El Porvenir",
+            "ubigeo": "220906"
+          },
+          {
+            "distrito": "Huimbayoc",
+            "ubigeo": "220907"
+          },
+          {
+            "distrito": "Juan Guerra",
+            "ubigeo": "220908"
+          },
+          {
+            "distrito": "La Banda De Shilcayo",
+            "ubigeo": "220909"
+          },
+          {
+            "distrito": "Morales",
+            "ubigeo": "220910"
+          },
+          {
+            "distrito": "Papaplaya",
+            "ubigeo": "220911"
+          },
+          {
+            "distrito": "San Antonio",
+            "ubigeo": "220912"
+          },
+          {
+            "distrito": "Sauce",
+            "ubigeo": "220913"
+          },
+          {
+            "distrito": "Shapaja",
+            "ubigeo": "220914"
+          },
+          {
+            "distrito": "Tarapoto",
+            "ubigeo": "220901"
+          }
+        ]
+      },
+      {
+        "provincia": "Tocache",
+        "distritos": [
+          {
+            "distrito": "Nuevo Progreso",
+            "ubigeo": "221002"
+          },
+          {
+            "distrito": "Polvora",
+            "ubigeo": "221003"
+          },
+          {
+            "distrito": "Shunte",
+            "ubigeo": "221004"
+          },
+          {
+            "distrito": "Tocache",
+            "ubigeo": "221001"
+          },
+          {
+            "distrito": "Uchiza",
+            "ubigeo": "221005"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "departamento": "Tacna",
+    "provincias": [
+      {
+        "provincia": "Candarave",
+        "distritos": [
+          {
+            "distrito": "Cairani",
+            "ubigeo": "230202"
+          },
+          {
+            "distrito": "Camilaca",
+            "ubigeo": "230203"
+          },
+          {
+            "distrito": "Candarave",
+            "ubigeo": "230201"
+          },
+          {
+            "distrito": "Curibaya",
+            "ubigeo": "230204"
+          },
+          {
+            "distrito": "Huanuara",
+            "ubigeo": "230205"
+          },
+          {
+            "distrito": "Quilahuani",
+            "ubigeo": "230206"
+          }
+        ]
+      },
+      {
+        "provincia": "Jorge Basadre",
+        "distritos": [
+          {
+            "distrito": "Ilabaya",
+            "ubigeo": "230302"
+          },
+          {
+            "distrito": "Ite",
+            "ubigeo": "230303"
+          },
+          {
+            "distrito": "Locumba",
+            "ubigeo": "230301"
+          }
+        ]
+      },
+      {
+        "provincia": "Tacna",
+        "distritos": [
+          {
+            "distrito": "Alto De La Alianza",
+            "ubigeo": "230102"
+          },
+          {
+            "distrito": "Calana",
+            "ubigeo": "230103"
+          },
+          {
+            "distrito": "Ciudad Nueva",
+            "ubigeo": "230104"
+          },
+          {
+            "distrito": "Coronel Gregorio Albarracin Lanchipa",
+            "ubigeo": "230110"
+          },
+          {
+            "distrito": "Inclan",
+            "ubigeo": "230105"
+          },
+          {
+            "distrito": "Pachia",
+            "ubigeo": "230106"
+          },
+          {
+            "distrito": "Palca",
+            "ubigeo": "230107"
+          },
+          {
+            "distrito": "Pocollay",
+            "ubigeo": "230108"
+          },
+          {
+            "distrito": "Sama",
+            "ubigeo": "230109"
+          },
+          {
+            "distrito": "Tacna",
+            "ubigeo": "230101"
+          }
+        ]
+      },
+      {
+        "provincia": "Tarata",
+        "distritos": [
+          {
+            "distrito": "Estique",
+            "ubigeo": "230403"
+          },
+          {
+            "distrito": "Estique-pampa",
+            "ubigeo": "230404"
+          },
+          {
+            "distrito": "Heroes Albarracin",
+            "ubigeo": "230402"
+          },
+          {
+            "distrito": "Sitajara",
+            "ubigeo": "230405"
+          },
+          {
+            "distrito": "Susapaya",
+            "ubigeo": "230406"
+          },
+          {
+            "distrito": "Tarata",
+            "ubigeo": "230401"
+          },
+          {
+            "distrito": "Tarucachi",
+            "ubigeo": "230407"
+          },
+          {
+            "distrito": "Ticaco",
+            "ubigeo": "230408"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "departamento": "Tumbes",
+    "provincias": [
+      {
+        "provincia": "Contralmirante Villar",
+        "distritos": [
+          {
+            "distrito": "Canoas De Punta Sal",
+            "ubigeo": "240203"
+          },
+          {
+            "distrito": "Casitas",
+            "ubigeo": "240202"
+          },
+          {
+            "distrito": "Zorritos",
+            "ubigeo": "240201"
+          }
+        ]
+      },
+      {
+        "provincia": "Tumbes",
+        "distritos": [
+          {
+            "distrito": "Corrales",
+            "ubigeo": "240102"
+          },
+          {
+            "distrito": "La Cruz",
+            "ubigeo": "240103"
+          },
+          {
+            "distrito": "Pampas De Hospital",
+            "ubigeo": "240104"
+          },
+          {
+            "distrito": "San Jacinto",
+            "ubigeo": "240105"
+          },
+          {
+            "distrito": "San Juan De La Virgen",
+            "ubigeo": "240106"
+          },
+          {
+            "distrito": "Tumbes",
+            "ubigeo": "240101"
+          }
+        ]
+      },
+      {
+        "provincia": "Zarumilla",
+        "distritos": [
+          {
+            "distrito": "Aguas Verdes",
+            "ubigeo": "240302"
+          },
+          {
+            "distrito": "Matapalo",
+            "ubigeo": "240303"
+          },
+          {
+            "distrito": "Papayal",
+            "ubigeo": "240304"
+          },
+          {
+            "distrito": "Zarumilla",
+            "ubigeo": "240301"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "departamento": "Ucayali",
+    "provincias": [
+      {
+        "provincia": "Atalaya",
+        "distritos": [
+          {
+            "distrito": "Raymondi",
+            "ubigeo": "250201"
+          },
+          {
+            "distrito": "Sepahua",
+            "ubigeo": "250202"
+          },
+          {
+            "distrito": "Tahuania",
+            "ubigeo": "250203"
+          },
+          {
+            "distrito": "Yurua",
+            "ubigeo": "250204"
+          }
+        ]
+      },
+      {
+        "provincia": "Coronel Portillo",
+        "distritos": [
+          {
+            "distrito": "Calleria",
+            "ubigeo": "250101"
+          },
+          {
+            "distrito": "Campoverde",
+            "ubigeo": "250102"
+          },
+          {
+            "distrito": "Iparia",
+            "ubigeo": "250103"
+          },
+          {
+            "distrito": "Manantay",
+            "ubigeo": "250107"
+          },
+          {
+            "distrito": "Masisea",
+            "ubigeo": "250104"
+          },
+          {
+            "distrito": "Nueva Requena",
+            "ubigeo": "250106"
+          },
+          {
+            "distrito": "Yarinacocha",
+            "ubigeo": "250105"
+          }
+        ]
+      },
+      {
+        "provincia": "Padre Abad",
+        "distritos": [
+          {
+            "distrito": "Curimana",
+            "ubigeo": "250303"
+          },
+          {
+            "distrito": "Irazola",
+            "ubigeo": "250302"
+          },
+          {
+            "distrito": "Padre Abad",
+            "ubigeo": "250301"
+          }
+        ]
+      },
+      {
+        "provincia": "Purús",
+        "distritos": [
+          {
+            "distrito": "Purus",
+            "ubigeo": "250401"
+          }
+        ]
+      }
+    ]
+  }
+]

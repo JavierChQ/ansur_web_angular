@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of, from } from 'rxjs';
+import { BehaviorSubject, Observable, forkJoin, from, of } from 'rxjs';
 import { catchError, concatMap, finalize, map, switchMap, tap } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 import { Cart, CartDisplayItem } from './models/cart.model';
 import { CartApiService } from './services/cart-api.service';
+import { ProductService } from './services/product.service';
 import { isInStock } from './utils/stock.util';
 
 export interface CartAddResult {
@@ -11,10 +12,17 @@ export interface CartAddResult {
   message: string;
 }
 
-interface LegacyCartItem {
+interface StoredCartItem {
   id: number;
   quantity: number;
+  name?: string;
+  sales_price?: number;
+  image?: string;
+  in_stock?: boolean;
+  available?: number;
 }
+
+const GUEST_CART_KEY = 'guest_cart';
 
 @Injectable({
   providedIn: 'root',
@@ -33,10 +41,20 @@ export class CartService {
   constructor(
     private readonly authService: AuthService,
     private readonly cartApi: CartApiService,
+    private readonly productService: ProductService,
   ) {}
 
   isProductInStock(product: { in_stock?: boolean } | null | undefined): boolean {
     return isInStock(product);
+  }
+
+  hasItems(): boolean {
+    const cart = this.cartSubject.value;
+    return (cart?.items?.length ?? 0) > 0;
+  }
+
+  isLocalCart(): boolean {
+    return this.cartSubject.value?.status === 'LOCAL';
   }
 
   getDisplayItems(): CartDisplayItem[] {
@@ -52,20 +70,31 @@ export class CartService {
     return cart?.items.find((item) => item.id_product === productId)?.quantity ?? 0;
   }
 
-  refreshCart(): Observable<Cart | null> {
-    if (!this.authService.isLoggedIn()) {
-      this.clearLocalState();
-      return of(null);
+  getCheckoutItems(): { id_product: number; quantity: number }[] {
+    const cart = this.cartSubject.value;
+    if (!cart) {
+      return [];
     }
 
-    return this.cartApi.getCart().pipe(
-      tap((cart) => this.applyCart(cart)),
-      catchError((error) => {
-        console.error('Error al cargar el carrito', error);
-        this.clearLocalState();
-        return of(null);
-      }),
-    );
+    return cart.items.map((item) => ({
+      id_product: item.id_product,
+      quantity: item.quantity,
+    }));
+  }
+
+  refreshCart(): Observable<Cart | null> {
+    if (this.authService.isLoggedIn()) {
+      return this.cartApi.getCart().pipe(
+        tap((cart) => this.applyCart(cart)),
+        catchError((error) => {
+          console.error('Error al cargar el carrito', error);
+          this.clearLocalState();
+          return of(null);
+        }),
+      );
+    }
+
+    return this.refreshGuestCart();
   }
 
   syncAfterLogin(): Observable<void> {
@@ -73,11 +102,11 @@ export class CartService {
       return of(undefined);
     }
 
-    const legacyItems = this.readLegacyCart();
+    const guestItems = this.readGuestCart();
     this.isSyncing = true;
 
-    const migration$ = legacyItems.length
-      ? from(legacyItems).pipe(
+    const migration$ = guestItems.length
+      ? from(guestItems).pipe(
           concatMap((item) =>
             this.cartApi.addOrUpdateItem(item.id, item.quantity).pipe(
               catchError((error) => {
@@ -86,7 +115,7 @@ export class CartService {
               }),
             ),
           ),
-          finalize(() => localStorage.removeItem('cart')),
+          finalize(() => this.clearGuestCartStorage()),
         )
       : of(null);
 
@@ -104,24 +133,13 @@ export class CartService {
       id: number;
       name: string;
       in_stock?: boolean;
+      available?: number;
       image1?: string;
+      sales_price?: number;
+      sale_price?: number;
     },
     quantity: number,
   ): Observable<CartAddResult> {
-    if (!this.authService.isLoggedIn()) {
-      return of({
-        success: false,
-        message: 'Debe iniciar sesión para agregar productos al carrito.',
-      });
-    }
-
-    if (!isInStock(product)) {
-      return of({
-        success: false,
-        message: 'Este producto no tiene stock disponible.',
-      });
-    }
-
     if (!Number.isInteger(quantity) || quantity < 1) {
       return of({
         success: false,
@@ -133,14 +151,152 @@ export class CartService {
       this.imageCache.set(product.id, product.image1);
     }
 
+    return this.productService.getFreshProduct(product.id).pipe(
+      switchMap((freshProduct) => {
+        const normalized = this.productService.normalize(freshProduct);
+        const merged = {
+          ...product,
+          ...normalized,
+          sales_price: normalized.sales_price ?? product.sales_price ?? product.sale_price,
+        };
+
+        if (!isInStock(merged)) {
+          return of({
+            success: false,
+            message: 'Este producto no tiene stock disponible.',
+          });
+        }
+
+        const existingQty = this.getCartQuantityForProduct(product.id);
+        const maxAddable = Math.max(0, (merged.available ?? 0) - existingQty);
+        if (quantity > maxAddable) {
+          return of({
+            success: false,
+            message:
+              maxAddable <= 0
+                ? 'Este producto no tiene stock disponible.'
+                : `Solo puedes agregar hasta ${maxAddable} unidad${maxAddable === 1 ? '' : 'es'} (stock disponible).`,
+          });
+        }
+
+        if (this.authService.isLoggedIn()) {
+          return this.addProductToApiCart(product.id, existingQty + quantity);
+        }
+
+        return this.addProductToGuestCart(merged, existingQty + quantity);
+      }),
+      catchError(() =>
+        of({
+          success: false,
+          message: 'No se pudo validar el stock del producto.',
+        }),
+      ),
+    );
+  }
+
+  setItemQuantity(productId: number, quantity: number): Observable<CartAddResult> {
+    if (!Number.isInteger(quantity) || quantity < 1) {
+      return of({
+        success: false,
+        message: 'La cantidad debe ser al menos 1.',
+      });
+    }
+
+    return this.productService.getFreshProduct(productId).pipe(
+      switchMap((freshProduct) => {
+        const normalized = this.productService.normalize(freshProduct);
+        if (!isInStock(normalized)) {
+          return of({
+            success: false,
+            message: 'Este producto no tiene stock disponible.',
+          });
+        }
+
+        if ((normalized.available ?? 0) < quantity) {
+          return of({
+            success: false,
+            message: `Solo hay ${normalized.available ?? 0} unidad(es) disponible(s) en stock.`,
+          });
+        }
+
+        if (this.authService.isLoggedIn()) {
+          return this.cartApi.addOrUpdateItem(productId, quantity).pipe(
+            map((cart) => {
+              this.applyCart(cart);
+              return { success: true, message: '' };
+            }),
+            catchError((error) =>
+              of({
+                success: false,
+                message: this.mapError(error),
+              }),
+            ),
+          );
+        }
+
+        return this.updateGuestItemQuantity(productId, quantity, normalized);
+      }),
+      catchError(() =>
+        of({
+          success: false,
+          message: 'No se pudo validar el stock del producto.',
+        }),
+      ),
+    );
+  }
+
+  removeItem(productId: number): Observable<CartAddResult> {
+    if (this.authService.isLoggedIn()) {
+      return this.cartApi.removeItem(productId).pipe(
+        map((cart) => {
+          this.imageCache.delete(productId);
+          this.applyCart(cart);
+          return { success: true, message: '' };
+        }),
+        catchError((error) =>
+          of({
+            success: false,
+            message: this.mapError(error),
+          }),
+        ),
+      );
+    }
+
+    const items = this.readGuestCart().filter((item) => item.id !== productId);
+    this.imageCache.delete(productId);
+    this.persistGuestCart(items);
+    return this.refreshGuestCart().pipe(map(() => ({ success: true, message: '' })));
+  }
+
+  updateCartCount(): void {
+    if (this.authService.isLoggedIn()) {
+      if (this.cartSubject.value) {
+        this.publishCount(this.cartSubject.value);
+        return;
+      }
+      this.refreshCart().subscribe();
+      return;
+    }
+
+    this.refreshGuestCart().subscribe();
+  }
+
+  clearLocalState(): void {
+    this.cartSubject.next(null);
+    this.displayItemsSubject.next([]);
+    this.cartCountSubject.next(0);
+  }
+
+  clearGuestCartStorage(): void {
+    localStorage.removeItem(GUEST_CART_KEY);
+    localStorage.removeItem('cart');
+  }
+
+  private addProductToApiCart(productId: number, quantity: number): Observable<CartAddResult> {
     const source$ = this.cartSubject.value ? of(this.cartSubject.value) : this.cartApi.getCart();
 
     return source$.pipe(
-      switchMap((cart) => {
-        const existingQty =
-          cart.items.find((item) => item.id_product === product.id)?.quantity ?? 0;
-        return this.cartApi.addOrUpdateItem(product.id, existingQty + quantity);
-      }),
+      switchMap(() => this.cartApi.addOrUpdateItem(productId, quantity)),
       map((cart) => {
         this.applyCart(cart);
         return {
@@ -157,76 +313,144 @@ export class CartService {
     );
   }
 
-  setItemQuantity(productId: number, quantity: number): Observable<CartAddResult> {
-    if (!this.authService.isLoggedIn()) {
-      return of({
-        success: false,
-        message: 'Debe iniciar sesión para modificar el carrito.',
+  private addProductToGuestCart(
+    product: {
+      id: number;
+      name: string;
+      sales_price?: number;
+      sale_price?: number;
+      available?: number;
+      in_stock?: boolean;
+      image1?: string;
+    },
+    quantity: number,
+  ): Observable<CartAddResult> {
+    const items = this.readGuestCart();
+    const existing = items.find((item) => item.id === product.id);
+    if (existing) {
+      existing.quantity = quantity;
+      existing.name = product.name;
+      existing.sales_price = product.sales_price ?? product.sale_price;
+      existing.available = product.available;
+      existing.in_stock = product.in_stock;
+      if (product.image1) {
+        existing.image = product.image1;
+      }
+    } else {
+      items.push({
+        id: product.id,
+        quantity,
+        name: product.name,
+        sales_price: product.sales_price ?? product.sale_price,
+        available: product.available,
+        in_stock: product.in_stock,
+        image: product.image1,
       });
     }
 
-    if (!Number.isInteger(quantity) || quantity < 1) {
-      return of({
-        success: false,
-        message: 'La cantidad debe ser al menos 1.',
-      });
-    }
-
-    return this.cartApi.addOrUpdateItem(productId, quantity).pipe(
-      map((cart) => {
-        this.applyCart(cart);
-        return { success: true, message: '' };
-      }),
-      catchError((error) =>
-        of({
-          success: false,
-          message: this.mapError(error),
-        }),
-      ),
+    this.persistGuestCart(items);
+    return this.refreshGuestCart().pipe(
+      map(() => ({
+        success: true,
+        message: 'Producto agregado al carrito.',
+      })),
     );
   }
 
-  removeItem(productId: number): Observable<CartAddResult> {
-    if (!this.authService.isLoggedIn()) {
-      return of({
-        success: false,
-        message: 'Debe iniciar sesión para modificar el carrito.',
-      });
+  private updateGuestItemQuantity(
+    productId: number,
+    quantity: number,
+    product: { name: string; sales_price?: number; available?: number; in_stock?: boolean },
+  ): Observable<CartAddResult> {
+    const items = this.readGuestCart();
+    const existing = items.find((item) => item.id === productId);
+    if (!existing) {
+      return of({ success: false, message: 'Producto no encontrado en el carrito.' });
     }
 
-    return this.cartApi.removeItem(productId).pipe(
-      map((cart) => {
-        this.imageCache.delete(productId);
-        this.applyCart(cart);
-        return { success: true, message: '' };
-      }),
-      catchError((error) =>
-        of({
-          success: false,
-          message: this.mapError(error),
+    existing.quantity = quantity;
+    existing.name = product.name;
+    existing.sales_price = product.sales_price;
+    existing.available = product.available;
+    existing.in_stock = product.in_stock;
+    this.persistGuestCart(items);
+
+    return this.refreshGuestCart().pipe(map(() => ({ success: true, message: '' })));
+  }
+
+  private refreshGuestCart(): Observable<Cart | null> {
+    const storedItems = this.readGuestCart();
+    if (!storedItems.length) {
+      this.clearLocalState();
+      return of(null);
+    }
+
+    const requests = storedItems.map((item) =>
+      this.productService.getFreshProduct(item.id).pipe(
+        map((product) => {
+          const normalized = this.productService.normalize(product);
+          return {
+            ...item,
+            name: normalized.name ?? item.name,
+            sales_price: normalized.sales_price ?? item.sales_price ?? 0,
+            available: normalized.available,
+            in_stock: normalized.in_stock,
+            image: item.image ?? normalized.image1,
+          };
         }),
+        catchError(() => of(item)),
       ),
+    );
+
+    return forkJoin(requests).pipe(
+      tap((items) => {
+        this.persistGuestCart(items);
+        this.applyGuestCart(items);
+      }),
+      map(() => this.cartSubject.value),
+      catchError(() => {
+        this.clearLocalState();
+        return of(null);
+      }),
     );
   }
 
-  updateCartCount(): void {
-    if (!this.authService.isLoggedIn()) {
-      this.cartCountSubject.next(0);
-      return;
-    }
+  private applyGuestCart(items: StoredCartItem[]): void {
+    const cartItems = items.map((item) => ({
+      id_product: item.id,
+      name: item.name ?? `Producto #${item.id}`,
+      sales_price: Number(item.sales_price ?? 0),
+      quantity: item.quantity,
+      available: item.available ?? 0,
+      in_stock: isInStock(item),
+    }));
 
-    if (this.cartSubject.value) {
-      this.publishCount(this.cartSubject.value);
-      return;
-    }
+    const total = cartItems.reduce(
+      (sum, item) => sum + item.sales_price * item.quantity,
+      0,
+    );
 
-    this.refreshCart().subscribe();
-  }
+    const cart: Cart = {
+      id: 0,
+      status: 'LOCAL',
+      expires_at: '',
+      items: cartItems,
+      total,
+    };
 
-  clearLocalState(): void {
-    this.cartSubject.next(null);
-    this.displayItemsSubject.next([]);
-    this.cartCountSubject.next(0);
+    this.cartSubject.next(cart);
+    this.displayItemsSubject.next(
+      items.map((item) => ({
+        id_product: item.id,
+        name: item.name ?? `Producto #${item.id}`,
+        sales_price: Number(item.sales_price ?? 0),
+        quantity: item.quantity,
+        available: item.available ?? 0,
+        in_stock: isInStock(item),
+        image: item.image ?? this.imageCache.get(item.id),
+      })),
+    );
+    this.publishCount(cart);
   }
 
   private applyCart(cart: Cart): void {
@@ -246,8 +470,8 @@ export class CartService {
     this.cartCountSubject.next(cart.items.length);
   }
 
-  private readLegacyCart(): LegacyCartItem[] {
-    const raw = localStorage.getItem('cart');
+  private readGuestCart(): StoredCartItem[] {
+    const raw = localStorage.getItem(GUEST_CART_KEY) ?? localStorage.getItem('cart');
     if (!raw) {
       return [];
     }
@@ -258,23 +482,47 @@ export class CartService {
         return [];
       }
 
-      const merged = new Map<number, number>();
+      const merged = new Map<number, StoredCartItem>();
       for (const item of parsed) {
-        const id = Number(item.id);
+        const id = Number(item.id ?? item.id_product);
         const quantity = Number(item.quantity);
         if (!Number.isInteger(id) || !Number.isInteger(quantity) || quantity < 1) {
           continue;
         }
-        merged.set(id, (merged.get(id) ?? 0) + quantity);
-        if (item.image) {
-          this.imageCache.set(id, item.image);
+
+        const existing = merged.get(id);
+        const image = item.image ?? item.image1;
+        if (existing) {
+          existing.quantity += quantity;
+          if (image) {
+            existing.image = image;
+          }
+        } else {
+          merged.set(id, {
+            id,
+            quantity,
+            name: item.name,
+            sales_price: item.sales_price ?? item.sale_price,
+            image,
+            available: item.available,
+            in_stock: item.in_stock,
+          });
+        }
+
+        if (image) {
+          this.imageCache.set(id, image);
         }
       }
 
-      return Array.from(merged.entries()).map(([id, quantity]) => ({ id, quantity }));
+      return Array.from(merged.values());
     } catch {
       return [];
     }
+  }
+
+  private persistGuestCart(items: StoredCartItem[]): void {
+    localStorage.setItem(GUEST_CART_KEY, JSON.stringify(items));
+    localStorage.removeItem('cart');
   }
 
   private mapError(error: { error?: { message?: string | string[] }; status?: number }): string {

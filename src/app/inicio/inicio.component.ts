@@ -362,11 +362,6 @@ export class InicioComponent implements OnInit {
   }
 
   addToCart(product: Product): void {
-    if (!this.authService.isLoggedIn()) {
-      this.showModal('Debe iniciar sesión para agregar productos al carrito.');
-      return;
-    }
-
     this.cartService.addProductToCart(product, product.quantity ?? 1).subscribe((result) => {
       if (result.success) {
         const max = getMaxAddableQuantity(

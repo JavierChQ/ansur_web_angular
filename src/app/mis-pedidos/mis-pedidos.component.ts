@@ -1,69 +1,108 @@
-
-
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { environment } from '../../environments/environment';
+import { AuthService } from '../auth.service';
+import { Order, OrderStatus } from '../models/order.model';
+import {
+  STORE_BUSINESS_HOURS,
+  STORE_PICKUP_ADDRESS,
+} from '../models/checkout.model';
+import { OrdersService } from '../services/orders.service';
 
 @Component({
   selector: 'app-mis-pedidos',
   templateUrl: './mis-pedidos.component.html',
-  styleUrls: ['./mis-pedidos.component.css']
+  styleUrls: ['./mis-pedidos.component.css'],
 })
 export class MisPedidosComponent implements OnInit {
-  cartItems: any[] = [];
-  totalAmount: number = 0;
+  orders: Order[] = [];
+  isLoading = true;
+  error = '';
 
-  constructor(private http: HttpClient, private router: Router) { }
+  readonly storeAddress = STORE_PICKUP_ADDRESS;
+  readonly storeHours = STORE_BUSINESS_HOURS;
+
+  constructor(
+    private readonly ordersService: OrdersService,
+    private readonly authService: AuthService,
+    private readonly router: Router,
+  ) {}
 
   ngOnInit(): void {
-    this.loadCartItems();
+    if (!this.authService.isLoggedIn()) {
+      this.router.navigate(['/login'], {
+        queryParams: { returnUrl: '/mis-pedidos' },
+      });
+      return;
+    }
+
+    this.ordersService.getMyOrders().subscribe({
+      next: (data) => {
+        this.orders = (data ?? []).sort(
+          (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
+        );
+        this.isLoading = false;
+      },
+      error: () => {
+        this.error = 'No se pudieron cargar tus pedidos.';
+        this.isLoading = false;
+      },
+    });
   }
 
-  loadCartItems(): void {
-    const orderId = localStorage.getItem('id');
-    const token = localStorage.getItem('token');
+  getCustomerName(order: Order): string {
+    if (order.customer_name || order.customer_lastname) {
+      return `${order.customer_name ?? ''} ${order.customer_lastname ?? ''}`.trim();
+    }
+    if (order.user) {
+      return `${order.user.name} ${order.user.lastname}`.trim();
+    }
+    return '—';
+  }
 
-    if (orderId && token) {
-      const headers = new HttpHeaders().set('Authorization', `${token}`);
-      this.http.get<any[]>(`${environment.apiUrl}/orders/${orderId}`, { headers })
-        .subscribe(response => {
-          const products = response.flatMap(order => 
-            order.orderHasProducts.map((orderProduct: any) => ({
-              id: orderProduct.product.id,
-              title: orderProduct.product.name,
-              description: orderProduct.product.description,
-              unit_price: Number(orderProduct.product.sale_price ?? orderProduct.product.sales_price ?? 0),
-              quantity: orderProduct.quantity,
-              image1: orderProduct.product.image1
-            }))
-            
-          );
-          // console.log(response);
-          this.cartItems = products;
-          this.calculateTotal();
-        }, error => {
-          console.error('Error al obtener los productos del carrito:', error);
-        });
-    } else {
-      console.error('No se encontró el ID del pedido o el token.');
+  getReceptorName(order: Order): string {
+    return `${order.receptor_nombres ?? ''} ${order.receptor_apellidos ?? ''}`.trim() || '—';
+  }
+
+  getDeliveryLabel(order: Order): string {
+    if (order.delivery_type === 'pickup') {
+      return 'Retiro en tienda';
+    }
+    if (order.delivery_type === 'delivery') {
+      return 'Envío a domicilio';
+    }
+    return '—';
+  }
+
+  getStatusLabel(status: OrderStatus | string): string {
+    const labels: Record<string, string> = {
+      PENDIENTE_PAGO: 'Pendiente de pago',
+      PAGADO: 'Pagado',
+      CANCELADO: 'Cancelado',
+      EXPIRADO: 'Expirado',
+      DESPACHADO: 'Despachado',
+      REEMBOLSADO: 'Reembolsado',
+    };
+    return labels[status] ?? status;
+  }
+
+  getStatusClass(status: OrderStatus | string): string {
+    switch (status) {
+      case 'PAGADO':
+        return 'status-paid';
+      case 'DESPACHADO':
+        return 'status-shipped';
+      case 'PENDIENTE_PAGO':
+        return 'status-pending';
+      case 'CANCELADO':
+      case 'EXPIRADO':
+      case 'REEMBOLSADO':
+        return 'status-cancelled';
+      default:
+        return '';
     }
   }
 
-  updateQuantity(productId: number, change: number): void {
-    const item = this.cartItems.find(i => i.id === productId);
-    if (item) {
-      item.quantity = Math.max(1, item.quantity + change);
-      this.calculateTotal();
-    }
-  }
-
-  removeItem(productId: number): void {
-    this.cartItems = this.cartItems.filter(item => item.id !== productId);
-    this.calculateTotal();
-  }
-
-  calculateTotal(): void {
-    this.totalAmount = this.cartItems.reduce((total, item) => total + (item.unit_price * item.quantity), 0);
+  getLinePrice(line: NonNullable<Order['orderHasProducts']>[number]): number {
+    return Number(line.unit_price ?? line.product?.sale_price ?? line.product?.sales_price ?? 0);
   }
 }

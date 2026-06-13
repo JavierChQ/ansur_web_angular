@@ -13,6 +13,8 @@ import { ComprobanteComponent } from './comprobante/comprobante.component';
 import { TipoDeEntregaComponent } from './tipo-de-entrega/tipo-de-entrega.component';
 import { PagarComponent } from './pagar/pagar.component';
 import { AuthGuard } from './auth.guard';
+import { CartGuard } from './cart.guard';
+import { CheckoutOrderGuard } from './checkout-order.guard';
 import { CompraRealizadaComponent } from './compra-realizada/compra-realizada.component';
 import { ErrorEnLaCompraComponent } from './error-en-la-compra/error-en-la-compra.component';
 import { MisPedidosComponent } from './mis-pedidos/mis-pedidos.component';
@@ -50,48 +52,45 @@ const routes: Routes = [
   {
     path: 'cart',
     component: CartComponent,
-    canActivate: [AuthGuard]
   },
   {
     path: 'datos-del-usuario',
     component: DatosDelUsuarioComponent,
-    canActivate: [AuthGuard] // Aplica el guard a la ruta
+    canActivate: [CartGuard],
   },
   {
     path: 'comprobante',
     component: ComprobanteComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: 'tipo-de-entrega',
     component: TipoDeEntregaComponent,
-    canActivate: [AuthGuard]
+    canActivate: [CartGuard],
   },
   {
     path: 'pagar',
     component: PagarComponent,
-    canActivate: [AuthGuard]
+    canActivate: [CheckoutOrderGuard],
   },
   {
     path: 'compra-realizada',
     component: CompraRealizadaComponent,
-    canActivate: [AuthGuard]
   },
   {
     path: 'error-en-la-compra',
     component: ErrorEnLaCompraComponent,
-    canActivate: [AuthGuard]
   },
   {
     path: 'mis-pedidos',
     component: MisPedidosComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: '**', 
+    path: '**',
     redirectTo: '/inicio',
     pathMatch: 'full',
-  }
+  },
 ];
 
 @NgModule({
