@@ -37,6 +37,28 @@
             </div>
           </div>
           <button type="submit">Iniciar sesión</button>
+
+          <div *ngIf="showPasswordNotSetHint" class="activation-hint">
+            <p>¿No recibiste el correo?</p>
+            <button type="button" class="link-button" (click)="showResendPanel = true">
+              Reenviar enlace para crear contraseña
+            </button>
+          </div>
+
+          <div *ngIf="showResendPanel" class="resend-panel">
+            <p>Te enviaremos un nuevo enlace si tu cuenta requiere activación.</p>
+            <button
+              type="button"
+              class="btn-resend"
+              [disabled]="isResending"
+              (click)="resendActivationEmail()"
+            >
+              {{ isResending ? 'Enviando...' : 'Reenviar correo' }}
+            </button>
+            <p *ngIf="resendMessage" class="resend-success">{{ resendMessage }}</p>
+            <p *ngIf="resendError" class="resend-error">{{ resendError }}</p>
+          </div>
+
           <div class="register__content">
             <p>¿Aún no tienes una cuenta?</p>
             <a routerLink="/registrate">Regístrate</a>

@@ -10,6 +10,7 @@ const ORDER_KEY = 'pendingOrder';
 const CUSTOMER_KEY = 'checkoutCustomer';
 const DELIVERY_KEY = 'checkoutDelivery';
 const COMPLETED_KEY = 'completedOrderSummary';
+const CHECKOUT_TOKEN_KEY = 'checkout_token';
 
 export interface CompletedOrderSummary {
   orderId: number;
@@ -106,6 +107,24 @@ export class CheckoutStateService {
     sessionStorage.removeItem(ORDER_KEY);
     sessionStorage.removeItem(CUSTOMER_KEY);
     sessionStorage.removeItem(DELIVERY_KEY);
+    this.clearCheckoutToken();
+  }
+
+  saveCheckoutToken(token: string): void {
+    const normalized = token.trim().replace(/^Bearer\s+/i, '');
+    sessionStorage.setItem(CHECKOUT_TOKEN_KEY, normalized);
+  }
+
+  getCheckoutToken(): string | null {
+    return sessionStorage.getItem(CHECKOUT_TOKEN_KEY);
+  }
+
+  hasCheckoutToken(): boolean {
+    return !!this.getCheckoutToken();
+  }
+
+  clearCheckoutToken(): void {
+    sessionStorage.removeItem(CHECKOUT_TOKEN_KEY);
   }
 
   clearAll(): void {

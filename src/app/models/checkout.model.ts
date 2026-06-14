@@ -78,6 +78,10 @@ export interface AuthenticatedCheckoutPayload {
 
 export interface GuestCheckoutResponse {
   order: import('./order.model').CheckoutOrder;
+  checkout_token: string;
+}
+
+export interface ClaimGuestSessionResponse {
   token: string;
   user: {
     id: number;
@@ -86,6 +90,7 @@ export interface GuestCheckoutResponse {
     email: string;
     phone: string;
   };
+  password_not_set: boolean;
 }
 
 export function getDeliveryFee(tipo?: DeliveryType): number {

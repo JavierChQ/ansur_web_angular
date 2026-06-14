@@ -7,14 +7,18 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
+import { CheckoutStateService } from './services/checkout-state.service';
+import { environment } from '../environments/environment';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly checkoutState: CheckoutStateService,
+  ) {}
 
   intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    const rawToken = this.authService.getToken();
-    const token = rawToken?.trim().replace(/^Bearer\s+/i, '') ?? null;
+    const token = this.resolveAuthToken(req.url);
 
     if (!token) {
       return next.handle(req);
@@ -27,5 +31,23 @@ export class AuthInterceptor implements HttpInterceptor {
         },
       }),
     );
+  }
+
+  private resolveAuthToken(url: string): string | null {
+    const checkoutToken = this.checkoutState.getCheckoutToken();
+    const userToken = this.authService.getToken()?.trim().replace(/^Bearer\s+/i, '') ?? null;
+    const apiBase = environment.apiUrl.replace(/\/$/, '');
+
+    const usesCheckoutToken =
+      !!checkoutToken &&
+      !this.authService.isLoggedIn() &&
+      (url.startsWith(`${apiBase}/mercadopago/`) ||
+        /\/orders\/\d+\/claim-session$/.test(url));
+
+    if (usesCheckoutToken) {
+      return checkoutToken;
+    }
+
+    return userToken;
   }
 }

@@ -8,6 +8,9 @@
       <h2>¡Compra realizada exitosamente!</h2>
       <p>Gracias por tu compra. Tu pedido ha sido procesado con éxito.</p>
       <p>Te enviamos el comprobante de compra a tu correo registrado.</p>
+      <p *ngIf="pendingActivation" class="activation-notice">
+        También te enviamos un correo para <strong>crear tu contraseña</strong> y acceder a Mis pedidos.
+      </p>
       <p *ngIf="summary">Número de orden: <strong>#{{ summary.orderId }}</strong></p>
 
       <div class="compra__summary" *ngIf="summary && summary.products.length">

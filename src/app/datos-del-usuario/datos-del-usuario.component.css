@@ -277,3 +277,19 @@
 .login-inline-form {
   margin-top: 1rem;
 }
+
+.email-registered-alert {
+  margin-top: 0.75rem;
+}
+
+.link-button {
+  display: inline;
+  margin-left: 0.35rem;
+  padding: 0;
+  border: none;
+  background: none;
+  color: #f82727;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+}

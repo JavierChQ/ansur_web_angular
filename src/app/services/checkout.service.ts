@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import {
   AuthenticatedCheckoutPayload,
+  ClaimGuestSessionResponse,
   GuestCheckoutPayload,
   GuestCheckoutResponse,
 } from '../models/checkout.model';
@@ -24,5 +25,12 @@ export class CheckoutService {
 
   guestCheckout(payload: GuestCheckoutPayload): Observable<GuestCheckoutResponse> {
     return this.http.post<GuestCheckoutResponse>(this.guestCheckoutUrl, payload);
+  }
+
+  claimGuestSession(orderId: number): Observable<ClaimGuestSessionResponse> {
+    return this.http.post<ClaimGuestSessionResponse>(
+      `${environment.apiUrl}/orders/${orderId}/claim-session`,
+      {},
+    );
   }
 }

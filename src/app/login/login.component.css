@@ -149,3 +149,40 @@ button {
   font-size: 20px;
 }
 
+.activation-hint,
+.resend-panel {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+  font-size: 0.95rem;
+}
+
+.link-button,
+.btn-resend {
+  border: none;
+  background: none;
+  color: #f82727;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+}
+
+.btn-resend {
+  margin-top: 0.5rem;
+  text-decoration: none;
+  background: #f82727;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+}
+
+.resend-success {
+  color: #166534;
+  margin-top: 0.5rem;
+}
+
+.resend-error {
+  color: #991b1b;
+  margin-top: 0.5rem;
+}

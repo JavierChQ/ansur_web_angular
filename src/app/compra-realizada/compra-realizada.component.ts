@@ -17,6 +17,7 @@ import {
 })
 export class CompraRealizadaComponent implements OnInit {
   summary: CompletedOrderSummary | null = null;
+  pendingActivation = false;
   readonly storeAddress = STORE_PICKUP_ADDRESS;
   readonly storeHours = STORE_BUSINESS_HOURS;
 
@@ -33,6 +34,8 @@ export class CompraRealizadaComponent implements OnInit {
     this.cartService.refreshCart().subscribe();
 
     const orderIdParam = this.route.snapshot.queryParamMap.get('orderId');
+    this.pendingActivation =
+      this.route.snapshot.queryParamMap.get('pendingActivation') === '1';
     if (!this.summary && orderIdParam) {
       this.summary = {
         orderId: Number(orderIdParam),

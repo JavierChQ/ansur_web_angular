@@ -8,6 +8,7 @@ import {
   CheckoutDeliveryData,
   DELIVERY_FEE,
   GuestCheckoutPayload,
+  GuestCheckoutResponse,
   STORE_PICKUP_ADDRESS,
 } from '../models/checkout.model';
 import { CheckoutOrder } from '../models/order.model';
@@ -71,7 +72,7 @@ export class CheckoutFlowService {
 
     return this.checkoutService.guestCheckout(payload).pipe(
       map((response) => {
-        this.applyGuestAuth(response);
+        this.applyGuestCheckoutToken(response);
         return response.order;
       }),
     );
@@ -183,21 +184,8 @@ export class CheckoutFlowService {
     };
   }
 
-  private applyGuestAuth(response: {
-    token: string;
-    user: { id: number; name: string; lastname: string; email: string };
-  }): void {
-    this.authService.login(response.token);
-    localStorage.setItem('token', response.token);
-    localStorage.setItem('id', String(response.user.id));
-    localStorage.setItem('nombre', response.user.name);
-    localStorage.setItem('apellidos', response.user.lastname);
-    this.authService.setUser({
-      id: response.user.id,
-      name: response.user.name,
-      lastname: response.user.lastname,
-      email: response.user.email,
-    });
+  private applyGuestCheckoutToken(response: GuestCheckoutResponse): void {
+    this.checkoutState.saveCheckoutToken(response.checkout_token);
     this.cartService.clearGuestCartStorage();
   }
 }

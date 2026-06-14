@@ -12,6 +12,7 @@ import {
   STORE_PICKUP_ADDRESS,
   getDeliveryFee,
 } from '../models/checkout.model';
+import { AUTH_ERROR_CODES } from '../models/auth.model';
 import { UbigeoDistrict, UbigeoProvince, UbigeoService } from '../services/ubigeo.service';
 import { CheckoutFlowService } from '../services/checkout-flow.service';
 import { CheckoutStateService } from '../services/checkout-state.service';
@@ -284,8 +285,20 @@ export class TipoDeEntregaComponent implements OnInit {
 
   private mapCheckoutError(error: {
     status?: number;
-    error?: { message?: string | string[] };
+    error?: { message?: string | string[]; code?: string };
   }): string {
+    const code = error?.error?.code;
+    if (code === AUTH_ERROR_CODES.EMAIL_ALREADY_REGISTERED) {
+      const customer = this.checkoutState.getCustomer();
+      void this.router.navigate(['/datos-del-usuario'], {
+        queryParams: {
+          requireLogin: '1',
+          email: customer?.email ?? '',
+        },
+      });
+      return 'Este correo ya tiene cuenta. Inicia sesión para continuar.';
+    }
+
     const message = error?.error?.message;
     if (Array.isArray(message)) {
       return message.join(', ');

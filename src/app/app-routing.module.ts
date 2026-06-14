@@ -18,6 +18,7 @@ import { CheckoutOrderGuard } from './checkout-order.guard';
 import { CompraRealizadaComponent } from './compra-realizada/compra-realizada.component';
 import { ErrorEnLaCompraComponent } from './error-en-la-compra/error-en-la-compra.component';
 import { MisPedidosComponent } from './mis-pedidos/mis-pedidos.component';
+import { EstablecerContrasenaComponent } from './establecer-contrasena/establecer-contrasena.component';
 
 const routes: Routes = [
   {
@@ -43,6 +44,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'establecer-contrasena',
+    component: EstablecerContrasenaComponent,
   },
   {
     path: 'registrate',

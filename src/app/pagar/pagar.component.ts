@@ -10,6 +10,7 @@ import { AuthService } from '../auth.service';
 import { CartService } from '../cart.service';
 import { CheckoutOrder, OrderProductLine } from '../models/order.model';
 import { CheckoutStateService } from '../services/checkout-state.service';
+import { CheckoutService } from '../services/checkout.service';
 import {
   CheckoutCustomerData,
   CheckoutDeliveryData,
@@ -71,6 +72,7 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
     private readonly authService: AuthService,
     private readonly cartService: CartService,
     private readonly checkoutState: CheckoutStateService,
+    private readonly checkoutService: CheckoutService,
     private readonly paymentService: PaymentService,
     private readonly mercadoPagoConfig: MercadoPagoConfigService,
     private readonly mercadoPagoSdk: MercadoPagoSdkService,
@@ -491,11 +493,42 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
       this.checkoutState.saveCompletedSummary(summary);
     }
 
-    this.checkoutState.clear();
-    this.cartService.clearLocalState();
-    this.router.navigate(['/compra-realizada'], {
-      queryParams: { orderId: this.pendingOrder?.id },
-    });
+    const orderId = this.pendingOrder?.id;
+    const hadCheckoutToken = this.checkoutState.hasCheckoutToken();
+
+    const finalize = (pendingActivation = false): void => {
+      this.checkoutState.clearCheckoutToken();
+      this.checkoutState.clear();
+      this.cartService.clearLocalState();
+      this.router.navigate(['/compra-realizada'], {
+        queryParams: {
+          ...(orderId ? { orderId } : {}),
+          ...(pendingActivation ? { pendingActivation: '1' } : {}),
+        },
+      });
+    };
+
+    if (hadCheckoutToken && orderId) {
+      this.checkoutService.claimGuestSession(orderId).subscribe({
+        next: (session) => {
+          if (session?.token) {
+            this.authService.login(session.token);
+            localStorage.setItem('token', session.token);
+          }
+          if (session?.user) {
+            this.authService.setUser(session.user);
+            localStorage.setItem('nombre', session.user.name || '');
+            localStorage.setItem('apellidos', session.user.lastname || '');
+            localStorage.setItem('id', String(session.user.id || ''));
+          }
+          finalize(!!session?.password_not_set);
+        },
+        error: () => finalize(true),
+      });
+      return;
+    }
+
+    finalize();
   }
 
   private mapPaymentError(error: {
