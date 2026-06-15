@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, map, switchMap, throwError } from 'rxjs';
+import { Observable, map, of, switchMap, throwError } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { CartService } from '../cart.service';
 import {
@@ -29,6 +29,11 @@ export class CheckoutFlowService {
   ) {}
 
   startCheckoutFromState(): Observable<CheckoutOrder> {
+    const existingOrder = this.checkoutState.getActiveOrder();
+    if (existingOrder) {
+      return of(existingOrder);
+    }
+
     const customer = this.checkoutState.getCustomer();
     const delivery = this.checkoutState.getDelivery();
 
@@ -186,7 +191,6 @@ export class CheckoutFlowService {
 
   private applyGuestCheckoutToken(response: GuestCheckoutResponse): void {
     this.checkoutState.saveCheckoutToken(response.checkout_token);
-    this.cartService.clearGuestCartStorage();
   }
 }
 

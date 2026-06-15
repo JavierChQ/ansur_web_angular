@@ -16,6 +16,7 @@ import { AUTH_ERROR_CODES } from '../models/auth.model';
 import { UbigeoDistrict, UbigeoProvince, UbigeoService } from '../services/ubigeo.service';
 import { CheckoutFlowService } from '../services/checkout-flow.service';
 import { CheckoutStateService } from '../services/checkout-state.service';
+import { CheckoutOrder, OrderProductLine } from '../models/order.model';
 
 @Component({
   selector: 'app-tipo-de-entrega',
@@ -103,6 +104,12 @@ export class TipoDeEntregaComponent implements OnInit {
 
     if (this.checkoutState.getDelivery()?.tipo === 'pickup') {
       this.activeSection = 'pickup';
+    }
+
+    const pendingOrder = this.checkoutState.getActiveOrder();
+    if (pendingOrder) {
+      this.applyOrderSummary(pendingOrder);
+      return;
     }
 
     this.cartService.refreshCart().subscribe((cart) => {
@@ -225,12 +232,6 @@ export class TipoDeEntregaComponent implements OnInit {
   }
 
   private startCheckout(): void {
-    const existingOrder = this.checkoutState.getOrder();
-    if (existingOrder && !this.checkoutState.isExpired(existingOrder)) {
-      this.router.navigate(['/pagar']);
-      return;
-    }
-
     this.isSubmitting = true;
     this.checkoutError = '';
 
@@ -253,6 +254,20 @@ export class TipoDeEntregaComponent implements OnInit {
           this.checkoutError = this.mapCheckoutError(error);
         },
       });
+  }
+
+  private applyOrderSummary(order: CheckoutOrder): void {
+    this.products = (order.orderHasProducts ?? []).map((line: OrderProductLine) => ({
+      name: line.product?.name ?? `Producto #${line.id_product}`,
+      sales_price: Number(line.product?.sale_price ?? line.unit_price ?? 0),
+      quantity: line.quantity,
+      image: line.product?.image1,
+    }));
+    this.subtotal = this.products.reduce(
+      (sum, product) => sum + product.sales_price * product.quantity,
+      0,
+    );
+    this.updateTotals();
   }
 
   private updateTotals(): void {

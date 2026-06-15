@@ -34,13 +34,12 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   private resolveAuthToken(url: string): string | null {
-    const checkoutToken = this.checkoutState.getCheckoutToken();
+    const checkoutToken = this.checkoutState.getCheckoutToken()?.trim();
     const userToken = this.authService.getToken()?.trim().replace(/^Bearer\s+/i, '') ?? null;
     const apiBase = environment.apiUrl.replace(/\/$/, '');
 
     const usesCheckoutToken =
       !!checkoutToken &&
-      !this.authService.isLoggedIn() &&
       (url.startsWith(`${apiBase}/mercadopago/`) ||
         /\/orders\/\d+\/claim-session$/.test(url));
 

@@ -67,6 +67,7 @@
         </div>
 
         <form
+          *ngIf="cardFormVisible"
           id="form-checkout"
           class="card-form"
           [class.hidden]="paymentMethod !== 'card' || isLoadingPayment"

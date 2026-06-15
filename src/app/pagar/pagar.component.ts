@@ -58,6 +58,7 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
   deliveryFee = 0;
   readonly storeAddress = STORE_PICKUP_ADDRESS;
   readonly storeHours = STORE_BUSINESS_HOURS;
+  cardFormVisible = true;
 
   private sdkReady = false;
   private viewReady = false;
@@ -80,6 +81,13 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.cardFormMounted = false;
+    this.cardFormMountAttempts = 0;
+    this.sdkReady = false;
+    this.viewReady = false;
+    this.isLoadingPayment = true;
+    this.paymentError = '';
+
     const pendingOrder = this.checkoutState.getOrder();
     this.customerData = this.checkoutState.getCustomer();
     this.deliveryData = this.checkoutState.getDelivery();
@@ -116,8 +124,9 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
       next: (config) => {
         void this.mercadoPagoSdk
           .init(config.public_key, config.locale)
-          .then(() => {
+          .then(async () => {
             this.sdkReady = true;
+            await this.refreshCardFormShell();
             this.isLoadingPayment = false;
             this.scheduleMountCardForm();
           })
@@ -145,8 +154,9 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
       clearInterval(this.expiryCheckInterval);
     }
     this.pendingPollSub?.unsubscribe();
-    this.mercadoPagoSdk.unmountCardForm();
+    this.mercadoPagoSdk.reset();
     this.cardFormMounted = false;
+    this.cardFormVisible = false;
   }
 
   get expiresAtLabel(): string {
@@ -202,7 +212,7 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
     if (method === 'card') {
       this.cardFormMounted = false;
       this.cardFormMountAttempts = 0;
-      this.scheduleMountCardForm();
+      void this.refreshCardFormShell().then(() => this.scheduleMountCardForm());
     }
   }
 
@@ -264,17 +274,29 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private scheduleMountCardForm(): void {
     this.cdr.detectChanges();
-    setTimeout(() => this.tryMountCardForm(), 0);
+    setTimeout(() => {
+      void this.mountCardFormAsync();
+    }, 0);
   }
 
-  private tryMountCardForm(): void {
+  private async refreshCardFormShell(): Promise<void> {
+    this.cardFormVisible = false;
+    this.cdr.detectChanges();
+    await new Promise<void>((resolve) => setTimeout(resolve, 0));
+    this.cardFormVisible = true;
+    this.cdr.detectChanges();
+    await new Promise<void>((resolve) => setTimeout(resolve, 0));
+  }
+
+  private async mountCardFormAsync(): Promise<void> {
     if (
       !this.sdkReady ||
       !this.viewReady ||
       this.paymentMethod !== 'card' ||
       this.cardFormMounted ||
       !this.pendingOrder ||
-      this.isLoadingPayment
+      this.isLoadingPayment ||
+      !this.cardFormVisible
     ) {
       return;
     }
@@ -288,11 +310,8 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
       return;
     }
 
-    this.cardFormMountAttempts = 0;
-    this.cardFormMounted = true;
-
     try {
-      this.mercadoPagoSdk.mountCardForm({
+      await this.mercadoPagoSdk.mountCardForm({
         amount: this.totalAmount.toFixed(2),
         payerEmail: this.payerEmail,
         payerName: this.getCardholderName(),
@@ -308,8 +327,16 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
             'No se pudieron cargar las cuotas. El pago se procesará en 1 cuota.';
         },
       });
+      this.cardFormMounted = true;
+      this.cardFormMountAttempts = 0;
     } catch {
       this.cardFormMounted = false;
+      if (this.cardFormMountAttempts < this.maxCardFormMountAttempts) {
+        this.cardFormMountAttempts += 1;
+        setTimeout(() => this.scheduleMountCardForm(), 250);
+        return;
+      }
+
       this.paymentError =
         'No se pudo inicializar el formulario de tarjeta. Recarga la página.';
     }
@@ -392,6 +419,15 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
 
     if (this.checkoutState.isExpired(this.pendingOrder)) {
       this.handleCheckoutExpired();
+      return false;
+    }
+
+    const hasCheckoutToken = this.checkoutState.hasCheckoutToken();
+    const isLoggedIn = this.authService.isLoggedIn();
+
+    if (!hasCheckoutToken && !isLoggedIn) {
+      this.paymentError =
+        'Tu sesión de checkout expiró. Volvé al carrito e iniciá el checkout de nuevo.';
       return false;
     }
 
@@ -499,6 +535,7 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
     const finalize = (pendingActivation = false): void => {
       this.checkoutState.clearCheckoutToken();
       this.checkoutState.clear();
+      this.cartService.clearGuestCartStorage();
       this.cartService.clearLocalState();
       this.router.navigate(['/compra-realizada'], {
         queryParams: {
@@ -544,11 +581,11 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
         this.handleCheckoutExpired();
         return this.paymentError;
       }
-      if (/invalid credentials/i.test(message)) {
+      if (/invalid credentials/i.test(message) || message.includes('internal_error')) {
         return (
-          'Credenciales de Mercado Pago inválidas en el servidor. ' +
-          'Actualizá MERCADOPAGO_ACCESS_TOKEN y MERCADOPAGO_PUBLIC_KEY en el .env ' +
-          '(ambas del mismo panel de prueba) y reiniciá el backend.'
+          'Mercado Pago rechazó el cobro. Si ya verificaste las credenciales, activá ' +
+          'Credenciales productivas en el panel MP (Industria + URL), confirmá que la app es ' +
+          'Checkout API y ejecutá "npm run verify:mercadopago" en el backend.'
         );
       }
       return message;

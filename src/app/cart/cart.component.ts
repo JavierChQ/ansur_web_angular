@@ -1,7 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CartService } from '../cart.service';
 import { CartDisplayItem } from '../models/cart.model';
+import { CheckoutStateService } from '../services/checkout-state.service';
 import { canIncreaseCartQuantity, getCartStockLimitMessage, getStockLabel } from '../utils/stock.util';
 
 @Component({
@@ -16,7 +18,11 @@ export class CartComponent implements OnInit, OnDestroy {
   error = '';
   private subscription?: Subscription;
 
-  constructor(private readonly cartService: CartService) {}
+  constructor(
+    private readonly cartService: CartService,
+    private readonly checkoutState: CheckoutStateService,
+    private readonly router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.subscription = this.cartService.displayItems$.subscribe((items) => {
@@ -82,5 +88,10 @@ export class CartComponent implements OnInit, OnDestroy {
         this.error = result.message;
       }
     });
+  }
+
+  startCheckout(): void {
+    this.checkoutState.clear();
+    void this.router.navigate(['/datos-del-usuario']);
   }
 }

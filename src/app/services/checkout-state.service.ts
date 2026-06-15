@@ -139,6 +139,19 @@ export class CheckoutStateService {
     return new Date(order.expires_at).getTime() < Date.now();
   }
 
+  hasActiveCheckout(): boolean {
+    const order = this.getOrder();
+    return !!order && !this.isExpired(order);
+  }
+
+  getActiveOrder(): CheckoutOrder | null {
+    const order = this.getOrder();
+    if (!order || this.isExpired(order)) {
+      return null;
+    }
+    return order;
+  }
+
   buildCompletedSummary(
     order: CheckoutOrder,
     customer: CheckoutCustomerData | null,

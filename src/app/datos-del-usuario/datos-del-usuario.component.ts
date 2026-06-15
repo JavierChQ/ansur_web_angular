@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { CartService } from '../cart.service';
 import { CheckoutCustomerData, DocType } from '../models/checkout.model';
+import { CheckoutOrder, OrderProductLine } from '../models/order.model';
 import { AUTH_ERROR_CODES } from '../models/auth.model';
 import { CheckoutStateService } from '../services/checkout-state.service';
 import { ApiService } from '../services/api.service';
@@ -43,13 +44,11 @@ export class DatosDelUsuarioComponent implements OnInit {
     private readonly apiService: ApiService,
   ) {
     const saved = this.checkoutState.getCustomer();
-    const nombre = saved?.nombres ?? localStorage.getItem('nombre') ?? '';
-    const apellidos = saved?.apellidos ?? localStorage.getItem('apellidos') ?? '';
 
     this.userForm = this.fb.group({
-      email: [saved?.email ?? this.authService.getUserEmail(), [Validators.required, Validators.email]],
-      nombres: [nombre, Validators.required],
-      apellidos: [apellidos, Validators.required],
+      email: [saved?.email ?? '', [Validators.required, Validators.email]],
+      nombres: [saved?.nombres ?? '', Validators.required],
+      apellidos: [saved?.apellidos ?? '', Validators.required],
       tipoDocumento: [saved?.tipoDocumento ?? 'DNI', Validators.required],
       numeroDocumento: [saved?.numeroDocumento ?? '', Validators.required],
       celular: [saved?.celular ?? '', [Validators.required, Validators.pattern(/^\d{9}$/)]],
@@ -67,6 +66,12 @@ export class DatosDelUsuarioComponent implements OnInit {
     }
 
     this.handleRequireLoginQueryParams();
+
+    const pendingOrder = this.checkoutState.getActiveOrder();
+    if (pendingOrder) {
+      this.applyOrderSummary(pendingOrder);
+      return;
+    }
 
     this.cartService.refreshCart().subscribe((cart) => {
       const items = cart?.items ?? [];
@@ -188,6 +193,19 @@ export class DatosDelUsuarioComponent implements OnInit {
     this.showErrorModal = false;
   }
 
+  private applyOrderSummary(order: CheckoutOrder): void {
+    this.products = (order.orderHasProducts ?? []).map((line: OrderProductLine) => ({
+      title: line.product?.name ?? `Producto #${line.id_product}`,
+      unit_price: Number(line.product?.sale_price ?? line.unit_price ?? 0),
+      quantity: line.quantity,
+      image1: line.product?.image1,
+    }));
+    this.subtotal = this.products.reduce(
+      (sum, product) => sum + product.unit_price * product.quantity,
+      0,
+    );
+  }
+
   private prefillFromLoggedUser(): void {
     const user = this.authService.getUser();
     if (!user) {
@@ -196,8 +214,8 @@ export class DatosDelUsuarioComponent implements OnInit {
 
     this.userForm.patchValue({
       email: user.email ?? this.authService.getUserEmail(),
-      nombres: user.name ?? localStorage.getItem('nombre') ?? '',
-      apellidos: user.lastname ?? localStorage.getItem('apellidos') ?? '',
+      nombres: user.name ?? '',
+      apellidos: user.lastname ?? '',
       celular: user.phone ?? this.userForm.get('celular')?.value,
     });
   }

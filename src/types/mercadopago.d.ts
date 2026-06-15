@@ -11,6 +11,8 @@ export interface MercadoPagoCardFormData {
 
 export interface MercadoPagoCardForm {
   getCardFormData: () => MercadoPagoCardFormData;
+  mount: () => void;
+  unmount: () => void;
 }
 
 export interface MercadoPagoYapeInstance {
