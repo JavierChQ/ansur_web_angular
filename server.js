@@ -3,10 +3,13 @@ const path = require('path');
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, 'dist/proyecto-instituto/browser')));
+const distPath = path.join(__dirname, 'dist/proyecto-instituto/browser');
+const indexPath = path.join(distPath, 'index.html');
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist/proyecto-instituto/browser/index.html'));
+app.use(express.static(distPath));
+
+app.use((req, res) => {
+  res.sendFile(indexPath);
 });
 
 const PORT = process.env.PORT || 4000;
