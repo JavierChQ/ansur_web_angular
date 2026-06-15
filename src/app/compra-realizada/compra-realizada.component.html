@@ -11,7 +11,7 @@
       <p *ngIf="pendingActivation" class="activation-notice">
         También te enviamos un correo para <strong>crear tu contraseña</strong> y acceder a Mis pedidos.
       </p>
-      <p *ngIf="summary">Número de orden: <strong>#{{ summary.orderId }}</strong></p>
+      <p *ngIf="summary">ID de pedido: <strong>{{ summary.orderReferenceCode || summary.orderId }}</strong></p>
 
       <div class="compra__summary" *ngIf="summary && summary.products.length">
         <h3>Resumen de tu compra</h3>

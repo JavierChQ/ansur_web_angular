@@ -14,7 +14,7 @@
     <div *ngFor="let order of orders" class="order-card">
       <div class="order-card-header">
         <div>
-          <h3>Pedido #{{ order.id }}</h3>
+          <p class="order-id">ID de pedido: {{ order.reference_code || order.id }}</p>
           <p class="order-date">{{ order.created_at | date:'medium' }}</p>
         </div>
         <span class="status-badge" [ngClass]="getStatusClass(order.status)">

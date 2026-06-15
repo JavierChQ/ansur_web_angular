@@ -14,6 +14,7 @@ const CHECKOUT_TOKEN_KEY = 'checkout_token';
 
 export interface CompletedOrderSummary {
   orderId: number;
+  orderReferenceCode: string;
   total: number;
   subtotal: number;
   deliveryFee: number;
@@ -171,6 +172,7 @@ export class CheckoutStateService {
 
     return {
       orderId: order.id,
+      orderReferenceCode: order.reference_code ?? String(order.id),
       total: Number(order.amount),
       subtotal,
       deliveryFee,

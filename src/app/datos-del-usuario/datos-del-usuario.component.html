@@ -27,7 +27,7 @@
 
     <div class="payment-layout">
       <div class="form-container">
-        <div class="checkout-mode-tabs">
+        <div class="checkout-mode-tabs" *ngIf="!isLoggedIn">
           <button
             type="button"
             class="mode-tab"
@@ -50,7 +50,7 @@
         </div>
 
         <form
-          *ngIf="mode === 'login'"
+          *ngIf="!isLoggedIn && mode === 'login'"
           [formGroup]="loginForm"
           (ngSubmit)="onLogin()"
           class="login-inline-form"
@@ -69,7 +69,7 @@
           </button>
         </form>
 
-        <form *ngIf="mode === 'guest'" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <form *ngIf="isLoggedIn || mode === 'guest'" [formGroup]="userForm" (ngSubmit)="onSubmit()">
           <div class="form-group">
             <label for="email">Correo</label>
             <input
@@ -77,12 +77,13 @@
               id="email"
               formControlName="email"
               placeholder="tu@email.com"
+              [readonly]="isLoggedIn"
               (blur)="onEmailBlur()"
             />
             <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">
               <small class="error-text">Ingresa un correo válido</small>
             </div>
-            <div *ngIf="emailRegisteredMessage" class="cart-alert email-registered-alert">
+            <div *ngIf="!isLoggedIn && emailRegisteredMessage" class="cart-alert email-registered-alert">
               {{ emailRegisteredMessage }}
               <button type="button" class="link-button" (click)="promptLoginFromAlert()">
                 Iniciar sesión

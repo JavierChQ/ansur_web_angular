@@ -39,6 +39,7 @@ export class CompraRealizadaComponent implements OnInit {
     if (!this.summary && orderIdParam) {
       this.summary = {
         orderId: Number(orderIdParam),
+        orderReferenceCode: orderIdParam,
         total: 0,
         subtotal: 0,
         deliveryFee: 0,

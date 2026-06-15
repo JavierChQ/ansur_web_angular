@@ -41,8 +41,11 @@
   margin-bottom: 1rem;
 }
 
-.order-card-header h3 {
+.order-card-header h3,
+.order-id {
   margin: 0;
+  font-size: 1.17em;
+  font-weight: 700;
 }
 
 .order-date {

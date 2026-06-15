@@ -21,6 +21,7 @@ export type OrderStatus =
 
 export interface Order {
   id: number;
+  reference_code?: string;
   id_client: number;
   id_address: number;
   amount: number;
@@ -63,6 +64,7 @@ export interface Order {
 
 export interface CheckoutOrder {
   id: number;
+  reference_code?: string;
   id_client: number;
   id_address: number;
   amount: number;

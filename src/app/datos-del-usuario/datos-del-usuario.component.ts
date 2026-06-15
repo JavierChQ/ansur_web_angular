@@ -18,6 +18,7 @@ type CheckoutMode = 'guest' | 'login';
 })
 export class DatosDelUsuarioComponent implements OnInit {
   mode: CheckoutMode = 'guest';
+  isLoggedIn = false;
   userForm: FormGroup;
   loginForm: FormGroup;
   showErrorModal = false;
@@ -61,8 +62,11 @@ export class DatosDelUsuarioComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.authService.isLoggedIn()) {
+    this.isLoggedIn = this.authService.isLoggedIn();
+
+    if (this.isLoggedIn) {
       this.prefillFromLoggedUser();
+      this.mode = 'guest';
     }
 
     this.handleRequireLoginQueryParams();
@@ -131,11 +135,13 @@ export class DatosDelUsuarioComponent implements OnInit {
         this.cartService.syncAfterLogin().subscribe({
           next: () => {
             this.isLoggingIn = false;
+            this.isLoggedIn = true;
             this.prefillFromLoggedUser();
             this.setMode('guest');
           },
           error: () => {
             this.isLoggingIn = false;
+            this.isLoggedIn = true;
             this.prefillFromLoggedUser();
             this.setMode('guest');
           },
@@ -149,6 +155,10 @@ export class DatosDelUsuarioComponent implements OnInit {
   }
 
   onEmailBlur(): void {
+    if (this.isLoggedIn) {
+      return;
+    }
+
     const emailControl = this.userForm.get('email');
     const email = emailControl?.value?.trim();
 
@@ -164,6 +174,11 @@ export class DatosDelUsuarioComponent implements OnInit {
     if (this.userForm.invalid) {
       this.showErrorModal = true;
       this.userForm.markAllAsTouched();
+      return;
+    }
+
+    if (this.isLoggedIn) {
+      this.continueAsGuest();
       return;
     }
 
