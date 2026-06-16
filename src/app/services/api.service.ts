@@ -34,4 +34,14 @@ export class ApiService {
       email,
     });
   }
+
+  forgotPassword(email: string) {
+    return this.http.post<{ message: string }>(`${this.apiUrl}/auth/forgot-password`, {
+      email,
+    });
+  }
+
+  resetPassword(payload: { token: string; password: string }) {
+    return this.http.post<{ message: string }>(`${this.apiUrl}/auth/reset-password`, payload);
+  }
 }

@@ -186,3 +186,19 @@ button {
   color: #991b1b;
   margin-top: 0.5rem;
 }
+
+.forgot-password-link {
+  text-align: right;
+  margin-bottom: 0.25rem;
+}
+
+.forgot-password-link a {
+  font-size: 0.9rem;
+  color: #555;
+  text-decoration: none;
+}
+
+.forgot-password-link a:hover {
+  color: #f82727;
+  text-decoration: underline;
+}

@@ -19,6 +19,8 @@ import { CompraRealizadaComponent } from './compra-realizada/compra-realizada.co
 import { ErrorEnLaCompraComponent } from './error-en-la-compra/error-en-la-compra.component';
 import { MisPedidosComponent } from './mis-pedidos/mis-pedidos.component';
 import { EstablecerContrasenaComponent } from './establecer-contrasena/establecer-contrasena.component';
+import { RecuperarContrasenaComponent } from './recuperar-contrasena/recuperar-contrasena.component';
+import { RestablecerContrasenaComponent } from './restablecer-contrasena/restablecer-contrasena.component';
 
 const routes: Routes = [
   {
@@ -48,6 +50,14 @@ const routes: Routes = [
   {
     path: 'establecer-contrasena',
     component: EstablecerContrasenaComponent,
+  },
+  {
+    path: 'recuperar-contrasena',
+    component: RecuperarContrasenaComponent,
+  },
+  {
+    path: 'restablecer-contrasena',
+    component: RestablecerContrasenaComponent,
   },
   {
     path: 'registrate',
