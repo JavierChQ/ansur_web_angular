@@ -76,6 +76,12 @@ export interface AuthenticatedCheckoutPayload {
   delivery: GuestCheckoutPayload['delivery'];
 }
 
+export interface UpdateCheckoutDeliveryPayload {
+  customer: GuestCheckoutPayload['customer'];
+  delivery: GuestCheckoutPayload['delivery'];
+  id_address?: number;
+}
+
 export interface GuestCheckoutResponse {
   order: import('./order.model').CheckoutOrder;
   checkout_token: string;

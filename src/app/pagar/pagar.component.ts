@@ -14,7 +14,7 @@ import { CheckoutService } from '../services/checkout.service';
 import {
   CheckoutCustomerData,
   CheckoutDeliveryData,
-  DELIVERY_FEE,
+  getDeliveryFee,
   mapDocTypeToMercadoPago,
   STORE_BUSINESS_HOURS,
   STORE_PICKUP_ADDRESS,
@@ -99,12 +99,18 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     this.pendingOrder = pendingOrder;
-    this.totalAmount = Number(pendingOrder.amount);
     this.subtotal = (pendingOrder.orderHasProducts ?? []).reduce(
       (sum, line) => sum + Number(line.product?.sale_price ?? 0) * line.quantity,
       0,
     );
-    this.deliveryFee = this.deliveryData?.tipo === 'delivery' ? DELIVERY_FEE : 0;
+    this.deliveryFee = getDeliveryFee(this.deliveryData?.tipo);
+    this.totalAmount = this.subtotal + this.deliveryFee;
+
+    if (Math.abs(Number(pendingOrder.amount) - this.totalAmount) > 0.01) {
+      this.paymentError =
+        'El total del pedido no coincide con el tipo de entrega. Volvé a tipo de entrega.';
+    }
+
     this.yapePhone = this.customerData?.celular ?? '';
     this.products = (pendingOrder.orderHasProducts ?? []).map((line) => ({
       id: line.id_product,

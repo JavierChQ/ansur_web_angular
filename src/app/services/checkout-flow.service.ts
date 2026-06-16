@@ -10,6 +10,7 @@ import {
   GuestCheckoutPayload,
   GuestCheckoutResponse,
   STORE_PICKUP_ADDRESS,
+  UpdateCheckoutDeliveryPayload,
 } from '../models/checkout.model';
 import { CheckoutOrder } from '../models/order.model';
 import { AddressService } from './address.service';
@@ -29,11 +30,6 @@ export class CheckoutFlowService {
   ) {}
 
   startCheckoutFromState(): Observable<CheckoutOrder> {
-    const existingOrder = this.checkoutState.getActiveOrder();
-    if (existingOrder) {
-      return of(existingOrder);
-    }
-
     const customer = this.checkoutState.getCustomer();
     const delivery = this.checkoutState.getDelivery();
 
@@ -42,6 +38,16 @@ export class CheckoutFlowService {
         status: 400,
         error: { message: 'Datos de checkout incompletos' },
       }));
+    }
+
+    const existingOrder = this.checkoutState.getActiveOrder();
+
+    if (existingOrder && this.hasDeliveryChanged(existingOrder, delivery)) {
+      return this.updateExistingCheckout(existingOrder.id, customer, delivery);
+    }
+
+    if (existingOrder) {
+      return of(existingOrder);
     }
 
     if (this.shouldUseAuthenticatedCheckout()) {
@@ -191,6 +197,47 @@ export class CheckoutFlowService {
 
   private applyGuestCheckoutToken(response: GuestCheckoutResponse): void {
     this.checkoutState.saveCheckoutToken(response.checkout_token);
+  }
+
+  private hasDeliveryChanged(
+    order: CheckoutOrder,
+    delivery: CheckoutDeliveryData,
+  ): boolean {
+    const orderType = order.delivery_type ?? 'delivery';
+    return orderType !== delivery.tipo;
+  }
+
+  private updateExistingCheckout(
+    orderId: number,
+    customer: CheckoutCustomerData,
+    delivery: CheckoutDeliveryData,
+  ): Observable<CheckoutOrder> {
+    const payload: UpdateCheckoutDeliveryPayload = {
+      customer: this.mapCustomer(customer),
+      delivery: this.mapDelivery(delivery),
+    };
+
+    if (this.shouldUseAuthenticatedCheckout()) {
+      const addressPayload = this.buildAddressStrings(customer, delivery);
+      const userId = this.authService.getUserId()!;
+
+      return this.addressService
+        .create({
+          address: addressPayload.address,
+          district: addressPayload.district,
+          id_user: userId,
+        })
+        .pipe(
+          switchMap((created) =>
+            this.checkoutService.updateCheckoutDelivery(orderId, {
+              ...payload,
+              id_address: created.id,
+            }),
+          ),
+        );
+    }
+
+    return this.checkoutService.updateCheckoutDelivery(orderId, payload);
   }
 }
 

@@ -7,6 +7,7 @@ import {
   ClaimGuestSessionResponse,
   GuestCheckoutPayload,
   GuestCheckoutResponse,
+  UpdateCheckoutDeliveryPayload,
 } from '../models/checkout.model';
 import { CheckoutOrder } from '../models/order.model';
 
@@ -31,6 +32,16 @@ export class CheckoutService {
     return this.http.post<ClaimGuestSessionResponse>(
       `${environment.apiUrl}/orders/${orderId}/claim-session`,
       {},
+    );
+  }
+
+  updateCheckoutDelivery(
+    orderId: number,
+    payload: UpdateCheckoutDeliveryPayload,
+  ): Observable<CheckoutOrder> {
+    return this.http.patch<CheckoutOrder>(
+      `${environment.apiUrl}/orders/${orderId}/checkout-delivery`,
+      payload,
     );
   }
 }
