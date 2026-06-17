@@ -14,6 +14,7 @@ import { CheckoutService } from '../services/checkout.service';
 import {
   CheckoutCustomerData,
   CheckoutDeliveryData,
+  CheckoutInvoiceData,
   getDeliveryFee,
   mapDocTypeToMercadoPago,
   STORE_BUSINESS_HOURS,
@@ -54,6 +55,7 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
   yapeOtp = '';
   customerData: CheckoutCustomerData | null = null;
   deliveryData: CheckoutDeliveryData | null = null;
+  invoiceData: CheckoutInvoiceData | null = null;
   subtotal = 0;
   deliveryFee = 0;
   readonly storeAddress = STORE_PICKUP_ADDRESS;
@@ -91,6 +93,7 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
     const pendingOrder = this.checkoutState.getOrder();
     this.customerData = this.checkoutState.getCustomer();
     this.deliveryData = this.checkoutState.getDelivery();
+    this.invoiceData = this.checkoutState.getInvoice();
 
     if (!pendingOrder || this.checkoutState.isExpired(pendingOrder)) {
       this.checkoutState.clear();
@@ -201,6 +204,18 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
       return `${this.customerData.nombres} ${this.customerData.apellidos}`;
     }
     return '';
+  }
+
+  get invoiceSummary(): string {
+    if (!this.invoiceData?.validated) {
+      return '';
+    }
+
+    if (this.invoiceData.tipo === 'BOLETA') {
+      return `Boleta — DNI ${this.invoiceData.numeroDocumento} — ${this.invoiceData.nombreTitular ?? ''}`.trim();
+    }
+
+    return `Factura — RUC ${this.invoiceData.numeroDocumento} — ${this.invoiceData.razonSocial ?? ''}`.trim();
   }
 
   submitCardPaymentClick(): void {
@@ -531,6 +546,7 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
         this.pendingOrder,
         this.customerData,
         this.deliveryData,
+        this.invoiceData,
       );
       this.checkoutState.saveCompletedSummary(summary);
     }

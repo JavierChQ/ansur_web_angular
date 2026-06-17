@@ -132,7 +132,94 @@
             </div>
           </div>
 
-          <button type="submit" class="btn btn-comprar" [disabled]="isCheckingEmail">
+          <div class="invoice-section">
+            <h3>Comprobante de pago</h3>
+
+            <div class="form-row">
+              <div class="form-group half-width">
+                <label for="invoiceTipo">Tipo de comprobante</label>
+                <select id="invoiceTipo" formControlName="invoiceTipo">
+                  <option value="BOLETA">Boleta</option>
+                  <option value="FACTURA">Factura</option>
+                </select>
+              </div>
+
+              <div class="form-group half-width">
+                <label for="invoiceNumeroDocumento">{{ isBoleta ? 'DNI' : 'RUC' }}</label>
+                <input
+                  type="text"
+                  id="invoiceNumeroDocumento"
+                  formControlName="invoiceNumeroDocumento"
+                  [attr.maxlength]="isBoleta ? 8 : 11"
+                  [placeholder]="isBoleta ? '12345678' : '20123456789'"
+                  (input)="onInvoiceDocumentInput()"
+                  (blur)="onInvoiceDocumentBlur()"
+                />
+                <div *ngIf="invoiceControlInvalid('invoiceNumeroDocumento')">
+                  <small class="error-text">
+                    {{ getInvoiceDocumentError(userForm.get('invoiceNumeroDocumento')) }}
+                  </small>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row" *ngIf="isBoleta && canUseCustomerDniForInvoice">
+              <button type="button" class="btn-link" (click)="useCustomerDniForInvoice()">
+                Usar el mismo DNI de mis datos
+              </button>
+            </div>
+
+            <div class="form-group" *ngIf="isBoleta">
+              <label for="invoiceNombreTitular">Nombre del titular</label>
+              <input
+                type="text"
+                id="invoiceNombreTitular"
+                formControlName="invoiceNombreTitular"
+                class="readonly-field"
+                readonly
+              />
+            </div>
+
+            <ng-container *ngIf="isFactura">
+              <div class="form-group">
+                <label for="invoiceRazonSocial">Razón social</label>
+                <input
+                  type="text"
+                  id="invoiceRazonSocial"
+                  formControlName="invoiceRazonSocial"
+                  class="readonly-field"
+                  readonly
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="invoiceDomicilioFiscal">Domicilio fiscal</label>
+                <input
+                  type="text"
+                  id="invoiceDomicilioFiscal"
+                  formControlName="invoiceDomicilioFiscal"
+                  class="readonly-field"
+                  readonly
+                />
+              </div>
+            </ng-container>
+
+            <p *ngIf="isLookingUp" class="lookup-status">Validando documento...</p>
+            <p *ngIf="isInvoiceValidated && !isLookingUp" class="lookup-success">
+              Documento validado correctamente.
+            </p>
+            <div *ngIf="identityError" class="cart-alert">{{ identityError }}</div>
+          </div>
+
+          <p class="invoice-notice">
+            La boleta o factura electrónica se emitirá en tienda al retirar o despachar tu pedido.
+          </p>
+
+          <button
+            type="submit"
+            class="btn btn-comprar"
+            [disabled]="isCheckingEmail || isLookingUp || !isInvoiceValidated"
+          >
             {{ isCheckingEmail ? 'Verificando...' : 'Continuar' }}
           </button>
         </form>
@@ -163,7 +250,7 @@
       <i class="bx bx-x"></i>
     </span>
     <h2>Error</h2>
-    <p>Por favor, completa todos los campos requeridos antes de continuar.</p>
+    <p>{{ modalErrorMessage || 'Por favor, completa todos los campos requeridos antes de continuar.' }}</p>
   </div>
 </div>
 

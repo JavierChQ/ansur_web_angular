@@ -6,6 +6,8 @@ import {
   AuthenticatedCheckoutPayload,
   CheckoutCustomerData,
   CheckoutDeliveryData,
+  CheckoutInvoiceData,
+  CheckoutInvoicePayload,
   DELIVERY_FEE,
   GuestCheckoutPayload,
   GuestCheckoutResponse,
@@ -32,13 +34,16 @@ export class CheckoutFlowService {
   startCheckoutFromState(): Observable<CheckoutOrder> {
     const customer = this.checkoutState.getCustomer();
     const delivery = this.checkoutState.getDelivery();
+    const invoice = this.checkoutState.getInvoice();
 
-    if (!customer || !delivery) {
+    if (!customer || !delivery || !invoice?.validated) {
       return throwError(() => ({
         status: 400,
         error: { message: 'Datos de checkout incompletos' },
       }));
     }
+
+    const invoicePayload = this.mapInvoice(invoice);
 
     const existingOrder = this.checkoutState.getActiveOrder();
 
@@ -64,6 +69,7 @@ export class CheckoutFlowService {
           switchMap((created) =>
             this.checkoutService.startCheckout({
               id_address: created.id,
+              invoice: invoicePayload,
               customer: this.mapCustomer(customer),
               delivery: this.mapDelivery(delivery),
             }),
@@ -79,7 +85,7 @@ export class CheckoutFlowService {
       }));
     }
 
-    const payload = this.buildGuestPayload(customer, delivery, items);
+    const payload = this.buildGuestPayload(customer, delivery, invoicePayload, items);
 
     return this.checkoutService.guestCheckout(payload).pipe(
       map((response) => {
@@ -100,12 +106,31 @@ export class CheckoutFlowService {
   private buildGuestPayload(
     customer: CheckoutCustomerData,
     delivery: CheckoutDeliveryData,
+    invoice: CheckoutInvoicePayload,
     items: { id_product: number; quantity: number }[],
   ): GuestCheckoutPayload {
     return {
       items,
+      invoice,
       customer: this.mapCustomer(customer),
       delivery: this.mapDelivery(delivery),
+    };
+  }
+
+  private mapInvoice(invoice: CheckoutInvoiceData): CheckoutInvoicePayload {
+    if (invoice.tipo === 'BOLETA') {
+      return {
+        type: 'BOLETA',
+        doc_number: invoice.numeroDocumento,
+        holder_name: invoice.nombreTitular,
+      };
+    }
+
+    return {
+      type: 'FACTURA',
+      doc_number: invoice.numeroDocumento,
+      business_name: invoice.razonSocial,
+      address: invoice.domicilioFiscal,
     };
   }
 

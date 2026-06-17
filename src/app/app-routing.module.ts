@@ -9,7 +9,6 @@ import { DetalleDelProductoComponent } from './detalle-del-producto/detalle-del-
 import { RegisterComponent } from './register/register.component';
 import { CartComponent } from './cart/cart.component';
 import { DatosDelUsuarioComponent } from './datos-del-usuario/datos-del-usuario.component';
-import { ComprobanteComponent } from './comprobante/comprobante.component';
 import { TipoDeEntregaComponent } from './tipo-de-entrega/tipo-de-entrega.component';
 import { PagarComponent } from './pagar/pagar.component';
 import { AuthGuard } from './auth.guard';
@@ -75,8 +74,8 @@ const routes: Routes = [
   },
   {
     path: 'comprobante',
-    component: ComprobanteComponent,
-    canActivate: [AuthGuard],
+    redirectTo: 'datos-del-usuario',
+    pathMatch: 'full',
   },
   {
     path: 'tipo-de-entrega',

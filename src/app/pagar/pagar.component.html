@@ -170,6 +170,13 @@
             <p>{{ customerData.celular }}</p>
             <p>{{ customerData.tipoDocumento }}: {{ customerData.numeroDocumento }}</p>
           </div>
+          <div class="details-block" *ngIf="invoiceData?.validated">
+            <h4>Comprobante solicitado</h4>
+            <p>{{ invoiceSummary }}</p>
+            <p class="invoice-note">
+              La boleta o factura electrónica se emitirá en tienda al retirar o despachar tu pedido.
+            </p>
+          </div>
           <div class="details-block">
             <h4>Entrega</h4>
             <p *ngIf="deliveryData.tipo === 'delivery'">Entrega a domicilio</p>

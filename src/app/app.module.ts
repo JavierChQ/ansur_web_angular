@@ -17,7 +17,6 @@ import { AuthInterceptor } from './auth.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CartComponent } from './cart/cart.component';
 import { DatosDelUsuarioComponent } from './datos-del-usuario/datos-del-usuario.component';
-import { ComprobanteComponent } from './comprobante/comprobante.component';
 import { TipoDeEntregaComponent } from './tipo-de-entrega/tipo-de-entrega.component';
 import { PagarComponent } from './pagar/pagar.component';
 import { CompraRealizadaComponent } from './compra-realizada/compra-realizada.component';
@@ -42,7 +41,6 @@ import { ProductPricePipe } from './pipes/product-price.pipe';
     DetalleDelProductoComponent,
     CartComponent,
     DatosDelUsuarioComponent,
-    ComprobanteComponent,
     TipoDeEntregaComponent,
     PagarComponent,
     CompraRealizadaComponent,

@@ -11,6 +11,25 @@ export type DeliveryType = 'delivery' | 'pickup';
 
 export type ReceptorType = 'yo' | 'otra_persona';
 
+export type InvoiceType = 'BOLETA' | 'FACTURA';
+
+export interface CheckoutInvoiceData {
+  tipo: InvoiceType;
+  numeroDocumento: string;
+  nombreTitular?: string;
+  razonSocial?: string;
+  domicilioFiscal?: string;
+  validated: boolean;
+}
+
+export interface CheckoutInvoicePayload {
+  type: InvoiceType;
+  doc_number: string;
+  holder_name?: string;
+  business_name?: string;
+  address?: string;
+}
+
 export interface CheckoutCustomerData {
   email: string;
   nombres: string;
@@ -45,6 +64,7 @@ export interface GuestCheckoutItemPayload {
 
 export interface GuestCheckoutPayload {
   items: GuestCheckoutItemPayload[];
+  invoice: CheckoutInvoicePayload;
   customer: {
     email: string;
     name: string;
@@ -72,6 +92,7 @@ export interface GuestCheckoutPayload {
 
 export interface AuthenticatedCheckoutPayload {
   id_address: number;
+  invoice: CheckoutInvoicePayload;
   customer: GuestCheckoutPayload['customer'];
   delivery: GuestCheckoutPayload['delivery'];
 }

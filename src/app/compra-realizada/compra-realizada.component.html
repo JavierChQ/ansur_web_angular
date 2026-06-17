@@ -7,7 +7,10 @@
       </div>
       <h2>¡Compra realizada exitosamente!</h2>
       <p>Gracias por tu compra. Tu pedido ha sido procesado con éxito.</p>
-      <p>Te enviamos el comprobante de compra a tu correo registrado.</p>
+      <p>Te enviamos tu nota de pedido a tu correo registrado.</p>
+      <p class="invoice-note">
+        Tu boleta o factura electrónica se emitirá en tienda al retirar o despachar tu pedido.
+      </p>
       <p *ngIf="pendingActivation" class="activation-notice">
         También te enviamos un correo para <strong>crear tu contraseña</strong> y acceder a Mis pedidos.
       </p>
@@ -34,6 +37,16 @@
           <span>Total pagado</span>
           <span>S/ {{ summary.total.toFixed(2) }}</span>
         </div>
+      </div>
+
+      <div class="compra__invoice" *ngIf="summary?.invoice as invoice">
+        <h3>Comprobante solicitado</h3>
+        <p *ngIf="invoice.tipo === 'BOLETA'">
+          Boleta — DNI {{ invoice.numeroDocumento }} — {{ invoice.nombreTitular }}
+        </p>
+        <p *ngIf="invoice.tipo === 'FACTURA'">
+          Factura — RUC {{ invoice.numeroDocumento }} — {{ invoice.razonSocial }}
+        </p>
       </div>
 
       <div class="compra__delivery" *ngIf="summary?.delivery as delivery">

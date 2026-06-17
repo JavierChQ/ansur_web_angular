@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {
   CheckoutCustomerData,
   CheckoutDeliveryData,
+  CheckoutInvoiceData,
   getDeliveryFee,
 } from '../models/checkout.model';
 import { CheckoutOrder, OrderProductLine } from '../models/order.model';
@@ -9,6 +10,7 @@ import { CheckoutOrder, OrderProductLine } from '../models/order.model';
 const ORDER_KEY = 'pendingOrder';
 const CUSTOMER_KEY = 'checkoutCustomer';
 const DELIVERY_KEY = 'checkoutDelivery';
+const INVOICE_KEY = 'checkoutInvoice';
 const COMPLETED_KEY = 'completedOrderSummary';
 const CHECKOUT_TOKEN_KEY = 'checkout_token';
 
@@ -26,6 +28,7 @@ export interface CompletedOrderSummary {
   }[];
   customer?: CheckoutCustomerData;
   delivery?: CheckoutDeliveryData;
+  invoice?: CheckoutInvoiceData;
 }
 
 @Injectable({
@@ -70,6 +73,27 @@ export class CheckoutStateService {
     sessionStorage.setItem(DELIVERY_KEY, JSON.stringify(delivery));
   }
 
+  saveInvoice(invoice: CheckoutInvoiceData): void {
+    sessionStorage.setItem(INVOICE_KEY, JSON.stringify(invoice));
+  }
+
+  getInvoice(): CheckoutInvoiceData | null {
+    const raw = sessionStorage.getItem(INVOICE_KEY);
+    if (!raw) {
+      return null;
+    }
+
+    try {
+      return JSON.parse(raw) as CheckoutInvoiceData;
+    } catch {
+      return null;
+    }
+  }
+
+  clearOrder(): void {
+    sessionStorage.removeItem(ORDER_KEY);
+  }
+
   getDelivery(): CheckoutDeliveryData | null {
     const raw = sessionStorage.getItem(DELIVERY_KEY);
     if (!raw) {
@@ -108,6 +132,7 @@ export class CheckoutStateService {
     sessionStorage.removeItem(ORDER_KEY);
     sessionStorage.removeItem(CUSTOMER_KEY);
     sessionStorage.removeItem(DELIVERY_KEY);
+    sessionStorage.removeItem(INVOICE_KEY);
     this.clearCheckoutToken();
   }
 
@@ -157,6 +182,7 @@ export class CheckoutStateService {
     order: CheckoutOrder,
     customer: CheckoutCustomerData | null,
     delivery: CheckoutDeliveryData | null,
+    invoice: CheckoutInvoiceData | null = null,
   ): CompletedOrderSummary {
     const products = (order.orderHasProducts ?? []).map((line: OrderProductLine) => ({
       name: line.product?.name ?? `Producto #${line.id_product}`,
@@ -179,6 +205,7 @@ export class CheckoutStateService {
       products,
       customer: customer ?? undefined,
       delivery: delivery ?? undefined,
+      invoice: invoice ?? undefined,
     };
   }
 

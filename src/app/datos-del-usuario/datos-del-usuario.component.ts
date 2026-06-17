@@ -1,13 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { CartService } from '../cart.service';
-import { CheckoutCustomerData, DocType } from '../models/checkout.model';
+import {
+  CheckoutCustomerData,
+  CheckoutInvoiceData,
+  DocType,
+  InvoiceType,
+} from '../models/checkout.model';
 import { CheckoutOrder, OrderProductLine } from '../models/order.model';
 import { AUTH_ERROR_CODES } from '../models/auth.model';
+import { IDENTITY_ERROR_CODES } from '../models/identity.model';
 import { CheckoutStateService } from '../services/checkout-state.service';
 import { ApiService } from '../services/api.service';
+import { IdentityService } from '../services/identity.service';
 
 type CheckoutMode = 'guest' | 'login';
 
@@ -16,24 +24,30 @@ type CheckoutMode = 'guest' | 'login';
   templateUrl: './datos-del-usuario.component.html',
   styleUrls: ['./datos-del-usuario.component.css'],
 })
-export class DatosDelUsuarioComponent implements OnInit {
+export class DatosDelUsuarioComponent implements OnInit, OnDestroy {
   mode: CheckoutMode = 'guest';
   isLoggedIn = false;
   userForm: FormGroup;
   loginForm: FormGroup;
   showErrorModal = false;
+  modalErrorMessage = '';
   products: any[] = [];
   subtotal = 0;
   loginError = '';
   isLoggingIn = false;
   emailRegisteredMessage = '';
   isCheckingEmail = false;
+  identityError = '';
+  isLookingUp = false;
+  isInvoiceValidated = false;
 
   readonly docTypes: { value: DocType; label: string }[] = [
     { value: 'DNI', label: 'DNI' },
     { value: 'PASAPORTE', label: 'Pasaporte' },
     { value: 'CE', label: 'Carnet de extranjería' },
   ];
+
+  private readonly destroy$ = new Subject<void>();
 
   constructor(
     private readonly fb: FormBuilder,
@@ -43,8 +57,10 @@ export class DatosDelUsuarioComponent implements OnInit {
     private readonly checkoutState: CheckoutStateService,
     private readonly authService: AuthService,
     private readonly apiService: ApiService,
+    private readonly identityService: IdentityService,
   ) {
     const saved = this.checkoutState.getCustomer();
+    const savedInvoice = this.checkoutState.getInvoice();
 
     this.userForm = this.fb.group({
       email: [saved?.email ?? '', [Validators.required, Validators.email]],
@@ -53,7 +69,18 @@ export class DatosDelUsuarioComponent implements OnInit {
       tipoDocumento: [saved?.tipoDocumento ?? 'DNI', Validators.required],
       numeroDocumento: [saved?.numeroDocumento ?? '', Validators.required],
       celular: [saved?.celular ?? '', [Validators.required, Validators.pattern(/^\d{9}$/)]],
+      invoiceTipo: [savedInvoice?.tipo ?? 'BOLETA', Validators.required],
+      invoiceNumeroDocumento: [
+        savedInvoice?.numeroDocumento ?? '',
+        [Validators.required, Validators.pattern(/^\d+$/)],
+      ],
+      invoiceNombreTitular: [{ value: savedInvoice?.nombreTitular ?? '', disabled: true }],
+      invoiceRazonSocial: [{ value: savedInvoice?.razonSocial ?? '', disabled: true }],
+      invoiceDomicilioFiscal: [{ value: savedInvoice?.domicilioFiscal ?? '', disabled: true }],
     });
+
+    this.isInvoiceValidated = savedInvoice?.validated ?? false;
+    this.applyInvoiceDocumentValidators(savedInvoice?.tipo ?? 'BOLETA');
 
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -70,6 +97,14 @@ export class DatosDelUsuarioComponent implements OnInit {
     }
 
     this.handleRequireLoginQueryParams();
+
+    this.userForm
+      .get('invoiceTipo')
+      ?.valueChanges.pipe(takeUntil(this.destroy$))
+      .subscribe((tipo: InvoiceType) => {
+        this.resetInvoiceValidation();
+        this.applyInvoiceDocumentValidators(tipo);
+      });
 
     const pendingOrder = this.checkoutState.getActiveOrder();
     if (pendingOrder) {
@@ -94,6 +129,26 @@ export class DatosDelUsuarioComponent implements OnInit {
       }));
       this.subtotal = cart?.total ?? 0;
     });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  get isBoleta(): boolean {
+    return this.userForm.get('invoiceTipo')?.value === 'BOLETA';
+  }
+
+  get isFactura(): boolean {
+    return this.userForm.get('invoiceTipo')?.value === 'FACTURA';
+  }
+
+  get canUseCustomerDniForInvoice(): boolean {
+    return (
+      this.userForm.get('tipoDocumento')?.value === 'DNI' &&
+      !!this.userForm.get('numeroDocumento')?.value
+    );
   }
 
   setMode(mode: CheckoutMode): void {
@@ -170,15 +225,39 @@ export class DatosDelUsuarioComponent implements OnInit {
     this.checkEmailRegistration(email);
   }
 
+  onInvoiceDocumentInput(): void {
+    this.resetInvoiceValidation(false);
+  }
+
+  onInvoiceDocumentBlur(): void {
+    void this.lookupInvoiceDocument();
+  }
+
+  useCustomerDniForInvoice(): void {
+    if (!this.canUseCustomerDniForInvoice) {
+      return;
+    }
+
+    this.userForm.patchValue({
+      invoiceTipo: 'BOLETA',
+      invoiceNumeroDocumento: this.userForm.get('numeroDocumento')?.value,
+    });
+    this.applyInvoiceDocumentValidators('BOLETA');
+    void this.lookupInvoiceDocument();
+  }
+
   onSubmit(): void {
-    if (this.userForm.invalid) {
+    if (this.userForm.invalid || !this.isInvoiceValidated) {
       this.showErrorModal = true;
       this.userForm.markAllAsTouched();
+      this.modalErrorMessage = !this.isInvoiceValidated
+        ? 'Debes validar el documento del comprobante con la consulta oficial antes de continuar.'
+        : 'Por favor, completa todos los campos requeridos antes de continuar.';
       return;
     }
 
     if (this.isLoggedIn) {
-      this.continueAsGuest();
+      this.continueCheckout();
       return;
     }
 
@@ -195,17 +274,37 @@ export class DatosDelUsuarioComponent implements OnInit {
           this.promptLoginWithEmail(email, status.password_not_set);
           return;
         }
-        this.continueAsGuest();
+        this.continueCheckout();
       },
       error: () => {
         this.isCheckingEmail = false;
-        this.continueAsGuest();
+        this.continueCheckout();
       },
     });
   }
 
   closeModal(): void {
     this.showErrorModal = false;
+    this.modalErrorMessage = '';
+  }
+
+  invoiceControlInvalid(controlName: string): boolean {
+    const control = this.userForm.get(controlName);
+    return !!control && control.invalid && (control.dirty || control.touched);
+  }
+
+  getInvoiceDocumentError(control: AbstractControl | null): string {
+    if (!control?.errors) {
+      return 'Este campo es obligatorio';
+    }
+
+    if (control.errors['pattern']) {
+      return this.isBoleta
+        ? 'Ingresa un DNI válido de 8 dígitos'
+        : 'Ingresa un RUC válido de 11 dígitos';
+    }
+
+    return 'Este campo es obligatorio';
   }
 
   private applyOrderSummary(order: CheckoutOrder): void {
@@ -235,10 +334,166 @@ export class DatosDelUsuarioComponent implements OnInit {
     });
   }
 
-  private continueAsGuest(): void {
-    const customer = this.userForm.getRawValue() as CheckoutCustomerData;
+  private continueCheckout(): void {
+    const raw = this.userForm.getRawValue();
+    const customer: CheckoutCustomerData = {
+      email: raw.email,
+      nombres: raw.nombres,
+      apellidos: raw.apellidos,
+      tipoDocumento: raw.tipoDocumento,
+      numeroDocumento: raw.numeroDocumento,
+      celular: raw.celular,
+    };
+
+    const invoice: CheckoutInvoiceData = {
+      tipo: raw.invoiceTipo,
+      numeroDocumento: raw.invoiceNumeroDocumento.trim(),
+      nombreTitular: raw.invoiceNombreTitular?.trim() || undefined,
+      razonSocial: raw.invoiceRazonSocial?.trim() || undefined,
+      domicilioFiscal: raw.invoiceDomicilioFiscal?.trim() || undefined,
+      validated: true,
+    };
+
     this.checkoutState.saveCustomer(customer);
+    this.checkoutState.saveInvoice(invoice);
+    this.checkoutState.clearOrder();
     this.router.navigate(['/tipo-de-entrega']);
+  }
+
+  private lookupInvoiceDocument(): void {
+    const tipo = this.userForm.get('invoiceTipo')?.value as InvoiceType;
+    const numeroDocumento = this.userForm.get('invoiceNumeroDocumento')?.value?.trim() ?? '';
+    const expectedLength = tipo === 'BOLETA' ? 8 : 11;
+
+    this.identityError = '';
+
+    if (!new RegExp(`^\\d{${expectedLength}}$`).test(numeroDocumento)) {
+      return;
+    }
+
+    this.isLookingUp = true;
+    this.resetInvoiceValidation(false);
+
+    if (tipo === 'BOLETA') {
+      this.identityService
+        .lookupDni(numeroDocumento)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: (response) => {
+            this.isLookingUp = false;
+            this.userForm.patchValue({
+              invoiceNombreTitular: response.nombre_completo,
+              invoiceRazonSocial: '',
+              invoiceDomicilioFiscal: '',
+            });
+            this.isInvoiceValidated = true;
+          },
+          error: (error: unknown) => {
+            this.isLookingUp = false;
+            this.isInvoiceValidated = false;
+            this.identityError = this.mapIdentityError(
+              error as { status?: number; error?: { code?: string; message?: string | string[] } },
+            );
+          },
+        });
+      return;
+    }
+
+    this.identityService
+      .lookupRuc(numeroDocumento)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (response) => {
+          this.isLookingUp = false;
+          this.userForm.patchValue({
+            invoiceNombreTitular: '',
+            invoiceRazonSocial: response.razon_social,
+            invoiceDomicilioFiscal: response.direccion,
+          });
+          this.isInvoiceValidated = true;
+        },
+        error: (error: unknown) => {
+          this.isLookingUp = false;
+          this.isInvoiceValidated = false;
+          this.identityError = this.mapIdentityError(
+            error as { status?: number; error?: { code?: string; message?: string | string[] } },
+          );
+        },
+      });
+  }
+
+  private resetInvoiceValidation(clearDocument = true): void {
+    this.isInvoiceValidated = false;
+    this.identityError = '';
+
+    if (clearDocument) {
+      this.userForm.patchValue({
+        invoiceNumeroDocumento: '',
+        invoiceNombreTitular: '',
+        invoiceRazonSocial: '',
+        invoiceDomicilioFiscal: '',
+      });
+    } else {
+      this.userForm.patchValue({
+        invoiceNombreTitular: '',
+        invoiceRazonSocial: '',
+        invoiceDomicilioFiscal: '',
+      });
+    }
+  }
+
+  private applyInvoiceDocumentValidators(tipo: InvoiceType): void {
+    const control = this.userForm.get('invoiceNumeroDocumento');
+    if (!control) {
+      return;
+    }
+
+    const length = tipo === 'BOLETA' ? 8 : 11;
+    control.setValidators([
+      Validators.required,
+      Validators.pattern(new RegExp(`^\\d{${length}}$`)),
+    ]);
+    control.updateValueAndValidity({ emitEvent: false });
+  }
+
+  private mapIdentityError(error: {
+    status?: number;
+    error?: { code?: string; message?: string | string[] };
+  }): string {
+    const code = error?.error?.code;
+    const message = error?.error?.message;
+
+    if (typeof message === 'string' && message.trim()) {
+      return message;
+    }
+
+    if (Array.isArray(message) && message.length) {
+      return message.join(', ');
+    }
+
+    switch (code) {
+      case IDENTITY_ERROR_CODES.INVALID_DNI_FORMAT:
+        return 'El DNI debe tener exactamente 8 dígitos numéricos.';
+      case IDENTITY_ERROR_CODES.INVALID_RUC_FORMAT:
+        return 'El RUC debe tener exactamente 11 dígitos numéricos.';
+      case IDENTITY_ERROR_CODES.DNI_NOT_FOUND:
+        return 'No se encontró información para el DNI ingresado.';
+      case IDENTITY_ERROR_CODES.RUC_NOT_FOUND:
+        return 'No se encontró información para el RUC ingresado.';
+      case IDENTITY_ERROR_CODES.RUC_NOT_ACTIVE:
+        return 'El RUC no se encuentra activo y habido.';
+      case IDENTITY_ERROR_CODES.SERVICE_UNAVAILABLE:
+      case IDENTITY_ERROR_CODES.PROVIDER_NOT_CONFIGURED:
+        return 'No se pudo validar el documento en este momento. Intenta nuevamente más tarde.';
+      default:
+        if (error?.status === 503) {
+          return 'No se pudo validar el documento en este momento. Intenta nuevamente más tarde.';
+        }
+        if (error?.status === 404) {
+          return 'No se encontró información para el documento ingresado.';
+        }
+        return 'No se pudo validar el documento. Revisa el número e intenta nuevamente.';
+    }
   }
 
   private checkEmailRegistration(email: string): void {

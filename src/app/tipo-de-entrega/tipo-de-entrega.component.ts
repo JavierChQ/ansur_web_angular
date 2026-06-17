@@ -13,6 +13,7 @@ import {
   getDeliveryFee,
 } from '../models/checkout.model';
 import { AUTH_ERROR_CODES } from '../models/auth.model';
+import { IDENTITY_ERROR_CODES } from '../models/identity.model';
 import { UbigeoDistrict, UbigeoProvince, UbigeoService } from '../services/ubigeo.service';
 import { CheckoutFlowService } from '../services/checkout-flow.service';
 import { CheckoutStateService } from '../services/checkout-state.service';
@@ -86,6 +87,11 @@ export class TipoDeEntregaComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.checkoutState.getCustomer()) {
+      this.router.navigate(['/datos-del-usuario']);
+      return;
+    }
+
+    if (!this.checkoutState.getInvoice()?.validated) {
       this.router.navigate(['/datos-del-usuario']);
       return;
     }
@@ -323,6 +329,18 @@ export class TipoDeEntregaComponent implements OnInit {
     }
     if (error?.status === 409) {
       return 'No hay stock suficiente para completar la compra.';
+    }
+    if (error?.status === 503) {
+      return 'No se pudo validar el comprobante en este momento. Intenta nuevamente más tarde.';
+    }
+    if (
+      code === IDENTITY_ERROR_CODES.SERVICE_UNAVAILABLE ||
+      code === IDENTITY_ERROR_CODES.PROVIDER_NOT_CONFIGURED ||
+      code === IDENTITY_ERROR_CODES.INVOICE_DATA_MISMATCH
+    ) {
+      return typeof message === 'string' && message.trim()
+        ? message
+        : 'No se pudo validar el comprobante. Revisa los datos e intenta nuevamente.';
     }
     if (error?.status === 400) {
       const message = typeof error?.error?.message === 'string' ? error.error.message : '';
