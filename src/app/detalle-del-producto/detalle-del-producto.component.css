@@ -173,3 +173,43 @@ input[type="text"] {
   text-decoration: none;
   cursor: pointer;
 }
+
+@media (max-width: 992px) {
+  .product-detail-section {
+    padding: 1rem;
+  }
+
+  .product-detail-container {
+    flex-direction: column;
+  }
+
+  .product-image,
+  .product-info {
+    width: 100%;
+    border-right: none;
+  }
+
+  .product-image img {
+    height: auto;
+    max-height: 20rem;
+  }
+
+  .product-image:hover img {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .product-title {
+    font-size: 1.25rem;
+  }
+
+  .add-to-cart-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .modal-content {
+    margin: 30% auto;
+    width: calc(100% - 2rem);
+  }
+}

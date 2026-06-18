@@ -233,7 +233,7 @@
 
 
 
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../auth.service';
@@ -256,6 +256,10 @@ import { environment } from '../../environments/environment';
 export class ProyectosComponent implements OnInit {
   products: Product[] = [];
   categorias: any[] = [];
+  categoryMenuOpen = false;
+  selectedCategoryId: number | null = null;
+  selectedCategoryLabel = 'Todas las categorías';
+  selectedCategoryIcon = 'bx bx-grid-alt';
   private apiUrl = `${environment.apiUrl}/products`;
   private apiCategorias = `${environment.apiUrl}/categories`;
   private searchApiUrl = `${environment.apiUrl}/products/search/`;
@@ -333,6 +337,34 @@ export class ProyectosComponent implements OnInit {
         alert('Error al filtrar por categoría');
       },
     });
+  }
+
+  toggleCategoryMenu(event: Event): void {
+    event.stopPropagation();
+    this.categoryMenuOpen = !this.categoryMenuOpen;
+  }
+
+  @HostListener('document:click')
+  closeCategoryMenu(): void {
+    this.categoryMenuOpen = false;
+  }
+
+  selectCategory(categoria: { id: number; name: string } | null, event?: Event): void {
+    event?.stopPropagation();
+    this.categoryMenuOpen = false;
+
+    if (!categoria) {
+      this.selectedCategoryId = null;
+      this.selectedCategoryLabel = 'Todas las categorías';
+      this.selectedCategoryIcon = 'bx bx-grid-alt';
+      this.loadAllProducts();
+      return;
+    }
+
+    this.selectedCategoryId = categoria.id;
+    this.selectedCategoryLabel = categoria.name;
+    this.selectedCategoryIcon = this.obtenerIcono(categoria.name);
+    this.getIdCategory(categoria.id);
   }
 
   obtenerIcono(categoriaNombre: string): string {

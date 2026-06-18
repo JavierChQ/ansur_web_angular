@@ -260,7 +260,7 @@
 // }
 
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../auth.service';
 import { CartService } from '../cart.service';
@@ -279,7 +279,7 @@ import { environment } from '../../environments/environment';
   templateUrl: './inicio.component.html',
   styleUrls: ['./inicio.component.css'],
 })
-export class InicioComponent implements OnInit {
+export class InicioComponent implements OnInit, OnDestroy {
   products: Product[] = [];
   images: string[] = [
     'assets/banner1.png',
@@ -290,6 +290,8 @@ export class InicioComponent implements OnInit {
   ];
   currentIndex: number = 0;
   private apiUrl = `${environment.apiUrl}/products`;
+  private slideIntervalId?: ReturnType<typeof setInterval>;
+  private readonly slideIntervalMs = 8000;
 
   constructor(
     private http: HttpClient,
@@ -307,25 +309,57 @@ export class InicioComponent implements OnInit {
         alert('Error en la API');
       },
     });
+
+    this.startSlideAutoplay();
+  }
+
+  ngOnDestroy(): void {
+    this.stopSlideAutoplay();
   }
 
   goToSlide(index: number): void {
     this.currentIndex = index;
     this.updateSlides();
+    this.resetSlideAutoplay();
   }
 
   prevSlide(): void {
     this.currentIndex = this.currentIndex > 0 ? this.currentIndex - 1 : this.images.length - 1;
     this.updateSlides();
+    this.resetSlideAutoplay();
   }
 
   nextSlide(): void {
     this.currentIndex = this.currentIndex < this.images.length - 1 ? this.currentIndex + 1 : 0;
     this.updateSlides();
+    this.resetSlideAutoplay();
+  }
+
+  private startSlideAutoplay(): void {
+    this.stopSlideAutoplay();
+    this.slideIntervalId = setInterval(() => {
+      this.currentIndex =
+        this.currentIndex < this.images.length - 1 ? this.currentIndex + 1 : 0;
+      this.updateSlides();
+    }, this.slideIntervalMs);
+  }
+
+  private stopSlideAutoplay(): void {
+    if (this.slideIntervalId) {
+      clearInterval(this.slideIntervalId);
+      this.slideIntervalId = undefined;
+    }
+  }
+
+  private resetSlideAutoplay(): void {
+    this.startSlideAutoplay();
   }
 
   private updateSlides(): void {
-    const slides = document.querySelector('.slides') as HTMLElement;
+    const slides = document.querySelector('.slides') as HTMLElement | null;
+    if (!slides) {
+      return;
+    }
     slides.style.transform = `translateX(-${this.currentIndex * 100}%)`;
   }
 

@@ -123,3 +123,22 @@
   color: #f82727;
   font-weight: 600;
 }
+
+@media (max-width: 992px) {
+  .section__orders {
+    padding: 0.75rem;
+  }
+
+  .orders-title {
+    font-size: 1.5rem;
+  }
+
+  .order-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .order-product {
+    align-items: flex-start;
+  }
+}

@@ -111,3 +111,30 @@
     color: #f82727;
     margin-top: 0.5rem;
   }
+
+@media (max-width: 992px) {
+  .section.compra__realizada {
+    margin: 1rem auto;
+    padding: 1rem 0;
+  }
+
+  .compra__content {
+    padding: 1.25rem;
+  }
+
+  .compra__icon,
+  .compra__icon .bx-check-circle {
+    font-size: 3rem;
+  }
+
+  .compra__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .compra__actions .btn {
+    width: 100%;
+    margin: 0;
+  }
+}

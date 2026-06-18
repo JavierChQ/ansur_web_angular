@@ -72,4 +72,40 @@ footer .contenedor__footer p {
   text-align: center;
 }
 
+@media (max-width: 992px) {
+  footer {
+    padding: 1.5rem 1rem;
+  }
 
+  footer h2 {
+    font-size: 1.25rem;
+    text-align: center;
+  }
+
+  footer .contenedor__footer article {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  footer .contenedor__footer article div {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  footer .contenedor__footer article .adress__footer {
+    width: 100%;
+    max-width: 18rem;
+  }
+
+  footer .contenedor__footer article div a {
+    align-items: center;
+  }
+
+  footer .contenedor__footer article div:last-child {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}

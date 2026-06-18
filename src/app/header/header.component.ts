@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   name: string | null = '';
   searchTerm: string = '';
   cartCount: number = 0;
+  menuOpen = false;
   private searchApiUrl = `${environment.apiUrl}/products/search/`;
   private cartSubscription?: Subscription;
 
@@ -40,6 +41,25 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.cartSubscription?.unsubscribe();
+    document.body.classList.remove('menu-open');
+  }
+
+  toggleMenu(): void {
+    this.menuOpen = !this.menuOpen;
+    document.body.classList.toggle('menu-open', this.menuOpen);
+  }
+
+  closeMenu(): void {
+    if (!this.menuOpen) {
+      return;
+    }
+    this.menuOpen = false;
+    document.body.classList.remove('menu-open');
+  }
+
+  navigateAndClose(route: string): void {
+    this.closeMenu();
+    void this.router.navigate([route]);
   }
 
   deleteToken(): void {

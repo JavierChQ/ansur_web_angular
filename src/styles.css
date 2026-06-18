@@ -5,13 +5,219 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+:root {
+  --bp-sm: 576px;
+  --bp-md: 992px;
+  --bp-lg: 992px;
+  --bp-xl: 1200px;
+  --page-padding: clamp(1rem, 4vw, 4rem);
+  --header-height: 5.7rem;
+}
+
 html {
   font-size: 16px;
   box-sizing: border-box;
   font-family: sans-serif;
 }
-.section{
-    max-width: 1300px;
+
+body {
+  max-width: 100%;
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+.section {
+  max-width: 1300px;
+}
+
+.stack-on-mobile {
+  display: flex;
+  gap: 1rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+@media (max-width: 992px) {
+  .section {
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: var(--page-padding);
+  }
+  :root {
+    --header-height: 6.75rem;
+  }
+
+  .stack-on-mobile,
+  .form-row {
+    flex-direction: column;
+  }
+
+  /* Checkout compartido (datos, entrega, pago) */
+  .section__payment {
+    width: 100%;
+    margin: 1rem auto;
+  }
+
+  .section__payment .container {
+    padding: 0.75rem;
+  }
+
+  .payment-layout {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .section__payment .form-container,
+  .section__payment .summary-container {
+    width: 100% !important;
+  }
+
+  .stepper {
+    margin-bottom: 1.25rem;
+  }
+
+  .stepper .step {
+    align-items: center;
+  }
+
+  .stepper .step-icon {
+    width: 28px;
+    height: 28px;
+    font-size: 1rem;
+  }
+
+  .stepper .step p {
+    font-size: 0.65rem;
+    max-width: 4.25rem;
+    text-align: center;
+    line-height: 1.2;
+  }
+
+  .stepper .progress-bar {
+    top: 28%;
+  }
+
+  .cards__entrega {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .cards__entrega article {
+    width: calc(50% - 0.5rem);
+    min-width: 7.5rem;
+    height: 5.5rem;
+  }
+
+  .payment-methods {
+    flex-wrap: wrap;
+  }
+
+  .payment-method {
+    flex: 1 1 calc(50% - 0.5rem);
+    min-width: 7rem;
+    width: auto;
+  }
+
+  .btn__form {
+    flex-direction: column;
+  }
+
+  .section__payment .btn-comprar,
+  .section__payment .summary-pay-btn,
+  .section__payment .yape-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .checkout-mode-tabs {
+    flex-direction: column;
+  }
+
+  .checkout-mode-tabs .mode-tab {
+    width: 100%;
+    text-align: center;
+  }
+
+  .receptor-options {
+    flex-direction: column;
+  }
+
+  .receptor-options .receptor-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .half-width {
+    flex: none;
+    width: 100%;
+  }
+
+  /* Auth, contacto y formularios públicos */
+  .section__contacto {
+    padding: 1rem 0;
+  }
+
+  .section__contacto .container {
+    margin: 1rem auto;
+  }
+
+  .section__contacto .contact-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .section__contacto .contact-form {
+    width: 100% !important;
+    max-width: 420px;
+    padding: 1.25rem;
+  }
+
+  .section__contacto .contact-image {
+    width: 100% !important;
+    max-width: 420px;
+  }
+
+  .section__contacto .form-group-inline {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .section__contacto .content__map iframe {
+    width: 100% !important;
+    height: 250px !important;
+    margin: 1.25rem auto;
+  }
+
+  /* Modales compartidos */
+  .modal-content {
+    width: calc(100% - 2rem) !important;
+    max-width: 28rem;
+    margin: auto !important;
+    padding: 1.25rem;
+  }
+
+  .close,
+  .close-btn {
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Ajustes extra: móvil en horizontal (p. ej. iPhone ~844px de ancho) */
+@media (max-width: 992px) and (orientation: landscape) {
+  :root {
+    --header-height: 4.25rem;
+  }
 }
 
 .stock-badge {

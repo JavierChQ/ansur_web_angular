@@ -60,4 +60,31 @@
   .btn-secondary:hover {
     opacity: 0.9;
   }
+
+@media (max-width: 992px) {
+  .section.section__error {
+    margin: 1rem auto;
+    padding: 1rem 0;
+  }
+
+  .error__content {
+    padding: 1.25rem;
+  }
+
+  .error__icon,
+  .error__icon .bx-x-circle {
+    font-size: 3rem;
+  }
+
+  .error__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .error__actions .btn {
+    width: 100%;
+    margin: 0;
+  }
+}
   

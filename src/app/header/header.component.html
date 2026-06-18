@@ -1,10 +1,20 @@
-<header>
+<header [class.menu-open]="menuOpen">
   <img src="assets/logo-header.jpg" class="logo" alt="logo" />
-  <nav>
-    <a routerLink="/inicio" routerLinkActive="active">Inicio</a>
-    <a routerLink="/productos" routerLinkActive="active">Productos</a>
-    <a routerLink="/nosotros" routerLinkActive="active">Nosotros</a>
-    <a routerLink="/contacto" routerLinkActive="active"> Contacto</a>
+  <button
+    type="button"
+    class="menu-toggle"
+    (click)="toggleMenu()"
+    [attr.aria-expanded]="menuOpen"
+    aria-label="Abrir menú de navegación"
+  >
+    <i class="bx" [class.bx-menu]="!menuOpen" [class.bx-x]="menuOpen"></i>
+  </button>
+  <div class="nav-overlay" *ngIf="menuOpen" (click)="closeMenu()" aria-hidden="true"></div>
+  <nav [class.open]="menuOpen">
+    <a routerLink="/inicio" routerLinkActive="active" (click)="navigateAndClose('/inicio')">Inicio</a>
+    <a routerLink="/productos" routerLinkActive="active" (click)="navigateAndClose('/productos')">Productos</a>
+    <a routerLink="/nosotros" routerLinkActive="active" (click)="navigateAndClose('/nosotros')">Nosotros</a>
+    <a routerLink="/contacto" routerLinkActive="active" (click)="navigateAndClose('/contacto')"> Contacto</a>
   </nav>
   <div class="search" >
     <i class="bx bx-search icon_s" (click)="searchProduct()"></i>
@@ -20,24 +30,23 @@
   
   
   <div class="icons">
-    <a [routerLink]="name ? '/mis-pedidos' : '/login'">
+    <a [routerLink]="name ? '/mis-pedidos' : '/login'" (click)="closeMenu()">
       <i class="bx bx-user-circle"></i>
-      {{ name ? name : 'Cuenta' }}
+      <span class="icon-label">{{ name ? name : 'Cuenta' }}</span>
     </a>
     
-    <a *ngIf="name" routerLink="#" (click)="deleteToken()">
+    <a *ngIf="name" routerLink="#" (click)="deleteToken(); closeMenu()">
       <i class='bx bx-log-out'></i>
-      Salir
+      <span class="icon-label">Salir</span>
     </a>
     
-    <a (click)="handleCartClick()" class="cart-link">
+    <a (click)="handleCartClick(); closeMenu()" class="cart-link">
       <i class="bx bx-cart"></i>
       <span class="cart-label">Carrito</span>
       <span *ngIf="cartCount > 0" class="cart-bubble">{{ cartCount }}</span>
     </a>
   </div>
 </header>
-
 
 <div id="myModal" class="modal">
   <div class="modal-content">

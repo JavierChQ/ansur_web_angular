@@ -151,4 +151,19 @@
       cursor: pointer;
       font-size: 20px;
     }
+
+@media (max-width: 992px) {
+  .contact-form h2 {
+    font-size: 1.35rem;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  .register__content {
+    flex-wrap: wrap;
+    text-align: center;
+  }
+}
     
