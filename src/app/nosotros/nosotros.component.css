@@ -1,97 +1,223 @@
-.about-us {
-    padding: 2rem;
-    background-color: #f4f4f4;
-    width: 100%;
-    margin: 0 auto;
-  }
-  
-  .container {
-    margin: 2rem auto;
-  }
-  
-  .about-item {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    margin-bottom: 3rem;
-    justify-content: center;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-  }
-  
-  .about-text, .about-image {
-    padding: 1rem;
-  }
-  
-  .about-text {
-    width: 65%;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .about-image img {
-    width: 18rem;
-    border-radius: 20px;
-    height: auto;
-    object-fit: cover;
-  }
-  
-  .about-text h2 {
-    margin-top: 0;
-    font-size: 1.5rem;
-    color: #333;
-  }
-  
-  .about-text p {
-    margin: 0.5rem 0 0;
-    color: #666;
-    line-height: 1.5;
-  }
-  
+.nosotros-page {
+  width: 100%;
+  background-color: #f7f3eb;
+  color: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2vw, 1.25rem);
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+}
 
-  .onigrama__content{
-      margin-top: 2rem 0;
-    }
-    .onigrama__content h2{
-        text-align: center;
-    }
-    .onigrama__content .img__on {
-        width: 100%;
-        margin-top: 2rem;
-    }
-    .onigrama__content .img__on img{
-        width: 80%;
-        display: block;
-        margin: auto;
-    }
+/* Hero */
+.nosotros-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: clamp(1rem, 2vw, 1.25rem);
+  min-height: clamp(22rem, 42vw, 30rem);
+  background: transparent;
+}
+
+.nosotros-hero__intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 5vw, 4.5rem);
+  background: #fff;
+  border-radius: 1rem;
+}
+
+.nosotros-hero__logo {
+  width: clamp(7rem, 14vw, 10rem);
+  height: auto;
+  object-fit: contain;
+}
+
+.nosotros-hero__intro h1 {
+  margin: 0;
+  font-size: clamp(1.5rem, 3.2vw, 2.35rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  max-width: 22rem;
+}
+
+.nosotros-hero__tagline {
+  margin: 0;
+  max-width: 24rem;
+  font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+  line-height: 1.55;
+  color: #333;
+}
+
+.nosotros-hero__tagline strong {
+  color: #f82727;
+  font-weight: 700;
+}
+
+.nosotros-hero__visual {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  background: #fff;
+}
+
+.nosotros-hero__photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.nosotros-callout {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  text-align: center;
+}
+
+.nosotros-callout img {
+  width: clamp(4.5rem, 8vw, 6rem);
+  height: clamp(4.5rem, 8vw, 6rem);
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #fff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+
+.nosotros-callout span {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #222;
+  max-width: 6.5rem;
+  line-height: 1.2;
+}
+
+.nosotros-callout--usb {
+  top: 18%;
+  left: 8%;
+}
+
+.nosotros-callout--tape {
+  bottom: 16%;
+  right: 10%;
+}
+
+/* Pillars */
+.nosotros-pillars {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 2vw, 1.25rem);
+  background: transparent;
+}
+
+.nosotros-pillar {
+  padding: clamp(1.5rem, 3vw, 2.5rem) clamp(1.25rem, 2.5vw, 2rem);
+  background: #fff;
+  border-radius: 1rem;
+}
+
+.nosotros-pillar h2 {
+  margin: 0 0 1rem;
+  font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.nosotros-pillar__text p,
+.nosotros-pillar__highlight {
+  margin: 0 0 0.85rem;
+  font-size: clamp(0.82rem, 1.1vw, 0.92rem);
+  line-height: 1.55;
+  color: #333;
+  text-align: justify;
+}
+
+.nosotros-pillar__text p:last-child,
+.nosotros-pillar__highlight:last-of-type {
+  margin-bottom: 0;
+}
+
+.nosotros-pillar__highlight strong {
+  color: #f82727;
+}
+
+.nosotros-pillar__illustration {
+  display: block;
+  width: min(100%, 11rem);
+  margin: 1.25rem auto 0;
+  height: auto;
+}
+
+/* CTA */
+.nosotros-cta-section {
+  display: flex;
+  justify-content: center;
+  padding: clamp(1.5rem, 3vw, 2rem);
+  background: #fff;
+  border-radius: 1rem;
+  text-align: center;
+}
+
+.nosotros-cta {
+  display: inline-block;
+  padding: 0.85rem 2rem;
+  border-radius: 999px;
+  background: #f82727;
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  border: 2px solid #f82727;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.nosotros-cta:hover {
+  background: #d02020;
+  border-color: #d02020;
+  transform: translateY(-1px);
+}
 
 @media (max-width: 992px) {
-  .about-us {
-    padding: 1rem 0;
+  .nosotros-hero {
+    grid-template-columns: 1fr;
   }
 
-  .container {
-    margin: 1rem auto;
+  .nosotros-hero__intro {
+    padding-bottom: clamp(1.5rem, 4vw, 2rem);
   }
 
-  .about-item {
-    flex-direction: column;
-    text-align: center;
-    margin-bottom: 2rem;
+  .nosotros-hero__intro h1 {
+    max-width: none;
   }
 
-  .about-text {
-    width: 100%;
+  .nosotros-hero__visual {
+    min-height: 18rem;
   }
 
-  .about-image img {
-    width: 100%;
-    max-width: 18rem;
+  .nosotros-pillars {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .nosotros-callout span {
+    font-size: 0.55rem;
   }
 
-  .onigrama__content .img__on img {
-    width: 100%;
+  .nosotros-callout--usb {
+    top: 10%;
+    left: 4%;
+  }
+
+  .nosotros-callout--tape {
+    bottom: 10%;
+    right: 4%;
   }
 }
