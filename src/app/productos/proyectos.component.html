@@ -1,77 +1,93 @@
 <app-header></app-header>
-<div class="categorias__header">
-  <nav class="categorias__nav categorias__nav--desktop">
-    <button
-      *ngFor="let categoria of categorias"
-      type="button"
-      [class.active]="selectedCategoryId === categoria.id"
-      (click)="selectCategory(categoria)"
-    >
-      <i [class]="obtenerIcono(categoria.name)"></i>
-      {{ categoria.name }}
-    </button>
-  </nav>
 
-  <div class="categorias__dropdown categorias__nav--mobile">
-    <button
-      type="button"
-      class="categorias__dropdown-toggle"
-      (click)="toggleCategoryMenu($event)"
-      [attr.aria-expanded]="categoryMenuOpen"
-      aria-haspopup="listbox"
-    >
-      <i [class]="selectedCategoryIcon"></i>
-      <span class="categorias__dropdown-label">{{ selectedCategoryLabel }}</span>
-      <i class="bx bx-chevron-down categorias__dropdown-chevron" [class.open]="categoryMenuOpen"></i>
-    </button>
-    <ul class="categorias__dropdown-menu" *ngIf="categoryMenuOpen" role="listbox">
-      <li role="option">
-        <button type="button" [class.active]="selectedCategoryId === null" (click)="selectCategory(null, $event)">
+<section class="section section__productos">
+  <div class="productos-layout">
+    <aside class="categorias__sidebar categorias__nav--desktop">
+      <h2 class="categorias__sidebar-title">Categorías</h2>
+      <nav class="categorias__nav">
+        <button
+          type="button"
+          [class.active]="selectedCategoryId === null"
+          (click)="selectCategory(null)"
+        >
           <i class="bx bx-grid-alt"></i>
           Todas las categorías
         </button>
-      </li>
-      <li *ngFor="let categoria of categorias" role="option">
         <button
+          *ngFor="let categoria of categorias"
           type="button"
           [class.active]="selectedCategoryId === categoria.id"
-          (click)="selectCategory(categoria, $event)"
+          (click)="selectCategory(categoria)"
         >
           <i [class]="obtenerIcono(categoria.name)"></i>
           {{ categoria.name }}
         </button>
-      </li>
-    </ul>
-  </div>
-</div><section class="section section__productos">
-  <div class="card-container">
-    <div class="card" *ngFor="let product of products">
-      <img class="card-image" [src]="product.image1" alt="Product Image" />
-      <div class="card-content">
-        <h2 class="card-title">{{ product.name }}</h2>
-        <span
-          class="stock-badge"
-          [class.available]="isProductInStock(product)"
-          [class.unavailable]="!isProductInStock(product)"
-        >
-          {{ getStockLabel(product) }}
-        </span>
-        <div class="card-footer">
-          <div class="text__content">
-            <p class="card-price">S/ {{ product | productPrice }}</p>
-            <div class="quantity-selector">
-              <button class="quantity-btn" (click)="disminuir(product)" [disabled]="!isProductInStock(product)">-</button>
-              <input type="text" [value]="product.quantity" min="1" readonly>
-              <button class="quantity-btn" (click)="aumentar(product)" [disabled]="!canIncreaseQuantity(product)">+</button>
+      </nav>
+    </aside>
+
+    <div class="categorias__dropdown categorias__nav--mobile">
+      <button
+        type="button"
+        class="categorias__dropdown-toggle"
+        (click)="toggleCategoryMenu($event)"
+        [attr.aria-expanded]="categoryMenuOpen"
+        aria-haspopup="listbox"
+      >
+        <i [class]="selectedCategoryIcon"></i>
+        <span class="categorias__dropdown-label">{{ selectedCategoryLabel }}</span>
+        <i class="bx bx-chevron-down categorias__dropdown-chevron" [class.open]="categoryMenuOpen"></i>
+      </button>
+      <ul class="categorias__dropdown-menu" *ngIf="categoryMenuOpen" role="listbox">
+        <li role="option">
+          <button type="button" [class.active]="selectedCategoryId === null" (click)="selectCategory(null, $event)">
+            <i class="bx bx-grid-alt"></i>
+            Todas las categorías
+          </button>
+        </li>
+        <li *ngFor="let categoria of categorias" role="option">
+          <button
+            type="button"
+            [class.active]="selectedCategoryId === categoria.id"
+            (click)="selectCategory(categoria, $event)"
+          >
+            <i [class]="obtenerIcono(categoria.name)"></i>
+            {{ categoria.name }}
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <div class="productos-main">
+      <div class="card-container">
+        <div class="card" *ngFor="let product of products">
+          <img class="card-image" [src]="product.image1" alt="Product Image" />
+          <div class="card-content">
+            <h2 class="card-title">{{ product.name }}</h2>
+            <span
+              class="stock-badge"
+              [class.available]="isProductInStock(product)"
+              [class.unavailable]="!isProductInStock(product)"
+            >
+              {{ getStockLabel(product) }}
+            </span>
+            <div class="card-footer">
+              <div class="text__content">
+                <p class="card-price">S/ {{ product | productPrice }}</p>
+                <div class="quantity-selector">
+                  <button class="quantity-btn" (click)="disminuir(product)" [disabled]="!isProductInStock(product)">-</button>
+                  <input type="text" [value]="product.quantity" min="1" readonly>
+                  <button class="quantity-btn" (click)="aumentar(product)" [disabled]="!canIncreaseQuantity(product)">+</button>
+                </div>
+              </div>
+              <div class="btns__content">
+                <a class="card-button" [routerLink]="['/detalle-del-producto', product.id]">Ver producto</a>
+                <a
+                  class="card-button"
+                  [class.disabled]="!isProductInStock(product)"
+                  (click)="addToCart(product)"
+                >Agregar al carrito</a>
+              </div>
             </div>
-          </div>
-          <div class="btns__content">
-            <a class="card-button" [routerLink]="['/detalle-del-producto', product.id]">Ver producto</a>
-            <a
-              class="card-button"
-              [class.disabled]="!isProductInStock(product)"
-              (click)="addToCart(product)"
-            >Agregar al carrito</a>
           </div>
         </div>
       </div>

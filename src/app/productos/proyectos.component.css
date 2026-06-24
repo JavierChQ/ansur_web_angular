@@ -1,41 +1,77 @@
-.categorias__header {
+.section__productos {
+  width: 100%;
+  margin: 2rem auto 3rem;
+  padding: 0 2rem;
+}
+
+.productos-layout {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  height: 3rem;
-  background-color: #383234;
+  align-items: flex-start;
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.categorias__sidebar {
+  width: 240px;
+  flex-shrink: 0;
   position: sticky;
-  top: 5.7rem;
-  z-index: 90;
+  top: 6.5rem;
+  align-self: flex-start;
+  max-height: calc(100vh - 7.5rem);
+  overflow-y: auto;
+  padding: 1.25rem 0;
+  background-color: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 8px;
 }
 
-.categorias__nav--desktop {
-  display: flex;
-  gap: 1.5rem;
-  align-items: center;
+.categorias__sidebar-title {
+  margin: 0 0 1rem;
+  padding: 0 1rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #333;
 }
 
-.categorias__nav--desktop button {
+.categorias__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.categorias__nav button {
   display: flex;
   align-items: center;
-  gap: 0.35rem;
-  background-color: transparent;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.65rem 1rem;
+  background: none;
   border: none;
+  border-left: 3px solid transparent;
   outline: none;
   cursor: pointer;
-  color: #fff;
-  font-size: 1rem;
+  color: #333;
+  font-size: 0.95rem;
   font-weight: 600;
+  text-align: left;
+  transition: background-color 0.15s ease, color 0.15s ease;
 }
 
-.categorias__nav--desktop button i {
+.categorias__nav button i {
   font-size: 1.1rem;
   color: #f82727;
+  flex-shrink: 0;
 }
 
-.categorias__nav--desktop button.active {
+.categorias__nav button:hover {
+  background-color: #fff5f5;
+}
+
+.categorias__nav button.active {
   color: #f82727;
+  background-color: #fff5f5;
+  border-left-color: #f82727;
 }
 
 .categorias__nav--mobile {
@@ -52,8 +88,8 @@
   padding: 0.65rem 0.85rem;
   border: 1px solid rgba(248, 39, 39, 0.45);
   border-radius: 8px;
-  background-color: rgba(255, 255, 255, 0.06);
-  color: #fff;
+  background-color: #fff;
+  color: #333;
   font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
@@ -123,25 +159,25 @@
   color: #f82727;
 }
 
-.section__productos {
-  width: 100%;
-  margin: 3rem auto;
-  padding: 0px;
+.productos-main {
+  flex: 1;
+  min-width: 0;
 }
 
 .card-container {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 20px;
-  justify-content: center;
 }
 
 .card {
   border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
-  width: 20%;
+  width: 100%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
 }
 
 .card-image {
@@ -152,6 +188,10 @@
 
 .card-content {
   padding: 13px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
 }
 
 .card-title {
@@ -175,6 +215,11 @@
   transition: background-color 0.3s ease;
 }
 
+.card-footer {
+  margin-top: auto;
+  width: 100%;
+}
+
 .btns__content {
   display: flex;
   flex-wrap: wrap;
@@ -188,14 +233,17 @@
 @media (max-width: 992px) {
   .section__productos {
     padding-inline: 0.75rem;
+    margin-top: 1.5rem;
   }
 
-  .categorias__header {
-    top: var(--header-height, 6.75rem);
-    height: auto;
-    min-height: 3rem;
-    padding: 0.5rem 0.75rem;
-    overflow: visible;
+  .productos-layout {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .productos-main {
+    width: 100%;
   }
 
   .categorias__nav--desktop {
@@ -207,28 +255,16 @@
   }
 
   .card-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 1.25rem;
+    width: 100%;
   }
 
   .card {
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
-
-  .card-content {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    min-height: 0;
-  }
-
-  .card-footer {
-    margin-top: auto;
-    width: 100%;
+    max-width: 420px;
   }
 
   .text__content {
@@ -254,7 +290,14 @@
 
 @media (max-width: 992px) and (orientation: landscape) {
   .card-container {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .card {
+    width: calc(33.333% - 0.85rem);
+    max-width: 240px;
   }
 
   .btns__content {
@@ -311,34 +354,28 @@ input[type="text"] {
   margin: .5rem 0;
 }
 
-
-
-
-
 /* El fondo del modal */
 .modal {
-  display: none; /* Ocultado por defecto */
-  position: fixed; /* Fijo en la pantalla */
-  z-index: 1; /* Encima del contenido */
+  display: none;
+  position: fixed;
+  z-index: 1;
   left: 0;
   top: 0;
-  width: 100%; /* Ancho completo */
-  height: 100%; /* Alto completo */
-  overflow: auto; /* Hacer que el modal sea desplazable si es necesario */
-  background-color: rgb(0,0,0); /* Color de fondo negro */
-  background-color: rgba(0,0,0,0.4); /* Fondo negro con opacidad */
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
 }
 
-/* Contenido del modal */
 .modal-content {
   background-color: #fefefe;
-  margin: 15% auto; /* 15% desde la parte superior y centrado horizontalmente */
+  margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%; /* Ancho del modal */
+  width: 80%;
 }
 
-/* El botón de cerrar */
 .close {
   color: #aaa;
   float: right;
@@ -352,5 +389,3 @@ input[type="text"] {
   text-decoration: none;
   cursor: pointer;
 }
-
-
