@@ -13,7 +13,8 @@
       <h2>Canales de atención</h2>
       <div class="contacto-card__actions">
         <a
-          href="https://wa.me/51947346467"
+          *ngIf="config?.whatsappUrl as whatsappUrl"
+          [href]="whatsappUrl"
           target="_blank"
           rel="noopener noreferrer"
           class="contacto-btn contacto-btn--whatsapp"
@@ -22,16 +23,31 @@
           WhatsApp
         </a>
       </div>
+      <p *ngIf="loadError" class="contacto-error">
+        No pudimos cargar los canales de contacto. Intenta nuevamente más tarde.
+      </p>
     </article>
 
-    <article class="contacto-card">
+    <article class="contacto-card" *ngIf="config?.facebookUrl || config?.tiktokUrl">
       <h2>Redes sociales</h2>
       <div class="contacto-card__actions contacto-card__actions--social">
-        <a href="#" class="contacto-btn contacto-btn--facebook">
+        <a
+          *ngIf="config?.facebookUrl as facebookUrl"
+          [href]="facebookUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="contacto-btn contacto-btn--facebook"
+        >
           <i class="bx bxl-facebook"></i>
           Facebook
         </a>
-        <a href="#" class="contacto-btn contacto-btn--tiktok">
+        <a
+          *ngIf="config?.tiktokUrl as tiktokUrl"
+          [href]="tiktokUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="contacto-btn contacto-btn--tiktok"
+        >
           <i class="bx bxl-tiktok"></i>
           TikTok
         </a>
@@ -40,9 +56,8 @@
   </section>
 
   <section class="contacto-map">
-    <h4>
-      Ubícanos en CAL.GARCI CARBAJAL NRO. 101 INT. A 12 CENTRO COMERCIAL LA
-      ESQUINA DEL FUTURO
+    <h4 *ngIf="config?.address as address">
+      Ubícanos en {{ address | uppercase }}
     </h4>
     <iframe
       src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3827.3803355712826!2d-71.53874012582217!3d-16.405499084323765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91424af819a9a93b%3A0xdb0d19b772b79adf!2sGarc%C3%AD%20de%20Carbajal%20101%2C%20Arequipa%2004001!5e0!3m2!1ses!2spe!4v1725838165510!5m2!1ses!2spe"

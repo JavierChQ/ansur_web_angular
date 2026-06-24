@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ContactConfigService } from './services/contact-config.service';
 
 @Component({
   selector: 'app-root',
@@ -6,8 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
+  constructor(private readonly contactConfigService: ContactConfigService) {}
 
   ngOnInit() {
+    this.contactConfigService.load();
+
     //----------- chatbot's code --------------//
    //----------- chatbot's code --------------//
    (function (d, m) {

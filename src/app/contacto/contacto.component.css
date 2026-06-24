@@ -140,6 +140,12 @@
   transform: translateY(-1px);
 }
 
+.contacto-error {
+  margin: 0.75rem 0 0;
+  color: #b42318;
+  font-size: 0.95rem;
+}
+
 .contacto-map {
   padding: clamp(1.5rem, 3vw, 2rem);
 }
