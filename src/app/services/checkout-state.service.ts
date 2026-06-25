@@ -12,7 +12,16 @@ const CUSTOMER_KEY = 'checkoutCustomer';
 const DELIVERY_KEY = 'checkoutDelivery';
 const INVOICE_KEY = 'checkoutInvoice';
 const COMPLETED_KEY = 'completedOrderSummary';
+const PENDING_WHATSAPP_KEY = 'pendingWhatsappOrderSummary';
 const CHECKOUT_TOKEN_KEY = 'checkout_token';
+
+export interface PendingWhatsappOrderSummary {
+  orderId: number;
+  orderReferenceCode: string;
+  total: number;
+  expiresAt: string;
+  whatsappUrl: string;
+}
 
 export interface CompletedOrderSummary {
   orderId: number;
@@ -128,6 +137,27 @@ export class CheckoutStateService {
     sessionStorage.removeItem(COMPLETED_KEY);
   }
 
+  savePendingWhatsappSummary(summary: PendingWhatsappOrderSummary): void {
+    sessionStorage.setItem(PENDING_WHATSAPP_KEY, JSON.stringify(summary));
+  }
+
+  getPendingWhatsappSummary(): PendingWhatsappOrderSummary | null {
+    const raw = sessionStorage.getItem(PENDING_WHATSAPP_KEY);
+    if (!raw) {
+      return null;
+    }
+
+    try {
+      return JSON.parse(raw) as PendingWhatsappOrderSummary;
+    } catch {
+      return null;
+    }
+  }
+
+  clearPendingWhatsappSummary(): void {
+    sessionStorage.removeItem(PENDING_WHATSAPP_KEY);
+  }
+
   clear(): void {
     sessionStorage.removeItem(ORDER_KEY);
     sessionStorage.removeItem(CUSTOMER_KEY);
@@ -156,6 +186,7 @@ export class CheckoutStateService {
   clearAll(): void {
     this.clear();
     this.clearCompletedSummary();
+    this.clearPendingWhatsappSummary();
   }
 
   isExpired(order: CheckoutOrder | null): boolean {

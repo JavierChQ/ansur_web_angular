@@ -23,6 +23,7 @@ import {
 import { MercadoPagoConfigService } from '../services/mercadopago-config.service';
 import { MercadoPagoSdkService } from '../services/mercadopago-sdk.service';
 import { CreatePaymentPayload, PaymentService } from '../services/payment.service';
+import { WhatsappPaymentService } from '../services/whatsapp-payment.service';
 import { MercadoPagoCardFormData } from '../../types/mercadopago';
 
 interface PaymentProductSummary {
@@ -33,7 +34,9 @@ interface PaymentProductSummary {
   image?: string;
 }
 
-type PaymentMethod = 'card' | 'yape';
+type PaymentChannel = 'mercadopago' | 'whatsapp';
+type MercadoPagoSubMethod = 'card' | 'yape';
+type PaymentMethod = MercadoPagoSubMethod | 'whatsapp';
 
 @Component({
   selector: 'app-pagar',
@@ -44,6 +47,7 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
   products: PaymentProductSummary[] = [];
   totalAmount = 0;
   pendingOrder: CheckoutOrder | null = null;
+  paymentChannel: PaymentChannel = 'mercadopago';
   paymentMethod: PaymentMethod = 'card';
   isPaying = false;
   isLoadingPayment = true;
@@ -58,6 +62,7 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
   invoiceData: CheckoutInvoiceData | null = null;
   subtotal = 0;
   deliveryFee = 0;
+  mercadoPagoMinAmount = 100;
   readonly storeAddress = STORE_PICKUP_ADDRESS;
   readonly storeHours = STORE_BUSINESS_HOURS;
   cardFormVisible = true;
@@ -77,6 +82,7 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
     private readonly checkoutState: CheckoutStateService,
     private readonly checkoutService: CheckoutService,
     private readonly paymentService: PaymentService,
+    private readonly whatsappPaymentService: WhatsappPaymentService,
     private readonly mercadoPagoConfig: MercadoPagoConfigService,
     private readonly mercadoPagoSdk: MercadoPagoSdkService,
     private readonly cdr: ChangeDetectorRef,
@@ -102,6 +108,10 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     this.pendingOrder = pendingOrder;
+    if (pendingOrder.payment_channel === 'whatsapp') {
+      this.paymentChannel = 'whatsapp';
+      this.paymentMethod = 'whatsapp';
+    }
     this.subtotal = (pendingOrder.orderHasProducts ?? []).reduce(
       (sum, line) => sum + Number(line.product?.sale_price ?? 0) * line.quantity,
       0,
@@ -131,6 +141,14 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.mercadoPagoConfig.getConfig().subscribe({
       next: (config) => {
+        this.mercadoPagoMinAmount = config.min_online_payment_amount ?? 100;
+        this.applyMercadoPagoAvailability();
+
+        if (!this.mercadoPagoAvailable) {
+          this.isLoadingPayment = false;
+          return;
+        }
+
         void this.mercadoPagoSdk
           .init(config.public_key, config.locale)
           .then(async () => {
@@ -179,6 +197,14 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
     return this.customerData?.email || this.authService.getUserEmail() || '';
   }
 
+  get mercadoPagoAvailable(): boolean {
+    return this.subtotal + 0.001 >= this.mercadoPagoMinAmount;
+  }
+
+  get mercadoPagoMinAmountLabel(): string {
+    return this.mercadoPagoMinAmount.toFixed(2);
+  }
+
   getCardholderName(): string {
     if (!this.customerData) {
       return '';
@@ -225,24 +251,149 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  setPaymentMethod(method: PaymentMethod): void {
+  setPaymentChannel(channel: PaymentChannel): void {
+    if (this.paymentChannel === channel) {
+      return;
+    }
+
+    if (channel === 'mercadopago' && !this.mercadoPagoAvailable) {
+      this.paymentNotice =
+        `El pago online requiere un subtotal mínimo de S/ ${this.mercadoPagoMinAmountLabel} en productos.`;
+      return;
+    }
+
+    const previousChannel = this.paymentChannel;
+    this.paymentChannel = channel;
+    this.paymentError = '';
+    this.paymentNotice = '';
+
+    if (channel === 'whatsapp') {
+      this.paymentMethod = 'whatsapp';
+      return;
+    }
+
+    this.paymentMethod = 'card';
+
+    if (previousChannel === 'whatsapp' && this.pendingOrder) {
+      this.whatsappPaymentService
+        .resetMercadoPagoCheckout(this.pendingOrder.id)
+        .subscribe({
+          next: (response) => this.applyCheckoutTimingUpdate(response.expires_at, null),
+          error: () => {
+            this.paymentNotice =
+              'No se pudo restablecer el tiempo de checkout. Si expira, vuelve al carrito.';
+          },
+        });
+    }
+
+    this.remountCardForm();
+  }
+
+  setMercadoPagoSubMethod(method: MercadoPagoSubMethod): void {
+    if (
+      this.paymentChannel !== 'mercadopago' ||
+      !this.mercadoPagoAvailable ||
+      this.paymentMethod === method
+    ) {
+      return;
+    }
+
     this.paymentMethod = method;
     this.paymentError = '';
     this.paymentNotice = '';
 
     if (method === 'card') {
-      this.cardFormMounted = false;
-      this.cardFormMountAttempts = 0;
-      void this.refreshCardFormShell().then(() => this.scheduleMountCardForm());
+      this.remountCardForm();
     }
   }
 
-  isActiveMethod(method: PaymentMethod): boolean {
-    return this.paymentMethod === method;
+  isActiveChannel(channel: PaymentChannel): boolean {
+    return this.paymentChannel === channel;
+  }
+
+  isActiveMpSubMethod(method: MercadoPagoSubMethod): boolean {
+    return this.paymentChannel === 'mercadopago' && this.paymentMethod === method;
+  }
+
+  private remountCardForm(): void {
+    this.cardFormMounted = false;
+    this.cardFormMountAttempts = 0;
+    void this.refreshCardFormShell().then(() => this.scheduleMountCardForm());
+  }
+
+  payWithWhatsapp(): void {
+    if (!this.pendingOrder || this.isPaying) {
+      return;
+    }
+
+    if (!this.validateCheckout()) {
+      return;
+    }
+
+    this.isPaying = true;
+    this.paymentError = '';
+
+    this.whatsappPaymentService.registerIntent(this.pendingOrder.id).subscribe({
+      next: (response) => {
+        this.isPaying = false;
+        this.applyCheckoutTimingUpdate(response.expires_at, response.payment_channel);
+        this.pendingOrder = {
+          ...this.pendingOrder!,
+          reference_code: response.reference_code,
+          expires_at: response.expires_at,
+          payment_channel: response.payment_channel,
+        };
+        this.checkoutState.saveOrder(this.pendingOrder);
+
+        this.checkoutState.savePendingWhatsappSummary({
+          orderId: response.order_id,
+          orderReferenceCode: response.reference_code,
+          total: response.amount,
+          expiresAt: response.expires_at,
+          whatsappUrl: response.whatsapp_url,
+        });
+
+        window.open(response.whatsapp_url, '_blank', 'noopener,noreferrer');
+        this.router.navigate(['/pedido-registrado'], {
+          queryParams: {
+            orderId: response.order_id,
+            referenceCode: response.reference_code,
+            expiresAt: response.expires_at,
+            whatsappUrl: response.whatsapp_url,
+          },
+        });
+      },
+      error: (error) => {
+        this.isPaying = false;
+        this.paymentError = this.mapPaymentError(error);
+      },
+    });
+  }
+
+  private applyCheckoutTimingUpdate(
+    expiresAt: string,
+    paymentChannel: string | null,
+  ): void {
+    if (!this.pendingOrder) {
+      return;
+    }
+
+    this.pendingOrder = {
+      ...this.pendingOrder,
+      expires_at: expiresAt,
+      payment_channel: paymentChannel,
+    };
+    this.checkoutState.saveOrder(this.pendingOrder);
   }
 
   async payWithYape(): Promise<void> {
     if (!this.pendingOrder || this.isPaying) {
+      return;
+    }
+
+    if (!this.mercadoPagoAvailable) {
+      this.paymentError =
+        `El pago online requiere un subtotal mínimo de S/ ${this.mercadoPagoMinAmountLabel} en productos.`;
       return;
     }
 
@@ -293,6 +444,18 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  private applyMercadoPagoAvailability(): void {
+    if (this.mercadoPagoAvailable || this.paymentChannel === 'whatsapp') {
+      return;
+    }
+
+    this.paymentChannel = 'whatsapp';
+    this.paymentMethod = 'whatsapp';
+    this.paymentNotice =
+      `El pago online está disponible desde S/ ${this.mercadoPagoMinAmountLabel} en productos. ` +
+      'Para montos menores, coordina tu pago por WhatsApp.';
+  }
+
   private scheduleMountCardForm(): void {
     this.cdr.detectChanges();
     setTimeout(() => {
@@ -313,6 +476,8 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
     if (
       !this.sdkReady ||
       !this.viewReady ||
+      !this.mercadoPagoAvailable ||
+      this.paymentChannel !== 'mercadopago' ||
       this.paymentMethod !== 'card' ||
       this.cardFormMounted ||
       !this.pendingOrder ||
@@ -365,6 +530,12 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private submitCardPayment(data: MercadoPagoCardFormData): void {
     if (!this.pendingOrder || this.isPaying) {
+      return;
+    }
+
+    if (!this.mercadoPagoAvailable) {
+      this.paymentError =
+        `El pago online requiere un subtotal mínimo de S/ ${this.mercadoPagoMinAmountLabel} en productos.`;
       return;
     }
 
@@ -458,8 +629,10 @@ export class PagarComponent implements OnInit, AfterViewInit, OnDestroy {
   private handleCheckoutExpired(): void {
     this.isPaying = false;
     this.checkoutExpired = true;
+    const ttlLabel =
+      this.pendingOrder?.payment_channel === 'whatsapp' ? '2 horas' : '15 min';
     this.paymentError =
-      'Tu reserva expiró (15 min). Volvé al carrito e iniciá el checkout de nuevo.';
+      `Tu reserva expiró (${ttlLabel}). Volvé al carrito e iniciá el checkout de nuevo.`;
     this.checkoutState.clear();
   }
 

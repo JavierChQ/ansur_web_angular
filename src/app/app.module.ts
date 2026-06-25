@@ -20,6 +20,7 @@ import { DatosDelUsuarioComponent } from './datos-del-usuario/datos-del-usuario.
 import { TipoDeEntregaComponent } from './tipo-de-entrega/tipo-de-entrega.component';
 import { PagarComponent } from './pagar/pagar.component';
 import { CompraRealizadaComponent } from './compra-realizada/compra-realizada.component';
+import { PedidoRegistradoComponent } from './pedido-registrado/pedido-registrado.component';
 import { ErrorEnLaCompraComponent } from './error-en-la-compra/error-en-la-compra.component';
 import { MisPedidosComponent } from './mis-pedidos/mis-pedidos.component';
 import { EstablecerContrasenaComponent } from './establecer-contrasena/establecer-contrasena.component';
@@ -44,6 +45,7 @@ import { ProductPricePipe } from './pipes/product-price.pipe';
     TipoDeEntregaComponent,
     PagarComponent,
     CompraRealizadaComponent,
+    PedidoRegistradoComponent,
     ErrorEnLaCompraComponent,
     MisPedidosComponent,
     EstablecerContrasenaComponent,

@@ -7,6 +7,7 @@ export interface MercadoPagoConfig {
   public_key: string;
   site_id: string;
   locale: string;
+  min_online_payment_amount: number;
 }
 
 @Injectable({

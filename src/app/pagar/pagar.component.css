@@ -74,10 +74,111 @@
   gap: 2rem;
 }
 
+.payment-channels {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.payment-channel {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem 1.15rem;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background: #fff;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.payment-channel__logo {
+  width: 3rem;
+  height: 2rem;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.payment-channel__icon {
+  font-size: 2rem;
+  color: #25d366;
+  flex-shrink: 0;
+  width: 3rem;
+  text-align: center;
+}
+
+.payment-channel__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.payment-channel__text strong {
+  font-size: 1rem;
+  color: #222;
+}
+
+.payment-channel__text span {
+  font-size: 0.875rem;
+  color: #666;
+  line-height: 1.35;
+}
+
+.payment-channel--mp.active {
+  border-color: #00b1ea;
+  background: rgba(0, 177, 234, 0.06);
+}
+
+.payment-channel--whatsapp.active {
+  border-color: #25d366;
+  background: rgba(37, 211, 102, 0.08);
+}
+
+.payment-channel--whatsapp.active .payment-channel__text strong {
+  color: #128c7e;
+}
+
+.payment-channel--disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.payment-channel--disabled:not(:disabled) {
+  pointer-events: none;
+}
+
+.payment-min-notice {
+  margin: 0 0 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #ffe0a3;
+  background: #fff8eb;
+  color: #7a5a00;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.mp-sub-methods {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border: 1px solid #e8e8e8;
+  border-radius: 10px;
+  background: #fafafa;
+}
+
+.mp-sub-methods__label {
+  margin: 0 0 0.75rem;
+  font-size: 0.875rem;
+  color: #555;
+  font-weight: 500;
+}
+
 .payment-methods {
   display: flex;
   gap: 1rem;
-  margin-bottom: 1.5rem;
 }
 
 .payment-method {
@@ -118,7 +219,8 @@
 }
 
 .card-form.hidden,
-.yape-form.hidden {
+.yape-form.hidden,
+.whatsapp-form.hidden {
   display: none;
 }
 
@@ -363,4 +465,23 @@ h3 {
 
 .hidden-submit {
   display: none;
+}
+
+.whatsapp-hint {
+  color: #444;
+  line-height: 1.5;
+}
+
+.whatsapp-btn {
+  background: #25d366;
+  border-color: #25d366;
+}
+
+.whatsapp-btn:hover {
+  background: #1ebe57;
+  border-color: #1ebe57;
+}
+
+.whatsapp-btn i {
+  font-size: 1.5rem;
 }

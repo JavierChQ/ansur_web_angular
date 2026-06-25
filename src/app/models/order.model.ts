@@ -70,6 +70,7 @@ export interface CheckoutOrder {
   amount: number;
   status: string;
   expires_at: string;
+  payment_channel?: string | null;
   delivery_type?: string;
   delivery_fee?: number;
   orderHasProducts: OrderProductLine[];

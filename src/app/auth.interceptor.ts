@@ -42,7 +42,9 @@ export class AuthInterceptor implements HttpInterceptor {
       !!checkoutToken &&
       (url.startsWith(`${apiBase}/mercadopago/`) ||
         /\/orders\/\d+\/claim-session$/.test(url) ||
-        /\/orders\/\d+\/checkout-delivery$/.test(url));
+        /\/orders\/\d+\/checkout-delivery$/.test(url) ||
+        /\/orders\/\d+\/whatsapp-payment-intent$/.test(url) ||
+        /\/orders\/\d+\/reset-mercadopago-checkout$/.test(url));
 
     if (usesCheckoutToken) {
       return checkoutToken;

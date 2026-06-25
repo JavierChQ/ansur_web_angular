@@ -15,6 +15,7 @@ import { AuthGuard } from './auth.guard';
 import { CartGuard } from './cart.guard';
 import { CheckoutOrderGuard } from './checkout-order.guard';
 import { CompraRealizadaComponent } from './compra-realizada/compra-realizada.component';
+import { PedidoRegistradoComponent } from './pedido-registrado/pedido-registrado.component';
 import { ErrorEnLaCompraComponent } from './error-en-la-compra/error-en-la-compra.component';
 import { MisPedidosComponent } from './mis-pedidos/mis-pedidos.component';
 import { EstablecerContrasenaComponent } from './establecer-contrasena/establecer-contrasena.component';
@@ -90,6 +91,10 @@ const routes: Routes = [
   {
     path: 'compra-realizada',
     component: CompraRealizadaComponent,
+  },
+  {
+    path: 'pedido-registrado',
+    component: PedidoRegistradoComponent,
   },
   {
     path: 'error-en-la-compra',

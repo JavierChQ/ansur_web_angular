@@ -1,0 +1,35 @@
+<app-header></app-header>
+<section class="section pedido-registrado">
+  <div class="container">
+    <div class="pedido-registrado__content" *ngIf="summary as data">
+      <div class="pedido-registrado__icon">
+        <i class="bx bxl-whatsapp"></i>
+      </div>
+      <h2>Pedido registrado</h2>
+      <p>
+        Tu pedido quedó pendiente de confirmación de pago. Coordina el pago con
+        nuestro equipo por WhatsApp e indica tu código de pedido.
+      </p>
+      <p class="reference-line">
+        Código de pedido:
+        <strong>{{ data.orderReferenceCode }}</strong>
+      </p>
+      <p *ngIf="data.total > 0" class="total-line">
+        Total: <strong>S/ {{ data.total.toFixed(2) }}</strong>
+      </p>
+      <p *ngIf="expiresAtLabel" class="expiry-line">
+        Reserva de stock válida hasta: {{ expiresAtLabel }}
+      </p>
+
+      <div class="pedido-registrado__actions">
+        <button type="button" class="btn btn-comprar whatsapp-btn" (click)="openWhatsapp()">
+          <i class="bx bxl-whatsapp"></i>
+          Abrir WhatsApp
+        </button>
+        <a routerLink="/pagar" class="btn btn-secondary">Volver a métodos de pago</a>
+        <a routerLink="/inicio" class="btn btn-secondary">Volver al inicio</a>
+      </div>
+    </div>
+  </div>
+</section>
+<app-footer></app-footer>

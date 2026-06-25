@@ -29,32 +29,70 @@
       <div class="form-container">
         <h3>Método de pago</h3>
 
-        <div class="payment-methods">
+        <p *ngIf="!mercadoPagoAvailable" class="payment-min-notice">
+          El pago online está disponible desde S/ {{ mercadoPagoMinAmountLabel }} en productos (sin envío).
+          Tu subtotal actual es S/ {{ subtotal.toFixed(2) }}.
+        </p>
+
+        <div class="payment-channels">
           <button
             type="button"
-            class="payment-method"
-            [class.active]="isActiveMethod('card')"
-            (click)="setPaymentMethod('card')"
+            class="payment-channel payment-channel--mp"
+            [class.active]="isActiveChannel('mercadopago')"
+            [class.payment-channel--disabled]="!mercadoPagoAvailable"
+            [disabled]="!mercadoPagoAvailable"
+            (click)="setPaymentChannel('mercadopago')"
           >
-            <i class="bx bx-credit-card"></i>
-            <span>Tarjeta</span>
+            <img src="/assets/mercadopago.png" alt="Mercado Pago" class="payment-channel__logo" />
+            <div class="payment-channel__text">
+              <strong>Pago online</strong>
+              <span *ngIf="mercadoPagoAvailable">Tarjeta o Yape · confirmación automática</span>
+              <span *ngIf="!mercadoPagoAvailable">Mín. S/ {{ mercadoPagoMinAmountLabel }} en productos</span>
+            </div>
           </button>
           <button
             type="button"
-            class="payment-method"
-            [class.active]="isActiveMethod('yape')"
-            (click)="setPaymentMethod('yape')"
+            class="payment-channel payment-channel--whatsapp"
+            [class.active]="isActiveChannel('whatsapp')"
+            (click)="setPaymentChannel('whatsapp')"
           >
-            <i class="bx bx-mobile"></i>
-            <span>Yape</span>
+            <i class="bx bxl-whatsapp payment-channel__icon"></i>
+            <div class="payment-channel__text">
+              <strong>Coordinar por WhatsApp</strong>
+              <span>Envía tu comprobante · confirmación manual</span>
+            </div>
           </button>
         </div>
 
-        <div *ngIf="isLoadingPayment" class="payment-loading">
+        <div *ngIf="mercadoPagoAvailable && isActiveChannel('mercadopago')" class="mp-sub-methods">
+          <p class="mp-sub-methods__label">Elige cómo pagar con Mercado Pago</p>
+          <div class="payment-methods">
+            <button
+              type="button"
+              class="payment-method"
+              [class.active]="isActiveMpSubMethod('card')"
+              (click)="setMercadoPagoSubMethod('card')"
+            >
+              <i class="bx bx-credit-card"></i>
+              <span>Tarjeta</span>
+            </button>
+            <button
+              type="button"
+              class="payment-method"
+              [class.active]="isActiveMpSubMethod('yape')"
+              (click)="setMercadoPagoSubMethod('yape')"
+            >
+              <i class="bx bx-mobile"></i>
+              <span>Yape</span>
+            </button>
+          </div>
+        </div>
+
+        <div *ngIf="mercadoPagoAvailable && isLoadingPayment" class="payment-loading">
           Cargando formulario de pago...
         </div>
 
-        <div *ngIf="isWaitingWebhook" class="payment-loading">
+        <div *ngIf="mercadoPagoAvailable && isWaitingWebhook" class="payment-loading">
           Confirmando pago con Mercado Pago...
         </div>
 
@@ -70,7 +108,7 @@
           *ngIf="cardFormVisible"
           id="form-checkout"
           class="card-form"
-          [class.hidden]="paymentMethod !== 'card' || isLoadingPayment"
+          [class.hidden]="!mercadoPagoAvailable || paymentMethod !== 'card' || isLoadingPayment"
         >
           <div class="form-group">
             <label>Número de tarjeta</label>
@@ -132,7 +170,7 @@
 
         <div
           class="yape-form"
-          [class.hidden]="paymentMethod !== 'yape' || isLoadingPayment"
+          [class.hidden]="!mercadoPagoAvailable || paymentMethod !== 'yape' || isLoadingPayment"
         >
           <p class="yape-hint">
             Abre tu app Yape, genera el código de aprobación e ingrésalo aquí.
@@ -159,6 +197,19 @@
               [(ngModel)]="yapeOtp"
             />
           </div>
+        </div>
+
+        <div
+          class="whatsapp-form"
+          [class.hidden]="paymentMethod !== 'whatsapp' || isLoadingPayment"
+        >
+          <p class="whatsapp-hint">
+            Coordina el pago con nuestro equipo por WhatsApp. Al continuar se abrirá un chat
+            con el resumen de tu pedido para que envíes tu comprobante.
+          </p>
+          <p class="whatsapp-hint">
+            Tu reserva de stock se extenderá por 2 horas mientras confirmamos el pago.
+          </p>
         </div>
 
         <div class="purchase-details" *ngIf="customerData && deliveryData">
@@ -228,7 +279,7 @@
         </p>
 
         <button
-          *ngIf="paymentMethod === 'card' && !isLoadingPayment"
+          *ngIf="mercadoPagoAvailable && paymentMethod === 'card' && !isLoadingPayment"
           type="button"
           class="btn btn-comprar mercado__pago summary-pay-btn"
           (click)="submitCardPaymentClick()"
@@ -239,7 +290,7 @@
         </button>
 
         <button
-          *ngIf="paymentMethod === 'yape' && !isLoadingPayment"
+          *ngIf="mercadoPagoAvailable && paymentMethod === 'yape' && !isLoadingPayment"
           type="button"
           class="btn btn-comprar mercado__pago yape-btn summary-pay-btn"
           (click)="payWithYape()"
@@ -247,6 +298,17 @@
         >
           <img src="/assets/mercadopago.png" alt="Mercado Pago" />
           <p>{{ isPaying ? 'Procesando pago...' : 'Pagar con Yape' }}</p>
+        </button>
+
+        <button
+          *ngIf="paymentMethod === 'whatsapp' && !isLoadingPayment"
+          type="button"
+          class="btn btn-comprar whatsapp-btn summary-pay-btn"
+          (click)="payWithWhatsapp()"
+          [disabled]="isPaying || isWaitingWebhook"
+        >
+          <i class="bx bxl-whatsapp"></i>
+          <p>{{ isPaying ? 'Preparando WhatsApp...' : 'Continuar por WhatsApp' }}</p>
         </button>
       </div>
     </div>
